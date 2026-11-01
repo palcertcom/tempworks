@@ -1,0 +1,296 @@
+{
+  "userStatus": {
+    "ACTIVE": "Aktiv",
+    "INACTIVE": "Inaktiv",
+    "SUSPENDED": "Gesperrt",
+    "PENDING": "Ausstehend",
+    "TERMINATED": "Beendet"
+  },
+  "agencyStatus": {
+    "ACTIVE": "Aktiv",
+    "INACTIVE": "Inaktiv",
+    "SUSPENDED": "Gesperrt"
+  },
+  "agencyApprovalStatus": {
+    "PENDING_APPROVAL": "Genehmigung ausstehend",
+    "APPROVED": "Genehmigt",
+    "REJECTED": "Abgelehnt"
+  },
+  "employeeStatus": {
+    "ACTIVE": "Aktiv",
+    "INACTIVE": "Inaktiv",
+    "PENDING": "Ausstehend",
+    "ONBOARDING": "Onboarding",
+    "TERMINATED": "Beendet",
+    "ON_LEAVE": "Im Urlaub",
+    "SUSPENDED": "Gesperrt"
+  },
+  "applicantStatus": {
+    "NEW": "Neu",
+    "SCREENING": "Vorauswahl",
+    "INTERVIEW": "Interview",
+    "OFFER": "Angebot",
+    "ACCEPTED": "Akzeptiert",
+    "REJECTED": "Abgelehnt",
+    "WITHDRAWN": "Zurückgezogen",
+    "ONBOARDING": "Onboarding",
+    "HIRED": "Eingestellt"
+  },
+  "applicantTier": {
+    "LEAD": "Lead",
+    "CANDIDATE": "Kandidat"
+  },
+  "documentStatus": {
+    "PENDING": "Prüfung ausstehend",
+    "VERIFIED": "Gültig",
+    "REJECTED": "Abgelehnt",
+    "EXPIRED": "Abgelaufen",
+    "EXPIRING_SOON": "Läuft bald ab"
+  },
+  "workflowStageStatus": {
+    "PENDING": "Ausstehend",
+    "IN_PROGRESS": "In Bearbeitung",
+    "COMPLETED": "Abgeschlossen",
+    "SKIPPED": "Übersprungen",
+    "BLOCKED": "Blockiert"
+  },
+  "workPermitStatus": {
+    "PENDING": "Ausstehend",
+    "APPLIED": "Beantragt",
+    "APPROVED": "Genehmigt",
+    "REJECTED": "Abgelehnt",
+    "EXPIRED": "Abgelaufen",
+    "CANCELLED": "Storniert"
+  },
+  "visaStatus": {
+    "PENDING": "Ausstehend",
+    "APPLIED": "Beantragt",
+    "APPOINTMENT_SCHEDULED": "Termin vereinbart",
+    "APPROVED": "Genehmigt",
+    "REJECTED": "Abgelehnt",
+    "EXPIRED": "Abgelaufen",
+    "CANCELLED": "Storniert"
+  },
+  "gender": {
+    "MALE": "Männlich",
+    "FEMALE": "Weiblich",
+    "OTHER": "Andere",
+    "PREFER_NOT_TO_SAY": "Keine Angabe"
+  },
+  "alertSeverity": {
+    "LOW": "Niedrig",
+    "MEDIUM": "Mittel",
+    "HIGH": "Hoch",
+    "CRITICAL": "Kritisch"
+  },
+  "alertStatus": {
+    "OPEN": "Offen",
+    "ACKNOWLEDGED": "Bestätigt",
+    "RESOLVED": "Gelöst",
+    "DISMISSED": "Verworfen"
+  },
+  "notificationType": {
+    "INFO": "Information",
+    "WARNING": "Warnung",
+    "ERROR": "Fehler",
+    "SUCCESS": "Erfolg",
+    "COMPLIANCE": "Compliance",
+    "DOCUMENT_EXPIRY": "Dokumentenablauf",
+    "WORKFLOW": "Workflow",
+    "SYSTEM": "System",
+    "FINANCIAL": "Finanzen",
+    "VEHICLE_MOT_EXPIRING": "MOT läuft ab",
+    "VEHICLE_TAX_EXPIRING": "KFZ-Steuer läuft ab",
+    "VEHICLE_INSURANCE_EXPIRING": "Versicherung läuft ab",
+    "VEHICLE_REGISTRATION_EXPIRING": "Zulassung läuft ab",
+    "VEHICLE_TACHOGRAPH_EXPIRING": "Tachograph läuft ab",
+    "VEHICLE_ATP_EXPIRING": "ATP läuft ab",
+    "VEHICLE_PRESSURE_TEST_DUE": "Druckprüfung fällig",
+    "VEHICLE_SERVICE_DUE": "Wartung fällig",
+    "VEHICLE_SERVICE_OVERDUE": "Wartung überfällig"
+  },
+  "workflowCategory": {
+    "INITIAL": "Initial",
+    "DOCUMENTATION": "Dokumentation",
+    "COMPLIANCE": "Compliance",
+    "TRAINING": "Schulung",
+    "DEPLOYMENT": "Einsatz",
+    "ADMINISTRATIVE": "Administrativ"
+  },
+  "candidateProgressStatus": {
+    "PENDING": "Ausstehend",
+    "IN_PROGRESS": "In Bearbeitung",
+    "COMPLETED": "Abgeschlossen",
+    "REJECTED": "Abgelehnt"
+  },
+  "approvalDecision": {
+    "APPROVED": "Genehmigt",
+    "REJECTED": "Abgelehnt",
+    "PENDING": "Ausstehend"
+  },
+  "attendanceStatus": {
+    "PRESENT": "Anwesend",
+    "ABSENT": "Abwesend",
+    "LATE": "Verspätet",
+    "ON_LEAVE": "Im Urlaub",
+    "HOLIDAY": "Feiertag",
+    "REMOTE": "Remote"
+  },
+  "fuelType": {
+    "DIESEL": "Diesel",
+    "PETROL": "Benzin",
+    "HYBRID": "Hybrid",
+    "ELECTRIC": "Elektrisch",
+    "LPG": "LPG",
+    "CNG": "CNG"
+  },
+  "maintenanceStatus": {
+    "SCHEDULED": "Geplant",
+    "IN_PROGRESS": "In Bearbeitung",
+    "COMPLETED": "Abgeschlossen",
+    "CANCELLED": "Storniert",
+    "OVERDUE": "Überfällig"
+  },
+  "contractType": {
+    "Full-time": "Vollzeit",
+    "Part-time": "Teilzeit",
+    "Contract": "Vertrag",
+    "Temporary": "Befristet",
+    "Internship": "Praktikum",
+    "Seasonal": "Saisonal"
+  },
+  "language": {
+    "Albanian": "Albanian",
+    "Arabic": "Arabic",
+    "Bosnian": "Bosnian",
+    "Bulgarian": "Bulgarian",
+    "Chinese (Cantonese)": "Chinese (Cantonese)",
+    "Chinese (Mandarin)": "Chinese (Mandarin)",
+    "Croatian": "Croatian",
+    "Czech": "Czech",
+    "Danish": "Danish",
+    "Dutch": "Dutch",
+    "English": "English",
+    "Estonian": "Estonian",
+    "Finnish": "Finnish",
+    "French": "French",
+    "German": "German",
+    "Greek": "Greek",
+    "Hungarian": "Hungarian",
+    "Italian": "Italian",
+    "Latvian": "Latvian",
+    "Lithuanian": "Lithuanian",
+    "Macedonian": "Macedonian",
+    "Maltese": "Maltese",
+    "Norwegian": "Norwegian",
+    "Persian": "Persian",
+    "Polish": "Polish",
+    "Portuguese": "Portuguese",
+    "Romanian": "Romanian",
+    "Russian": "Russian",
+    "Serbian": "Serbian",
+    "Slovak": "Slovak",
+    "Slovenian": "Slovenian",
+    "Spanish": "Spanish",
+    "Swedish": "Swedish",
+    "Turkish": "Turkish",
+    "Ukrainian": "Ukrainian",
+    "Urdu": "Urdu",
+    "Other": "Other"
+  },
+  "proficiency": {
+    "A1 - Beginner": "A1 — Beginner",
+    "A2 - Elementary": "A2 — Elementary",
+    "B1 - Intermediate": "B1 — Intermediate",
+    "B2 - Upper Intermediate": "B2 — Upper Intermediate",
+    "C1 - Advanced": "C1 — Advanced",
+    "C2 - Mastery": "C2 — Mastery",
+    "Native": "Native"
+  },
+  "skillLevel": {
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Advanced": "Advanced",
+    "Expert": "Expert"
+  },
+  "jobCategory": {
+    "Flatbed Driver": "Pritschenfahrer",
+    "Forklift Operator": "Gabelstaplerfahrer",
+    "HGV Driver Class 1": "LKW-Fahrer Klasse 1",
+    "HGV Driver Class 2": "LKW-Fahrer Klasse 2",
+    "LGV Driver": "Kleintransporterfahrer",
+    "Multi-Drop Driver": "Mehrstopp-Auslieferfahrer",
+    "Tanker Driver": "Tankwagenfahrer",
+    "Transport Manager": "Transportleiter",
+    "Van Driver": "Transporterfahrer",
+    "Warehouse Operative": "Lagermitarbeiter",
+    "Bus Driver": "Busfahrer",
+    "Coach Driver": "Reisebusfahrer",
+    "Courier Driver": "Kurierfahrer",
+    "Delivery Driver": "Auslieferfahrer",
+    "Taxi Driver": "Taxifahrer",
+    "Crane Operator": "Kranführer",
+    "Logistics Coordinator": "Logistikkoordinator"
+  },
+  "familyRelation": {
+    "Spouse": "Ehepartner/in",
+    "Partner": "Partner/in",
+    "Parent": "Elternteil",
+    "Child": "Kind",
+    "Sibling": "Geschwister",
+    "Friend": "Freund/in",
+    "Colleague": "Kollege/Kollegin",
+    "Other": "Sonstige"
+  },
+  "drivingQualification": {
+    "Tachograph Card": "Tachografenkarte",
+    "C95 / CPC Card": "C95 / CPC-Karte (BKrFQG)",
+    "ADR Certificate": "ADR-Bescheinigung",
+    "Medical Certificate": "Ärztliches Attest",
+    "DVLA Check": "DVLA-Auskunft",
+    "Transport Manager CPC": "CPC Verkehrsleiter"
+  },
+  "educationLevel": {
+    "Primary School": "Grundschule",
+    "Secondary School": "Sekundarstufe I",
+    "High School / A-Levels": "Gymnasium / Abitur",
+    "Vocational Training": "Berufsausbildung",
+    "Associate Degree": "Fachhochschulreife / Associate-Abschluss",
+    "Bachelor's Degree": "Bachelor-Abschluss",
+    "Master's Degree": "Master-Abschluss",
+    "Doctoral Degree": "Promotion",
+    "Professional Certification": "Berufszertifikat",
+    "Other": "Sonstige"
+  },
+  "vehicleStatus": {
+    "ACTIVE": "Aktiv",
+    "INACTIVE": "Inaktiv",
+    "IN_MAINTENANCE": "In Wartung",
+    "SCRAPPED": "Verschrottet"
+  },
+  "vehicleType": {
+    "TRUCK": "LKW",
+    "CAR": "PKW",
+    "VAN": "Transporter",
+    "TANKER": "Tankwagen",
+    "TRAILER": "Anhänger",
+    "REFRIGERATED_TRAILER": "Kühlanhänger",
+    "SPECIALTY": "Sonderfahrzeug"
+  },
+  "workshopStatus": {
+    "ACTIVE": "Aktiv",
+    "INACTIVE": "Inaktiv"
+  },
+  "documentCompliance": {
+    "COMPLIANT": "Konform",
+    "AT_RISK": "Risiko",
+    "NON_COMPLIANT": "Nicht konform",
+    "PENDING": "Ausstehend"
+  },
+  "entityType": {
+    "APPLICANT": "Bewerber",
+    "EMPLOYEE": "Mitarbeiter",
+    "VEHICLE": "Fahrzeug",
+    "AGENCY": "Agentur"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "name": "1. pilot off legacy create succeeds (tenantId NULL)",
+      "ok": true,
+      "detail": "id=0ca0f6d6 tenantId=null"
+    },
+    {
+      "name": "2. pilot A create stamps tenantId = A",
+      "ok": true,
+      "detail": "tenantId=11111111"
+    },
+    {
+      "name": "3. pilot A create for tenant B employee raises NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "4. rejected create produces no row",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "5. tenant A update on tenant A row succeeds",
+      "ok": true,
+      "detail": "status=ABSENT"
+    },
+    {
+      "name": "6. tenant A update on tenant B row rejected",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "7. tenant B row unchanged after rejected update",
+      "ok": true,
+      "detail": "status=PRESENT"
+    },
+    {
+      "name": "8. tenant A delete on tenant A row succeeds",
+      "ok": true,
+      "detail": "Attendance record deleted"
+    },
+    {
+      "name": "9. tenant A delete on tenant B row rejected",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "10. tenant B row unchanged after rejected delete",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "11. bulkApply tenant A creates rows tagged tenant A",
+      "ok": true,
+      "detail": "created=0 tagged=2"
+    },
+    {
+      "name": "12. bulkApply tenant B emp rejected; no rows",
+      "ok": true,
+      "detail": "threw=true count=0"
+    },
+    {
+      "name": "13. NULL-tenant legacy row not mutated under pilot",
+      "ok": true,
+      "detail": "threw=true status=PRESENT tenantId=null"
+    },
+    {
+      "name": "14. concurrent ALS frames stamp correct tenantId",
+      "ok": true,
+      "detail": "A=11111111 B=22222222"
+    },
+    {
+      "name": "15. audit row tenant A mutation carries tenantId=A (audit pilot ON)",
+      "ok": true,
+      "detail": "tenantId=11111111"
+    },
+    {
+      "name": "16. rejected tenant B mutation does not emit audit row",
+      "ok": true,
+      "detail": "before=0 after=0"
+    },
+    {
+      "name": "17. exportExcel under tenant A refuses tenant B employee",
+      "ok": true,
+      "detail": "BadRequest"
+    }
+  ]
+}

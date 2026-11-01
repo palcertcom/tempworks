@@ -1,0 +1,17 @@
+{
+  "mode": "dry-run",
+  "applied": false,
+  "safeClassification": "SAFE_CLONE",
+  "refusalReason": "AUDIT_LOG_RETENTION_ENABLED=false",
+  "scope": "tenant",
+  "tenantId": "11111111-1111-1111-1111-111111111111",
+  "days": 365,
+  "cutoffIso": "2025-05-10T18:31:16.447Z",
+  "candidateRows": 3,
+  "alreadyDeletedRows": 3,
+  "excludedByCutoff": 77,
+  "updatedRows": 0,
+  "beforeAliveRows": 80,
+  "afterAliveRows": 80,
+  "recommendedSnapshotSql": "SELECT id, \"tenantId\", \"createdAt\", \"deletedAt\" FROM audit_logs WHERE \"createdAt\" < '2025-05-10T18:31:16.447Z' AND \"deletedAt\" IS NULL AND \"tenantId\" = '11111111-1111-1111-1111-111111111111'"
+}

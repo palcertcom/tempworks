@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-05-10T21:35:19.304Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantB": "22222222-2222-2222-2222-222222222222",
+  "counts": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "STORAGE GUARD: cross-tenant create raises NotFoundException; 0 uploads; 0 rows inserted",
+      "ok": true,
+      "detail": "err=NotFoundException uploads=0 dbDelta=0"
+    },
+    {
+      "name": "pilot ON, tenant A: same-tenant create succeeds, tenantId=A, 1 storage upload",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111 uploads=1"
+    },
+    {
+      "name": "pilot ON, tenant A: update on tenant B doc rejected, notes unchanged",
+      "ok": true,
+      "detail": "before=\"null\" after=\"null\""
+    },
+    {
+      "name": "pilot ON, tenant A: verify on tenant B doc rejected, status unchanged",
+      "ok": true,
+      "detail": "before=VERIFIED after=VERIFIED"
+    },
+    {
+      "name": "pilot ON, tenant A: renew on tenant B doc rejected, 0 storage uploads",
+      "ok": true,
+      "detail": "leaked=false uploadDelta=0"
+    },
+    {
+      "name": "pilot ON, tenant A: remove on tenant B doc rejected, deletedAt unchanged",
+      "ok": true,
+      "detail": "deletedAt=null"
+    },
+    {
+      "name": "pilot ON, tenant A: getExpiringDocuments after mutation excludes tenant B",
+      "ok": true,
+      "detail": "count=2"
+    },
+    {
+      "name": "pilot OFF: legacy update on tenant B doc still succeeds (gate disengages)",
+      "ok": true,
+      "detail": "mutated as expected"
+    },
+    {
+      "name": "source: every Phase 2.21 mutation site carries the right tag and shape",
+      "ok": true,
+      "detail": "all patterns matched"
+    }
+  ]
+}

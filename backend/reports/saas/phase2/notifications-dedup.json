@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. flag off: duplicates still created (legacy)",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":1,\"deduped\":0} count=2"
+    },
+    {
+      "name": "2. flag on: second identical suppressed",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":0,\"deduped\":1} count=1"
+    },
+    {
+      "name": "3. dedup does NOT suppress different user same tenant",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":1,\"deduped\":0} totalA=2"
+    },
+    {
+      "name": "4. dedup does NOT cross tenants",
+      "ok": true,
+      "detail": "aCount=1 bCount=1"
+    },
+    {
+      "name": "5. dedup does NOT suppress different event type",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":1,\"deduped\":0} total=2"
+    },
+    {
+      "name": "6. window respected: old row outside window does not suppress",
+      "ok": true,
+      "detail": "r={\"created\":1,\"deduped\":0} total=2"
+    },
+    {
+      "name": "7. tenant A dedup does NOT see tenant B rows",
+      "ok": true,
+      "detail": "r={\"created\":1,\"deduped\":0} aCount=1"
+    },
+    {
+      "name": "8. NULL-tenant legacy row does NOT suppress tenant-scoped notification",
+      "ok": true,
+      "detail": "r={\"created\":1,\"deduped\":0} aCount=1"
+    },
+    {
+      "name": "9. compliance coupling: first tick creates, second tick deduped",
+      "ok": true,
+      "detail": "t1={\"notified\":1,\"deduped\":0} t2={\"notified\":0,\"deduped\":1}"
+    },
+    {
+      "name": "10. scheduler health includes notifyDeduped counter",
+      "ok": true,
+      "detail": "health={\"status\":\"ok\",\"notifyDeduped\":2,\"notifySucceeded\":0}"
+    },
+    {
+      "name": "11. missing tenant context refuses safely (assertTenantForFanout)",
+      "ok": true,
+      "detail": "threw"
+    },
+    {
+      "name": "12. concurrent tenant fan-outs remain isolated",
+      "ok": true,
+      "detail": "a={\"created\":1,\"deduped\":0} b={\"created\":1,\"deduped\":0}"
+    }
+  ]
+}

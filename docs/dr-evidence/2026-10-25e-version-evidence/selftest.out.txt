@@ -1,0 +1,98 @@
+
+=== provisioning source + clean target clusters ===
+  ✓ clusters up (source=56432, clean target=56433)
+
+=== materialising real schema via prisma migrate diff ===
+psql:/tmp/dr-selftest.mJntKu/schema.sql:2: NOTICE:  schema "public" already exists, skipping
+  ✓ schema applied (82 tables) + grants + RLS
+
+=== seeding representative data + upload files ===
+  ✓ seeded (3 employees, 5 documents) + 6 files
+
+=== preflight ===
+  ✓ preflight passed
+
+=== full backup ===
+  ✓ backup created
+
+=== verify package integrity ===
+  ✓ verify passed
+
+=== restore onto CLEAN target cluster ===
+  ✓ restore succeeded
+
+=== deep verification of restored environment ===
+  ✓ table count parity (82)
+  ✓ row count parity: users (2)
+  ✓ row count parity: employees (3)
+  ✓ row count parity: applicants (2)
+  ✓ row count parity: documents (5)
+  ✓ row count parity: attendance_records (3)
+  ✓ row count parity: tenants (2)
+  ✓ ownership preserved (tempworks_app)
+  ✓ database owner preserved (not the restoring superuser) (tempworks_app)
+  ✓ app role can CREATE in schema public (future migrations work) (t)
+  ✓ encoding + collation preserved (UTF8/C.UTF-8)
+  ✓ ACL grants preserved (82)
+  ✓ RLS policy preserved (1)
+  ✓ uploaded-file checksums identical
+  ✓ every DB file reference resolves on disk (0)
+  ✓ app role authenticates + reads
+  ✓ new write as app role succeeds
+  ✓ row count incremented after write (4)
+
+=== negative / regression cases ===
+  ✓ checksum corruption detected
+  ✓ missing upload detected
+  ✓ version-mismatch resolver refuses (actionable)
+  ✓ restore is fail-loud on corrupt package
+  ✓ no stray .partial (atomic publish)
+
+=== restore toolchain must match the TARGET major (not merely newest) ===
+  ✓ restore picks exact target-major client (18)
+  ✓ restore refuses version skew without PG_ALLOW_VERSION_SKEW
+  ✓ pg_restore 16 refuses archive made by pg_dump 18
+
+=== stage failures preserve the ORIGINAL exit status and leave no partial package ===
+  ✓ backup stage 'dump' failure propagates original status (97)
+  ✓ stage 'dump' left no partial artifact
+  ✓ backup stage 'copy' failure propagates original status (97)
+  ✓ stage 'copy' left no partial artifact
+  ✓ backup stage 'archive' failure propagates original status (97)
+  ✓ stage 'archive' left no partial artifact
+  ✓ restore stage 'restore-db' failure propagates original status (97)
+  ✓ restore 'restore-db' did not report success
+  ✓ restore stage 'restore-files' failure propagates original status (97)
+  ✓ restore 'restore-files' did not report success
+  ✓ off-site upload failure reported as FAILED (FAILED)
+
+=== consistency under concurrent replacement / deletion ===
+  ✓ replacement race: backup completes (0)
+  ✓ replacement race: detected, retried, consistent on attempt 2 (True 2)
+  ✓ replacement race: resulting package verifies
+  ✓ overwrite race: backup completes (0)
+  ✓ overwrite race: in-place overwrite of a referenced key DETECTED on attempt 1
+  ✓ overwrite race: retried, consistent on attempt 2 (True 2)
+  ✓ overwrite race: package holds the new bytes, matching its post-overwrite snapshot (9bd962ada4b3629b0ae380ca8d6b31408a674c85218564a990ee2393220d71b8)
+  ✓ overwrite race: package verifies
+  ✓ deletion race: backup exits 4 (INCOMPLETE), not success (4)
+  ✓ deletion race: manifest marked complete=false (False)
+  ✓ deletion race: missing file named explicitly in refcheck
+  ✓ INCOMPLETE package fails verify
+  ✓ restore refuses an INCOMPLETE package
+  ✓ pre-existing missing file: backup exits 6 (DEGRADED), not success and not INCOMPLETE (6)
+  ✓ pre-existing missing file: manifest DEGRADED / complete=false / FILES_UNRESOLVED (DEGRADED False ['FILES_UNRESOLVED'])
+  ✓ DEGRADED package: verify exit 6 (integrity OK, not a complete recovery point) (6)
+  ✓ restore refuses a DEGRADED package unless explicitly accepted
+
+=== managed-provider roles + role mapping (ownership/grants preserved under a new role name) ===
+  ✓ role-mapped restore succeeds (0)
+  ✓ provider-managed role (postgres) skipped explicitly, not silently
+  ✓ all tables owned by mapped role (tw_recovered)
+  ✓ database owned by mapped role (tw_recovered)
+  ✓ grants preserved through role map (82)
+  ✓ data intact through role map (3)
+
+════════════════════════════════════════
+DR SELF-TEST: PASS=67 FAIL=0
+════════════════════════════════════════

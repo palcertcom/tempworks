@@ -1,0 +1,161 @@
+{
+  "ranAt": "2026-10-25T12:01:10.259Z",
+  "environment": "local PostgreSQL 18 + s3rver S3 SIMULATOR (not real Spaces)",
+  "failures": 0,
+  "results": {
+    "A": {
+      "checks": [
+        {
+          "name": "exit 0 (consistent after retry)",
+          "ok": true,
+          "detail": 0
+        },
+        {
+          "name": "needed a retry (overwrite detected)",
+          "ok": true,
+          "detail": 2
+        },
+        {
+          "name": "captured bytes are the NEW content",
+          "ok": true
+        }
+      ],
+      "package": "tempworks-dr_2026-10-25T12-00-35Z_98e910a1"
+    },
+    "B": {
+      "checks": [
+        {
+          "name": "exit 4 (INCOMPLETE)",
+          "ok": true,
+          "detail": 4
+        },
+        {
+          "name": "MANIFEST complete=false",
+          "ok": true
+        },
+        {
+          "name": "refcheck lists the vanished reference as missing (not dangling)",
+          "ok": true,
+          "detail": {
+            "missing": 1,
+            "dangling": 0
+          }
+        },
+        {
+          "name": "all retries used",
+          "ok": true,
+          "detail": 3
+        },
+        {
+          "name": "verify refuses the INCOMPLETE snapshot (exit 3)",
+          "ok": true,
+          "detail": 3
+        }
+      ],
+      "package": "tempworks-dr_2026-10-25T12-00-42Z_7f7ab7b8"
+    },
+    "C": {
+      "checks": [
+        {
+          "name": "exit 0 (consistent after retry)",
+          "ok": true,
+          "detail": 0
+        },
+        {
+          "name": "needed a retry",
+          "ok": true,
+          "detail": 2
+        }
+      ]
+    },
+    "D": {
+      "checks": [
+        {
+          "name": "exit 0, single attempt",
+          "ok": true,
+          "detail": {
+            "code": 0,
+            "attempts": 1
+          }
+        },
+        {
+          "name": "reported as dangling (pre-existing), not as a backup failure",
+          "ok": true
+        },
+        {
+          "name": "MANIFEST records danglingReferences=1",
+          "ok": true
+        }
+      ]
+    },
+    "E": {
+      "checks": [
+        {
+          "name": "exit 143",
+          "ok": true,
+          "detail": 143
+        },
+        {
+          "name": "no uncommitted snapshot files left behind",
+          "ok": true,
+          "detail": []
+        },
+        {
+          "name": "operation lock released",
+          "ok": true
+        },
+        {
+          "name": "list does not show an interrupted snapshot",
+          "ok": true
+        }
+      ]
+    },
+    "F": {
+      "checks": [
+        {
+          "name": "second backup refused with exit 5 (lock held)",
+          "ok": true,
+          "detail": 5
+        },
+        {
+          "name": "first backup still completes",
+          "ok": true,
+          "detail": 0
+        }
+      ]
+    },
+    "G": {
+      "checks": [
+        {
+          "name": "fresh unreferenced blob survives the GC grace period (protects in-flight backups)",
+          "ok": true
+        },
+        {
+          "name": "exactly one snapshot kept (the newest complete)",
+          "ok": true,
+          "detail": [
+            "tempworks-dr_2026-10-25T12-01-01Z_9a2de143"
+          ]
+        },
+        {
+          "name": "unreferenced blobs collected after grace",
+          "ok": true,
+          "detail": {
+            "before": 21,
+            "after": 20,
+            "removed": 1
+          }
+        }
+      ]
+    },
+    "H": {
+      "checks": [
+        {
+          "name": "deep verify exit 0",
+          "ok": true,
+          "detail": []
+        }
+      ]
+    }
+  }
+}

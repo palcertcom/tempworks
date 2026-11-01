@@ -1,0 +1,108 @@
+{
+  "generatedAt": "2026-05-10T21:33:51.448Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "userA": "00000000-0000-0000-0000-00000000us01",
+  "relatedEntityId": "00000000-0000-0000-0000-deadbeef0001",
+  "legacy": {
+    "pilotActive": false,
+    "reason": "TENANT_PRISMA_PILOT_ENABLED=false",
+    "listTotal": 6,
+    "listIds": [
+      "00000000-0000-0000-0000-000000c00001",
+      "00000000-0000-0000-0000-000000c00002",
+      "00000000-0000-0000-0000-000000c00003",
+      "00000000-0000-0000-0000-000000c00004",
+      "00000000-0000-0000-0000-000000c00501",
+      "00000000-0000-0000-0000-000000c00999"
+    ],
+    "unreadCount": 4,
+    "highBalanceProbe": true,
+    "errorOnMissingMark": "PrismaClientKnownRequestError",
+    "preferencesId": "f5fcc90c-874f-49dd-8e23-df3f4feb4114"
+  },
+  "pilot": {
+    "pilotActive": true,
+    "reason": "pilot ON, env=SAFE_CLONE",
+    "listTotal": 5,
+    "listIds": [
+      "00000000-0000-0000-0000-000000c00001",
+      "00000000-0000-0000-0000-000000c00002",
+      "00000000-0000-0000-0000-000000c00003",
+      "00000000-0000-0000-0000-000000c00004",
+      "00000000-0000-0000-0000-000000c00501"
+    ],
+    "unreadCount": 3,
+    "highBalanceProbe": true,
+    "errorOnMissingMark": "NotFoundException",
+    "preferencesId": "f5fcc90c-874f-49dd-8e23-df3f4feb4114"
+  },
+  "counts": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "legacy: pilot OFF reports pilotActive=false",
+      "ok": true,
+      "detail": "TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "pilot: ON + module allow-list ⇒ pilotActive=true",
+      "ok": true,
+      "detail": "pilot ON, env=SAFE_CLONE"
+    },
+    {
+      "name": "getUserNotifications: pilot total <= legacy total (filtered)",
+      "ok": true,
+      "detail": "legacy=6 pilot=5"
+    },
+    {
+      "name": "getUserNotifications: pilot excludes NULL-tenant legacy row",
+      "ok": true,
+      "detail": "pilotIds=5 ids"
+    },
+    {
+      "name": "getUserNotifications: legacy includes NULL-tenant legacy row",
+      "ok": true,
+      "detail": "legacyIds.includes legacy=true"
+    },
+    {
+      "name": "getUnreadCount: pilot <= legacy",
+      "ok": true,
+      "detail": "legacy=4 pilot=3"
+    },
+    {
+      "name": "wasHighBalanceAlertRecentlySent: legacy true (any tenant), pilot true (tenant A row exists)",
+      "ok": true,
+      "detail": "legacy=true pilot=true"
+    },
+    {
+      "name": "markAsRead(missing-id): pilot raises NotFoundException; legacy raises Prisma error",
+      "ok": true,
+      "detail": "legacy=PrismaClientKnownRequestError pilot=NotFoundException"
+    },
+    {
+      "name": "getOrCreatePreferences: returns identical preferences id (per-user global record)",
+      "ok": true,
+      "detail": "legacy=f5fcc90c-874f-49dd-8e23-df3f4feb4114 pilot=f5fcc90c-874f-49dd-8e23-df3f4feb4114"
+    },
+    {
+      "name": "markAllAsRead pilot ON: tenant A unread → 0; tenant B unread unchanged",
+      "ok": true,
+      "detail": "A: 3→0; B: 3→3"
+    },
+    {
+      "name": "response shape preserved ({ data: [...], total: number })",
+      "ok": true,
+      "detail": "arrays + numeric total in both modes"
+    }
+  ]
+}

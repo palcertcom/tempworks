@@ -1,0 +1,27 @@
+== 1-2. ORIGINAL migration (a51b657) on the real schema ==
+  ✓ original migration fails: foreign key constraint "maintenance_records_driverId_fkey" cannot be implemented
+  ✓ cause: incompatible types uuid vs text
+  ✓ original leaves NO new columns (whole file rolled back) (0)
+== 3-4. FIXED migration ==
+  ✓ fixed migration applies
+  ✓ all 11 maintenance columns created (11)
+  ✓ driver/approver key columns are TEXT (text)
+  ✓ 4 foreign keys to users(id) (4)
+  ✓ maintenance_record_attachments table exists (t)
+  ✓ attachments table has 2 foreign keys (2)
+  ✓ re-running the fixed migration is a no-op (idempotent)
+  ✓ re-run did not duplicate foreign keys (4)
+== 5. FIXED on a partially-applied database ==
+  ✓ fixed migration applies over pre-existing columns
+  ✓ all 11 columns present after partial-state apply (11)
+== 6. foreign-key behaviour ==
+  ✓ maintenance record with driver + approver + attachment inserted
+  ✓ unknown driver id rejected by FK
+  ✓ deleting the user sets driver/approver to NULL (NULL/NULL)
+  ✓ attachment uploader set NULL (NULL)
+  ✓ deleting the record cascades to attachments (0)
+== 7. full runner (db:migrate:all) on a fresh database ==
+    ✅  Succeeded: 28/28
+  ✓ db:migrate:all exits 0 (0)
+
+MIGRATION VERIFY: PASS=19 FAIL=0

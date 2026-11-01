@@ -1,0 +1,60 @@
+{
+  "slug": "01-agency-structure",
+  "title": "Audit A — Agency Structure",
+  "startedAt": "2026-05-09T14:52:50.324Z",
+  "durationMs": 83,
+  "status": "INFO",
+  "metrics": [
+    {
+      "key": "agencies.total",
+      "value": 5
+    },
+    {
+      "key": "agencies.isSystem",
+      "value": 1,
+      "note": ""
+    },
+    {
+      "key": "agencies.with-parent",
+      "value": 0
+    },
+    {
+      "key": "users.distinct-agencies",
+      "value": 4
+    },
+    {
+      "key": "agencies.empty-customer",
+      "value": 2
+    },
+    {
+      "key": "phase1.candidate-tenants",
+      "value": 4
+    }
+  ],
+  "findings": [
+    {
+      "severity": "INFO",
+      "rule": "agency.empty",
+      "message": "2 customer agencies have no users/employees/applicants — verify they should still become tenants.",
+      "detail": [
+        {
+          "id": "44444444-4444-4444-4444-444444444444",
+          "name": "Empty Co"
+        },
+        {
+          "id": "33333333-3333-3333-3333-333333333333",
+          "name": "Initech"
+        }
+      ]
+    },
+    {
+      "severity": "INFO",
+      "rule": "phase1.tenant-projection",
+      "message": "Phase 1 backfill projects 4 new Tenant rows (one per non-system Agency)."
+    }
+  ],
+  "notes": [
+    "Per ADR-003: each non-system Agency becomes a Tenant (id reused) plus a Default sub-Agency.",
+    "isSystem agencies are not created as Tenants; their users become PlatformAdmin rows."
+  ]
+}

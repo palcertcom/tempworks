@@ -1,0 +1,39 @@
+{
+  "recoverability": "COMPLETE",
+  "recoveryIssues": [
+    {
+      "code": "GLOBALS_FROM_CATALOG",
+      "severity": "INFO",
+      "count": 5,
+      "detail": "pg_dumpall --globals-only was refused; the required roles were captured from the database catalog instead (database/roles.sql).",
+      "action": "none \u2014 restore.sh --roles recreates them; LOGIN roles need their passwords from the secret store."
+    }
+  ],
+  "globals": false,
+  "prerequisites": {
+    "file": "database/prerequisites.json",
+    "rolesSql": "database/roles.sql",
+    "captured": true,
+    "method": "catalog (pg_dumpall refused)",
+    "requiredRoles": [
+      "postgres",
+      "tw_app",
+      "tw_owner",
+      "tw_readonly",
+      "tw_report"
+    ],
+    "providerRoles": [
+      "postgres"
+    ],
+    "loginRoles": [
+      "tw_app",
+      "tw_report"
+    ],
+    "extensions": [
+      "pgcrypto",
+      "plpgsql"
+    ],
+    "tablespaces": [],
+    "note": "LOGIN roles are recreated WITHOUT passwords \u2014 set them from the secret store; provider-managed roles must exist on the target or be mapped (restore.sh --role-map)."
+  }
+}

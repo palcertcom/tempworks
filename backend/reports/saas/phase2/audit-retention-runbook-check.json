@@ -1,0 +1,116 @@
+{
+  "passed": 22,
+  "total": 22,
+  "cases": [
+    {
+      "name": "1. docs/runbooks/audit-retention-rollout.md exists",
+      "ok": true,
+      "detail": "/home/user/Tempworksemployeerecruitmentcompliancemanagementsystem/docs/runbooks/audit-retention-rollout.md"
+    },
+    {
+      "name": "2. AUDIT_LOG_RETENTION_RUNBOOK.md exists",
+      "ok": true,
+      "detail": "/home/user/Tempworksemployeerecruitmentcompliancemanagementsystem/AUDIT_LOG_RETENTION_RUNBOOK.md"
+    },
+    {
+      "name": "3. runbook mentions Phase 2.50",
+      "ok": true,
+      "detail": "(Phase\\s*2\\.50|phase250)"
+    },
+    {
+      "name": "4. runbook mentions Phase 2.51",
+      "ok": true,
+      "detail": "(Phase\\s*2\\.51|phase251)"
+    },
+    {
+      "name": "5. runbook mentions Phase 2.52",
+      "ok": true,
+      "detail": "(Phase\\s*2\\.52|phase252)"
+    },
+    {
+      "name": "6. runbook mentions Phase 2.53",
+      "ok": true,
+      "detail": "(Phase\\s*2\\.53|phase253)"
+    },
+    {
+      "name": "7. runbook mentions Phase 2.54",
+      "ok": true,
+      "detail": "(Phase\\s*2\\.54|phase254)"
+    },
+    {
+      "name": "8. runbook includes dry-run commands",
+      "ok": true,
+      "detail": "dry-run + npm script"
+    },
+    {
+      "name": "9. runbook includes apply commands",
+      "ok": true,
+      "detail": "APPLY=true env shown"
+    },
+    {
+      "name": "10. runbook includes snapshot SQL for soft-delete",
+      "ok": true,
+      "detail": "soft-delete snapshot/restore SQL"
+    },
+    {
+      "name": "11. runbook includes full-row snapshot SQL for hard-delete",
+      "ok": true,
+      "detail": "full-row snapshot SQL"
+    },
+    {
+      "name": "12. runbook states hard-delete cannot be configuration-rolled back",
+      "ok": true,
+      "detail": "configuration-rollback negation"
+    },
+    {
+      "name": "13. runbook includes pg_dump audit_logs requirement",
+      "ok": true,
+      "detail": "pg_dump audit_logs"
+    },
+    {
+      "name": "14. runbook includes operator approval checklist",
+      "ok": true,
+      "detail": "approval text"
+    },
+    {
+      "name": "15. runbook includes go/no-go gates",
+      "ok": true,
+      "detail": "gates section + checkboxes"
+    },
+    {
+      "name": "16. runbook includes tenant/null-tenant/all scope descriptions",
+      "ok": true,
+      "detail": "three scopes mentioned"
+    },
+    {
+      "name": "17. runbook includes sign-off table",
+      "ok": true,
+      "detail": "sign-off table header"
+    },
+    {
+      "name": "18. audit-log-hard-delete.ts still requires soft-deleted rows + grace cutoff",
+      "ok": true,
+      "detail": "softDeleted=true graceCutoff=true"
+    },
+    {
+      "name": "19. audit-log-retention-enforce.ts performs soft-delete only",
+      "ok": true,
+      "detail": "noHardDelete=true setsDeletedAt=true"
+    },
+    {
+      "name": "20. saas:phase254-audit-log-hard-delete-harness wired in package.json",
+      "ok": true,
+      "detail": "script entry present"
+    },
+    {
+      "name": "21. saas:phase253-audit-log-retention-enforce-harness wired",
+      "ok": true,
+      "detail": "script entry present"
+    },
+    {
+      "name": "22. audit read + preview harnesses wired",
+      "ok": true,
+      "detail": "three phase252 scripts wired"
+    }
+  ]
+}

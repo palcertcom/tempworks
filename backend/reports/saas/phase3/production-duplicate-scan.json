@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-05-11T08:41:18.658Z",
+  "readOnly": true,
+  "classification": "SAFE_CLONE",
+  "target": "local (localhost)",
+  "productionShaped": true,
+  "sections": {
+    "1_employee_email_same_tenant": [],
+    "2_employee_email_null_tenant": [],
+    "3_applicant_email_same_tenant": [],
+    "4_applicant_email_null_tenant": [],
+    "5_employee_number_same_tenant": [],
+    "6_employee_number_null_tenant": [],
+    "7_cross_tenant_email_observation": []
+  },
+  "blockingDuplicateGroups": 0,
+  "crossTenantObservationGroups": 0,
+  "cleanupBuckets": {
+    "exact": 0,
+    "conflicting_active": 0,
+    "null_tenant_assignment_required": 0,
+    "manual_review": 0
+  }
+}

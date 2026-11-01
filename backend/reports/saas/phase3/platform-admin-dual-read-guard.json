@@ -1,0 +1,124 @@
+{
+  "passed": 14,
+  "total": 14,
+  "cases": [
+    {
+      "name": "1. legacy user with no PlatformAdmin returns false (Phase 3.9 supersedes legacy signal)",
+      "ok": true,
+      "detail": "uLegacy"
+    },
+    {
+      "name": "2. PlatformAdmin row user (non-system agency) returns platform admin",
+      "ok": true,
+      "detail": "uNewOnly"
+    },
+    {
+      "name": "3. user with both signals returns platform admin",
+      "ok": true,
+      "detail": "uBoth"
+    },
+    {
+      "name": "4. user with neither signal returns false",
+      "ok": true,
+      "detail": "uNeither"
+    },
+    {
+      "name": "5. deleted/inactive user returns false",
+      "ok": true,
+      "detail": "uDeleted"
+    },
+    {
+      "name": "6. existing PlatformAdmin row is not mutated by isPlatformAdmin()",
+      "ok": true,
+      "detail": "level=SUPER grantedBy=phase360-test"
+    },
+    {
+      "name": "7. Agency row is not mutated by isPlatformAdmin() (column dropped in Phase 3.9; row presence preserved)",
+      "ok": true,
+      "detail": "sysAgency=00000000-0000-0000-0000-0000000036SA"
+    },
+    {
+      "name": "11. PlatformAuditLog write is not attempted (table absent, no error raised)",
+      "ok": true,
+      "detail": "tableExists=false"
+    },
+    {
+      "name": "8. missing user returns false",
+      "ok": true,
+      "detail": "result=true"
+    },
+    {
+      "name": "9. PLATFORM_ADMIN_DUAL_READ_ENABLED flag inert under Phase 3.9 (PlatformAdmin sole authority)",
+      "ok": true,
+      "detail": "uNewOnly=true uLegacy=false"
+    },
+    {
+      "name": "10. source-level inventory captures remaining Agency.isSystem references",
+      "ok": true,
+      "detail": "totalSites=9 mustHave=2"
+    },
+    {
+      "name": "12. Phase 3.5 platform-admin-backfill wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "13. Phase 3.4 employee unique harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "14. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=10/10"
+    }
+  ],
+  "inventory": [
+    {
+      "file": "src/saas/jobs/tenant-job-fanout-planner.ts",
+      "line": 28,
+      "text": "readonly isSystem?: boolean;"
+    },
+    {
+      "file": "src/saas/jobs/tenant-job-fanout-planner.ts",
+      "line": 122,
+      "text": "if (excludeSys && c.isSystem === true) {"
+    },
+    {
+      "file": "src/roles/roles.service.ts",
+      "line": 92,
+      "text": "if (role.isSystem && dto.name && dto.name !== role.name) throw new BadRequestException('Cannot rename system roles');"
+    },
+    {
+      "file": "src/roles/roles.service.ts",
+      "line": 122,
+      "text": "if (role.isSystem) throw new BadRequestException('Cannot delete system roles');"
+    },
+    {
+      "file": "src/recycle-bin/hard-delete.service.ts",
+      "line": 306,
+      "text": "if (record.isSystem) {"
+    },
+    {
+      "file": "src/recycle-bin/recycle-bin.service.ts",
+      "line": 1147,
+      "text": "extra: { isSystem: r.isSystem },"
+    },
+    {
+      "file": "src/auth/auth.service.ts",
+      "line": 551,
+      "text": "agency: user.agency ? { id: user.agency.id, name: user.agency.name, isSystem: await this.platformAdminAccess.isPlatformAdmin(user.id) } : null,"
+    },
+    {
+      "file": "src/agencies/agencies.service.ts",
+      "line": 157,
+      "text": "if ('isSystem' in (dto as any)) delete (dto as any).isSystem;"
+    },
+    {
+      "file": "src/agencies/agencies.service.ts",
+      "line": 210,
+      "text": "if ('isSystem' in (dto as any)) delete (dto as any).isSystem;"
+    }
+  ],
+  "inventoryTotal": 9
+}

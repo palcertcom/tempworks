@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-05-10T02:08:45.444Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantB": "22222222-2222-2222-2222-222222222222",
+  "empA": "f2cae0af-4df6-46ea-8689-3c0576681de2",
+  "empB": "2e00a128-26e3-4fb0-a25d-fd9c06c4d281",
+  "counts": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "pilot ON, tenant A: list(empA) returns ONLY tenant A rows",
+      "ok": true,
+      "detail": "ids=00000000-0000-0000-0000-0000000ea002,00000000-0000-0000-0000-0000000ea001"
+    },
+    {
+      "name": "pilot ON, tenant A: NULL-tenant legacy row not surfaced",
+      "ok": true,
+      "detail": "legacy NULL-tenant row excluded"
+    },
+    {
+      "name": "pilot ON, tenant A: list(empB) raises NotFoundException (cross-tenant employee id hidden)",
+      "ok": true,
+      "detail": "NotFoundException raised"
+    },
+    {
+      "name": "pilot ON, tenant A: create persists tenantId=A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "pilot ON, tenant A: update on tenant B entry rejected, row unchanged",
+      "ok": true,
+      "detail": "before=tenant B new contract after=tenant B new contract"
+    },
+    {
+      "name": "pilot ON, tenant A: remove of tenant B entry rejected, deletedAt still NULL",
+      "ok": true,
+      "detail": "deletedAt=null"
+    },
+    {
+      "name": "concurrent ALS frames isolated (T_A sees only A, T_B sees only B)",
+      "ok": true,
+      "detail": "seenA=00000000-0000-0000-0000-0000000ea002,00000000-0000-0000-0000-0000000ea001 seenB=00000000-0000-0000-0000-0000000eb002,00000000-0000-0000-0000-0000000eb001"
+    },
+    {
+      "name": "pilot OFF: legacy returns rows including NULL-tenant legacy row",
+      "ok": true,
+      "detail": "ids=00000000-0000-0000-0000-0000000ea002,00000000-0000-0000-0000-0000000ea001,00000000-0000-0000-0000-0000000ea999"
+    }
+  ]
+}

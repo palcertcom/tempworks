@@ -1,0 +1,102 @@
+{
+  "title": "Prehľad",
+  "welcomeBack": "Vitajte späť, {{name}}",
+  "user": "Používateľ",
+  "refresh": "Obnoviť",
+  "loadFailed": "Nepodarilo sa načítať údaje prehľadu.",
+  "retry": "Skúsiť znova",
+  "kpi": {
+    "totalEmployees": "Celkový počet zamestnancov",
+    "activeEmployees": "Aktívni zamestnanci",
+    "pendingApplications": "Čakajúce žiadosti",
+    "expiringDocuments": "Čoskoro expirujú",
+    "expiredDocuments": "Expirované dokumenty",
+    "expiredAction": "Vyžaduje sa akcia",
+    "noExpired": "Žiadne expirované dokumenty",
+    "thisMonth": "tento mesiac",
+    "noChangeThisMonth": "Tento mesiac bez zmeny",
+    "active": "Aktívnych",
+    "ofTotal": "({{percent}} % z celku)",
+    "needReview": "{{count}} čaká na kontrolu",
+    "allReviewed": "Všetko skontrolované",
+    "within60Days": "Do 60 dní",
+    "within60DaysAction": "Do 60 dní — potrebná akcia"
+  },
+  "applicants": {
+    "title": "Prehľad uchádzačov",
+    "subtitle": "Uchádzači podľa aktuálneho stavu",
+    "viewAllApplicants": "Zobraziť všetkých uchádzačov",
+    "viewAllCandidates": "Zobraziť všetkých kandidátov",
+    "total": "Spolu",
+    "newUnreviewed": "Noví / nepreskúmaní",
+    "screening": "Prehliadka",
+    "interview": "Pohovor",
+    "offerMade": "Ponuka",
+    "accepted": "Akceptované"
+  },
+  "workflow": {
+    "title": "Náborový pracovný postup",
+    "subtitle": "Rozloženie zamestnancov v jednotlivých fázach náborového procesu",
+    "viewWorkflow": "Zobraziť pracovný postup",
+    "noStages": "Nie sú nakonfigurované žiadne aktívne fázy.",
+    "employees_one": "{{count}} zamestnanec",
+    "employees_few": "{{count}} zamestnanci",
+    "employees_many": "{{count}} zamestnancov",
+    "employees_other": "{{count}} zamestnancov",
+    "documentVerification": "Overenie dokumentov",
+    "workPermit": "Pracovné povolenie",
+    "visa": "Vízum",
+    "onboarding": "Nástup",
+    "avgProcessingDays": "Priemerné dni spracovania",
+    "approvalRate": "Miera schválenia",
+    "daysSuffix": "{{count}} d"
+  },
+  "recentActivity": {
+    "title": "Nedávna aktivita",
+    "subtitle": "Najnovšie systémové udalosti",
+    "empty": "Žiadna nedávna aktivita.",
+    "viewAll": "Zobraziť všetku aktivitu",
+    "system": "Systém",
+    "uploaded": "{{entity}} nahrané",
+    "verified": "{{entity}} overené",
+    "rejected": "{{entity}} zamietnuté",
+    "created": "{{entity}} vytvorené",
+    "updated": "{{entity}} aktualizované",
+    "deleted": "{{entity}} vymazané",
+    "renewed": "{{entity}} obnovené",
+    "converted": "{{entity}} prevedené",
+    "fallback": "{{entity}} {{action}}"
+  },
+  "recentEmployees": {
+    "title": "Nedávni zamestnanci",
+    "subtitle": "Najnovšie registrácie",
+    "viewAll": "Zobraziť všetkých",
+    "empty": "Zatiaľ nie sú registrovaní žiadni zamestnanci."
+  },
+  "expiredDocuments": {
+    "title": "Expirované dokumenty",
+    "subtitleCount": "{{count}} expirovaných bez obnovenia",
+    "subtitleLoading": "…",
+    "viewAll": "Zobraziť všetky",
+    "emptyZero": "Žiadne expirované dokumenty bez obnovenia.",
+    "emptyOther": "Zobrazené 0 z 0 expirovaných dokumentov.",
+    "expiredOn": "Expirované {{date}} (pred {{days}} d)",
+    "more": "+{{count}} ďalších —",
+    "moreLink": "zobraziť všetky",
+    "expiredBadge": "Expirované"
+  },
+  "quickActions": {
+    "title": "Rýchle akcie",
+    "subtitle": "Skratky k bežným úlohám",
+    "addEmployee": "Pridať zamestnanca",
+    "uploadDocument": "Nahrať dokument",
+    "viewWorkflow": "Zobraziť pracovný postup",
+    "reports": "Reporty"
+  },
+  "timeAgo": {
+    "justNow": "práve teraz",
+    "minutesAgo": "pred {{count}} min",
+    "hoursAgo": "pred {{count}} h",
+    "daysAgo": "pred {{count}} d"
+  }
+}

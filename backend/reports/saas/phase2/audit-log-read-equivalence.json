@@ -1,0 +1,76 @@
+{
+  "passed": 14,
+  "total": 14,
+  "cases": [
+    {
+      "name": "1. pilot disabled returns legacy list shape",
+      "ok": true,
+      "detail": "keys=data,meta"
+    },
+    {
+      "name": "2. pilot disabled count matches legacy (>=5 Phase252A)",
+      "ok": true,
+      "detail": "total=5"
+    },
+    {
+      "name": "3. pilot enabled response shape preserved",
+      "ok": true,
+      "detail": "keys=data,meta"
+    },
+    {
+      "name": "4. pilot enabled list ⊂ legacy union",
+      "ok": true,
+      "detail": "legacy=5 pilotA=4"
+    },
+    {
+      "name": "5. entity filter preserved",
+      "ok": true,
+      "detail": "entity=Phase252A"
+    },
+    {
+      "name": "6. entityId filter preserved",
+      "ok": true,
+      "detail": "entityId=...a01"
+    },
+    {
+      "name": "7. action filter preserved",
+      "ok": true,
+      "detail": "action=EQ_A_CREATE"
+    },
+    {
+      "name": "8. userId filter preserved (zero match for synthetic id)",
+      "ok": true,
+      "detail": "userId=synthetic"
+    },
+    {
+      "name": "9. date range filter preserved",
+      "ok": true,
+      "detail": "last 7 days"
+    },
+    {
+      "name": "10. pagination shape preserved (page=1 limit=1)",
+      "ok": true,
+      "detail": "page=1 limit=1"
+    },
+    {
+      "name": "11. allow-list unset ⇒ all modules allowed",
+      "ok": true,
+      "detail": "both true"
+    },
+    {
+      "name": "12. allow-list \"audit-logs\" allows audit-logs, denies others",
+      "ok": true,
+      "detail": "audit=true att=false"
+    },
+    {
+      "name": "13. allow-list comma-separated allows both",
+      "ok": true,
+      "detail": "both true"
+    },
+    {
+      "name": "14. allow-list \"nothing\" ⇒ scope inactive (legacy)",
+      "ok": true,
+      "detail": "module \"audit-logs\" not in TENANT_PRISMA_PILOT_MODULES"
+    }
+  ]
+}

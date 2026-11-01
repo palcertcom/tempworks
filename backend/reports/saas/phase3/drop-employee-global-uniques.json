@@ -1,0 +1,106 @@
+{
+  "passed": 20,
+  "total": 20,
+  "cases": [
+    {
+      "name": "1. migration SQL contains no DROP for User.email",
+      "ok": true,
+      "detail": "no users mention"
+    },
+    {
+      "name": "2. migration SQL contains no DROP for Applicant indexes",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "3. migration SQL does not drop Phase 3.3 per-tenant indexes",
+      "ok": true,
+      "detail": "no per-tenant index name in up"
+    },
+    {
+      "name": "4. migration SQL drops only exact global Employee.email uniqueness",
+      "ok": true,
+      "detail": "emailDrop=true whereGuard=true"
+    },
+    {
+      "name": "5. migration SQL drops only exact global Employee.employeeNumber uniqueness",
+      "ok": true,
+      "detail": "guarded by partial-index check"
+    },
+    {
+      "name": "6. migration SQL contains no UPDATE/DELETE data mutation",
+      "ok": true,
+      "detail": "no UPDATE/DELETE in up"
+    },
+    {
+      "name": "7. after migration, same Employee.email in different tenants is allowed",
+      "ok": true,
+      "detail": "inserted"
+    },
+    {
+      "name": "8. after migration, same Employee.employeeNumber in different tenants is allowed",
+      "ok": true,
+      "detail": "inserted"
+    },
+    {
+      "name": "9. same-tenant Employee.email still rejected by employees_tenant_email_unique",
+      "ok": true,
+      "detail": "code=23505 constraint=employees_tenant_email_unique"
+    },
+    {
+      "name": "10. same-tenant Employee.employeeNumber still rejected by employees_tenant_employee_number_unique",
+      "ok": true,
+      "detail": "code=23505 constraint=employees_tenant_employee_number_unique"
+    },
+    {
+      "name": "11. User.email duplicate is still rejected globally",
+      "ok": true,
+      "detail": "code=23505 constraint=users_email_key"
+    },
+    {
+      "name": "12. Applicant same-tenant email duplicate is still rejected",
+      "ok": true,
+      "detail": "code=23505 constraint=applicants_tenant_email_unique"
+    },
+    {
+      "name": "13. Applicant cross-tenant same email behavior remains (allowed)",
+      "ok": true,
+      "detail": "inserted"
+    },
+    {
+      "name": "14. down migration restores global Employee.email uniqueness",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "15. down migration restores global Employee.employeeNumber uniqueness",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "16. down migration failure caveat documented when cross-tenant duplicates exist",
+      "ok": true,
+      "detail": "documented"
+    },
+    {
+      "name": "17. Phase 3.3 per-tenant unique harness wiring intact in package.json",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "18. Phase 3.2 cleanup harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "19. Phase 3.1 readiness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "20. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=8/8"
+    }
+  ]
+}

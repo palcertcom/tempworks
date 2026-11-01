@@ -1,0 +1,1 @@
+{"package":"tempworks-dr_2026-10-25T15-53-25Z_fe13ac1c","integrity":"OK","recoverability":"COMPLETE","verified":true,"deep":true,"problems":[],"checks":["database.dump 2.20 KB sha256 ok","database.dump parsed completely by pg_restore","uploads: 21 file(s), 0 problem(s) (deep re-hash)"],"complete":true,"kind":"full","recoveryIssues":[]}

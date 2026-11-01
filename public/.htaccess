@@ -1,0 +1,11 @@
+Options -MultiViews
+RewriteEngine On
+
+# Proxy /api/ requests to the local NestJS backend on port 3000
+RewriteCond %{REQUEST_URI} ^/api/ [NC]
+RewriteRule ^api/(.*)$ http://localhost:3000/api/$1 [P,L]
+
+# SPA fallback — all non-file, non-api routes serve index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]

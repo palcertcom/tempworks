@@ -1,0 +1,102 @@
+{
+  "title": "Панель управления",
+  "welcomeBack": "С возвращением, {{name}}",
+  "user": "Пользователь",
+  "refresh": "Обновить",
+  "loadFailed": "Не удалось загрузить данные панели.",
+  "retry": "Повторить",
+  "kpi": {
+    "totalEmployees": "Всего сотрудников",
+    "activeEmployees": "Активные сотрудники",
+    "pendingApplications": "Ожидающие заявки",
+    "expiringDocuments": "Скоро истекут",
+    "expiredDocuments": "Просроченные документы",
+    "expiredAction": "Требуется действие",
+    "noExpired": "Нет просроченных документов",
+    "thisMonth": "в этом месяце",
+    "noChangeThisMonth": "В этом месяце без изменений",
+    "active": "Активные",
+    "ofTotal": "({{percent}}% от общего)",
+    "needReview": "{{count}} ждут рассмотрения",
+    "allReviewed": "Все рассмотрены",
+    "within60Days": "В течение 60 дней",
+    "within60DaysAction": "В течение 60 дней — нужно действие"
+  },
+  "applicants": {
+    "title": "Обзор соискателей",
+    "subtitle": "Соискатели по текущему статусу",
+    "viewAllApplicants": "Все соискатели",
+    "viewAllCandidates": "Все кандидаты",
+    "total": "Всего",
+    "newUnreviewed": "Новые / не рассмотрены",
+    "screening": "Отбор",
+    "interview": "Собеседование",
+    "offerMade": "Предложение сделано",
+    "accepted": "Приняты"
+  },
+  "workflow": {
+    "title": "Рабочий процесс найма",
+    "subtitle": "Распределение сотрудников по этапам процесса найма",
+    "viewWorkflow": "Показать процесс",
+    "noStages": "Активные этапы не настроены.",
+    "employees_one": "{{count}} сотрудник",
+    "employees_few": "{{count}} сотрудника",
+    "employees_many": "{{count}} сотрудников",
+    "employees_other": "{{count}} сотрудников",
+    "documentVerification": "Проверка документов",
+    "workPermit": "Разрешение на работу",
+    "visa": "Виза",
+    "onboarding": "Адаптация",
+    "avgProcessingDays": "Среднее время обработки (дн.)",
+    "approvalRate": "Доля одобрений",
+    "daysSuffix": "{{count}} д"
+  },
+  "recentActivity": {
+    "title": "Недавняя активность",
+    "subtitle": "Последние системные события",
+    "empty": "Нет недавней активности.",
+    "viewAll": "Вся активность",
+    "system": "Система",
+    "uploaded": "{{entity}} загружено",
+    "verified": "{{entity}} проверено",
+    "rejected": "{{entity}} отклонено",
+    "created": "{{entity}} создано",
+    "updated": "{{entity}} обновлено",
+    "deleted": "{{entity}} удалено",
+    "renewed": "{{entity}} обновлено",
+    "converted": "{{entity}} преобразовано",
+    "fallback": "{{entity}} {{action}}"
+  },
+  "recentEmployees": {
+    "title": "Недавние сотрудники",
+    "subtitle": "Последние регистрации",
+    "viewAll": "Все",
+    "empty": "Сотрудники ещё не зарегистрированы."
+  },
+  "expiredDocuments": {
+    "title": "Просроченные документы",
+    "subtitleCount": "{{count}} просрочено без обновления",
+    "subtitleLoading": "…",
+    "viewAll": "Все",
+    "emptyZero": "Нет просроченных документов без обновления.",
+    "emptyOther": "Показано 0 из 0 просроченных документов.",
+    "expiredOn": "Истёк {{date}} ({{days}} дн назад)",
+    "more": "+{{count}} ещё —",
+    "moreLink": "показать все",
+    "expiredBadge": "Истёк"
+  },
+  "quickActions": {
+    "title": "Быстрые действия",
+    "subtitle": "Ярлыки для частых задач",
+    "addEmployee": "Добавить сотрудника",
+    "uploadDocument": "Загрузить документ",
+    "viewWorkflow": "Показать процесс",
+    "reports": "Отчёты"
+  },
+  "timeAgo": {
+    "justNow": "только что",
+    "minutesAgo": "{{count}} мин назад",
+    "hoursAgo": "{{count}} ч назад",
+    "daysAgo": "{{count}} д назад"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "generatedAt": "2026-05-10T02:07:12.812Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "counts": {
+    "total": 28,
+    "passed": 28,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "flags OFF: scheduler invokes legacy runAllChecks (not tenant-aware)",
+      "ok": true,
+      "detail": "legacy=true tenantAware=false"
+    },
+    {
+      "name": "flags ON in SAFE_CLONE: scheduler invokes runAllChecksTenantAware",
+      "ok": true,
+      "detail": "legacy=false tenantAware=true"
+    },
+    {
+      "name": "planner: 1 ACTIVE non-system selected; 1 system + 1 inactive skipped",
+      "ok": true,
+      "detail": "selected=11111111-1111-1111-1111-111111111111 skipped={\"system-tenant\":1,\"inactive\":1}"
+    },
+    {
+      "name": "runForTenant: ALS frame carries tenantId (smoke for fanout-tenant entry)",
+      "ok": true,
+      "detail": "seen=[{\"tenantFromAls\":\"11111111-1111-1111-1111-111111111111\"}]"
+    },
+    {
+      "name": "tenant-aware ON: notifyUploaderAndRoles without ALS tenant raises MissingTenantContextError",
+      "ok": true,
+      "detail": "threw=true isMissing=true"
+    },
+    {
+      "name": "tenant-aware ON: notifyUsersByRoles without ALS tenant raises MissingTenantContextError",
+      "ok": true,
+      "detail": "threw=true isMissing=true"
+    },
+    {
+      "name": "flags OFF: notifyUsersByRoles does NOT raise the new MissingTenantContextError",
+      "ok": true,
+      "detail": "raisedMissing=false (other errors are unrelated to this case)"
+    },
+    {
+      "name": "flags ON outside staging: scheduler stays on legacy path (env classifier refuses tenant-aware)",
+      "ok": true,
+      "detail": "legacy=true tenantAware=false"
+    },
+    {
+      "name": "cron timing constant unchanged (6-hour interval)",
+      "ok": true,
+      "detail": "source contains 6 * 60 * 60 * 1000: true"
+    },
+    {
+      "name": "checkExpiringCompliance: reads narrowingTenantId() at the top of its body",
+      "ok": true,
+      "detail": "source matches: true"
+    },
+    {
+      "name": "checkServiceDue: reads narrowingTenantId() at the top of its body",
+      "ok": true,
+      "detail": "source matches: true"
+    },
+    {
+      "name": "checkOverdue: reads narrowingTenantId() at the top of its body",
+      "ok": true,
+      "detail": "source matches: true"
+    },
+    {
+      "name": "checkScheduledMaintenance: reads narrowingTenantId() at the top of its body",
+      "ok": true,
+      "detail": "source matches: true"
+    },
+    {
+      "name": "each check* method narrows User scan by agency.tenantId when tid set",
+      "ok": true,
+      "detail": "agency: { tenantId: tid } appears in source: true"
+    },
+    {
+      "name": "notification creates spread tenantId when tid set (≥ 4 sites)",
+      "ok": true,
+      "detail": "tenantId spread occurrences: 14"
+    },
+    {
+      "name": "notification dedupe queries scope by tenantId when tid set (≥ 4 sites)",
+      "ok": true,
+      "detail": "dedupe-scope occurrences: 6"
+    },
+    {
+      "name": "legacy mode: narrowingTenantId() returns null (no narrowing)",
+      "ok": true,
+      "detail": "tid=null"
+    },
+    {
+      "name": "tenant-aware mode + ALS: narrowingTenantId() returns the active tenantId",
+      "ok": true,
+      "detail": "tid=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "tenant-aware mode without ALS frame: narrowingTenantId() returns null (legacy fallback)",
+      "ok": true,
+      "detail": "tid=null"
+    },
+    {
+      "name": "fanout: notifyUploaderAndRoles reads narrowingTenantId()",
+      "ok": true,
+      "detail": "source matches: true"
+    },
+    {
+      "name": "fanout: notifyUploaderAndRoles narrows User.findMany via agency.tenantId when tid set",
+      "ok": true,
+      "detail": "agency narrow present: true"
+    },
+    {
+      "name": "fanout: notifyUsersByRoles reads narrowingTenantId()",
+      "ok": true,
+      "detail": "source matches: true"
+    },
+    {
+      "name": "fanout: notifyUsersByRoles narrows User.findMany via agency.tenantId when tid set",
+      "ok": true,
+      "detail": "agency narrow present: true"
+    },
+    {
+      "name": "fanout: notification.create payloads spread tenantId when tid set (≥ 6 sites: 4 check* + 2 writers)",
+      "ok": true,
+      "detail": "tenantId spread occurrences in create blocks: 6"
+    },
+    {
+      "name": "fanout: notifyUploaderAndRoles validates uploader belongs to tid via findFirst probe",
+      "ok": true,
+      "detail": "uploader probe present: true"
+    },
+    {
+      "name": "fanout: tenant A → notifyUsersByRoles(Recruiter) writes rows tagged tenantId=A",
+      "ok": true,
+      "detail": "count=5; allTidA=true; sampleTids=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "fanout: tenant A → notifyUsersByRoles(HR Manager) creates 0 rows (HR Managers are in tenant B only)",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "fanout legacy: notifyUsersByRoles(HR Manager) reaches B-tenant users (cross-tenant fanout preserved)",
+      "ok": true,
+      "detail": "created=5"
+    }
+  ]
+}

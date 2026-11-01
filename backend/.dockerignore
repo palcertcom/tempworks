@@ -1,0 +1,13 @@
+# Never send secrets, local state or build output into the image build.
+.env
+.env.*
+!.env.example
+node_modules
+dist
+backups
+uploads/*
+!uploads/.gitkeep
+reports
+*.log
+*.tsbuildinfo
+.git

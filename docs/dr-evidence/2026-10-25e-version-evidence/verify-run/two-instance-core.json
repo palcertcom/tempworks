@@ -1,0 +1,177 @@
+{
+  "environment": "local, two backend processes, PostgreSQL 18, s3rver S3 SIMULATOR",
+  "failures": 0,
+  "checks": [
+    {
+      "name": "backup accepted by A",
+      "ok": true,
+      "detail": 201
+    },
+    {
+      "name": "concurrent backup on B refused (cross-instance lock)",
+      "ok": true,
+      "detail": 503
+    },
+    {
+      "name": "B sees COMPLETED",
+      "ok": true,
+      "detail": "COMPLETED"
+    },
+    {
+      "name": "engine = stream (bucket-native)",
+      "ok": true,
+      "detail": "stream"
+    },
+    {
+      "name": "stored copy verified by the engine",
+      "ok": true,
+      "detail": {
+        "verify": "VERIFIED",
+        "offsite": "VERIFIED"
+      }
+    },
+    {
+      "name": "B lists it as present (fileExists, not missing)",
+      "ok": true,
+      "detail": {
+        "fileExists": true,
+        "fileMissing": false
+      }
+    },
+    {
+      "name": "deep verification via B",
+      "ok": true,
+      "detail": "{\"package\":\"tempworks-dr_2026-10-25T16-08-16Z_d99c4415\",\"integrity\":\"OK\",\"recoverability\":\"COMPLETE\",\"verified\":true,\"deep\":true,\"problems\":[],\"checks\":[\"database.dump 336.84 KB sha256 ok\",\"database.dump parsed completely by pg_restore\",\"uploads: 52 file(s), 0 problem(s) (deep re-hash)\"],\"complete\":true,\"kind\":\"full\",\"recoveryIssues\":[]} | "
+    },
+    {
+      "name": "download via B is a valid package (tar extracts, verify.sh passes)",
+      "ok": true,
+      "detail": {
+        "http": 200,
+        "contentType": "application/x-tar",
+        "bytes": 656384,
+        "tarOk": true,
+        "verifyExit": 0,
+        "dumpSha": "176b60d73d460f3363432bbbae4efc14dbd131cdea5d3332ebf2ca91280417a4",
+        "pkg": "tempworks-dr_2026-10-25T16-08-16Z_d99c4415"
+      }
+    },
+    {
+      "name": "downloaded dump sha256 = catalog checksum",
+      "ok": true
+    },
+    {
+      "name": "local dirs of both instances wiped",
+      "ok": true,
+      "detail": [
+        "/tmp/tw-drill-verify/source/backups",
+        "/tmp/tw-drill-verify/source/backups.tmp",
+        "/tmp/tw-drill-verify/source/backups-b",
+        "/tmp/tw-drill-verify/source/backups-b.tmp"
+      ]
+    },
+    {
+      "name": "still present on A and on B (bucket is authoritative, not local cache)",
+      "ok": true
+    },
+    {
+      "name": "reconcile via A marks nothing missing",
+      "ok": true,
+      "detail": {
+        "total": 3,
+        "present": 3,
+        "missing": 0,
+        "imported": 2
+      }
+    },
+    {
+      "name": "download via A after the wipe: identical dump, verify.sh passes",
+      "ok": true,
+      "detail": {
+        "verifyExit": 0
+      }
+    },
+    {
+      "name": "purge on B skipped while another instance purges (purge lock)",
+      "ok": true,
+      "detail": {
+        "skippedBecauseBackupRunning": false,
+        "examined": 0,
+        "purged": 0,
+        "stillReferenced": 0,
+        "failed": 0,
+        "graceHours": 0,
+        "skippedBecauseOtherInstancePurging": true
+      }
+    },
+    {
+      "name": "purge skipped while a backup holds the lock exclusively",
+      "ok": true,
+      "detail": {
+        "skippedBecauseBackupRunning": true,
+        "examined": 0,
+        "purged": 0,
+        "stillReferenced": 0,
+        "failed": 0,
+        "graceHours": 0
+      }
+    },
+    {
+      "name": "a backup requested during a purge waits for it, then starts (no false \"busy\")",
+      "ok": true,
+      "detail": {
+        "status": 201,
+        "waitedSeconds": 2.855
+      }
+    },
+    {
+      "name": "that backup completes",
+      "ok": true,
+      "detail": "COMPLETED"
+    },
+    {
+      "name": "external snapshot created",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "reconcile via B imports it",
+      "ok": true,
+      "detail": {
+        "total": 6,
+        "present": 6,
+        "missing": 0,
+        "imported": 1
+      }
+    },
+    {
+      "name": "A lists the imported snapshot as COMPLETED + present",
+      "ok": true,
+      "detail": {
+        "status": "COMPLETED",
+        "notes": "[imported from backup storage] external-runner"
+      }
+    }
+  ],
+  "backup": {
+    "id": "c94d9052-453a-48a5-8823-4e97eccd8cf4",
+    "fileName": "tempworks-dr_2026-10-25T16-08-16Z_d99c4415",
+    "location": "s3://dr-offsite/dr/snapshots/tempworks-dr_2026-10-25T16-08-16Z_d99c4415/",
+    "checksum": "176b60d73d460f3363432bbbae4efc14dbd131cdea5d3332ebf2ca91280417a4"
+  },
+  "downloadB": {
+    "http": 200,
+    "contentType": "application/x-tar",
+    "bytes": 656384,
+    "tarOk": true,
+    "verifyExit": 0,
+    "dumpSha": "176b60d73d460f3363432bbbae4efc14dbd131cdea5d3332ebf2ca91280417a4",
+    "pkg": "tempworks-dr_2026-10-25T16-08-16Z_d99c4415"
+  },
+  "reconcileAfterWipe": {
+    "total": 3,
+    "present": 3,
+    "missing": 0,
+    "imported": 2
+  }
+}

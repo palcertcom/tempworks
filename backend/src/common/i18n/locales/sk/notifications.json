@@ -1,0 +1,80 @@
+{
+  "events": {
+    "vehicleCheckExpiring": {
+      "title": "{{registrationNumber}}: {{checkLabel}} Expiring Soon",
+      "body": "{{checkLabel}} expires in {{daysUntilDue}} days"
+    },
+    "vehicleServiceDueKm": {
+      "title": "{{registrationNumber}}: Service Due Soon",
+      "body": "Service due in {{kmRemaining}} km"
+    },
+    "vehicleComplianceOverdue": {
+      "title": "🚨 {{registrationNumber}}: Compliance Overdue",
+      "body": "Vehicle has expired compliance. Service immediately."
+    },
+    "vehicleScheduledMaintenance": {
+      "title": "{{registrationNumber}}: Scheduled Maintenance",
+      "body": "{{maintenanceTypeName}} scheduled in {{daysUntil}} days at {{workshopName}}"
+    },
+    "documentUploaded": {
+      "title": "Document uploaded: {{documentName}}",
+      "body": "{{uploaderName}} uploaded a new document for {{entityName}}"
+    },
+    "documentVerified": {
+      "title": "Document verified: {{documentName}}",
+      "body": "{{verifierName}} approved the document for {{entityName}}"
+    },
+    "documentRejected": {
+      "title": "Document rejected: {{documentName}}",
+      "body": "{{verifierName}} rejected the document for {{entityName}}"
+    },
+    "documentExpiringSoon": {
+      "title": "Document Expiring Soon",
+      "body": "Document \"{{documentName}}\" for {{entityName}} expires in {{daysUntilExpiry}} days."
+    },
+    "documentExpired": {
+      "title": "Document Expired",
+      "body": "Document \"{{documentName}}\" for {{entityName}} has already expired."
+    },
+    "documentExpiring": {
+      "title": "Document expiring: {{documentName}}",
+      "body": "Expires on {{expiryDate}} for {{entityName}}"
+    },
+    "financeRecordCreated": {
+      "title": "New Financial Record Added",
+      "body": "A new financial record was added for {{entityName}}: {{transactionType}}{{amountSuffix}}"
+    },
+    "financeRecordUpdated": {
+      "title": "Financial Record Updated",
+      "body": "A financial record was updated for {{entityName}}."
+    },
+    "financeRecordDeleted": {
+      "title": "Financial Record Deleted",
+      "body": "A financial record was deleted for {{entityName}}."
+    },
+    "financeRecordDeducted": {
+      "title": "Record Marked for Deduction",
+      "body": "A financial record for {{entityName}} has been marked as deducted{{amountSuffix}}."
+    },
+    "financeRecordFullyDeducted": {
+      "title": "Record Fully Deducted",
+      "body": "A financial record for {{entityName}} has been fully deducted ({{currency}} {{amount}})."
+    },
+    "financeHighBalance": {
+      "title": "High Balance Alert",
+      "body": "Outstanding balance for {{entityName}} has reached {{amount}} EUR (threshold: {{threshold}} EUR)."
+    },
+    "financeRecordRestored": {
+      "title": "Finance record restored: {{candidateName}}",
+      "body": "{{actorName}} restored a {{transactionType}} record"
+    },
+    "generic": {
+      "title": "Notification",
+      "body": "You have a new notification"
+    },
+    "employeeBirthdayReminder": {
+      "title": "Pripomienka narodenín: {{name}}",
+      "body": "{{name}} oslavuje narodeniny {{date}}{{ageLabel}}. Otvorte profil a pošlite želanie."
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "passed": 10,
+  "total": 10,
+  "cases": [
+    {
+      "name": "1. tenant A sees only audit rows with tenantId=A",
+      "ok": true,
+      "detail": "count=3 allA=true"
+    },
+    {
+      "name": "2. tenant A does not see tenant B audit rows",
+      "ok": true,
+      "detail": "actions=ISO_A1,ISO_A2,ISO_A3"
+    },
+    {
+      "name": "3. tenant A does not see NULL-tenant audit rows in pilot mode",
+      "ok": true,
+      "detail": "NULL excluded"
+    },
+    {
+      "name": "4. tenant B sees only tenant B rows",
+      "ok": true,
+      "detail": "count=2 allB=true"
+    },
+    {
+      "name": "5. entity filter under tenant A does not leak tenant B rows",
+      "ok": true,
+      "detail": "count=3"
+    },
+    {
+      "name": "6. entityId filter for tenant B entity under tenant A returns empty",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "7. count under tenant A includes only tenant A rows",
+      "ok": true,
+      "detail": "total=3"
+    },
+    {
+      "name": "8. pagination under tenant A cannot page into tenant B rows",
+      "ok": true,
+      "detail": "p1=2 p2=1"
+    },
+    {
+      "name": "9. concurrent ALS frames remain isolated",
+      "ok": true,
+      "detail": "A=3 B=2"
+    },
+    {
+      "name": "10. pilot opt-out (allow-list nothing) returns legacy union (incl. B + NULL)",
+      "ok": true,
+      "detail": "count=6 hasB=true hasNull=true"
+    }
+  ]
+}

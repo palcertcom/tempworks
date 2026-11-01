@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. pilot disabled returns legacy list shape",
+      "ok": true,
+      "detail": "keys=data,meta"
+    },
+    {
+      "name": "2. pilot disabled count matches legacy (>=2 employees)",
+      "ok": true,
+      "detail": "total=10"
+    },
+    {
+      "name": "3. pilot enabled response shape preserved",
+      "ok": true,
+      "detail": "keys=data,meta"
+    },
+    {
+      "name": "4. pilot enabled list ⊂ legacy union",
+      "ok": true,
+      "detail": "legacy=10 pilotA=6"
+    },
+    {
+      "name": "5. date-range filter equivalent (legacy >= pilot, both >0)",
+      "ok": true,
+      "detail": "legacy=3 pilotA=3"
+    },
+    {
+      "name": "6. employee filter works for same-tenant employee under pilot",
+      "ok": true,
+      "detail": "id=eeeeeeea recs=0"
+    },
+    {
+      "name": "7. pagination shape preserved (page=1 limit=1)",
+      "ok": true,
+      "detail": "page=1 limit=1 data=1"
+    },
+    {
+      "name": "8. mutation shape preserved (upsert returns id + employee)",
+      "ok": true,
+      "detail": "id=19d63d25"
+    },
+    {
+      "name": "9. allow-list unset ⇒ all modules allowed",
+      "ok": true,
+      "detail": "both true"
+    },
+    {
+      "name": "10. allow-list \"attendance\" allows attendance, denies others",
+      "ok": true,
+      "detail": "att=true emp=false"
+    },
+    {
+      "name": "11. allow-list comma-separated allows both",
+      "ok": true,
+      "detail": "both true"
+    },
+    {
+      "name": "12. allow-list \"nothing\" ⇒ scope inactive (legacy)",
+      "ok": true,
+      "detail": "module \"attendance\" not in TENANT_PRISMA_PILOT_MODULES"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. pilot disabled returns legacy list shape",
+      "ok": true,
+      "detail": "workflows=3"
+    },
+    {
+      "name": "2. pilot disabled getWorkflow matches legacy",
+      "ok": true,
+      "detail": "id=00000000 stages=2"
+    },
+    {
+      "name": "3. pilot enabled response shape preserved (array)",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "4. pilot enabled candidates ⊂ legacy union",
+      "ok": true,
+      "detail": "legacy=3 pilotA=1"
+    },
+    {
+      "name": "5. getWorkflow under pilot returns same workflow id (workflows are global)",
+      "ok": true,
+      "detail": "id=00000000"
+    },
+    {
+      "name": "6. stages list shape preserved (id/name/order)",
+      "ok": true,
+      "detail": "stages=2"
+    },
+    {
+      "name": "7. getWorkflowStats keys preserved",
+      "ok": true,
+      "detail": "keys=totalActive,totalCompleted,flaggedCount,slaBreached"
+    },
+    {
+      "name": "8. getWorkflowBoardView shape preserved (workflow + columns)",
+      "ok": true,
+      "detail": "columns=2"
+    },
+    {
+      "name": "9. allow-list unset ⇒ all modules allowed",
+      "ok": true,
+      "detail": "both true"
+    },
+    {
+      "name": "10. allow-list \"pipeline\" allows pipeline, denies others",
+      "ok": true,
+      "detail": "pipeline=true audit=false"
+    },
+    {
+      "name": "11. allow-list comma-separated allows both",
+      "ok": true,
+      "detail": "both true"
+    },
+    {
+      "name": "12. allow-list \"nothing\" ⇒ scope inactive (legacy)",
+      "ok": true,
+      "detail": "module \"pipeline\" not in TENANT_PRISMA_PILOT_MODULES"
+    }
+  ]
+}

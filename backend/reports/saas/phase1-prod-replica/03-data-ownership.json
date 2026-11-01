@@ -1,0 +1,164 @@
+{
+  "slug": "03-data-ownership",
+  "title": "Audit C — Data Ownership",
+  "startedAt": "2026-05-09T14:52:54.660Z",
+  "durationMs": 65,
+  "status": "WARN",
+  "metrics": [
+    {
+      "key": "applicants.total",
+      "value": 72
+    },
+    {
+      "key": "applicants.distinct-owners",
+      "value": 2
+    },
+    {
+      "key": "applicants.null-owner",
+      "value": 0
+    },
+    {
+      "key": "employees.total",
+      "value": 29
+    },
+    {
+      "key": "employees.distinct-owners",
+      "value": 2
+    },
+    {
+      "key": "employees.null-owner",
+      "value": 0
+    },
+    {
+      "key": "job_ads.total",
+      "value": 3
+    },
+    {
+      "key": "documents.total",
+      "value": 52
+    },
+    {
+      "key": "attendance_records.total",
+      "value": 0
+    },
+    {
+      "key": "attendance_locked_periods.total",
+      "value": 2
+    },
+    {
+      "key": "financial_records.total",
+      "value": 1
+    },
+    {
+      "key": "workflows.total",
+      "value": 3
+    },
+    {
+      "key": "reports.total",
+      "value": 2
+    },
+    {
+      "key": "reports.distinct-owners",
+      "value": 1
+    },
+    {
+      "key": "reports.null-owner",
+      "value": 0
+    },
+    {
+      "key": "notifications.total",
+      "value": 5
+    },
+    {
+      "key": "notifications.distinct-owners",
+      "value": 5
+    },
+    {
+      "key": "notifications.null-owner",
+      "value": 0
+    },
+    {
+      "key": "vehicles.total",
+      "value": 3
+    },
+    {
+      "key": "vehicles.distinct-owners",
+      "value": 3
+    },
+    {
+      "key": "vehicles.null-owner",
+      "value": 1
+    },
+    {
+      "key": "identifier_sequences.total",
+      "value": 2
+    },
+    {
+      "key": "audit_logs.total",
+      "value": 1
+    },
+    {
+      "key": "audit_logs.distinct-owners",
+      "value": 1
+    },
+    {
+      "key": "audit_logs.null-owner",
+      "value": 0
+    },
+    {
+      "key": "workshops.total",
+      "value": 1
+    }
+  ],
+  "findings": [
+    {
+      "severity": "INFO",
+      "rule": "model.job_ads.no-direct-ownership",
+      "message": "NO ownership column today (global slug)"
+    },
+    {
+      "severity": "INFO",
+      "rule": "model.documents.no-direct-ownership",
+      "message": "entity-keyed; tenancy via parent"
+    },
+    {
+      "severity": "INFO",
+      "rule": "model.attendance_records.no-direct-ownership",
+      "message": "via Employee"
+    },
+    {
+      "severity": "INFO",
+      "rule": "model.attendance_locked_periods.no-direct-ownership",
+      "message": "GLOBAL today; must become per-tenant"
+    },
+    {
+      "severity": "INFO",
+      "rule": "model.financial_records.no-direct-ownership",
+      "message": "entity-keyed"
+    },
+    {
+      "severity": "INFO",
+      "rule": "model.workflows.no-direct-ownership",
+      "message": "no ownership; system-template + clone-on-use planned"
+    },
+    {
+      "severity": "WARN",
+      "rule": "model.vehicles.null-owner",
+      "message": "1 rows with NULL agencyId — must be reconciled before backfill."
+    },
+    {
+      "severity": "INFO",
+      "rule": "model.identifier_sequences.no-direct-ownership",
+      "message": "GLOBAL today; must become per-tenant"
+    },
+    {
+      "severity": "INFO",
+      "rule": "model.workshops.no-direct-ownership",
+      "message": "GLOBAL today; review per-tenant ownership"
+    }
+  ],
+  "notes": [
+    "Models with `entity-keyed` ownership (Document, FinancialRecord) need a tenantId denorm in Phase 2 derived from the parent entity at backfill time.",
+    "Global models (workshops, identifier_sequences, attendance_locked_periods) require a per-tenant split decision before any backfill writes."
+  ]
+}

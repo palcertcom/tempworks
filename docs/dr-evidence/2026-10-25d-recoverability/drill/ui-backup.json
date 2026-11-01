@@ -1,0 +1,16 @@
+{
+  "id": "9b71ac85-cb7b-43b2-8b21-64dc2f385c40",
+  "status": "COMPLETED",
+  "kind": "FULL_SYSTEM",
+  "verifyResult": "VERIFIED",
+  "offsiteStatus": "VERIFIED",
+  "package": "tempworks-dr_2026-10-25T14-50-52Z_ebedccaa",
+  "fileName": "tempworks-dr_2026-10-25T14-50-52Z_ebedccaa",
+  "engine": "stream",
+  "uploadsCount": 8,
+  "uploadsComplete": true,
+  "globalsCaptured": false,
+  "createdAt": "2026-10-25T14:50:52.318Z",
+  "completedAt": "2026-10-25T14:50:53.773Z",
+  "uiToCompletedSeconds": 3.6
+}

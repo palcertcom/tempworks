@@ -1,0 +1,16 @@
+== 0. the live test bucket must be empty (isolation)
+  ✓ test bucket spaces-test-live is empty
+== 1. throwaway database + test objects written by the real StorageService
+  ✓ 21 test objects uploaded to real Spaces via StorageService (incl. 40 MiB)
+== 2. probe + streaming backup to the real backup bucket (test prefix)
+  ✓ preflight (bucket access, separation, credentials) passes
+  ✓ backup COMPLETE on real Spaces (rc=0)
+  ✓ every captured object carries app write-once version evidence
+  ✓ deep verify (dump re-read, every blob re-hashed) on real Spaces
+== 3. restore into a second fresh cluster + local files; compare hashes
+  ✓ restore into a fresh cluster as non-superuser: RESTORE OK
+  ✓ restored rows = 21
+  ✓ every restored file matches its SHA-256 (compared=21 mismatched_or_missing=0)
+result: 9 passed, 0 failed
+== cleanup: test objects in spaces-test-live and s3://dr-backups/dr-test/20261025T155315Z/
+  cleaned

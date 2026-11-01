@@ -1,0 +1,261 @@
+{
+  "passed": 51,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "recovery config references no source DB/API/bucket",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "source API is down",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "source upload bucket is gone",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "recovered backend runs from the unpacked release artifact, not the source tree",
+      "pass": true,
+      "detail": "cwd=/tmp/tw-drill/recovery/app/backend gitSha=e9a27b377a58"
+    },
+    {
+      "name": "recovered app can run its schema migrations (boot drift-heal applies all statements)",
+      "pass": true,
+      "detail": "117/117"
+    },
+    {
+      "name": "outbound email is disabled in the recovered app",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "platform admin logs in with the ORIGINAL password",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "tenant users log in (alpha HR, beta HR, alpha read-only)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "wrong password is rejected",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "cross-tenant login is rejected (alpha user → company beta)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Read Only user cannot create employees",
+      "pass": true,
+      "detail": "HTTP 403"
+    },
+    {
+      "name": "alpha sees all 2 of its recovered employees",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "alpha sees none of the other tenant's employees",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "beta sees all 1 of its recovered employees",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "beta sees none of the other tenant's employees",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct cross-tenant record access is denied",
+      "pass": true,
+      "detail": "HTTP 403"
+    },
+    {
+      "name": "cross-tenant attachment download is denied",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "name": "bulk ZIP download excludes the other tenant's file",
+      "pass": true,
+      "detail": "HTTP 200, 1 file(s)"
+    },
+    {
+      "name": "attachment \"Oleksii Work Contract\" downloads byte-identical",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "attachment \"Oleksii Identity Document\" downloads byte-identical",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "attachment \"Tawanda Work Contract\" downloads byte-identical",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "attachment \"Tawanda Identity Document\" downloads byte-identical",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "attachment \"Ingrid Work Contract\" downloads byte-identical",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "attachment \"Ingrid Identity Document\" downloads byte-identical",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "every document fileUrl points at the RECOVERY bucket (remapped)",
+      "pass": true,
+      "detail": "rec=6 src=0"
+    },
+    {
+      "name": "profile photo (alpha) is the one captured at the recovery point",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "profile photo (beta) is the one captured at the recovery point",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "records written AFTER the backup are absent (recovery point = backup snapshot)",
+      "pass": true,
+      "detail": "0 found"
+    },
+    {
+      "name": "document soft-deleted after the backup is active again (state as of the snapshot)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "employee profile documents list loads",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "create employee succeeds",
+      "pass": true,
+      "detail": "HTTP 201"
+    },
+    {
+      "name": "employee number continues the sequence (no collision)",
+      "pass": true,
+      "detail": "E20261000003 → E20261000004"
+    },
+    {
+      "name": "update employee persists",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "new upload accepted",
+      "pass": true,
+      "detail": "HTTP 201"
+    },
+    {
+      "name": "new upload stored in the recovery bucket",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "new upload downloads byte-identical",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "all public tables owned by the app role",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "read-only role grants restored",
+      "pass": true,
+      "detail": "83 table grants"
+    },
+    {
+      "name": "foreign-key constraint enforced",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "unique constraint enforced",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "identity/serial sequences advance",
+      "pass": true,
+      "detail": "platform_audit_logs_id_seq,saas_phase1_seq_snapshot_id_seq,saas_reconciliation_queue_id_seq,user_number_sequences_id_seq"
+    },
+    {
+      "name": "backup catalog reconstructed: restored package = COMPLETED|VERIFIED|restore-tested",
+      "pass": true,
+      "detail": "COMPLETED|VERIFIED|true"
+    },
+    {
+      "name": "no orphaned RUNNING rows in the recovered catalog",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "recovered catalog row describes the package (kind, file count, size, off-site source)",
+      "pass": true,
+      "detail": "kind=FULL_SYSTEM files=8 size=96490 offsite=VERIFIED"
+    },
+    {
+      "name": "recovered system re-verifies the package it was restored from",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "all 8 captured files present in recovery storage with identical SHA-256",
+      "pass": true,
+      "detail": "missing=0 mismatch=0"
+    },
+    {
+      "name": "UI login (tenant alpha HR) reaches the dashboard",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UI employee list shows alpha employees only",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "UI \"Download\" link serves an original attachment from recovery storage",
+      "pass": true,
+      "detail": "http://127.0.0.1:5555/rec-uploads/documents/EMPLOYEE/d8e3bf67-ed0c-4583-ab7f-aa907e214aa5/National_ID_Card/ce220b21-7533-48fa-af00-7aeda0d3bb87.pdf"
+    },
+    {
+      "name": "file uploaded through the recovered UI is stored + served byte-identical",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "recovered admin UI shows the restored backup in its catalog",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

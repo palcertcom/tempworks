@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-05-10T10:27:35.104Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "counts": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "updateEmployeeWorkflowStage (legacy) mutates notes",
+      "ok": true,
+      "detail": "notes=legacy-mozmpq55"
+    },
+    {
+      "name": "updateEmployeeWorkflowStage (pilot) mutates notes",
+      "ok": true,
+      "detail": "notes=pilot-mozmpq55"
+    },
+    {
+      "name": "setEmployeeCurrentStage (pilot) upserts an IN_PROGRESS row",
+      "ok": true,
+      "detail": "status=IN_PROGRESS stageId=00000000-0000-0000-0000-00000000st02"
+    },
+    {
+      "name": "createWorkPermit response shape preserved",
+      "ok": true,
+      "detail": "legacy.id=08570818-0953-4f5d-800c-10af987bd5b0 pilot.id=4dec5873-2832-4d37-bd9c-f9d39f452e52"
+    },
+    {
+      "name": "createWorkPermit legacy: tenantId NULL",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "createWorkPermit pilot: tenantId=A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "updateWorkPermit (pilot) mutates permitType",
+      "ok": true,
+      "detail": "permitType=UPDATED-mozmpq55"
+    },
+    {
+      "name": "createVisa shape preserved + tenantId NULL legacy / set pilot",
+      "ok": true,
+      "detail": "legacy.tid=null pilot.tid=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "updateVisa (pilot) mutates visaType",
+      "ok": true,
+      "detail": "visaType=UPDATED-mozmpq55"
+    },
+    {
+      "name": "validation: NotFoundException for missing permit id in both modes",
+      "ok": true,
+      "detail": "legacy=NotFoundException pilot=NotFoundException"
+    },
+    {
+      "name": "pilot read-after-write: findWorkPermits sees the new pilot-created row",
+      "ok": true,
+      "detail": "count=2"
+    }
+  ]
+}

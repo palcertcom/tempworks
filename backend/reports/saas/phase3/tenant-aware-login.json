@@ -1,0 +1,96 @@
+{
+  "passed": 18,
+  "total": 18,
+  "cases": [
+    {
+      "name": "1. loginV2 succeeds with valid company/email/password",
+      "ok": true,
+      "detail": "id=00000000"
+    },
+    {
+      "name": "2. wrong company → generic failure",
+      "ok": true,
+      "detail": "generic 401"
+    },
+    {
+      "name": "3. wrong email → generic failure",
+      "ok": true,
+      "detail": "generic 401"
+    },
+    {
+      "name": "4. wrong password → generic failure",
+      "ok": true,
+      "detail": "generic 401"
+    },
+    {
+      "name": "5. user outside tenant → generic failure",
+      "ok": true,
+      "detail": "uB belongs to tenant B"
+    },
+    {
+      "name": "6. inactive/deleted user → generic failure",
+      "ok": true,
+      "detail": "INACTIVE"
+    },
+    {
+      "name": "7. exact slug matching only (substring rejected)",
+      "ok": true,
+      "detail": "no LIKE"
+    },
+    {
+      "name": "8. no fuzzy display-name matching",
+      "ok": true,
+      "detail": "name not used"
+    },
+    {
+      "name": "9. normalized lowercase company/email works (slug + customDomain)",
+      "ok": true,
+      "detail": "normalize + customDomain"
+    },
+    {
+      "name": "10. legacy /auth/login still delegates to authService.login (flag=false)",
+      "ok": true,
+      "detail": "preserved"
+    },
+    {
+      "name": "11. /auth/login rejects missing company when TENANT_LOGIN_REQUIRED=true",
+      "ok": true,
+      "detail": "gate present"
+    },
+    {
+      "name": "12. /auth/login-v2 always requires company (DTO @MinLength)",
+      "ok": true,
+      "detail": "required"
+    },
+    {
+      "name": "13. PlatformAdmin authority still works (uPa is PA)",
+      "ok": true,
+      "detail": "isPa=true"
+    },
+    {
+      "name": "14. JWT payload shape preserved (8 keys)",
+      "ok": true,
+      "detail": "keys=agencyId,agencyIsSystem,email,firstName,id,lastName,role,roleId"
+    },
+    {
+      "name": "15. tenant context correctly selected (user.agency.tenantId)",
+      "ok": true,
+      "detail": "tenant=00000000"
+    },
+    {
+      "name": "16. no password logging in loginV2 (delegation only)",
+      "ok": true,
+      "detail": "delegated only"
+    },
+    {
+      "name": "17. no credential leakage in errors (single generic message)",
+      "ok": true,
+      "detail": "source-level + behavioural verified above"
+    },
+    {
+      "name": "18. Phase 3.12 controller wiring intact + cumulative outputs present",
+      "ok": true,
+      "detail": "present=13/13"
+    }
+  ]
+}

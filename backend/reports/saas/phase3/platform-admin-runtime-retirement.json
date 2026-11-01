@@ -1,0 +1,87 @@
+{
+  "passed": 16,
+  "total": 16,
+  "cases": [
+    {
+      "name": "1. PlatformAdmin user stamps agencyIsSystem=true",
+      "ok": true,
+      "detail": "agencyIsSystem=true"
+    },
+    {
+      "name": "2. legacy Agency.isSystem-only user stamps false (default)",
+      "ok": true,
+      "detail": "agencyIsSystem=false"
+    },
+    {
+      "name": "3. PLATFORM_ADMIN_LEGACY_AGENCY_FALLBACK is inert under Phase 3.9 (column dropped)",
+      "ok": true,
+      "detail": "agencyIsSystem=false"
+    },
+    {
+      "name": "4. user with neither signal stamps false",
+      "ok": true,
+      "detail": "agencyIsSystem=false"
+    },
+    {
+      "name": "5. deleted/inactive PlatformAdmin user stamps false",
+      "ok": true,
+      "detail": "result=false"
+    },
+    {
+      "name": "6. JwtStrategy output shape unchanged",
+      "ok": true,
+      "detail": "keys=agencyId,agencyIsSystem,email,firstName,id,lastName,role,roleId"
+    },
+    {
+      "name": "7. JwtStrategy source does not directly read agency.isSystem",
+      "ok": true,
+      "detail": "no direct read"
+    },
+    {
+      "name": "8. PlatformAdminAccessService no longer reads Agency.isSystem (Phase 3.9 column removed)",
+      "ok": true,
+      "detail": "agencyReads=0"
+    },
+    {
+      "name": "9. runtime inventory: no direct Agency.isSystem authorization dependency outside allow-list",
+      "ok": true,
+      "detail": "clean"
+    },
+    {
+      "name": "10. Agency.isSystem REMOVED from Prisma schema (Phase 3.9)",
+      "ok": true,
+      "detail": "removed"
+    },
+    {
+      "name": "11. PlatformAuditLog write not attempted (table absent)",
+      "ok": true,
+      "detail": "tableExists=false"
+    },
+    {
+      "name": "12. Phase 3.7B bake check wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "13. Phase 3.7 JWT dual-read harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "14. Phase 3.6 dual-read guard harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "15. Phase 3.5 backfill harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "16. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=14/14"
+    }
+  ],
+  "violations": []
+}

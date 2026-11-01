@@ -1,0 +1,54 @@
+{
+  "confirmDialog": {
+    "title": "Вы уверены?",
+    "confirm": "Подтвердить",
+    "cancel": "Отмена"
+  },
+  "pagination": {
+    "previous": "Назад",
+    "next": "Далее",
+    "morePages": "Ещё страницы",
+    "ariaLabel": "пагинация",
+    "goToPrevious": "Перейти на предыдущую страницу",
+    "goToNext": "Перейти на следующую страницу"
+  },
+  "dialog": {
+    "close": "Закрыть"
+  },
+  "sidebar": {
+    "title": "Боковая панель",
+    "description": "Показывает мобильную боковую панель.",
+    "toggle": "Переключить боковую панель"
+  },
+  "address": {
+    "line1": "Адрес, строка 1",
+    "line1Placeholder": "Улица, дом, квартира",
+    "line2": "Адрес, строка 2",
+    "line2Placeholder": "Этаж, помещение, доп. информация (необязательно)",
+    "country": "Страна",
+    "city": "Город",
+    "cityPlaceholder": "Город",
+    "zip": "Почтовый индекс"
+  },
+  "country": {
+    "selectPlaceholder": "Выберите страну",
+    "none": "— Нет —"
+  },
+  "phone": {
+    "code": "Код",
+    "placeholder": "напр. 20 7123 4567",
+    "searchCode": "Поиск страны или кода…",
+    "noResults": "Совпадений не найдено."
+  },
+  "captcha": {
+    "newChallenge": "Новая задача",
+    "refreshAria": "Обновить CAPTCHA",
+    "answerPlaceholder": "Введите ответ",
+    "verified": "Подтверждено",
+    "incorrect": "Неверно, попробуйте снова"
+  },
+  "carousel": {
+    "previous": "Previous slide",
+    "next": "Next slide"
+  }
+}

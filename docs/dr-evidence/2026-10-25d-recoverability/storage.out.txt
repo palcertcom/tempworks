@@ -1,0 +1,20 @@
+== local driver ==
+[Nest] 12585  - 10/25/2026, 2:48:51 PM     LOG [StorageService] Storage driver: local (root=/tmp/storage-harness-zObjZt)
+  ✓ second write to an existing key is refused (STORAGE.KEY_EXISTS)
+  ✓ original bytes unchanged after the refused overwrite
+  ✓ normal uploads always get a fresh key
+[Nest] 12585  - 10/25/2026, 2:48:51 PM     LOG [StorageService] Storage driver: local (root=/tmp/storage-harness-zObjZt)
+  ✓ delete is QUEUED (purge queue insert recorded)
+  ✓ queued object is still present (a running backup can capture it)
+  ✓ prefix delete queues every object under the prefix (3 of 3 queued)
+  ✓ prefix-queued objects are still present
+[Nest] 12585  - 10/25/2026, 2:48:51 PM     LOG [StorageService] Storage driver: local (root=/tmp/storage-harness-zObjZt)
+  ✓ STORAGE_DEFERRED_DELETE=off deletes immediately
+[Nest] 12585  - 10/25/2026, 2:48:51 PM     LOG [StorageService] Storage driver: local (root=/tmp/storage-harness-zObjZt)
+  ✓ without a database (harness construction) deletes immediately
+[Nest] 12585  - 10/25/2026, 2:48:51 PM     LOG [StorageService] Storage driver: local (root=/tmp/storage-harness-zObjZt)
+[Nest] 12585  - 10/25/2026, 2:48:51 PM    WARN [StorageService] purge queue unavailable, deleting immediately: relation "storage_purge_queue" does not exist
+  ✓ queue failure falls back to an immediate delete
+== S3 path skipped (set S3_TEST_ENDPOINT) ==
+
+STORAGE INTEGRITY: PASS=10 FAIL=0

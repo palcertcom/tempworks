@@ -1,0 +1,71 @@
+{
+  "passed": 13,
+  "total": 13,
+  "cases": [
+    {
+      "name": "1. pilot off lockPeriod produces NULL-tenant row",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "2. pilot A lockPeriod stamps tenantId = A",
+      "ok": true,
+      "detail": "tenantId=11111111"
+    },
+    {
+      "name": "3. pilot B lockPeriod for SAME (year, month) succeeds",
+      "ok": true,
+      "detail": "idA=c8f804ec idB=592082a1"
+    },
+    {
+      "name": "4. tenant A listLockedPeriods returns only A rows",
+      "ok": true,
+      "detail": "count=1 hasA=true"
+    },
+    {
+      "name": "5. tenant B listLockedPeriods returns only B rows",
+      "ok": true,
+      "detail": "count=1 hasB=true"
+    },
+    {
+      "name": "6. tenant A unlock on tenant B row rejected; B row intact",
+      "ok": true,
+      "detail": "threw=true count=1"
+    },
+    {
+      "name": "7. tenant B lock (Y,9) does NOT block tenant A mutation in (Y,9)",
+      "ok": true,
+      "detail": "id=8dace50e"
+    },
+    {
+      "name": "8. tenant A lock blocks tenant A mutation",
+      "ok": true,
+      "detail": "BadRequest (locked)"
+    },
+    {
+      "name": "9. tenant A lock (Y,M) does NOT block tenant B mutation in (Y,10)",
+      "ok": true,
+      "detail": "id=0098a147"
+    },
+    {
+      "name": "10. NULL-tenant global lock does NOT block tenant A pilot mutation",
+      "ok": true,
+      "detail": "id=3f49fe54"
+    },
+    {
+      "name": "11. concurrent ALS frames: lock checks isolated",
+      "ok": true,
+      "detail": "A=true B=false"
+    },
+    {
+      "name": "12. unique constraint permits SAME (year, month) across tenants",
+      "ok": true,
+      "detail": "idA=c8f804ec idB=592082a1"
+    },
+    {
+      "name": "13. duplicate (tenantId, year, month) on same tenant rejected",
+      "ok": true,
+      "detail": "BadRequest already locked"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "passed": 11,
+  "total": 11,
+  "cases": [
+    {
+      "name": "1. scheduler disabled: skipped result, zero dispatch calls",
+      "ok": true,
+      "detail": "skipped=true dispatchCalls=0"
+    },
+    {
+      "name": "2. scheduler ON + fan-out OFF: dispatch refuses",
+      "ok": true,
+      "detail": "refused=TENANT_JOB_FANOUT_ENABLED=false dispatchCalls=1"
+    },
+    {
+      "name": "3. scheduler + fan-out ON + pilot OFF: dispatch refuses",
+      "ok": true,
+      "detail": "refused=pilot inactive: TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "4. scheduler+fanout+pilot: processes ACTIVE tenants only",
+      "ok": true,
+      "detail": "processed=2 ids=11111111,22222222"
+    },
+    {
+      "name": "5. scheduler creates no NULL-tenant alerts",
+      "ok": true,
+      "detail": "newNull=false"
+    },
+    {
+      "name": "6. scheduler creates no cross-tenant alerts",
+      "ok": true,
+      "detail": "newA=1 newB=1"
+    },
+    {
+      "name": "7. scheduler body never calls raw generateAlerts()",
+      "ok": true,
+      "detail": "raw=false"
+    },
+    {
+      "name": "8. scheduler body never calls generateAlertsForTenant() directly",
+      "ok": true,
+      "detail": "forTenant=false"
+    },
+    {
+      "name": "9. exactly one dispatch call per tick",
+      "ok": true,
+      "detail": "dispatchCalls=1 dispatchSrc=true"
+    },
+    {
+      "name": "10. concurrent ticks remain ALS-isolated",
+      "ok": true,
+      "detail": "r1=2 r2=2 dispatchCalls=2"
+    },
+    {
+      "name": "11. unexpected dispatch failure captured (no crash)",
+      "ok": true,
+      "detail": "error=synthetic dispatch failure"
+    }
+  ]
+}

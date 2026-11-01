@@ -1,0 +1,97 @@
+{
+  "passed": 18,
+  "total": 18,
+  "cases": [
+    {
+      "name": "1. PlatformAdminAccessService source contains no PLATFORM_ADMIN_DUAL_READ_ENABLED",
+      "ok": true,
+      "detail": "absent"
+    },
+    {
+      "name": "2. PlatformAdminAccessService source contains no PLATFORM_ADMIN_LEGACY_AGENCY_FALLBACK",
+      "ok": true,
+      "detail": "absent"
+    },
+    {
+      "name": "3. src/ contains no runtime agency.isSystem authorization read outside allow-list",
+      "ok": true,
+      "detail": "clean"
+    },
+    {
+      "name": "4. Prisma schema no longer contains Agency.isSystem",
+      "ok": true,
+      "detail": "absent"
+    },
+    {
+      "name": "5. Prisma schema contains PlatformAuditLog model",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "6. migration creates platform_audit_logs",
+      "ok": true,
+      "detail": "CREATE TABLE present"
+    },
+    {
+      "name": "7. migration down drops only platform_audit_logs",
+      "ok": true,
+      "detail": "dropStatements=1"
+    },
+    {
+      "name": "8. migration has no UPDATE/DELETE data mutation",
+      "ok": true,
+      "detail": "no writes"
+    },
+    {
+      "name": "9. applying migration creates the table in the fixture",
+      "ok": true,
+      "detail": "tableExists=true"
+    },
+    {
+      "name": "10. PlatformAuditLog indexes/columns match the Prisma model",
+      "ok": true,
+      "detail": "cols=9/9 actorIdx=true tenantIdx=true"
+    },
+    {
+      "name": "11. req.user.agencyIsSystem output shape preserved (8 keys)",
+      "ok": true,
+      "detail": "keys=agencyId,agencyIsSystem,email,firstName,id,lastName,role,roleId"
+    },
+    {
+      "name": "12. PlatformAdmin user stamps agencyIsSystem=true",
+      "ok": true,
+      "detail": "agencyIsSystem=true"
+    },
+    {
+      "name": "13. non-PlatformAdmin user stamps agencyIsSystem=false",
+      "ok": true,
+      "detail": "agencyIsSystem=false"
+    },
+    {
+      "name": "14. PlatformAdmin grant/revoke audit emission: implemented (Phase 3.11) or deferred",
+      "ok": true,
+      "detail": "implemented in PlatformAdminService"
+    },
+    {
+      "name": "15. Phase 3.9 drop-agency-is-system wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "16. Phase 3.8 runtime retirement wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "17. Phase 3.7B bake check wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "18. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=16/16"
+    }
+  ],
+  "violations": []
+}

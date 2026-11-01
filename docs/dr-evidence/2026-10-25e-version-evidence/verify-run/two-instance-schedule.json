@@ -1,0 +1,49 @@
+{
+  "since": "2026-10-25T16:08:49Z",
+  "claims": [
+    {
+      "occurrence": "backup:* * * * *:2026-10-25T16:09:00.000Z",
+      "instance": "vm:18472"
+    },
+    {
+      "occurrence": "backup:* * * * *:2026-10-25T16:10:00.000Z",
+      "instance": "vm:18472"
+    },
+    {
+      "occurrence": "backup:* * * * *:2026-10-25T16:11:00.000Z",
+      "instance": "vm:18472"
+    },
+    {
+      "occurrence": "backup:* * * * *:2026-10-25T16:12:00.000Z",
+      "instance": "vm:18472"
+    }
+  ],
+  "scheduledRows": 4,
+  "completed": 4,
+  "standDownLogLines": {
+    "A": 4,
+    "B": 0
+  },
+  "checks": [
+    {
+      "name": "at least 3 occurrences fired",
+      "ok": true
+    },
+    {
+      "name": "every occurrence claimed exactly once (unique)",
+      "ok": true
+    },
+    {
+      "name": "one backup row per claimed occurrence (no duplicates)",
+      "ok": true
+    },
+    {
+      "name": "all scheduled runs COMPLETED",
+      "ok": true
+    },
+    {
+      "name": "the non-owning instance stood down (logged) for each occurrence",
+      "ok": true
+    }
+  ]
+}

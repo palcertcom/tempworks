@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-05-10T02:08:15.296Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "counts": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "model classifier: Role is GLOBAL",
+      "ok": true,
+      "detail": "classify=GLOBAL, inGlobal=true"
+    },
+    {
+      "name": "model classifier: Permission is GLOBAL",
+      "ok": true,
+      "detail": "classify=GLOBAL, inGlobal=true"
+    },
+    {
+      "name": "model classifier: RolePermission is not TENANT-scoped",
+      "ok": true,
+      "detail": "classify=UNKNOWN (UNKNOWN ⇒ pass-through, by design)"
+    },
+    {
+      "name": "pilot OFF → legacy reads succeed",
+      "ok": true,
+      "detail": "roles=5, pilotActive=false"
+    },
+    {
+      "name": "pilot OFF reason recorded as flag-off",
+      "ok": true,
+      "detail": "TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "pilot ON (safe env) → pilotActive=true",
+      "ok": true,
+      "detail": "pilotActive=true reason=pilot ON, env=SAFE_CLONE"
+    },
+    {
+      "name": "pilot ON + NODE_ENV=production → pilot refuses to engage",
+      "ok": true,
+      "detail": "active=false reason=env=UNSAFE_PRODUCTION is not SAFE_CLONE/SAFE_STAGING"
+    },
+    {
+      "name": "concurrent tenants see identical global rows (Role is GLOBAL)",
+      "ok": true,
+      "detail": "seen=[{\"t\":\"22222222-2222-2222-2222-222222222222\",\"n\":5},{\"t\":\"11111111-1111-1111-1111-111111111111\",\"n\":5}]"
+    },
+    {
+      "name": "rollback: pilot flag off ⇒ tenantPrismaPilotEnabled() false",
+      "ok": true,
+      "detail": "flag=false"
+    }
+  ]
+}

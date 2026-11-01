@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. pilot active when flag ON + module allowed",
+      "ok": true,
+      "detail": "{\"active\":true,\"reason\":\"pilot ON, env=SAFE_CLONE\"}"
+    },
+    {
+      "name": "2. legacy findAll: union across tenants",
+      "ok": true,
+      "detail": "total=10"
+    },
+    {
+      "name": "3. pilot findAll(A): total reduced from legacy union",
+      "ok": true,
+      "detail": "legacy=10 pilotA=6"
+    },
+    {
+      "name": "4. findOne resolves tenant A id under pilot A",
+      "ok": true,
+      "detail": "id=eeeeeeea"
+    },
+    {
+      "name": "5. findOne raises NotFound for missing id",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "6. status filter narrowed by tenantId",
+      "ok": true,
+      "detail": "count=6"
+    },
+    {
+      "name": "7. search filter does not leak tenant B",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "8. agency filter respects tenantId",
+      "ok": true,
+      "detail": "count=6"
+    },
+    {
+      "name": "9. getDocuments returns array",
+      "ok": true,
+      "detail": "count=5"
+    },
+    {
+      "name": "10. getCompliance shape preserved (documents+alerts)",
+      "ok": true,
+      "detail": "docs=5 alerts=0"
+    },
+    {
+      "name": "11. listAgencyAccess parent-gated returns array",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "12. response shape preserved",
+      "ok": true,
+      "detail": "data,meta"
+    }
+  ]
+}

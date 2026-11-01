@@ -1,0 +1,61 @@
+{
+  "passed": 11,
+  "total": 11,
+  "cases": [
+    {
+      "name": "1. findAll under tenant A returns A only",
+      "ok": true,
+      "detail": "count=6 allA=true"
+    },
+    {
+      "name": "2. findOne(tenantB-id) cross-tenant 404",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "3. agencyId=tenantB filter under A returns 0",
+      "ok": true,
+      "detail": "total=0"
+    },
+    {
+      "name": "4. search \"Bob\" under A does not leak B",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "5. getDocuments(tenantB-id) blocked at parent gate",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "6. getCompliance(tenantB-id) blocked at parent gate",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "7. listAgencyAccess(tenantB-id) blocked at parent gate",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "8. exportExcel by-id [A,B] under A includes only A rows",
+      "ok": true,
+      "detail": "bytes=7199 listAllA=true"
+    },
+    {
+      "name": "9. concurrent ALS frames isolated (A, B)",
+      "ok": true,
+      "detail": "aAll=true bAll=true"
+    },
+    {
+      "name": "10. legacy: returns union across tenants",
+      "ok": true,
+      "detail": "tenants=3 total=10"
+    },
+    {
+      "name": "11. source-level: phase233/234 read+mutation+global+storage tags present",
+      "ok": true,
+      "detail": "read=true mut=true global=true storage=true create=true update=true"
+    }
+  ]
+}

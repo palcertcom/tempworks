@@ -1,0 +1,116 @@
+{
+  "passed": 22,
+  "total": 22,
+  "cases": [
+    {
+      "name": "1. SUPER actor can grant SUPPORT to active user",
+      "ok": true,
+      "detail": "action=PLATFORM_ADMIN_GRANTED level=SUPPORT"
+    },
+    {
+      "name": "2. SUPER actor can grant OPERATOR to active user",
+      "ok": true,
+      "detail": "action=PLATFORM_ADMIN_GRANTED level=OPERATOR"
+    },
+    {
+      "name": "3. SUPER actor can grant SUPER to active user",
+      "ok": true,
+      "detail": "action=PLATFORM_ADMIN_GRANTED level=SUPER"
+    },
+    {
+      "name": "4. non-SUPER PlatformAdmin cannot grant",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "5. non-PlatformAdmin cannot grant",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "6. cannot grant missing user",
+      "ok": true,
+      "detail": "not-found"
+    },
+    {
+      "name": "7. cannot grant inactive/deleted user",
+      "ok": true,
+      "detail": "rejected"
+    },
+    {
+      "name": "8. duplicate-grant deterministic (IDEMPOTENT same-level, LEVEL_CHANGED different-level)",
+      "ok": true,
+      "detail": "same=PLATFORM_ADMIN_GRANT_IDEMPOTENT diff=PLATFORM_ADMIN_LEVEL_CHANGED"
+    },
+    {
+      "name": "9. grant emits PlatformAuditLog",
+      "ok": true,
+      "detail": "t1.auditRows=3"
+    },
+    {
+      "name": "10. SUPER actor can revoke target PlatformAdmin",
+      "ok": true,
+      "detail": "action=PLATFORM_ADMIN_REVOKED"
+    },
+    {
+      "name": "11. non-SUPER cannot revoke",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "12. non-PlatformAdmin cannot revoke",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "13. cannot self-revoke",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "14. revoke emits PlatformAuditLog",
+      "ok": true,
+      "detail": "t2.revokeRows=1"
+    },
+    {
+      "name": "15. list returns only PlatformAdmin rows",
+      "ok": true,
+      "detail": "count=4"
+    },
+    {
+      "name": "16. PlatformAuditLog rows carry actorId/action/reason/target",
+      "ok": true,
+      "detail": "shape ok"
+    },
+    {
+      "name": "17. PlatformAdminAccessService treats granted user as platform admin",
+      "ok": true,
+      "detail": "uTarget3.isPa=true"
+    },
+    {
+      "name": "18. PlatformAdminAccessService treats revoked user as NOT platform admin",
+      "ok": true,
+      "detail": "uTarget2.isPa=false"
+    },
+    {
+      "name": "19. JWT stamp reflects grant/revoke at validate() time",
+      "ok": true,
+      "detail": "t3=true t2=false"
+    },
+    {
+      "name": "20. Phase 3.10 cleanup harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "21. Phase 3.9 drop-agency-is-system wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "22. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=17/17"
+    }
+  ]
+}

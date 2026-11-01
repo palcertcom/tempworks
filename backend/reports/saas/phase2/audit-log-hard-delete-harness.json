@@ -1,0 +1,91 @@
+{
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "name": "1. dry-run deletes zero rows",
+      "ok": true,
+      "detail": "mode=dry-run deleted=0"
+    },
+    {
+      "name": "2. dry-run reports correct eligible count for tenant A (>=2)",
+      "ok": true,
+      "detail": "eligible=3"
+    },
+    {
+      "name": "3. apply refused when AUDIT_LOG_HARD_DELETE_ENABLED=false",
+      "ok": true,
+      "detail": "AUDIT_LOG_HARD_DELETE_ENABLED=false"
+    },
+    {
+      "name": "4. apply refused when AUDIT_LOG_HARD_DELETE_APPLY=false",
+      "ok": true,
+      "detail": "AUDIT_LOG_HARD_DELETE_APPLY=false"
+    },
+    {
+      "name": "5. apply refused outside SAFE_CLONE/SAFE_STAGING (source gate)",
+      "ok": true,
+      "detail": "all 3 gates wired"
+    },
+    {
+      "name": "6. apply refuses tenant scope without tenant id",
+      "ok": true,
+      "detail": "scope=tenant requires AUDIT_LOG_HARD_DELETE_TENANT_ID"
+    },
+    {
+      "name": "7. apply hard-deletes only already soft-deleted rows older than grace",
+      "ok": true,
+      "detail": "deleted=3"
+    },
+    {
+      "name": "8. apply does not delete rows where deletedAt IS NULL",
+      "ok": true,
+      "detail": "live row preserved"
+    },
+    {
+      "name": "9. apply does not delete soft-deleted rows inside grace window",
+      "ok": true,
+      "detail": "inside-grace row preserved"
+    },
+    {
+      "name": "10. tenant A hard-delete does not touch tenant B rows",
+      "ok": true,
+      "detail": "B old row preserved"
+    },
+    {
+      "name": "7b. tenant A old eligible rows physically removed",
+      "ok": true,
+      "detail": "A1.exists=false A2.exists=false"
+    },
+    {
+      "name": "11. tenant B hard-delete does not touch tenant A rows",
+      "ok": true,
+      "detail": "B.gone=true A.live=true A.grace=true deleted=1"
+    },
+    {
+      "name": "12. null-tenant scope deletes only NULL-tenant eligible rows",
+      "ok": true,
+      "detail": "null.gone=true A.still=true B.still=true deleted=1"
+    },
+    {
+      "name": "13. all scope deletes all eligible rows only when explicitly requested",
+      "ok": true,
+      "detail": "A.gone=true B.gone=true null.gone=true live=true grace=true deleted=4"
+    },
+    {
+      "name": "14. rerun apply is idempotent (zero deletes)",
+      "ok": true,
+      "detail": "deleted=0 eligible=0"
+    },
+    {
+      "name": "15. DELETE FROM audit_logs lives ONLY in scripts/ + the pre-existing recycle-bin admin path",
+      "ok": true,
+      "detail": "allowed sites only"
+    },
+    {
+      "name": "16. scanner registers phase254-audit-log-hard-delete",
+      "ok": true,
+      "detail": "tag found"
+    }
+  ]
+}

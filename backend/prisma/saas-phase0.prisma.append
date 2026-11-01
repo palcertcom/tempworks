@@ -1,0 +1,159 @@
+// =============================================================================
+// SaaS Phase 0 — Tenancy foundations (ADDITIVE ONLY)
+// =============================================================================
+//
+// These models are NEW. They do not modify, replace, or rename any existing
+// model. No production code reads them in Phase 0. The corresponding
+// migration is `prisma/migrations/saas_phase0_foundations/migration.sql` and
+// it is committed but NOT auto-applied — review before running.
+//
+// To apply this in dev/staging:
+//   1. Append the contents of this file to `prisma/schema.prisma` after
+//      the `NotificationPreference` model.
+//   2. Run `prisma generate` to update the client types.
+//   3. Run `prisma migrate dev --name saas_phase0_foundations`.
+//
+// Until step (1) is performed, none of these models exist in the
+// generated Prisma client and runtime is byte-identical.
+// =============================================================================
+
+enum TenantStatus {
+  ACTIVE
+  SUSPENDED
+  INACTIVE
+}
+
+enum MembershipStatus {
+  INVITED
+  ACTIVE
+  SUSPENDED
+  REMOVED
+}
+
+enum AgencyMembershipScope {
+  FULL
+  READ_ONLY
+  RECRUITER_ONLY
+}
+
+enum PlatformAdminLevel {
+  SUPPORT
+  OPERATOR
+  SUPER
+}
+
+model Tenant {
+  id           String       @id @default(uuid())
+  slug         String       @unique
+  name         String
+  status       TenantStatus @default(ACTIVE)
+  region       String       @default("eu")
+  customDomain String?      @unique
+  branding     Json?
+  planId       String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  memberships TenantMembership[]
+  domains     TenantDomain[]
+
+  @@map("tenants")
+}
+
+model TenantMembership {
+  id        String           @id @default(uuid())
+  userId    String
+  tenantId  String
+  status    MembershipStatus @default(ACTIVE)
+  invitedBy String?
+  invitedAt DateTime?
+  joinedAt  DateTime?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  tenant            Tenant                          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  roles             MembershipRole[]
+  agencies          AgencyMembership[]
+  permissionOverrides MembershipPermissionOverride[]
+
+  @@unique([userId, tenantId])
+  @@index([tenantId, status])
+  @@index([userId])
+  @@map("tenant_memberships")
+}
+
+model MembershipRole {
+  membershipId String
+  roleId       String
+
+  membership TenantMembership @relation(fields: [membershipId], references: [id], onDelete: Cascade)
+
+  @@id([membershipId, roleId])
+  @@map("membership_roles")
+}
+
+model AgencyMembership {
+  id           String                @id @default(uuid())
+  membershipId String
+  agencyId     String
+  scope        AgencyMembershipScope @default(FULL)
+
+  membership TenantMembership @relation(fields: [membershipId], references: [id], onDelete: Cascade)
+
+  @@unique([membershipId, agencyId])
+  @@index([agencyId])
+  @@map("agency_memberships")
+}
+
+// Renamed from `AgencyUserPermission` per ADR-002 D-7. Phase 0 ships the new
+// table; legacy `agency_user_permission` keeps its rows until Phase 3 cutover.
+model MembershipPermissionOverride {
+  id           String  @id @default(uuid())
+  membershipId String
+  permissionId String
+  effect       Boolean @default(true) // true=grant, false=deny
+
+  membership TenantMembership @relation(fields: [membershipId], references: [id], onDelete: Cascade)
+
+  @@unique([membershipId, permissionId])
+  @@map("membership_permission_overrides")
+}
+
+model PlatformAdmin {
+  id        String             @id @default(uuid())
+  userId    String             @unique
+  level     PlatformAdminLevel @default(SUPPORT)
+  grantedBy String?
+  grantedAt DateTime           @default(now())
+
+  @@map("platform_admins")
+}
+
+model PlatformAuditLog {
+  id        BigInt   @id @default(autoincrement())
+  actorId   String
+  tenantId  String?
+  action    String
+  reason    String
+  target    Json?
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([actorId, createdAt])
+  @@index([tenantId, createdAt])
+  @@map("platform_audit_logs")
+}
+
+model TenantDomain {
+  id         String    @id @default(uuid())
+  tenantId   String
+  host       String    @unique
+  verifiedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("tenant_domains")
+}

@@ -1,0 +1,91 @@
+{
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "name": "1. limiter disabled ⇒ list behaves as Phase 2.58",
+      "ok": true,
+      "detail": "count=2"
+    },
+    {
+      "name": "2. limiter disabled ⇒ export.csv behaves as Phase 2.58",
+      "ok": true,
+      "detail": "bodyLen=437"
+    },
+    {
+      "name": "3. RPM=2 ⇒ third list request returns 429",
+      "ok": true,
+      "detail": "429"
+    },
+    {
+      "name": "10. rejected 429 does NOT call LogsService data query",
+      "ok": true,
+      "detail": "before=2 after=2"
+    },
+    {
+      "name": "4. tenant A exhaustion does not block tenant B",
+      "ok": true,
+      "detail": "A=429 B.pass=true"
+    },
+    {
+      "name": "5. tenant B exhaustion does not block tenant A separately",
+      "ok": true,
+      "detail": "B=429"
+    },
+    {
+      "name": "6. stats route is rate-limited",
+      "ok": true,
+      "detail": "429"
+    },
+    {
+      "name": "7. retention-preview route is rate-limited",
+      "ok": true,
+      "detail": "429"
+    },
+    {
+      "name": "8. export.csv route is rate-limited",
+      "ok": true,
+      "detail": "429"
+    },
+    {
+      "name": "9. byId route is rate-limited",
+      "ok": true,
+      "detail": "429"
+    },
+    {
+      "name": "11. invalid AUDIT_LOG_HTTP_RATE_LIMIT_RPM falls back to disabled (no 429)",
+      "ok": true,
+      "detail": "no 429"
+    },
+    {
+      "name": "12. missing ALS in pilot still raises Forbidden (RBAC reachable through limiter)",
+      "ok": true,
+      "detail": "first=forbidden second=429"
+    },
+    {
+      "name": "13. FULL_ACCESS with global gate OFF is tenant-keyed",
+      "ok": true,
+      "detail": "B passes"
+    },
+    {
+      "name": "14. FULL_ACCESS with global gate ON is global/user-keyed",
+      "ok": true,
+      "detail": "429 across tenants"
+    },
+    {
+      "name": "15. limiter window expiry allows requests again",
+      "ok": true,
+      "detail": "blocked=true allowedAfterWait=true"
+    },
+    {
+      "name": "16. every TenantAuditController GET handler invokes enforceRateLimit",
+      "ok": true,
+      "detail": "routes=5 wired=5"
+    },
+    {
+      "name": "17. no destructive routes added",
+      "ok": true,
+      "detail": "GET only"
+    }
+  ]
+}

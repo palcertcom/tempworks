@@ -1,0 +1,101 @@
+{
+  "passed": 19,
+  "total": 19,
+  "cases": [
+    {
+      "name": "1. pilot off: createWorkflow returns row with tenantId=null (legacy)",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "2. pilot A: createWorkflow stamps tenantId=A",
+      "ok": true,
+      "detail": "tenantId=11111111"
+    },
+    {
+      "name": "3. pilot A: createWorkflow(isDefault=true) flips ONLY own-tenant defaults",
+      "ok": true,
+      "detail": "A.isDefault=false B.isDefault=true new=true"
+    },
+    {
+      "name": "4. listWorkflows pilot A: own + NULL-global only (no B rows)",
+      "ok": true,
+      "detail": "A=true B=false global=true"
+    },
+    {
+      "name": "5. listWorkflows pilot B: own + NULL-global only (no A rows)",
+      "ok": true,
+      "detail": "A=false B=true global=true"
+    },
+    {
+      "name": "6. getWorkflow pilot A: own workflow visible",
+      "ok": true,
+      "detail": "id=00000000"
+    },
+    {
+      "name": "7. getWorkflow pilot A: NULL-global template visible",
+      "ok": true,
+      "detail": "id=00000000"
+    },
+    {
+      "name": "8. getWorkflow pilot A: tenant B workflow → NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "9. updateWorkflow pilot A: NULL-global template refused (NotFound)",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "10. updateWorkflow pilot A: tenant B workflow → NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "11. updateWorkflow pilot A: own workflow → success",
+      "ok": true,
+      "detail": "description=owned-update"
+    },
+    {
+      "name": "12. deleteWorkflow pilot A: NULL-global → NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "13. archiveWorkflow pilot A: tenant B → NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "14. addStage pilot A: tenant B parent → NotFound + no row inserted",
+      "ok": true,
+      "detail": "threw=true before=1 after=1"
+    },
+    {
+      "name": "15. updateStage pilot A: stage in NULL-global → NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "16. deleteStage pilot A: stage in NULL-global → NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "17. addAccessUser pilot A: tenant B parent → NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "18. concurrent ALS frames remain isolated for updateWorkflow",
+      "ok": true,
+      "detail": "A.blocked=true B.blocked=true"
+    },
+    {
+      "name": "19. source-level: helpers defined + wired into update/archive/delete/stage routes + createWorkflow stamps tenantData()",
+      "ok": true,
+      "detail": "readWhere=true mutWhere=true mutOrFail=true gated=true createStamped=true"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "label": "stream-verify-deep",
+  "exitCode": 0,
+  "durationS": 9.9,
+  "peakDiskBytes": 0,
+  "peakDiskMiB": 0.0,
+  "peakRssBytes": 136335360,
+  "peakRssMiB": 130.0
+}

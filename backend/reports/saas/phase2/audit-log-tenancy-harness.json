@@ -1,0 +1,46 @@
+{
+  "passed": 8,
+  "total": 8,
+  "cases": [
+    {
+      "name": "1. pilot OFF: tenantId is NULL",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "2. pilot ON + ALS A: tenantId=A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "3. pilot ON + ALS B: tenantId=B",
+      "ok": true,
+      "detail": "tenantId=22222222-2222-2222-2222-222222222222"
+    },
+    {
+      "name": "4. pilot ON, no ALS: tenantId is NULL",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "5. explicit tenantId override: tenantId=B (no ALS)",
+      "ok": true,
+      "detail": "tenantId=22222222-2222-2222-2222-222222222222"
+    },
+    {
+      "name": "6. decide() inactive when flag off",
+      "ok": true,
+      "detail": "TENANT_AUDIT_LOG_PILOT_ENABLED=false"
+    },
+    {
+      "name": "7. write() never throws on DB error",
+      "ok": true,
+      "detail": "swallowed"
+    },
+    {
+      "name": "8. source-level: no `legacyPrisma.auditLog.create` left in piloted modules",
+      "ok": true,
+      "detail": "noInline=true delegates=true"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "passed": 14,
+  "total": 14,
+  "cases": [
+    {
+      "name": "1. signal agreement report runs read-only",
+      "ok": true,
+      "detail": "noWrites=true readOnlyTxn=true"
+    },
+    {
+      "name": "2. signal agreement report writes JSON and MD",
+      "ok": true,
+      "detail": "md=true hasTotals=true"
+    },
+    {
+      "name": "3. legacyOnly users counted",
+      "ok": true,
+      "detail": "legacyOnly=0"
+    },
+    {
+      "name": "4. platformOnly users counted",
+      "ok": true,
+      "detail": "platformOnly=0"
+    },
+    {
+      "name": "5. agreementBoth users counted",
+      "ok": true,
+      "detail": "agreementBoth=0"
+    },
+    {
+      "name": "6. inactive/deleted PlatformAdmin users reported",
+      "ok": true,
+      "detail": "inactivePlatform=0"
+    },
+    {
+      "name": "7. report has explicit go/no-go fields",
+      "ok": true,
+      "detail": "goPhase38=true blockers=0"
+    },
+    {
+      "name": "8. JWT bake check preserves output shape",
+      "ok": true,
+      "detail": "keys=agencyId,agencyIsSystem,email,firstName,id,lastName,role,roleId"
+    },
+    {
+      "name": "9. JWT bake check confirms PlatformAdminAccessService is called",
+      "ok": true,
+      "detail": "calls=50 probes=50"
+    },
+    {
+      "name": "10. JWT bake check reports validation timings",
+      "ok": true,
+      "detail": "avg=2745μs p95=4431μs p99=6649μs (LOCAL FIXTURE — NOT PROD)"
+    },
+    {
+      "name": "11. no INSERT/UPDATE/DELETE in bake script source (outside seed templates)",
+      "ok": true,
+      "detail": "bakeNoWrites=true sigNoWrites=true"
+    },
+    {
+      "name": "12. Phase 3.7 JWT dual-read harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "13. Phase 3.6 dual-read guard wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "14. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=12/12"
+    }
+  ],
+  "probes": 50,
+  "timingsMicros": {
+    "avg": 2744.5107999999996,
+    "p95": 4430.663,
+    "p99": 6648.765
+  }
+}

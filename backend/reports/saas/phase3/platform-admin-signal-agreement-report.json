@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-05-11T08:40:41.995Z",
+  "readOnly": true,
+  "classification": "SAFE_CLONE",
+  "target": "local (localhost)",
+  "totals": {
+    "totalActiveUsers": 6,
+    "legacyTrue": 0,
+    "platformRow": 0,
+    "agreementBoth": 0,
+    "legacyOnly": 0,
+    "platformOnly": 0,
+    "neither": 6
+  },
+  "conflicts": {
+    "inactivePlatform": 0,
+    "missingAgencyOnPlatform": 0
+  },
+  "goPhase38": true,
+  "blockersForPhase38": []
+}

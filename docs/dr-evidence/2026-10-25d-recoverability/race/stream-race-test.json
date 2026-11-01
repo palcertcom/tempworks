@@ -1,0 +1,266 @@
+{
+  "ranAt": "2026-10-25T14:47:14.841Z",
+  "environment": "local PostgreSQL 18 + s3rver S3 SIMULATOR (not real Spaces)",
+  "failures": 0,
+  "results": {
+    "A": {
+      "checks": [
+        {
+          "name": "exit 0 (consistent after retry)",
+          "ok": true,
+          "detail": 0
+        },
+        {
+          "name": "needed a retry (overwrite detected)",
+          "ok": true,
+          "detail": 2
+        },
+        {
+          "name": "captured bytes are the NEW content",
+          "ok": true
+        }
+      ],
+      "package": "tempworks-dr_2026-10-25T14-46-28Z_b837a5bb"
+    },
+    "B": {
+      "checks": [
+        {
+          "name": "exit 4 (INCOMPLETE)",
+          "ok": true,
+          "detail": 4
+        },
+        {
+          "name": "MANIFEST complete=false",
+          "ok": true
+        },
+        {
+          "name": "refcheck lists the vanished reference as missing (not dangling)",
+          "ok": true,
+          "detail": {
+            "missing": 1,
+            "dangling": 0
+          }
+        },
+        {
+          "name": "all retries used",
+          "ok": true,
+          "detail": 3
+        },
+        {
+          "name": "recoverability INCOMPLETE with FILES_CHANGED_DURING_BACKUP",
+          "ok": true
+        },
+        {
+          "name": "verify: integrity OK, recoverability INCOMPLETE → exit 6 (not verified)",
+          "ok": true,
+          "detail": 6
+        }
+      ],
+      "package": "tempworks-dr_2026-10-25T14-46-36Z_77369f5e"
+    },
+    "C": {
+      "checks": [
+        {
+          "name": "exit 0 (consistent after retry)",
+          "ok": true,
+          "detail": 0
+        },
+        {
+          "name": "needed a retry",
+          "ok": true,
+          "detail": 2
+        }
+      ]
+    },
+    "D": {
+      "checks": [
+        {
+          "name": "exit 6 DEGRADED (consistent, single attempt) — not COMPLETE",
+          "ok": true,
+          "detail": {
+            "code": 6,
+            "rec": "DEGRADED"
+          }
+        },
+        {
+          "name": "MANIFEST: recoverability DEGRADED, complete=false, FILES_UNRESOLVED issue",
+          "ok": true
+        },
+        {
+          "name": "evidence: listings + direct HEAD 404 + earlier snapshots searched",
+          "ok": true,
+          "detail": [
+            "live bucket s3://live-uploads: absent from every listing and direct HEAD → 404 at 2026-10-25T14:46:52.131Z",
+            "3 earlier snapshot(s): not contained"
+          ]
+        },
+        {
+          "name": "verify: integrity OK but recoverability DEGRADED → exit 6 (not \"verified\")",
+          "ok": true,
+          "detail": {
+            "code": 6
+          }
+        },
+        {
+          "name": "list: shown as DEGRADED / complete=false",
+          "ok": true
+        }
+      ]
+    },
+    "D2": {
+      "checks": [
+        {
+          "name": "exit 0 COMPLETE — the file was recovered from an earlier snapshot, not declared lost",
+          "ok": true,
+          "detail": {
+            "code": 0
+          }
+        },
+        {
+          "name": "manifest entry records where it came from; bytes identical",
+          "ok": true,
+          "detail": "earlier snapshot tempworks-dr_2026-10-25T14-46-50Z_98bd5bf8"
+        },
+        {
+          "name": "LIVE_STORAGE_MISSING_RECOVERED reported so live storage can be repaired",
+          "ok": true
+        }
+      ]
+    },
+    "D4": {
+      "checks": [
+        {
+          "name": "before instance B reported: DEGRADED, evidence names this instance + \"no inventory from any other instance\"",
+          "ok": true,
+          "detail": [
+            "instance instance-A: /tmp/stream-race-instA — absent",
+            "no inventory from any other instance yet",
+            "5 earlier snapshot(s): not contained"
+          ]
+        }
+      ]
+    },
+    "D3": {
+      "checks": [
+        {
+          "name": "legacy-inventory on instance B records its files",
+          "ok": true,
+          "detail": {
+            "instance": "instance-B",
+            "root": "/tmp/stream-race-instB",
+            "files": 1,
+            "uploaded": 1,
+            "scannedAt": "2026-10-25T14:46:58.176Z"
+          }
+        },
+        {
+          "name": "backup on instance A is COMPLETE: the file came from instance B",
+          "ok": true,
+          "detail": {
+            "code": 0,
+            "from": "instance instance-B (inventory 2026-10-25T14:46:58.176Z)"
+          }
+        }
+      ]
+    },
+    "E": {
+      "checks": [
+        {
+          "name": "exit 143",
+          "ok": true,
+          "detail": 143
+        },
+        {
+          "name": "no uncommitted snapshot files left behind",
+          "ok": true,
+          "detail": []
+        },
+        {
+          "name": "operation lock released",
+          "ok": true
+        },
+        {
+          "name": "list does not show an interrupted snapshot",
+          "ok": true
+        }
+      ]
+    },
+    "F": {
+      "checks": [
+        {
+          "name": "second backup refused with exit 5 (lock held)",
+          "ok": true,
+          "detail": 5
+        },
+        {
+          "name": "first backup still completes",
+          "ok": true,
+          "detail": 0
+        }
+      ]
+    },
+    "G": {
+      "checks": [
+        {
+          "name": "fresh unreferenced blob survives the GC grace period (protects in-flight backups)",
+          "ok": true
+        },
+        {
+          "name": "exactly one snapshot kept (the newest complete)",
+          "ok": true,
+          "detail": [
+            "tempworks-dr_2026-10-25T14-47-03Z_1cd9ce78"
+          ]
+        },
+        {
+          "name": "unreferenced blobs collected after grace",
+          "ok": true,
+          "detail": {
+            "before": 22,
+            "after": 20,
+            "removed": 2
+          }
+        }
+      ]
+    },
+    "R": {
+      "checks": [
+        {
+          "name": "the last COMPLETE snapshot is kept AND the newer DEGRADED one is kept as a partial",
+          "ok": true,
+          "detail": [
+            "tempworks-dr_2026-10-25T14-47-11Z_bcda4374:DEGRADED",
+            "tempworks-dr_2026-10-25T14-47-03Z_1cd9ce78:COMPLETE"
+          ]
+        },
+        {
+          "name": "retention reports them separately",
+          "ok": true,
+          "detail": {
+            "kept": 2,
+            "removed": [],
+            "keptComplete": [
+              "tempworks-dr_2026-10-25T14-47-03Z_1cd9ce78"
+            ],
+            "keptPartial": [
+              "tempworks-dr_2026-10-25T14-47-11Z_bcda4374"
+            ],
+            "blobsKept": 20,
+            "blobsDeleted": 0,
+            "orphanSnapshotsDeleted": 0,
+            "abortedUploads": 0
+          }
+        }
+      ]
+    },
+    "H": {
+      "checks": [
+        {
+          "name": "deep verify exit 0",
+          "ok": true,
+          "detail": []
+        }
+      ]
+    }
+  }
+}

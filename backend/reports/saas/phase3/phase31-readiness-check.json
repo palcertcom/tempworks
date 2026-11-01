@@ -1,0 +1,86 @@
+{
+  "passed": 16,
+  "total": 16,
+  "cases": [
+    {
+      "name": "1. tenant backfill report runs read-only",
+      "ok": true,
+      "detail": "readOnlyJson=true readOnlyTxn=true noWrites=true"
+    },
+    {
+      "name": "2. tenant backfill report writes JSON and MD",
+      "ok": true,
+      "detail": "md=true"
+    },
+    {
+      "name": "3. Employee NULL-tenant count reported",
+      "ok": true,
+      "detail": "null=2"
+    },
+    {
+      "name": "4. Applicant NULL-tenant count reported",
+      "ok": true,
+      "detail": "null=0"
+    },
+    {
+      "name": "5. production duplicate scan runs read-only",
+      "ok": true,
+      "detail": "readOnlyJson=true readOnlyTxn=true noWrites=true"
+    },
+    {
+      "name": "6. production duplicate scan writes JSON and MD",
+      "ok": true,
+      "detail": "md=true"
+    },
+    {
+      "name": "7. duplicate scan includes all 7 detection sections",
+      "ok": true,
+      "detail": "sections=7"
+    },
+    {
+      "name": "8. duplicate scan masks (or avoids) PII in MD",
+      "ok": true,
+      "detail": "masked"
+    },
+    {
+      "name": "9. cross-tenant same email classified as observation, not blocker",
+      "ok": true,
+      "detail": "blocking=0 sum1-6=0 xtObs=0"
+    },
+    {
+      "name": "10. PlatformAdmin readiness runs read-only",
+      "ok": true,
+      "detail": "readOnlyJson=true readOnlyTxn=true noWrites=true"
+    },
+    {
+      "name": "11. PlatformAdmin readiness writes JSON and MD",
+      "ok": true,
+      "detail": "md=true"
+    },
+    {
+      "name": "12. PlatformAdmin readiness detects existing model/table",
+      "ok": true,
+      "detail": "model=true table=true"
+    },
+    {
+      "name": "13. source-level: scripts contain no INSERT/UPDATE/DELETE",
+      "ok": true,
+      "detail": "noWrites=true"
+    },
+    {
+      "name": "14. no Phase 3.1 schema migration added",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "15. Phase 3.0 product-migration-readiness wiring intact",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "16. cumulative regression chain outputs present from prior runs",
+      "ok": true,
+      "detail": "present=5/5"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+🔌  Connected to database.
+📁  Found 28 migration file(s):
+
+     · _consolidated_fix_production.sql
+     · add-document-enhancements.sql
+     · add-recycle-bin-fields.sql
+     · add-user-profile-auth-fields.sql
+     · add_agency_is_system.sql
+     · add_agency_profile_fields.sql
+     · add_agency_tenancy_workflow.sql
+     · add_applicant_tier_financial_history.sql
+     · add_application_draft_uploads.sql
+     · add_application_drafts.sql
+     · add_application_form_v2.sql
+     · add_employee_agency_access_view_edit.sql
+     · add_financial_records.sql
+     · add_job_ads.sql
+     · add_job_ads_required_documents.sql
+     · add_lifecycle_identifiers.sql
+     · add_maintenance_types.sql
+     · add_missing_applicant_columns.sql
+     · add_notification_fields.sql
+     · add_notification_i18n_fields.sql
+     · add_notification_preferences.sql
+     · add_two_factor_auth.sql
+     · add_user_allow_manager_view.sql
+     · backfill-nationality.sql
+     · drop-applicant-email-unique.sql
+     · enhance_maintenance_records.sql
+     · enhance_workshop_fields.sql
+     · ensure_applicant_columns.sql
+
+🚀  Running _consolidated_fix_production.sql … ✅
+🚀  Running add-document-enhancements.sql … ✅
+🚀  Running add-recycle-bin-fields.sql … ✅
+🚀  Running add-user-profile-auth-fields.sql … ✅
+🚀  Running add_agency_is_system.sql … ✅
+🚀  Running add_agency_profile_fields.sql … ✅
+🚀  Running add_agency_tenancy_workflow.sql … ✅
+🚀  Running add_applicant_tier_financial_history.sql … ✅
+🚀  Running add_application_draft_uploads.sql … ✅
+🚀  Running add_application_drafts.sql … ✅
+🚀  Running add_application_form_v2.sql … ✅
+🚀  Running add_employee_agency_access_view_edit.sql … ✅
+🚀  Running add_financial_records.sql … ✅
+🚀  Running add_job_ads.sql … ✅
+🚀  Running add_job_ads_required_documents.sql … ✅
+🚀  Running add_lifecycle_identifiers.sql … ✅
+🚀  Running add_maintenance_types.sql … ✅
+🚀  Running add_missing_applicant_columns.sql … ✅
+🚀  Running add_notification_fields.sql … ✅
+🚀  Running add_notification_i18n_fields.sql … ✅
+🚀  Running add_notification_preferences.sql … ✅
+🚀  Running add_two_factor_auth.sql … ✅
+🚀  Running add_user_allow_manager_view.sql … ✅
+🚀  Running backfill-nationality.sql … ✅
+🚀  Running drop-applicant-email-unique.sql … ✅
+🚀  Running enhance_maintenance_records.sql … ❌
+     foreign key constraint "maintenance_records_driverId_fkey" cannot be implemented
+🚀  Running enhance_workshop_fields.sql … ✅
+🚀  Running ensure_applicant_columns.sql … ✅
+
+────────────────────────────────────────
+✅  Succeeded: 27/28
+❌  Failed: 1
+     · enhance_maintenance_records.sql: foreign key constraint "maintenance_records_driverId_fkey" cannot be implemented

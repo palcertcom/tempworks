@@ -1,0 +1,46 @@
+== 1. identity
+{"id":"sha256:b250ad6e568cc0cab4a4c32e274e9ae3f3a59f767a030f4f3432fccf55b2067b","user":"node","entrypoint":"["/usr/bin/tini","--","/usr/local/bin/docker-entrypoint.sh"]","size":1131946066,"created":"2026-10-25T14:44:58.159626918Z","arch":"amd64"}
+
+  ✓ runs as a non-root user (node)
+== 2. tools inside the image
+pg_dump (PostgreSQL) 18.6 (Debian 18.6-1.pgdg12+2)
+pg_restore (PostgreSQL) 18.6 (Debian 18.6-1.pgdg12+2)
+psql (PostgreSQL) 18.6 (Debian 18.6-1.pgdg12+2)
+pg_dumpall (PostgreSQL) 18.6 (Debian 18.6-1.pgdg12+2)
+Python 3.11.2
+GNU bash, version 5.2.15(1)-release (x86_64-pc-linux-gnu)
+v22.23.4
+  ✓ pg_dump/pg_restore/psql/pg_dumpall are all major 18
+  ✓ Prisma CLI available without network (prisma : 7.5.0)
+== 3. database over TLS (private CA, host name pg-ci.internal)
+  ✓ schema applied from the image's Prisma schema (82 tables)
+-- non-empty DB without migration history
+  ✓ unbaselined: migrate deploy fails (P3005), container exits non-zero (rc=1), server not started
+  ✓ baseline recorded (13 migrations)
+-- documented start path (no command): strict-TLS migrate deploy, then the server
+[entrypoint] v22.23.4; pg_dump (PostgreSQL) 18.6 (Debian 18.6-1.pgdg12+2)
+[entrypoint] prisma migrate deploy (TLS: chain + host name verified against DATABASE_CA_CERT)
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma/schema.prisma.
+Datasource "db": PostgreSQL database "tw", schema "public" at "pg-ci.internal:55432"
+  ✓ migrations verified the DB certificate strictly (DATABASE_CA_CERT)
+  ✓ "No pending migrations" then the server started
+  ✓ listening on $PORT=58080 (HTTP 200 from /api/docs)
+== 4. graceful stop
+  ✓ SIGTERM → exited in 1 s (code 143), schedulers stopped
+== 5. TLS diagnostic (documented command) from the image
+✓ postgres pg-ci.internal:55432 [app policy] app policy (sslmode=require, CA configured): verified
+✓ postgres pg-ci.internal:55432 [chain]      chain trusted (DATABASE_CA_CERT/PGSSLROOTCERT)
+✓ postgres pg-ci.internal:55432 [chain+hostname] verify-full would work
+
+ALL VERIFIED — NODE_TLS_REJECT_UNAUTHORIZED=0 is not needed for these endpoints.
+  ✓ tls-check with the right CA: everything verified (rc=0)
+  ✓ tls-check with a WRONG CA: reports the failure (rc=1)
+  ✓ tls-check output contains no credentials
+== 6. backup → restore cycle from the image (fresh cluster, non-superuser admin)
+  ✓ streaming backup from the image over verified TLS: COMPLETE (rc=0) although pg_dumpall is refused
+  ✓ deep verify from the image (rc=0)
+  ✓ restore from the image into a FRESH cluster as non-superuser dbadmin: RESTORE OK (rc=0)
+  ✓ restored: tw owned by tw_app, data present
+result: 17 passed, 0 failed

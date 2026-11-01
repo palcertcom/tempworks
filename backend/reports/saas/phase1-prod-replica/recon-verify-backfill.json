@@ -1,0 +1,26 @@
+{
+  "slug": "verify-backfill",
+  "title": "Phase 1 — Tenant Backfill Verifier",
+  "mode": "dry-run",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "startedAt": "2026-05-09T14:53:20.023Z",
+  "durationMs": 16,
+  "metrics": [
+    {
+      "key": "tenants.count",
+      "value": 0
+    }
+  ],
+  "actions": [
+    {
+      "kind": "tenants.populated",
+      "subject": "tenants.count=0 (pre-backfill)",
+      "proposedDecision": "SKIPPED",
+      "applied": false
+    }
+  ],
+  "notes": [
+    "No tenants row found — verifier ran before backfill. Re-run after `--apply`."
+  ],
+  "status": "OK"
+}

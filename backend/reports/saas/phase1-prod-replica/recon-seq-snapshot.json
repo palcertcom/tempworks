@@ -1,0 +1,38 @@
+{
+  "slug": "seq-snapshot",
+  "title": "Phase 1 — Identifier Sequence Snapshot",
+  "mode": "dry-run",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "startedAt": "2026-05-09T14:53:18.173Z",
+  "durationMs": 34,
+  "metrics": [
+    {
+      "key": "identifier_sequences.global-rows",
+      "value": 2
+    },
+    {
+      "key": "snapshot.projected-rows",
+      "value": 0
+    },
+    {
+      "key": "snapshot.cross-source-conflicts",
+      "value": 0
+    }
+  ],
+  "actions": [
+    {
+      "kind": "seq.proposed-phase2-sql",
+      "subject": {
+        "sample": "",
+        "totalRows": 0
+      },
+      "proposedDecision": "apply via Phase 2 migration after `tenantId` column lands on identifier_sequences",
+      "applied": false
+    }
+  ],
+  "notes": [
+    "This script does NOT mutate identifier_sequences itself. The Phase 2 cutover migration consumes saas_phase1_seq_snapshot to seed per-tenant counters.",
+    "If projected-rows == 0 but global-rows > 0, the source tables may not yet have tenantId populated — run the dry-run-tenant-backfill --apply on staging first."
+  ],
+  "status": "OK"
+}

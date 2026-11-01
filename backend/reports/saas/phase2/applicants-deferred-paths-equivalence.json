@@ -1,0 +1,36 @@
+{
+  "passed": 6,
+  "total": 6,
+  "cases": [
+    {
+      "name": "1. uploadPhoto legacy: shape preserved",
+      "ok": true,
+      "detail": "id=00000000-0000-0000-0000-0000000aa001 hasPhotoUrl=true uploads=1"
+    },
+    {
+      "name": "2. uploadPhoto pilot: shape preserved",
+      "ok": true,
+      "detail": "id=00000000-0000-0000-0000-0000000aa001 hasPhotoUrl=true"
+    },
+    {
+      "name": "3. uploadPhoto pilot same-tenant: 1 storage call",
+      "ok": true,
+      "detail": "uploads=1"
+    },
+    {
+      "name": "4. publicSubmit legacy: tenantId = NULL",
+      "ok": true,
+      "detail": "id=b034759e-9c42-4631-a900-d0505feabd80 tenantId=null"
+    },
+    {
+      "name": "5. publicSubmit pilot + agencyId (no ALS): tenantId = A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "6. publicSubmit pilot + ALS A: tenantId = A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    }
+  ]
+}

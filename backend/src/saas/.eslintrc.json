@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "@prisma/client",
+            "message": "Use TenantPrismaService (backend/src/saas/prisma) instead. If you must, add `// @tenant-reviewed: <reason>`."
+          }
+        ],
+        "patterns": [
+          {
+            "group": ["**/prisma/prisma.service", "**/../prisma/prisma.service"],
+            "message": "Direct PrismaService is forbidden inside src/saas/. Use TenantPrismaService."
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["prisma/**", "__validation__/**"],
+      "rules": { "no-restricted-imports": "off" }
+    }
+  ]
+}

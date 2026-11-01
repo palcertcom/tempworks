@@ -1,0 +1,9 @@
+{
+  "label": "4-stream-full",
+  "exitCode": 0,
+  "containerPeakRssMiB": 261.3,
+  "containerPeakUsageInclCacheMiB": 282.6,
+  "peakTempDiskMiB": 1.3,
+  "oomKills": 0,
+  "limits": "memory 1 GiB (no swap), 1 vCPU"
+}

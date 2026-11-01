@@ -1,0 +1,53 @@
+== source cluster (managed-provider shape)
+psql:/tmp/prereq-test/schema.sql:2: NOTICE:  schema "public" already exists, skipping
+  ✓ source: pg_dumpall --globals-only is REFUSED for the app role (managed-like)
+== backup (streaming engine) as tw_app
+  ✓ stream backup exit 0 (COMPLETE) although pg_dumpall was refused (rc=0)
+  ✓ required roles = owner, app, readonly, report (+ provider postgres); unrelated excluded [postgres tw_app tw_owner tw_readonly tw_report]
+  ✓ GLOBALS_FROM_CATALOG recorded as information, not hidden
+== negative: prerequisite capture fails → INCOMPLETE
+  ✓ capture failure → exit 4 INCOMPLETE with an actionable reason (rc=4)
+== backup (staging engine) as tw_app
+  ✓ staging backup exit 0, prerequisites.json + roles.sql captured (rc=0)
+== TARGET 1: fresh cluster, restore as NON-superuser dbadmin (CREATEROLE CREATEDB)
+  ✓ target 1 starts with none of the source roles
+-- negative: without --roles
+  ✓ without --roles: aborted BEFORE touching the target, names the missing roles (rc=1)
+  ✓ restore as dbadmin with --roles: RESTORE OK (rc=0)
+     ✓ all component checksums match
+     ✓ dump is a readable custom-format archive (658 TOC entries, 248 table defs)
+  ✓ globals: database/globals.sql sha ok
+  ✓ database: database/database.dump sha ok
+     ✓ integrity: every component and file matches its checksum
+     ✓ recoverability COMPLETE: all DB-referenced files and database prerequisites captured
+     ✓ required roles present: postgres, tw_app, tw_owner, tw_readonly, tw_report
+     ✓ prerequisites met on target: required roles, extensions
+     ✓ catalog reconstructed: package registered as COMPLETED + VERIFIED + RESTORE-TESTED.
+     ✓ all 83 tables present after restore
+     ✓ database owned by tw_owner; it can create objects in schema public (future migrations work)
+     LOGIN roles were recreated WITHOUT passwords (by design — secrets are never in backups). Set each from the secret store:
+  ✓ roles recreated; unrelated role NOT created
+  ✓ attributes: tw_owner NOLOGIN, tw_app LOGIN
+  ✓ memberships: tw_app ∈ tw_owner, tw_report ∈ tw_readonly
+  ✓ role setting: tw_app statement_timeout=60s
+  ✓ database owned by tw_owner
+  ✓ every table owned by tw_owner
+  ✓ app role logs in with the password from the secret store and reads data
+  ✓ app role can write + sequences advance
+  ✓ app role can run schema changes (boot drift-heal needs this)
+  ✓ grants: tw_readonly can read documents, cannot read users
+  ✓ column grant: tw_report may read users.email only
+  ✓ default privileges: a NEW table is readable by tw_readonly
+  ✓ RLS policy restored
+  ✓ extension pgcrypto restored and usable
+== TARGET 2: provider-owned source (doadmin) → fresh cluster with --role-map
+  ✓ provider-owned source backs up COMPLETE; doadmin flagged as provider-managed (rc=0)
+  ✓ without --role-map: aborted, tells the operator to map doadmin (rc=1)
+  ✓ with --role-map doadmin:tw_recovered: RESTORE OK (rc=0)
+  ✓ mapped role owns the database and its objects
+  ✓ grant to tw_readonly preserved; data intact
+== TARGET 3: source whose pg_dumpall WORKS (globals.sql non-empty) → fresh cluster as NON-superuser dbadmin
+  ✓ the doadmin package has a non-empty globals.sql
+  ✓ globals-created roles are SET-able by the non-superuser admin: RESTORE OK (rc=0)
+  ✓ mapped owner + grant + data intact
+result: 31 passed, 0 failed

@@ -1,0 +1,76 @@
+{
+  "passed": 14,
+  "total": 14,
+  "cases": [
+    {
+      "name": "1. ComplianceCron wired into ComplianceModule providers",
+      "ok": true,
+      "detail": "wired=true"
+    },
+    {
+      "name": "2. exactly one @Cron entrypoint exists",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "3. cron body calls runScheduledComplianceAlertGeneration()",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "4. cron body never calls dispatchComplianceAlertGenerationForTenants directly",
+      "ok": true,
+      "detail": "present=false"
+    },
+    {
+      "name": "5. cron body never calls generateAlerts()",
+      "ok": true,
+      "detail": "present=false"
+    },
+    {
+      "name": "6. cron body never calls generateAlertsForTenant()",
+      "ok": true,
+      "detail": "present=false"
+    },
+    {
+      "name": "7. ScheduleModule.forRoot() registered exactly once",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "8. scheduler disabled: cron tick is a no-op",
+      "ok": true,
+      "detail": "noNew=true"
+    },
+    {
+      "name": "9. scheduler ON + fan-out OFF: dispatch refuses; zero scans",
+      "ok": true,
+      "detail": "noNew=true"
+    },
+    {
+      "name": "10. scheduler + fan-out ON + pilot OFF: dispatch refuses",
+      "ok": true,
+      "detail": "noNew=true"
+    },
+    {
+      "name": "11. cron processes ACTIVE tenants only (no error path)",
+      "ok": true,
+      "detail": "newA=1 newB=1"
+    },
+    {
+      "name": "12. cron creates no NULL-tenant alerts",
+      "ok": true,
+      "detail": "newNull=false"
+    },
+    {
+      "name": "13. cron creates no cross-tenant alerts (per-row tenantId attributed)",
+      "ok": true,
+      "detail": "newA=1 newB=1"
+    },
+    {
+      "name": "14. concurrent cron ticks remain ALS-isolated",
+      "ok": true,
+      "detail": "newNull=false"
+    }
+  ]
+}

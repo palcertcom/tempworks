@@ -1,0 +1,51 @@
+{
+  "passed": 9,
+  "total": 9,
+  "cases": [
+    {
+      "name": "1. tenant A: convert(tenantB-id) rejected; no Employee created",
+      "ok": true,
+      "detail": "threw=true employees=0"
+    },
+    {
+      "name": "2. pilot: Employee.tenantId = A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "3. pilot: tenant A document re-linked to EMPLOYEE",
+      "ok": true,
+      "detail": "entityType=EMPLOYEE"
+    },
+    {
+      "name": "4. pilot: tenant A FinancialRecord re-linked to EMPLOYEE",
+      "ok": true,
+      "detail": "entityType=EMPLOYEE"
+    },
+    {
+      "name": "5. pilot: tenant B document NOT smuggled",
+      "ok": true,
+      "detail": "entityType=APPLICANT entityId=f37f5edd"
+    },
+    {
+      "name": "6. pilot: tenant B FinancialRecord NOT smuggled",
+      "ok": true,
+      "detail": "entityType=APPLICANT"
+    },
+    {
+      "name": "7. legacy: both rows re-linked (today's behaviour)",
+      "ok": true,
+      "detail": "A=EMPLOYEE B=EMPLOYEE"
+    },
+    {
+      "name": "8. concurrent ALS frames: A→A, B→B",
+      "ok": true,
+      "detail": "eA=11111111-1111-1111-1111-111111111111 eB=22222222-2222-2222-2222-222222222222"
+    },
+    {
+      "name": "9. source-level: phase232 patterns present",
+      "ok": true,
+      "detail": "OK"
+    }
+  ]
+}

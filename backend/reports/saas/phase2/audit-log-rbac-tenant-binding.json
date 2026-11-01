@@ -1,0 +1,81 @@
+{
+  "passed": 15,
+  "total": 15,
+  "cases": [
+    {
+      "name": "1. tenant A FULL_ACCESS actor sees only tenant A audit rows",
+      "ok": true,
+      "detail": "count=3"
+    },
+    {
+      "name": "2. tenant A FULL_ACCESS actor does not see tenant B audit rows",
+      "ok": true,
+      "detail": "B excluded"
+    },
+    {
+      "name": "3. tenant A FULL_ACCESS actor does not see NULL-tenant audit rows",
+      "ok": true,
+      "detail": "NULL excluded"
+    },
+    {
+      "name": "4. tenant B FULL_ACCESS actor sees only tenant B audit rows",
+      "ok": true,
+      "detail": "count=2"
+    },
+    {
+      "name": "5. entity filter under tenant A cannot leak tenant B row",
+      "ok": true,
+      "detail": "all tenantA"
+    },
+    {
+      "name": "6. entityId filter for tenant B id under tenant A returns empty",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "7. READ_ROLES actor requires active tenant context in pilot mode",
+      "ok": true,
+      "detail": "ForbiddenException raised"
+    },
+    {
+      "name": "8. FULL_ACCESS without global gate also refuses without ALS frame",
+      "ok": true,
+      "detail": "ForbiddenException raised"
+    },
+    {
+      "name": "9. FULL_ACCESS role with global gate OFF remains tenant-scoped in pilot",
+      "ok": true,
+      "detail": "all tenantA"
+    },
+    {
+      "name": "10. FULL_ACCESS with explicit global gate ON sees global rows (B + NULL)",
+      "ok": true,
+      "detail": "count=6 hasB=true hasNull=true"
+    },
+    {
+      "name": "11. non-allowed role cannot read audit rows (RBAC roles decorator pinned)",
+      "ok": true,
+      "detail": "roles pinned + no Random Role"
+    },
+    {
+      "name": "12. pagination under tenant A cannot page into tenant B rows",
+      "ok": true,
+      "detail": "p1=2 p2=1"
+    },
+    {
+      "name": "13. getStats respects tenant-bound RBAC scope",
+      "ok": true,
+      "detail": "total=196"
+    },
+    {
+      "name": "14. concurrent ALS frames remain isolated for findAll",
+      "ok": true,
+      "detail": "A=3 B=2"
+    },
+    {
+      "name": "15. assertAuditReadAccess + auditTenantWhereForActor + global gate are wired",
+      "ok": true,
+      "detail": "all helpers present + called"
+    }
+  ]
+}

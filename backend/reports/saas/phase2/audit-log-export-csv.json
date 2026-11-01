@@ -1,0 +1,91 @@
+{
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "name": "1. export under tenant A returns only tenant A rows",
+      "ok": true,
+      "detail": "rows=32"
+    },
+    {
+      "name": "2. export under tenant A excludes tenant B rows",
+      "ok": true,
+      "detail": "B excluded"
+    },
+    {
+      "name": "3. export under tenant A excludes NULL-tenant rows",
+      "ok": true,
+      "detail": "NULL excluded"
+    },
+    {
+      "name": "7. CSV header contains expected safe columns",
+      "ok": true,
+      "detail": "id,tenantId,createdAt,userId,userEmail,action,entity,entityId,ipAddress,userAgent"
+    },
+    {
+      "name": "4. entity filter preserved",
+      "ok": true,
+      "detail": "rows=32"
+    },
+    {
+      "name": "5. entityId filter cannot leak tenant B row",
+      "ok": true,
+      "detail": "rows=0"
+    },
+    {
+      "name": "6. date range filter preserved (last 6h ⊂ all 25h)",
+      "ok": true,
+      "detail": "rows=13"
+    },
+    {
+      "name": "8. CSV escaping handles comma, quote, and newline safely",
+      "ok": true,
+      "detail": "tricky row escaped"
+    },
+    {
+      "name": "9. row cap enforced",
+      "ok": true,
+      "detail": "rows=5 capped=true max=5"
+    },
+    {
+      "name": "10. invalid AUDIT_LOG_EXPORT_MAX_ROWS falls back to default 50000",
+      "ok": true,
+      "detail": "max=50000"
+    },
+    {
+      "name": "11. FULL_ACCESS with global gate OFF remains tenant-bound",
+      "ok": true,
+      "detail": "B=true NULL=true"
+    },
+    {
+      "name": "12. FULL_ACCESS with global gate ON exports global rows (B + NULL)",
+      "ok": true,
+      "detail": "B=true NULL=true"
+    },
+    {
+      "name": "13. missing ALS tenant context refuses safely (Forbidden)",
+      "ok": true,
+      "detail": "ForbiddenException"
+    },
+    {
+      "name": "14. controller @Roles allow-list pinned for export.csv",
+      "ok": true,
+      "detail": "allow-list pinned"
+    },
+    {
+      "name": "15. export route is GET-only",
+      "ok": true,
+      "detail": "GET only"
+    },
+    {
+      "name": "16. no Post/Put/Patch/Delete in controller",
+      "ok": true,
+      "detail": "GET only"
+    },
+    {
+      "name": "17. controller does not import retention/hard-delete scripts",
+      "ok": true,
+      "detail": "no script imports"
+    }
+  ]
+}

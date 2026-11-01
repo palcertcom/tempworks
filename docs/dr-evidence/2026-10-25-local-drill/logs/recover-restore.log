@@ -1,0 +1,48 @@
+2026-10-25T08:59:25Z [dr] extracting /tmp/tw-drill/recovery/incoming/tempworks-dr_2026-10-25T08-56-54Z_d4a27306.tar.gz …
+2026-10-25T08:59:25Z [dr] verifying package integrity before restore…
+2026-10-25T08:59:25Z [dr] verifying checksums…
+2026-10-25T08:59:25Z [dr] ✓ all component checksums match
+2026-10-25T08:59:25Z [dr] ✓ dump is a readable custom-format archive (691 TOC entries, 251 table defs)
+2026-10-25T08:59:25Z [dr] verifying manifest component hashes…
+  ✓ globals: database/globals.sql sha ok
+  ✓ database: database/database.dump sha ok
+2026-10-25T08:59:25Z [dr] verifying file checksums (uploads)…
+  uploads: files=8 ok=8 mismatch=0 missing=0
+2026-10-25T08:59:25Z [dr] ✓ package completeness: all DB-referenced files captured
+2026-10-25T08:59:25Z [dr] VERIFY OK — package integrity confirmed: /tmp/tmp.kXnwPO7tMP/tempworks-dr_2026-10-25T08-56-54Z_d4a27306
+2026-10-25T08:59:25Z [dr] restoring package tempworks-dr_2026-10-25T08-56-54Z_d4a27306 (kind=full)
+2026-10-25T08:59:25Z [dr] restore toolchain: /usr/lib/postgresql/18/bin (pg_restore 18.6; target major 18, archive major 18)
+2026-10-25T08:59:25Z [dr] target: postgresql://***:***@127.0.0.1:57433/tempworks?sslmode=disable (server major 18)
+2026-10-25T08:59:25Z [dr] applying cluster globals (roles / memberships)…
+     skipped provider-managed role statement: CREATE ROLE postgres;
+     skipped provider-managed role statement: ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
+2026-10-25T08:59:25Z [dr] ✓ globals applied (provider-managed roles skipped explicitly)
+2026-10-25T08:59:26Z [dr] creating database tempworks with captured properties:
+     CREATE DATABASE tempworks WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'C.UTF-8';
+     ALTER DATABASE tempworks OWNER TO tempworks_app;
+2026-10-25T08:59:26Z [dr] restoring database objects + data (pg_restore --exit-on-error)…
+2026-10-25T08:59:26Z [dr] database restore complete.
+2026-10-25T08:59:26Z [dr] pushing uploaded files to object-storage bucket 'rec-uploads'…
+2026-10-25T08:59:26Z [dr] uploaded files restored.
+2026-10-25T08:59:27Z [dr] remapping storage URLs: http://127.0.0.1:5555/src-uploads/… → http://127.0.0.1:5555/rec-uploads/…
+     NOTICE:  rewrote 6 row(s) in documents.fileUrl
+     NOTICE:  rewrote 2 row(s) in employees.photoUrl
+     NOTICE:  storage URL remap: 8 row(s) updated
+     DO
+2026-10-25T08:59:27Z [dr] ✓ storage URL remap complete — no document references the old storage.
+2026-10-25T08:59:27Z [dr] reconstructing backup catalog (package tempworks-dr_2026-10-25T08-56-54Z_d4a27306, catalogId 18459d2b-3d77-4d9c-9cf1-e5e6e5572538)…
+2026-10-25T08:59:27Z [dr] ✓ catalog reconstructed: package registered as COMPLETED + VERIFIED + RESTORE-TESTED.
+2026-10-25T08:59:27Z [dr] running post-restore verification…
+2026-10-25T08:59:27Z [dr] ✓ all 84 tables present after restore
+2026-10-25T08:59:27Z [dr] checking exact row counts on key tables…
+     users|4
+     employees|6
+     applicants|2
+     documents|6
+     attendance_records|0
+     tenants|3
+2026-10-25T08:59:27Z [dr] ✓ database owned by tempworks_app; it can create objects in schema public (future migrations work)
+2026-10-25T08:59:27Z [dr] checking sequences support new inserts…
+2026-10-25T08:59:27Z [dr]      4 sequence(s) present
+2026-10-25T08:59:27Z [dr] RESTORE OK — database + uploads restored and verified on target.
+2026-10-25T08:59:27Z [dr] Next: start the app against this target with external side-effects disabled (see runbook §Bring-up).

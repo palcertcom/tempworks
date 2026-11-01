@@ -1,0 +1,54 @@
+{
+  "confirmDialog": {
+    "title": "Sind Sie sicher?",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen"
+  },
+  "pagination": {
+    "previous": "Zurück",
+    "next": "Weiter",
+    "morePages": "Weitere Seiten",
+    "ariaLabel": "Seitennavigation",
+    "goToPrevious": "Zur vorherigen Seite",
+    "goToNext": "Zur nächsten Seite"
+  },
+  "dialog": {
+    "close": "Schließen"
+  },
+  "sidebar": {
+    "title": "Seitenleiste",
+    "description": "Zeigt die mobile Seitenleiste an.",
+    "toggle": "Seitenleiste umschalten"
+  },
+  "address": {
+    "line1": "Adresse Zeile 1",
+    "line1Placeholder": "Straße, Hausnummer, Wohnung",
+    "line2": "Adresse Zeile 2",
+    "line2Placeholder": "Stockwerk, Suite, zusätzliche Angaben (optional)",
+    "country": "Land",
+    "city": "Stadt",
+    "cityPlaceholder": "Stadt",
+    "zip": "Postleitzahl"
+  },
+  "country": {
+    "selectPlaceholder": "Land auswählen",
+    "none": "— Keine —"
+  },
+  "phone": {
+    "code": "Code",
+    "placeholder": "z. B. 20 7123 4567",
+    "searchCode": "Land oder Code suchen…",
+    "noResults": "Kein Land gefunden."
+  },
+  "captcha": {
+    "newChallenge": "Neue Aufgabe",
+    "refreshAria": "CAPTCHA aktualisieren",
+    "answerPlaceholder": "Antwort eingeben",
+    "verified": "Verifiziert",
+    "incorrect": "Falsch, bitte erneut versuchen"
+  },
+  "carousel": {
+    "previous": "Previous slide",
+    "next": "Next slide"
+  }
+}

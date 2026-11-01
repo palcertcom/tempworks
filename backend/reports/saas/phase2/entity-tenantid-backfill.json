@@ -1,0 +1,179 @@
+{
+  "generatedAt": "2026-05-09T16:42:50.903Z",
+  "mode": "apply",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "counts": {
+    "models": 15,
+    "totalApplied": 56,
+    "totalWillBackfill": 0,
+    "totalQuarantined": 2,
+    "reconciliationQueueRowsInserted": 2,
+    "errors": 11
+  },
+  "results": [
+    {
+      "name": "documents",
+      "parentPath": "documents.entityId → employees|applicants|agencies → tenantId",
+      "willBackfill": 0,
+      "applied": 52,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      }
+    },
+    {
+      "name": "work_permits",
+      "parentPath": "work_permits.employeeId → employees.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "visas",
+      "parentPath": "visas.entityId → employees|applicants → tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "compliance_alerts",
+      "parentPath": "compliance_alerts.entityId → employees|applicants → tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "financial_records",
+      "parentPath": "financial_records.entityId → employees|applicants → tenantId",
+      "willBackfill": 0,
+      "applied": 1,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      }
+    },
+    {
+      "name": "financial_record_attachments",
+      "parentPath": "financial_record_attachments.financialRecordId → financial_records.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "financial_record_deductions",
+      "parentPath": "financial_record_deductions.financialRecordId → financial_records.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "attendance_records",
+      "parentPath": "attendance_records.employeeId → employees.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      }
+    },
+    {
+      "name": "notifications",
+      "parentPath": "notifications.userId → users.agencyId → agencies.tenantId",
+      "willBackfill": 0,
+      "applied": 3,
+      "quarantined": {
+        "n": 2,
+        "sample": [
+          "bf7c5ed0-8ba9-4f25-ac38-e3d7ef78de23",
+          "f08f67dc-3689-4746-9580-93c670ff6b3a"
+        ]
+      }
+    },
+    {
+      "name": "vehicle_documents",
+      "parentPath": "vehicle_documents.vehicleId → vehicles.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "maintenance_records",
+      "parentPath": "maintenance_records.vehicleId → vehicles.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "candidate_workflow_assignments",
+      "parentPath": "candidate_workflow_assignments.candidateId → applicants.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "employee_workflow_assignments",
+      "parentPath": "employee_workflow_assignments.employeeId → employees.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "employee_work_history",
+      "parentPath": "employee_work_history.employeeId → employees.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    },
+    {
+      "name": "employee_work_history_attachments",
+      "parentPath": "employee_work_history_attachments.workHistoryId → employee_work_history.tenantId",
+      "willBackfill": 0,
+      "applied": 0,
+      "quarantined": {
+        "n": 0,
+        "sample": []
+      },
+      "error": "table not present (skipped)"
+    }
+  ]
+}

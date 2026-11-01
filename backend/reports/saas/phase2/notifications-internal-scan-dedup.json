@@ -1,0 +1,71 @@
+{
+  "passed": 13,
+  "total": 13,
+  "cases": [
+    {
+      "name": "1. flag off: scan create produces duplicate (legacy)",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":1,\"deduped\":0} cnt=2"
+    },
+    {
+      "name": "2. checkExpiringCompliance condition deduped",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":0,\"deduped\":1} cnt=1"
+    },
+    {
+      "name": "3. checkServiceDue condition deduped",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":0,\"deduped\":1} cnt=1"
+    },
+    {
+      "name": "4. checkOverdue condition deduped",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":0,\"deduped\":1} cnt=1"
+    },
+    {
+      "name": "5. checkScheduledMaintenance condition deduped",
+      "ok": true,
+      "detail": "r1={\"created\":1,\"deduped\":0} r2={\"created\":0,\"deduped\":1} cnt=1"
+    },
+    {
+      "name": "6. different user (same tenant) NOT deduped",
+      "ok": true,
+      "detail": "cnt=2"
+    },
+    {
+      "name": "7. same user different tenant NOT deduped",
+      "ok": true,
+      "detail": "a=1 b=1"
+    },
+    {
+      "name": "8. different condition types for same vehicle NOT deduped",
+      "ok": true,
+      "detail": "total=2"
+    },
+    {
+      "name": "9. window respected: old row outside window does not suppress",
+      "ok": true,
+      "detail": "total=2"
+    },
+    {
+      "name": "10. NULL-tenant legacy row does NOT suppress tenant-scoped row",
+      "ok": true,
+      "detail": "a=1"
+    },
+    {
+      "name": "11. dedup with tid=null falls through (no probe; legacy create)",
+      "ok": true,
+      "detail": "cnt=2"
+    },
+    {
+      "name": "12. concurrent tenant-aware scans remain ALS-isolated",
+      "ok": true,
+      "detail": "a=1 b=1"
+    },
+    {
+      "name": "13. all four check* methods route through createInAppWithDedup",
+      "ok": true,
+      "detail": "checkExpiringCompliance=OK checkServiceDue=OK checkOverdue=OK checkScheduledMaintenance=OK"
+    }
+  ]
+}

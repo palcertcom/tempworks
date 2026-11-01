@@ -1,0 +1,20 @@
+# Generated report outputs.
+#
+# Every Phase 1 audit / reconciliation / backfill / verification script
+# rewrites these files on each run. Tracking them in git was an early-
+# Phase-1 mistake: it caused merge / pull conflicts on every operator
+# machine that produced its own runs.
+#
+# Source-of-truth is the script + the database, not the artefact.
+# Operators archive the JSON/MD outputs to a security-tracked location
+# (or an internal storage bucket) per `SAAS_PHASE1_EXECUTION_RUNBOOK.md`.
+
+# Ignore every generated report
+phase1/*.json
+phase1/*.md
+phase1-real/*.json
+phase1-real/*.md
+
+# But keep the README explaining the directory
+!phase1/README.md
+!phase1-real/README.md

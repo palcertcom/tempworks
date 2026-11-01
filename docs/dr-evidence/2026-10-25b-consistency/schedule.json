@@ -1,0 +1,33 @@
+{
+  "config": {
+    "active": true,
+    "cron": "* * * * *",
+    "timezone": "Europe/Bratislava",
+    "kind": "FULL_SYSTEM",
+    "nextRun": "2026-10-25T10:56:00.000+01:00",
+    "staleHours": 26,
+    "retentionCount": 10
+  },
+  "whileLocked": {
+    "at": "2026-10-25T09:56:00.009Z",
+    "outcome": "SKIPPED_BUSY",
+    "detail": "Another backup or restore operation is currently in progress (held by this or another app instance). Please try again later."
+  },
+  "nextRun": {
+    "at": "2026-10-25T09:57:00.003Z",
+    "outcome": "COMPLETED",
+    "backupId": "7a81a2fa-f7e1-4845-8865-666fc75a967c"
+  },
+  "scheduledBackup": {
+    "id": "7a81a2fa-f7e1-4845-8865-666fc75a967c",
+    "status": "COMPLETED",
+    "kind": "FULL_SYSTEM",
+    "verifyResult": "VERIFIED",
+    "offsiteStatus": "VERIFIED",
+    "notes": "[SCHEDULED]"
+  },
+  "staleness": {
+    "stale": false,
+    "newestVerifiedAgeHours": 0.0005361111111111111
+  }
+}

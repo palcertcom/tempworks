@@ -1,0 +1,121 @@
+{
+  "tenants": {
+    "alpha": {
+      "id": "0c070c59-64bb-4d99-8126-fa16cc45d851",
+      "agencyId": "1d2a30da-6a92-4d71-b6d7-e7e4ab54990a",
+      "name": "Alpha Staffing s.r.o."
+    },
+    "beta": {
+      "id": "57e028b4-8927-4c38-900f-557f0f0348ce",
+      "agencyId": "bbb95f3b-a7f0-4cdf-a5d3-ecc4faf03827",
+      "name": "Beta Recruitment GmbH"
+    }
+  },
+  "users": {
+    "hr@alpha.test": {
+      "id": "874d4b14-b201-41ce-b7fa-c1bcb768f933",
+      "tenant": "alpha",
+      "role": "HR Manager"
+    },
+    "viewer@alpha.test": {
+      "id": "13bb0971-19ed-45d8-8324-7aed845f884b",
+      "tenant": "alpha",
+      "role": "Read Only"
+    },
+    "hr@beta.test": {
+      "id": "50e3f501-0c66-4a76-ac72-48f8323a856f",
+      "tenant": "beta",
+      "role": "HR Manager"
+    }
+  },
+  "employees": [
+    {
+      "id": "d8e3bf67-ed0c-4583-ab7f-aa907e214aa5",
+      "number": "E20261000001",
+      "tenant": "alpha",
+      "name": "Oleksii Kovalenko"
+    },
+    {
+      "id": "e3aecadc-213c-4a30-9b42-4bcf26d52ad4",
+      "number": "E20261000002",
+      "tenant": "alpha",
+      "name": "Tawanda Moyo"
+    },
+    {
+      "id": "d6816e2f-f8d9-40d2-9ab4-098b6aec343c",
+      "number": "E20261000003",
+      "tenant": "beta",
+      "name": "Ingrid Schmidt"
+    }
+  ],
+  "documents": [
+    {
+      "id": "572306b2-078c-440b-8edb-a2f9a7e3f3bf",
+      "tenant": "alpha",
+      "employeeId": "d8e3bf67-ed0c-4583-ab7f-aa907e214aa5",
+      "name": "Oleksii Work Contract",
+      "fileUrl": "http://127.0.0.1:5555/src-uploads/documents/EMPLOYEE/d8e3bf67-ed0c-4583-ab7f-aa907e214aa5/Employment_Contract/17181738-e005-41c2-9f7d-f1438c525273.pdf",
+      "sha256": "3b84c78700fe1a912408ebfe8158758adb5201c5f20b0401c0ca9c9fc34ee807",
+      "bytes": 869
+    },
+    {
+      "id": "40fcf6ad-629b-4f96-acc3-34f37477b239",
+      "tenant": "alpha",
+      "employeeId": "d8e3bf67-ed0c-4583-ab7f-aa907e214aa5",
+      "name": "Oleksii Identity Document",
+      "fileUrl": "http://127.0.0.1:5555/src-uploads/documents/EMPLOYEE/d8e3bf67-ed0c-4583-ab7f-aa907e214aa5/National_ID_Card/ce220b21-7533-48fa-af00-7aeda0d3bb87.pdf",
+      "sha256": "328505e6efc6bcb9809185684ce8e3e1c33fadf519650b4054e9a0ec6dabbcb6",
+      "bytes": 873
+    },
+    {
+      "id": "aaf91b95-563a-41ce-a4b6-0a8009dec06c",
+      "tenant": "alpha",
+      "employeeId": "e3aecadc-213c-4a30-9b42-4bcf26d52ad4",
+      "name": "Tawanda Work Contract",
+      "fileUrl": "http://127.0.0.1:5555/src-uploads/documents/EMPLOYEE/e3aecadc-213c-4a30-9b42-4bcf26d52ad4/Employment_Contract/0465300c-e203-4031-9d7e-6aed84ee88a7.pdf",
+      "sha256": "8d93337a3fcf14c6e067f3aa2d4b9f3950c403585696c76b3b1fe2e708aff58a",
+      "bytes": 869
+    },
+    {
+      "id": "ba699d97-affc-4bf9-ac74-37ce3378130c",
+      "tenant": "alpha",
+      "employeeId": "e3aecadc-213c-4a30-9b42-4bcf26d52ad4",
+      "name": "Tawanda Identity Document",
+      "fileUrl": "http://127.0.0.1:5555/src-uploads/documents/EMPLOYEE/e3aecadc-213c-4a30-9b42-4bcf26d52ad4/National_ID_Card/3989d129-6c65-41be-999e-52ddf6c1fafc.pdf",
+      "sha256": "fe308dd708e5b21b2f44639af5fac24d01444aceba7f87c02a01d8e3b8ff2686",
+      "bytes": 873
+    },
+    {
+      "id": "76a7fab9-b580-4633-befd-11f5a06aa85c",
+      "tenant": "beta",
+      "employeeId": "d6816e2f-f8d9-40d2-9ab4-098b6aec343c",
+      "name": "Ingrid Work Contract",
+      "fileUrl": "http://127.0.0.1:5555/src-uploads/documents/EMPLOYEE/d6816e2f-f8d9-40d2-9ab4-098b6aec343c/Employment_Contract/7e4c8f1f-0b30-4ebe-9ee8-e29dd12c84ad.pdf",
+      "sha256": "3347a00cbbf6c6e65f4806cd30ffbaffb67430a626e41f29d90f794b7f086f77",
+      "bytes": 867
+    },
+    {
+      "id": "3fb0ec6b-30b2-4e0e-8ef9-a16e4f16d734",
+      "tenant": "beta",
+      "employeeId": "d6816e2f-f8d9-40d2-9ab4-098b6aec343c",
+      "name": "Ingrid Identity Document",
+      "fileUrl": "http://127.0.0.1:5555/src-uploads/documents/EMPLOYEE/d6816e2f-f8d9-40d2-9ab4-098b6aec343c/National_ID_Card/ffe2f1b3-143b-4b99-8b3d-9940cfd8d051.pdf",
+      "sha256": "869b5642adb4ec4ae648045689dff24f6387a90f3934bff50e8719f5f90ed1db",
+      "bytes": 871
+    }
+  ],
+  "photos": [
+    {
+      "employeeId": "d8e3bf67-ed0c-4583-ab7f-aa907e214aa5",
+      "tenant": "alpha",
+      "photoUrl": "http://127.0.0.1:5555/src-uploads/employees/d8e3bf67-ed0c-4583-ab7f-aa907e214aa5/photos/61924184-866a-4abf-9618-9d92c8c36402.png",
+      "sha256": "c6f082c8541d959726d08c679e3eb29aa66f2e65dcb34fb02d0d0d387dfc073b"
+    },
+    {
+      "employeeId": "d6816e2f-f8d9-40d2-9ab4-098b6aec343c",
+      "tenant": "beta",
+      "photoUrl": "http://127.0.0.1:5555/src-uploads/employees/d6816e2f-f8d9-40d2-9ab4-098b6aec343c/photos/b0329fbb-a1ba-42c9-b530-a97a951dbfd7.png",
+      "sha256": "f4ade379abd6f75c7e4927974e3671118c2d90130d42163bd05e34870df49912"
+    }
+  ]
+}

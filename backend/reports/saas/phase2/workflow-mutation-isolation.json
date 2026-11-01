@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-05-10T21:35:48.563Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantB": "22222222-2222-2222-2222-222222222222",
+  "counts": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "pilot ON, tenant A: updateEmployeeWorkflowStage(tenantB-employee) raises NotFoundException",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: setEmployeeCurrentStage(tenantB-employee) raises NotFoundException",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: createWorkPermit(tenantB-employee) raises 404; no row inserted",
+      "ok": true,
+      "detail": "delta=0"
+    },
+    {
+      "name": "pilot ON, tenant A: updateWorkPermit(tenantB-id) rejected; permitType unchanged",
+      "ok": true,
+      "detail": "before=WORK_VISA_B after=WORK_VISA_B"
+    },
+    {
+      "name": "pilot ON, tenant A: createVisa({EMPLOYEE, tenantB}) raises 404",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: updateVisa(tenantB-id) rejected; visaType unchanged",
+      "ok": true,
+      "detail": "before=TOURIST after=TOURIST"
+    },
+    {
+      "name": "pilot ON, tenant A: createWorkPermit succeeds; tenantId=A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "pilot ON, tenant A: createVisa succeeds; tenantId=A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "pilot ON, tenant A: getOverview after mutations still excludes B (sum IN_PROGRESS = 1)",
+      "ok": true,
+      "detail": "aTotalInProgress=1"
+    },
+    {
+      "name": "pilot OFF: legacy update on tenant B permit still succeeds (gate disengages)",
+      "ok": true,
+      "detail": "mutated"
+    },
+    {
+      "name": "source: every Phase 2.27 mutation site has the right tag and parent gate",
+      "ok": true,
+      "detail": "all patterns matched"
+    }
+  ]
+}

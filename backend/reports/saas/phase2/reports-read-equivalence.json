@@ -1,0 +1,653 @@
+{
+  "generatedAt": "2026-05-09T17:18:50.760Z",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "tenantId": "11111111-1111-1111-1111-111111111111",
+  "counts": {
+    "total": 18,
+    "ready": 17,
+    "disabled": 1,
+    "equal": 17,
+    "withDelta": 0,
+    "errors": 0,
+    "pass": 17,
+    "warn": 0,
+    "fail": 0,
+    "skipped": 1
+  },
+  "results": [
+    {
+      "source": "employees",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 16,
+      "safeCount": 16,
+      "joinedLegacyCount": 16,
+      "joinedSafeCount": 16,
+      "idsLegacy": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "idsSafe": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "applicants",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 41,
+      "safeCount": 41,
+      "joinedLegacyCount": 41,
+      "joinedSafeCount": 41,
+      "idsLegacy": [
+        "12c520fe-4ed9-4471-b451-9afc49f8057a",
+        "12d4dc10-f724-49ef-9e5b-a5550fd7fbc8",
+        "14aa55b0-206e-4cb7-b665-6fbbe09f5db8",
+        "164d50a5-1a1a-45bb-89a9-84d8a8990652",
+        "2d973372-26a1-4b74-9bdc-3c8f234e0898",
+        "37455931-b45c-4554-bbd4-d1d4444c6cd4",
+        "43650504-aec5-4455-bcb9-b27d59616892",
+        "52eb59bf-51b2-4b2e-8fbc-8fdfd0eb98cf",
+        "5414e00a-4494-4137-8bb2-83c8f86712a4",
+        "5bd015fe-fc28-4195-aa8d-e02876d6beec"
+      ],
+      "idsSafe": [
+        "12c520fe-4ed9-4471-b451-9afc49f8057a",
+        "12d4dc10-f724-49ef-9e5b-a5550fd7fbc8",
+        "14aa55b0-206e-4cb7-b665-6fbbe09f5db8",
+        "164d50a5-1a1a-45bb-89a9-84d8a8990652",
+        "2d973372-26a1-4b74-9bdc-3c8f234e0898",
+        "37455931-b45c-4554-bbd4-d1d4444c6cd4",
+        "43650504-aec5-4455-bcb9-b27d59616892",
+        "52eb59bf-51b2-4b2e-8fbc-8fdfd0eb98cf",
+        "5414e00a-4494-4137-8bb2-83c8f86712a4",
+        "5bd015fe-fc28-4195-aa8d-e02876d6beec"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "agencies",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 1,
+      "safeCount": 1,
+      "joinedLegacyCount": 1,
+      "joinedSafeCount": 1,
+      "idsLegacy": [
+        "2743dd4e-a76b-453b-838b-6592a31b8b47"
+      ],
+      "idsSafe": [
+        "2743dd4e-a76b-453b-838b-6592a31b8b47"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "documents",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 28,
+      "safeCount": 28,
+      "joinedLegacyCount": 28,
+      "joinedSafeCount": 28,
+      "idsLegacy": [
+        "1525d624-2a90-44bc-a109-a9a407774210",
+        "154e3dec-95be-423c-9bf2-073018d433c2",
+        "21bfbc59-99ea-4ecd-8973-f14913f13fea",
+        "2ccf9164-c675-4e12-8977-fc519f2ad73f",
+        "393d52b1-2a81-4ac7-9a4e-c3fd1e785d4c",
+        "4244e477-b97f-4537-8d18-f68ab51a0ffd",
+        "4a19fbe9-9b64-4285-8e7e-07fab26a9fe6",
+        "51e7a58c-19c9-4e16-9a43-1d3962be00fa",
+        "533e7970-3d58-4db1-9423-9768f72fe022",
+        "551bf4c3-3798-445b-adbd-f57bea1562bd"
+      ],
+      "idsSafe": [
+        "1525d624-2a90-44bc-a109-a9a407774210",
+        "154e3dec-95be-423c-9bf2-073018d433c2",
+        "21bfbc59-99ea-4ecd-8973-f14913f13fea",
+        "2ccf9164-c675-4e12-8977-fc519f2ad73f",
+        "393d52b1-2a81-4ac7-9a4e-c3fd1e785d4c",
+        "4244e477-b97f-4537-8d18-f68ab51a0ffd",
+        "4a19fbe9-9b64-4285-8e7e-07fab26a9fe6",
+        "51e7a58c-19c9-4e16-9a43-1d3962be00fa",
+        "533e7970-3d58-4db1-9423-9768f72fe022",
+        "551bf4c3-3798-445b-adbd-f57bea1562bd"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "compliance_alerts",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 2,
+      "safeCount": 2,
+      "joinedLegacyCount": 2,
+      "joinedSafeCount": 2,
+      "idsLegacy": [
+        "00000000-0000-0000-0000-00000000a004",
+        "00000000-0000-0000-0000-00000000a005"
+      ],
+      "idsSafe": [
+        "00000000-0000-0000-0000-00000000a004",
+        "00000000-0000-0000-0000-00000000a005"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "work_permits",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 1,
+      "safeCount": 1,
+      "joinedLegacyCount": 1,
+      "joinedSafeCount": 1,
+      "idsLegacy": [
+        "00000000-0000-0000-0000-00000000a001"
+      ],
+      "idsSafe": [
+        "00000000-0000-0000-0000-00000000a001"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "visas",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 2,
+      "safeCount": 2,
+      "joinedLegacyCount": 2,
+      "joinedSafeCount": 2,
+      "idsLegacy": [
+        "00000000-0000-0000-0000-00000000a002",
+        "00000000-0000-0000-0000-00000000a003"
+      ],
+      "idsSafe": [
+        "00000000-0000-0000-0000-00000000a002",
+        "00000000-0000-0000-0000-00000000a003"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "document_types",
+      "status": "DISABLED",
+      "verdict": "SKIPPED"
+    },
+    {
+      "source": "employees_documents",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 16,
+      "safeCount": 16,
+      "joinedLegacyCount": 28,
+      "joinedSafeCount": 28,
+      "idsLegacy": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "idsSafe": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "employees_work_permits",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 16,
+      "safeCount": 16,
+      "joinedLegacyCount": 16,
+      "joinedSafeCount": 16,
+      "idsLegacy": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "idsSafe": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "employees_compliance",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 16,
+      "safeCount": 16,
+      "joinedLegacyCount": 16,
+      "joinedSafeCount": 16,
+      "idsLegacy": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "idsSafe": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "applicants_documents",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 41,
+      "safeCount": 41,
+      "joinedLegacyCount": 41,
+      "joinedSafeCount": 41,
+      "idsLegacy": [
+        "12c520fe-4ed9-4471-b451-9afc49f8057a",
+        "12d4dc10-f724-49ef-9e5b-a5550fd7fbc8",
+        "14aa55b0-206e-4cb7-b665-6fbbe09f5db8",
+        "164d50a5-1a1a-45bb-89a9-84d8a8990652",
+        "2d973372-26a1-4b74-9bdc-3c8f234e0898",
+        "37455931-b45c-4554-bbd4-d1d4444c6cd4",
+        "43650504-aec5-4455-bcb9-b27d59616892",
+        "52eb59bf-51b2-4b2e-8fbc-8fdfd0eb98cf",
+        "5414e00a-4494-4137-8bb2-83c8f86712a4",
+        "5bd015fe-fc28-4195-aa8d-e02876d6beec"
+      ],
+      "idsSafe": [
+        "12c520fe-4ed9-4471-b451-9afc49f8057a",
+        "12d4dc10-f724-49ef-9e5b-a5550fd7fbc8",
+        "14aa55b0-206e-4cb7-b665-6fbbe09f5db8",
+        "164d50a5-1a1a-45bb-89a9-84d8a8990652",
+        "2d973372-26a1-4b74-9bdc-3c8f234e0898",
+        "37455931-b45c-4554-bbd4-d1d4444c6cd4",
+        "43650504-aec5-4455-bcb9-b27d59616892",
+        "52eb59bf-51b2-4b2e-8fbc-8fdfd0eb98cf",
+        "5414e00a-4494-4137-8bb2-83c8f86712a4",
+        "5bd015fe-fc28-4195-aa8d-e02876d6beec"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "applicants_compliance",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 41,
+      "safeCount": 41,
+      "joinedLegacyCount": 41,
+      "joinedSafeCount": 41,
+      "idsLegacy": [
+        "12c520fe-4ed9-4471-b451-9afc49f8057a",
+        "12d4dc10-f724-49ef-9e5b-a5550fd7fbc8",
+        "14aa55b0-206e-4cb7-b665-6fbbe09f5db8",
+        "164d50a5-1a1a-45bb-89a9-84d8a8990652",
+        "2d973372-26a1-4b74-9bdc-3c8f234e0898",
+        "37455931-b45c-4554-bbd4-d1d4444c6cd4",
+        "43650504-aec5-4455-bcb9-b27d59616892",
+        "52eb59bf-51b2-4b2e-8fbc-8fdfd0eb98cf",
+        "5414e00a-4494-4137-8bb2-83c8f86712a4",
+        "5bd015fe-fc28-4195-aa8d-e02876d6beec"
+      ],
+      "idsSafe": [
+        "12c520fe-4ed9-4471-b451-9afc49f8057a",
+        "12d4dc10-f724-49ef-9e5b-a5550fd7fbc8",
+        "14aa55b0-206e-4cb7-b665-6fbbe09f5db8",
+        "164d50a5-1a1a-45bb-89a9-84d8a8990652",
+        "2d973372-26a1-4b74-9bdc-3c8f234e0898",
+        "37455931-b45c-4554-bbd4-d1d4444c6cd4",
+        "43650504-aec5-4455-bcb9-b27d59616892",
+        "52eb59bf-51b2-4b2e-8fbc-8fdfd0eb98cf",
+        "5414e00a-4494-4137-8bb2-83c8f86712a4",
+        "5bd015fe-fc28-4195-aa8d-e02876d6beec"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "employees_visas",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 16,
+      "safeCount": 16,
+      "joinedLegacyCount": 16,
+      "joinedSafeCount": 16,
+      "idsLegacy": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "idsSafe": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "applicants_visas",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 41,
+      "safeCount": 41,
+      "joinedLegacyCount": 41,
+      "joinedSafeCount": 41,
+      "idsLegacy": [
+        "12c520fe-4ed9-4471-b451-9afc49f8057a",
+        "12d4dc10-f724-49ef-9e5b-a5550fd7fbc8",
+        "14aa55b0-206e-4cb7-b665-6fbbe09f5db8",
+        "164d50a5-1a1a-45bb-89a9-84d8a8990652",
+        "2d973372-26a1-4b74-9bdc-3c8f234e0898",
+        "37455931-b45c-4554-bbd4-d1d4444c6cd4",
+        "43650504-aec5-4455-bcb9-b27d59616892",
+        "52eb59bf-51b2-4b2e-8fbc-8fdfd0eb98cf",
+        "5414e00a-4494-4137-8bb2-83c8f86712a4",
+        "5bd015fe-fc28-4195-aa8d-e02876d6beec"
+      ],
+      "idsSafe": [
+        "12c520fe-4ed9-4471-b451-9afc49f8057a",
+        "12d4dc10-f724-49ef-9e5b-a5550fd7fbc8",
+        "14aa55b0-206e-4cb7-b665-6fbbe09f5db8",
+        "164d50a5-1a1a-45bb-89a9-84d8a8990652",
+        "2d973372-26a1-4b74-9bdc-3c8f234e0898",
+        "37455931-b45c-4554-bbd4-d1d4444c6cd4",
+        "43650504-aec5-4455-bcb9-b27d59616892",
+        "52eb59bf-51b2-4b2e-8fbc-8fdfd0eb98cf",
+        "5414e00a-4494-4137-8bb2-83c8f86712a4",
+        "5bd015fe-fc28-4195-aa8d-e02876d6beec"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "employees_agencies",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 16,
+      "safeCount": 16,
+      "joinedLegacyCount": 16,
+      "joinedSafeCount": 16,
+      "idsLegacy": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "idsSafe": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "documents_with_type",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 28,
+      "safeCount": 28,
+      "joinedLegacyCount": 28,
+      "joinedSafeCount": 28,
+      "idsLegacy": [
+        "1525d624-2a90-44bc-a109-a9a407774210",
+        "154e3dec-95be-423c-9bf2-073018d433c2",
+        "21bfbc59-99ea-4ecd-8973-f14913f13fea",
+        "2ccf9164-c675-4e12-8977-fc519f2ad73f",
+        "393d52b1-2a81-4ac7-9a4e-c3fd1e785d4c",
+        "4244e477-b97f-4537-8d18-f68ab51a0ffd",
+        "4a19fbe9-9b64-4285-8e7e-07fab26a9fe6",
+        "51e7a58c-19c9-4e16-9a43-1d3962be00fa",
+        "533e7970-3d58-4db1-9423-9768f72fe022",
+        "551bf4c3-3798-445b-adbd-f57bea1562bd"
+      ],
+      "idsSafe": [
+        "1525d624-2a90-44bc-a109-a9a407774210",
+        "154e3dec-95be-423c-9bf2-073018d433c2",
+        "21bfbc59-99ea-4ecd-8973-f14913f13fea",
+        "2ccf9164-c675-4e12-8977-fc519f2ad73f",
+        "393d52b1-2a81-4ac7-9a4e-c3fd1e785d4c",
+        "4244e477-b97f-4537-8d18-f68ab51a0ffd",
+        "4a19fbe9-9b64-4285-8e7e-07fab26a9fe6",
+        "51e7a58c-19c9-4e16-9a43-1d3962be00fa",
+        "533e7970-3d58-4db1-9423-9768f72fe022",
+        "551bf4c3-3798-445b-adbd-f57bea1562bd"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    },
+    {
+      "source": "employees_documents_type",
+      "status": "READY",
+      "verdict": "PASS",
+      "legacyCount": 16,
+      "safeCount": 16,
+      "joinedLegacyCount": 28,
+      "joinedSafeCount": 28,
+      "idsLegacy": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "idsSafe": [
+        "0a7931bf-d86c-4341-95c2-b6bc672a548d",
+        "1ddd5e2f-7a56-41ab-ad81-de63af22ad78",
+        "2b303474-9352-4020-8656-4f991f2d7e0c",
+        "3ff1250a-eec5-4fce-b6ff-abd95c56d1ff",
+        "5e9467b1-815c-4d34-abad-b5f659cb6a92",
+        "7d276706-f2a7-4f5d-a7b4-0959eeed1e45",
+        "803f0e61-c7d2-4c94-962a-0fa13a0a852e",
+        "b3e86c46-69ec-4a87-a239-ce5937fb636c",
+        "b92b5f93-61ca-4425-9499-c0d2dcde6217",
+        "ba32d7cf-fccf-4c1a-bcc6-88c6b0f26169"
+      ],
+      "setEqual": true,
+      "delta": {
+        "onlyLegacy": 0,
+        "onlySafe": 0
+      },
+      "paginationEqual": true,
+      "sortEqual": true,
+      "filterEqual": true
+    }
+  ]
+}

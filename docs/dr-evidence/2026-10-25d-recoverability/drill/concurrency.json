@@ -1,0 +1,58 @@
+{
+  "A1": {
+    "exitCode": 0,
+    "consistencyAttempts": 1,
+    "uploadsComplete": true,
+    "referenced": 8,
+    "inconsistent": 0,
+    "verifyExit": 0,
+    "statuses": {
+      "upload": 201,
+      "photoReplace": 200,
+      "renew": 201,
+      "softDelete": 200
+    },
+    "oldPhotoStillThere": true
+  },
+  "A2": {
+    "exitCode": 0,
+    "consistencyAttempts": 2,
+    "uploadsComplete": true,
+    "detectedOnAttempt1": true,
+    "capturedIsNewVersion": true,
+    "verifyExit": 0
+  },
+  "B": {
+    "overlapRequestStatus": 503,
+    "status": "COMPLETED",
+    "consistencyAttempts": 1,
+    "uploadsComplete": true,
+    "offsiteStatus": "VERIFIED",
+    "load": {
+      "uploads": 43,
+      "photoReplacements": 43,
+      "deletes": 21,
+      "errors": 0
+    },
+    "verify": true
+  },
+  "P": {
+    "queuedBefore": 44,
+    "whileBackupLocked": {
+      "skippedBecauseBackupRunning": true,
+      "examined": 0,
+      "purged": 0,
+      "stillReferenced": 0,
+      "failed": 0,
+      "graceHours": 0
+    },
+    "run": {
+      "skippedBecauseBackupRunning": false,
+      "examined": 45,
+      "purged": 44,
+      "stillReferenced": 1,
+      "failed": 0,
+      "graceHours": 0
+    }
+  }
+}

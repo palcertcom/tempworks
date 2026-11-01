@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-05-10T21:35:03.997Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantB": "22222222-2222-2222-2222-222222222222",
+  "counts": {
+    "total": 16,
+    "passed": 16,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "pilot ON, tenant A: create persists tenantId=A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111 expected=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "pilot ON, tenant A: update on tenant B record rejected, description unchanged",
+      "ok": true,
+      "detail": "before=\"Training B1\" after=\"Training B1\""
+    },
+    {
+      "name": "pilot ON, tenant A: remove on tenant B record rejected, deletedAt unchanged",
+      "ok": true,
+      "detail": "deletedAt=null"
+    },
+    {
+      "name": "pilot ON, tenant A: updateStatus on tenant B record rejected, status unchanged",
+      "ok": true,
+      "detail": "before=PENDING after=PENDING"
+    },
+    {
+      "name": "pilot ON, tenant A: addAttachment on tenant B record rejected (no upload performed)",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: removeDeduction on tenant B deduction rejected, child row preserved",
+      "ok": true,
+      "detail": "child preserved=true"
+    },
+    {
+      "name": "pilot ON, tenant A: getTotals on tenant B entity returns 0 records (mutations did not pollute)",
+      "ok": true,
+      "detail": "count=0 disbursed=0"
+    },
+    {
+      "name": "pilot ON, tenant A: create with tenant-B entityId raises NotFoundException; no row inserted (Phase 2.17.1 helper guard)",
+      "ok": true,
+      "detail": "err=NotFoundException before=5 after=5"
+    },
+    {
+      "name": "pilot ON, tenant A: update scrubs smuggled entityType/entityId/applicantId (defensive)",
+      "ok": true,
+      "detail": "before={\"entityType\":\"EMPLOYEE\",\"entityId\":\"eeeeeeea-aaaa-aaaa-aaaa-aaaaaaaaaaaa\",\"applicantId\":null} after={\"entityType\":\"EMPLOYEE\",\"entityId\":\"eeeeeeea-aaaa-aaaa-aaaa-aaaaaaaaaaaa\",\"applicantId\":null}"
+    },
+    {
+      "name": "pilot ON, tenant A: APPLICANT cross-tenant create raises NotFoundException; no row inserted",
+      "ok": true,
+      "detail": "err=NotFoundException before=6 after=6"
+    },
+    {
+      "name": "pilot ON, tenant A: APPLICANT same-tenant create succeeds, tenantId=A, applicantId=appA, stageAtCreation set",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111 applicantId=00000000-0000-0000-0000-0000000aa002 stage=CANDIDATE"
+    },
+    {
+      "name": "pilot ON, tenant A: APPLICANT-typed record update keeps applicantId tenant-scoped (notif helper safe)",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111 applicantId=00000000-0000-0000-0000-0000000aa002 desc=\"iso-applicant-update\""
+    },
+    {
+      "name": "pilot ON, tenant A: AGENCY cross-tenant create raises NotFoundException; no row inserted",
+      "ok": true,
+      "detail": "err=NotFoundException before=7 after=7"
+    },
+    {
+      "name": "pilot ON, tenant A: AGENCY same-tenant create succeeds, tenantId=A, applicantId=null, stage=AGENCY",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111 entityId=aaaaaaa1-aaaa-aaaa-aaaa-aaaaaaaaaaaa applicantId=null stage=AGENCY"
+    },
+    {
+      "name": "pilot ON, tenant A: AGENCY-typed record update keeps entityId tenant-scoped (notif helper safe)",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111 entityId=aaaaaaa1-aaaa-aaaa-aaaa-aaaaaaaaaaaa desc=\"iso-agency-update\""
+    },
+    {
+      "name": "pilot OFF: legacy update on tenant B record still succeeds (tenant gate disengages)",
+      "ok": true,
+      "detail": "mutated as expected"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "slug": "02-user-identity",
+  "title": "Audit B — User Identity",
+  "startedAt": "2026-05-09T14:52:52.522Z",
+  "durationMs": 31,
+  "status": "BLOCKER",
+  "metrics": [
+    {
+      "key": "users.total",
+      "value": 14
+    },
+    {
+      "key": "users.soft-deleted",
+      "value": 1
+    },
+    {
+      "key": "users.null-email",
+      "value": 0
+    },
+    {
+      "key": "users.duplicate-emails",
+      "value": 0
+    },
+    {
+      "key": "users.no-agency",
+      "value": 1
+    },
+    {
+      "key": "users.system-agency",
+      "value": 2
+    },
+    {
+      "key": "tenant_memberships.preexisting",
+      "value": 0
+    },
+    {
+      "key": "users.status-counts",
+      "value": "[{\"status\":\"ACTIVE\",\"n\":13},{\"status\":\"INACTIVE\",\"n\":1}]"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "BLOCKER",
+      "rule": "user.no-agency",
+      "message": "1 users have NULL agencyId. Each must be reconciled (delete, assign, or platform-admin)."
+    },
+    {
+      "severity": "INFO",
+      "rule": "user.platform-admin-candidates",
+      "message": "2 users belong to the system agency. They become PlatformAdmin rows.",
+      "detail": [
+        {
+          "id": "4634432d-de83-4376-8539-951ad54ba186",
+          "email": "admin1@tempworks.test"
+        },
+        {
+          "id": "2306089e-3968-4ba0-877f-ab46593696c6",
+          "email": "admin2@tempworks.test"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Pre-flight contract: users.duplicate-email and users.null-email MUST be 0 before backfill.",
+    "NULL agencyId users require manual disposition (assign, deactivate, or platform-admin)."
+  ]
+}

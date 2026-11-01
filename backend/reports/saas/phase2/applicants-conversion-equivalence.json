@@ -1,0 +1,41 @@
+{
+  "passed": 7,
+  "total": 7,
+  "cases": [
+    {
+      "name": "1. legacy convert: response shape preserved",
+      "ok": true,
+      "detail": "employeeId=bb8ae0c2"
+    },
+    {
+      "name": "3. legacy convert: Employee.tenantId NULL",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "5. legacy convert: Document re-linked to EMPLOYEE",
+      "ok": true,
+      "detail": "entityType=EMPLOYEE"
+    },
+    {
+      "name": "6. legacy convert: FinancialRecord re-linked to EMPLOYEE",
+      "ok": true,
+      "detail": "entityType=EMPLOYEE"
+    },
+    {
+      "name": "7. legacy convert: Applicant soft-deleted + back-pointer",
+      "ok": true,
+      "detail": "deletedAt=true backPointer=true"
+    },
+    {
+      "name": "2. pilot convert: response shape preserved",
+      "ok": true,
+      "detail": "employeeId=6d51b0fc"
+    },
+    {
+      "name": "4. pilot convert: Employee.tenantId = A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "generatedAt": "2026-05-09T17:05:22.199Z",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "counts": {
+    "models": 15,
+    "passed": 7,
+    "failed": 8,
+    "mismatches": 0,
+    "withTid": 61,
+    "withoutTid": 2,
+    "unexplained": 0
+  },
+  "results": [
+    {
+      "name": "documents",
+      "mismatch": 0,
+      "withTid": 52,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "ok": true
+    },
+    {
+      "name": "work_permits",
+      "mismatch": 0,
+      "withTid": 1,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "ok": true
+    },
+    {
+      "name": "visas",
+      "mismatch": 0,
+      "withTid": 2,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "ok": true
+    },
+    {
+      "name": "compliance_alerts",
+      "mismatch": 0,
+      "withTid": 2,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "ok": true
+    },
+    {
+      "name": "financial_records",
+      "mismatch": 0,
+      "withTid": 1,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "ok": true
+    },
+    {
+      "name": "financial_record_attachments",
+      "ok": false,
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "error": "relation \"financial_record_attachments\" does not exist"
+    },
+    {
+      "name": "financial_record_deductions",
+      "ok": false,
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "error": "relation \"financial_record_deductions\" does not exist"
+    },
+    {
+      "name": "attendance_records",
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "ok": true
+    },
+    {
+      "name": "notifications",
+      "mismatch": 0,
+      "withTid": 3,
+      "withoutTid": 2,
+      "withoutParentTid": 2,
+      "unexplainedNulls": 0,
+      "ok": true
+    },
+    {
+      "name": "vehicle_documents",
+      "ok": false,
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "error": "relation \"vehicle_documents\" does not exist"
+    },
+    {
+      "name": "maintenance_records",
+      "ok": false,
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "error": "relation \"maintenance_records\" does not exist"
+    },
+    {
+      "name": "candidate_workflow_assignments",
+      "ok": false,
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "error": "relation \"candidate_workflow_assignments\" does not exist"
+    },
+    {
+      "name": "employee_workflow_assignments",
+      "ok": false,
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "error": "relation \"employee_workflow_assignments\" does not exist"
+    },
+    {
+      "name": "employee_work_history",
+      "ok": false,
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "error": "relation \"employee_work_history\" does not exist"
+    },
+    {
+      "name": "employee_work_history_attachments",
+      "ok": false,
+      "mismatch": 0,
+      "withTid": 0,
+      "withoutTid": 0,
+      "withoutParentTid": 0,
+      "unexplainedNulls": 0,
+      "error": "relation \"employee_work_history_attachments\" does not exist"
+    }
+  ]
+}

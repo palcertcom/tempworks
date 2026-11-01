@@ -1,0 +1,9 @@
+{
+  "label": "5-staging-full",
+  "exitCode": 137,
+  "containerPeakRssMiB": 934.8,
+  "containerPeakUsageInclCacheMiB": 1024.0,
+  "peakTempDiskMiB": 1063.9,
+  "oomKills": 1,
+  "limits": "memory 1 GiB (no swap), 1 vCPU"
+}

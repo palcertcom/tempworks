@@ -1,0 +1,35 @@
+{
+  "api": "http://127.0.0.1:3201/api/v1",
+  "package": "tempworks-dr_2026-10-25T15-53-18Z_dd8850c3",
+  "passed": 6,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "recovered API is up",
+      "ok": true
+    },
+    {
+      "name": "administrator logs in with the original credentials",
+      "ok": true
+    },
+    {
+      "name": "a wrong password is rejected",
+      "ok": true
+    },
+    {
+      "name": "attachments served by the recovered app match the backup's SHA-256 (6/6 checked of 8 documents)",
+      "ok": true
+    },
+    {
+      "name": "documents without a file in the backup (expected: the backup's recovery issues, or rows created after the restore)",
+      "ok": true,
+      "detail": "2 [3950f075-fd27-4efe-9706-897aea5db7a6, 71b29546-557a-4b84-ad34-61790bd0018f]"
+    },
+    {
+      "name": "recovery storage holds all 8 manifest files with matching SHA-256",
+      "ok": true,
+      "detail": "missing=0 mismatch=0"
+    }
+  ],
+  "at": "2026-10-25T16:01:50.955Z"
+}

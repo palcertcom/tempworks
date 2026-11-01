@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. tenant A list returns only tenant A employees",
+      "ok": true,
+      "detail": "total=6 hasB=false"
+    },
+    {
+      "name": "2. tenant A getEmployeeAttendance for tenant B raises NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "3. NULL-tenant legacy row excluded under pilot",
+      "ok": true,
+      "detail": "records=0"
+    },
+    {
+      "name": "4. summary counts only tenant A records",
+      "ok": true,
+      "detail": "records=3"
+    },
+    {
+      "name": "5. tenant A date-range list excludes tenant B",
+      "ok": true,
+      "detail": "total=6"
+    },
+    {
+      "name": "6. employee filter rejects tenant B employee under pilot A",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "7. tenant A update on tenant B record raises NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "8. tenant B row unchanged after rejected mutation",
+      "ok": true,
+      "detail": "status=PRESENT"
+    },
+    {
+      "name": "9. create under tenant A returns id+employee",
+      "ok": true,
+      "detail": "id=87a23f17"
+    },
+    {
+      "name": "10. tenant A bulk-apply for tenant B employee raises NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "11. concurrent ALS frames remain isolated",
+      "ok": true,
+      "detail": "A.total=6 B.total=2"
+    },
+    {
+      "name": "12. allow-list nothing ⇒ NULL-tenant row visible (legacy)",
+      "ok": true,
+      "detail": "records=1"
+    }
+  ]
+}

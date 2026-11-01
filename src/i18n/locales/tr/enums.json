@@ -1,0 +1,296 @@
+{
+  "userStatus": {
+    "ACTIVE": "Aktif",
+    "INACTIVE": "Pasif",
+    "SUSPENDED": "Askıda",
+    "PENDING": "Beklemede",
+    "TERMINATED": "Sonlandırıldı"
+  },
+  "agencyStatus": {
+    "ACTIVE": "Aktif",
+    "INACTIVE": "Pasif",
+    "SUSPENDED": "Askıda"
+  },
+  "agencyApprovalStatus": {
+    "PENDING_APPROVAL": "Onay Bekliyor",
+    "APPROVED": "Onaylandı",
+    "REJECTED": "Reddedildi"
+  },
+  "employeeStatus": {
+    "ACTIVE": "Aktif",
+    "INACTIVE": "Pasif",
+    "PENDING": "Beklemede",
+    "ONBOARDING": "İşe Alma",
+    "TERMINATED": "Sonlandırıldı",
+    "ON_LEAVE": "İzinli",
+    "SUSPENDED": "Askıya Alındı"
+  },
+  "applicantStatus": {
+    "NEW": "Yeni",
+    "SCREENING": "Tarama",
+    "INTERVIEW": "Mülakat",
+    "OFFER": "Teklif",
+    "ACCEPTED": "Kabul Edildi",
+    "REJECTED": "Reddedildi",
+    "WITHDRAWN": "Geri Çekildi",
+    "ONBOARDING": "İşe Alma",
+    "HIRED": "İşe Alındı"
+  },
+  "applicantTier": {
+    "LEAD": "Aday Adayı",
+    "CANDIDATE": "Aday"
+  },
+  "documentStatus": {
+    "PENDING": "İnceleme Bekliyor",
+    "VERIFIED": "Geçerli",
+    "REJECTED": "Reddedildi",
+    "EXPIRED": "Süresi Doldu",
+    "EXPIRING_SOON": "Yakında Sona Erecek"
+  },
+  "workflowStageStatus": {
+    "PENDING": "Beklemede",
+    "IN_PROGRESS": "Devam Ediyor",
+    "COMPLETED": "Tamamlandı",
+    "SKIPPED": "Atlandı",
+    "BLOCKED": "Engellendi"
+  },
+  "workPermitStatus": {
+    "PENDING": "Beklemede",
+    "APPLIED": "Başvuruldu",
+    "APPROVED": "Onaylandı",
+    "REJECTED": "Reddedildi",
+    "EXPIRED": "Süresi Doldu",
+    "CANCELLED": "İptal Edildi"
+  },
+  "visaStatus": {
+    "PENDING": "Beklemede",
+    "APPLIED": "Başvuruldu",
+    "APPOINTMENT_SCHEDULED": "Randevu Alındı",
+    "APPROVED": "Onaylandı",
+    "REJECTED": "Reddedildi",
+    "EXPIRED": "Süresi Doldu",
+    "CANCELLED": "İptal Edildi"
+  },
+  "gender": {
+    "MALE": "Erkek",
+    "FEMALE": "Kadın",
+    "OTHER": "Diğer",
+    "PREFER_NOT_TO_SAY": "Belirtmek İstemiyorum"
+  },
+  "alertSeverity": {
+    "LOW": "Düşük",
+    "MEDIUM": "Orta",
+    "HIGH": "Yüksek",
+    "CRITICAL": "Kritik"
+  },
+  "alertStatus": {
+    "OPEN": "Açık",
+    "ACKNOWLEDGED": "Kabul Edildi",
+    "RESOLVED": "Çözüldü",
+    "DISMISSED": "Reddedildi"
+  },
+  "notificationType": {
+    "INFO": "Bilgi",
+    "WARNING": "Uyarı",
+    "ERROR": "Hata",
+    "SUCCESS": "Başarılı",
+    "COMPLIANCE": "Uyumluluk",
+    "DOCUMENT_EXPIRY": "Belge Süresi",
+    "WORKFLOW": "İş Akışı",
+    "SYSTEM": "Sistem",
+    "FINANCIAL": "Finansal",
+    "VEHICLE_MOT_EXPIRING": "MOT Sona Eriyor",
+    "VEHICLE_TAX_EXPIRING": "Araç Vergisi Sona Eriyor",
+    "VEHICLE_INSURANCE_EXPIRING": "Sigorta Sona Eriyor",
+    "VEHICLE_REGISTRATION_EXPIRING": "Tescil Sona Eriyor",
+    "VEHICLE_TACHOGRAPH_EXPIRING": "Takograf Sona Eriyor",
+    "VEHICLE_ATP_EXPIRING": "ATP Sona Eriyor",
+    "VEHICLE_PRESSURE_TEST_DUE": "Basınç Testi Gerekli",
+    "VEHICLE_SERVICE_DUE": "Servis Gerekli",
+    "VEHICLE_SERVICE_OVERDUE": "Servis Gecikti"
+  },
+  "workflowCategory": {
+    "INITIAL": "Başlangıç",
+    "DOCUMENTATION": "Dokümantasyon",
+    "COMPLIANCE": "Uyumluluk",
+    "TRAINING": "Eğitim",
+    "DEPLOYMENT": "Dağıtım",
+    "ADMINISTRATIVE": "İdari"
+  },
+  "candidateProgressStatus": {
+    "PENDING": "Beklemede",
+    "IN_PROGRESS": "Devam Ediyor",
+    "COMPLETED": "Tamamlandı",
+    "REJECTED": "Reddedildi"
+  },
+  "approvalDecision": {
+    "APPROVED": "Onaylandı",
+    "REJECTED": "Reddedildi",
+    "PENDING": "Beklemede"
+  },
+  "attendanceStatus": {
+    "PRESENT": "Mevcut",
+    "ABSENT": "Yok",
+    "LATE": "Geç",
+    "ON_LEAVE": "İzinli",
+    "HOLIDAY": "Tatil",
+    "REMOTE": "Uzaktan"
+  },
+  "fuelType": {
+    "DIESEL": "Dizel",
+    "PETROL": "Benzin",
+    "HYBRID": "Hibrit",
+    "ELECTRIC": "Elektrikli",
+    "LPG": "LPG",
+    "CNG": "CNG"
+  },
+  "maintenanceStatus": {
+    "SCHEDULED": "Planlandı",
+    "IN_PROGRESS": "Devam Ediyor",
+    "COMPLETED": "Tamamlandı",
+    "CANCELLED": "İptal Edildi",
+    "OVERDUE": "Gecikti"
+  },
+  "contractType": {
+    "Full-time": "Tam Zamanlı",
+    "Part-time": "Yarı Zamanlı",
+    "Contract": "Sözleşmeli",
+    "Temporary": "Geçici",
+    "Internship": "Staj",
+    "Seasonal": "Mevsimlik"
+  },
+  "language": {
+    "Albanian": "Albanian",
+    "Arabic": "Arabic",
+    "Bosnian": "Bosnian",
+    "Bulgarian": "Bulgarian",
+    "Chinese (Cantonese)": "Chinese (Cantonese)",
+    "Chinese (Mandarin)": "Chinese (Mandarin)",
+    "Croatian": "Croatian",
+    "Czech": "Czech",
+    "Danish": "Danish",
+    "Dutch": "Dutch",
+    "English": "English",
+    "Estonian": "Estonian",
+    "Finnish": "Finnish",
+    "French": "French",
+    "German": "German",
+    "Greek": "Greek",
+    "Hungarian": "Hungarian",
+    "Italian": "Italian",
+    "Latvian": "Latvian",
+    "Lithuanian": "Lithuanian",
+    "Macedonian": "Macedonian",
+    "Maltese": "Maltese",
+    "Norwegian": "Norwegian",
+    "Persian": "Persian",
+    "Polish": "Polish",
+    "Portuguese": "Portuguese",
+    "Romanian": "Romanian",
+    "Russian": "Russian",
+    "Serbian": "Serbian",
+    "Slovak": "Slovak",
+    "Slovenian": "Slovenian",
+    "Spanish": "Spanish",
+    "Swedish": "Swedish",
+    "Turkish": "Turkish",
+    "Ukrainian": "Ukrainian",
+    "Urdu": "Urdu",
+    "Other": "Other"
+  },
+  "proficiency": {
+    "A1 - Beginner": "A1 — Beginner",
+    "A2 - Elementary": "A2 — Elementary",
+    "B1 - Intermediate": "B1 — Intermediate",
+    "B2 - Upper Intermediate": "B2 — Upper Intermediate",
+    "C1 - Advanced": "C1 — Advanced",
+    "C2 - Mastery": "C2 — Mastery",
+    "Native": "Native"
+  },
+  "skillLevel": {
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Advanced": "Advanced",
+    "Expert": "Expert"
+  },
+  "jobCategory": {
+    "Flatbed Driver": "Açık Kasa Şoförü",
+    "Forklift Operator": "Forklift Operatörü",
+    "HGV Driver Class 1": "Ağır Vasıta Şoförü – Sınıf 1",
+    "HGV Driver Class 2": "Ağır Vasıta Şoförü – Sınıf 2",
+    "LGV Driver": "Hafif Ticari Araç Şoförü",
+    "Multi-Drop Driver": "Çoklu Dağıtım Şoförü",
+    "Tanker Driver": "Tanker Şoförü",
+    "Transport Manager": "Nakliye Yöneticisi",
+    "Van Driver": "Panelvan Şoförü",
+    "Warehouse Operative": "Depo Görevlisi",
+    "Bus Driver": "Otobüs Şoförü",
+    "Coach Driver": "Otokar Şoförü",
+    "Courier Driver": "Kurye Şoförü",
+    "Delivery Driver": "Dağıtım Şoförü",
+    "Taxi Driver": "Taksi Şoförü",
+    "Crane Operator": "Vinç Operatörü",
+    "Logistics Coordinator": "Lojistik Koordinatörü"
+  },
+  "familyRelation": {
+    "Spouse": "Eş",
+    "Partner": "Partner",
+    "Parent": "Ebeveyn",
+    "Child": "Çocuk",
+    "Sibling": "Kardeş",
+    "Friend": "Arkadaş",
+    "Colleague": "Meslektaş",
+    "Other": "Diğer"
+  },
+  "drivingQualification": {
+    "Tachograph Card": "Takograf Kartı",
+    "C95 / CPC Card": "C95 / CPC Kartı",
+    "ADR Certificate": "ADR Sertifikası",
+    "Medical Certificate": "Sağlık Raporu",
+    "DVLA Check": "DVLA Kontrolü",
+    "Transport Manager CPC": "Nakliye Yöneticisi CPC"
+  },
+  "educationLevel": {
+    "Primary School": "İlkokul",
+    "Secondary School": "Ortaokul",
+    "High School / A-Levels": "Lise / A-Levels",
+    "Vocational Training": "Meslek Eğitimi",
+    "Associate Degree": "Ön Lisans",
+    "Bachelor's Degree": "Lisans",
+    "Master's Degree": "Yüksek Lisans",
+    "Doctoral Degree": "Doktora",
+    "Professional Certification": "Mesleki Sertifika",
+    "Other": "Diğer"
+  },
+  "vehicleStatus": {
+    "ACTIVE": "Aktif",
+    "INACTIVE": "Pasif",
+    "IN_MAINTENANCE": "Bakımda",
+    "SCRAPPED": "Hurdaya Ayrıldı"
+  },
+  "vehicleType": {
+    "TRUCK": "Kamyon",
+    "CAR": "Otomobil",
+    "VAN": "Kamyonet",
+    "TANKER": "Tanker",
+    "TRAILER": "Römork",
+    "REFRIGERATED_TRAILER": "Soğuk Hava Römorku",
+    "SPECIALTY": "Özel Araç"
+  },
+  "workshopStatus": {
+    "ACTIVE": "Aktif",
+    "INACTIVE": "Pasif"
+  },
+  "documentCompliance": {
+    "COMPLIANT": "Uygun",
+    "AT_RISK": "Riskli",
+    "NON_COMPLIANT": "Uygun Değil",
+    "PENDING": "Beklemede"
+  },
+  "entityType": {
+    "APPLICANT": "Aday Adayı",
+    "EMPLOYEE": "Çalışan",
+    "VEHICLE": "Araç",
+    "AGENCY": "Ajans"
+  }
+}

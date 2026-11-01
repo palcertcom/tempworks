@@ -1,0 +1,54 @@
+{
+  "confirmDialog": {
+    "title": "هل أنت متأكد؟",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء"
+  },
+  "pagination": {
+    "previous": "السابق",
+    "next": "التالي",
+    "morePages": "المزيد من الصفحات",
+    "ariaLabel": "ترقيم الصفحات",
+    "goToPrevious": "الانتقال إلى الصفحة السابقة",
+    "goToNext": "الانتقال إلى الصفحة التالية"
+  },
+  "dialog": {
+    "close": "إغلاق"
+  },
+  "sidebar": {
+    "title": "الشريط الجانبي",
+    "description": "يعرض الشريط الجانبي للجوال.",
+    "toggle": "تبديل الشريط الجانبي"
+  },
+  "address": {
+    "line1": "العنوان السطر الأول",
+    "line1Placeholder": "الشارع، المبنى، الشقة",
+    "line2": "العنوان السطر الثاني",
+    "line2Placeholder": "الطابق، الجناح، معلومات إضافية (اختياري)",
+    "country": "الدولة",
+    "city": "المدينة",
+    "cityPlaceholder": "المدينة",
+    "zip": "الرمز البريدي"
+  },
+  "country": {
+    "selectPlaceholder": "اختر الدولة",
+    "none": "— لا شيء —"
+  },
+  "phone": {
+    "code": "الرمز",
+    "placeholder": "مثال: 20 7123 4567",
+    "searchCode": "ابحث عن دولة أو رمز…",
+    "noResults": "لا توجد دولة مطابقة."
+  },
+  "captcha": {
+    "newChallenge": "تحدٍّ جديد",
+    "refreshAria": "تحديث CAPTCHA",
+    "answerPlaceholder": "أدخل الإجابة",
+    "verified": "تم التحقق",
+    "incorrect": "غير صحيح، حاول مرة أخرى"
+  },
+  "carousel": {
+    "previous": "Previous slide",
+    "next": "Next slide"
+  }
+}

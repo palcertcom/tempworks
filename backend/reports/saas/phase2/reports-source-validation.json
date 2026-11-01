@@ -1,0 +1,345 @@
+{
+  "generatedAt": "2026-05-09T16:46:05.009Z",
+  "counts": {
+    "total": 18,
+    "READY": 0,
+    "NEEDS_DECISION": 8,
+    "BLOCKED": 10
+  },
+  "findings": [
+    {
+      "key": "employees",
+      "label": "Employees",
+      "primaryTable": "employees",
+      "primaryAlias": "e",
+      "softDelete": true,
+      "joinCount": 0,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 14,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "NEEDS_DECISION",
+      "notes": [
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "applicants",
+      "label": "Applicants",
+      "primaryTable": "applicants",
+      "primaryAlias": "ap",
+      "softDelete": true,
+      "joinCount": 0,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 13,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "NEEDS_DECISION",
+      "notes": [
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "documents",
+      "label": "Documents",
+      "primaryTable": "documents",
+      "primaryAlias": "doc",
+      "softDelete": true,
+      "joinCount": 0,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 10,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "NEEDS_DECISION",
+      "notes": [
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "compliance_alerts",
+      "label": "Compliance Alerts",
+      "primaryTable": "compliance_alerts",
+      "primaryAlias": "ca",
+      "softDelete": false,
+      "joinCount": 0,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 8,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "NEEDS_DECISION",
+      "notes": [
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "agencies",
+      "label": "Agencies",
+      "primaryTable": "agencies",
+      "primaryAlias": "ag",
+      "softDelete": true,
+      "joinCount": 0,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 8,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "NEEDS_DECISION",
+      "notes": [
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "work_permits",
+      "label": "Work Permits",
+      "primaryTable": "work_permits",
+      "primaryAlias": "wp",
+      "softDelete": false,
+      "joinCount": 0,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 8,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "NEEDS_DECISION",
+      "notes": [
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "employees_documents",
+      "label": "Employees + Documents",
+      "primaryTable": "employees",
+      "primaryAlias": "e",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 14,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "employees_work_permits",
+      "label": "Employees + Work Permits",
+      "primaryTable": "employees",
+      "primaryAlias": "e",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 13,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "employees_compliance",
+      "label": "Employees + Compliance Alerts",
+      "primaryTable": "employees",
+      "primaryAlias": "e",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 12,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "applicants_documents",
+      "label": "Applicants + Documents",
+      "primaryTable": "applicants",
+      "primaryAlias": "ap",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 13,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "employees_agencies",
+      "label": "Employees + Agencies",
+      "primaryTable": "employees",
+      "primaryAlias": "e",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 13,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "applicants_compliance",
+      "label": "Applicants + Compliance Alerts",
+      "primaryTable": "applicants",
+      "primaryAlias": "ap",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 11,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "document_types",
+      "label": "Document Types",
+      "primaryTable": "document_types",
+      "primaryAlias": "dt",
+      "softDelete": false,
+      "joinCount": 0,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 9,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "NEEDS_DECISION",
+      "notes": [
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "visas",
+      "label": "Visas",
+      "primaryTable": "visas",
+      "primaryAlias": "v",
+      "softDelete": false,
+      "joinCount": 0,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 12,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "NEEDS_DECISION",
+      "notes": [
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "documents_with_type",
+      "label": "Documents + Document Types",
+      "primaryTable": "documents",
+      "primaryAlias": "doc",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 15,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "employees_visas",
+      "label": "Employees + Visas",
+      "primaryTable": "employees",
+      "primaryAlias": "e",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 14,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "applicants_visas",
+      "label": "Applicants + Visas",
+      "primaryTable": "applicants",
+      "primaryAlias": "ap",
+      "softDelete": true,
+      "joinCount": 1,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 14,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "1 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    },
+    {
+      "key": "employees_documents_type",
+      "label": "Employees + Documents + Types",
+      "primaryTable": "employees",
+      "primaryAlias": "e",
+      "softDelete": true,
+      "joinCount": 2,
+      "joinsWithTenantEquality": 0,
+      "fieldCount": 14,
+      "hasAgencyIdField": false,
+      "hasTenantIdField": false,
+      "proposedTenantColumn": "tenantId",
+      "proposedAgencyColumn": null,
+      "status": "BLOCKED",
+      "notes": [
+        "2 join(s) lack tenant_id equality.",
+        "No tenantId / agencyId field exposed; Phase 2 backfill must add the denorm before this source is migrated."
+      ]
+    }
+  ]
+}

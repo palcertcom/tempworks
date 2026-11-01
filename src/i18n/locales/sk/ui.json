@@ -1,0 +1,54 @@
+{
+  "confirmDialog": {
+    "title": "Ste si istý?",
+    "confirm": "Potvrdiť",
+    "cancel": "Zrušiť"
+  },
+  "pagination": {
+    "previous": "Predchádzajúce",
+    "next": "Ďalej",
+    "morePages": "Ďalšie strany",
+    "ariaLabel": "stránkovanie",
+    "goToPrevious": "Prejsť na predchádzajúcu stranu",
+    "goToNext": "Prejsť na ďalšiu stranu"
+  },
+  "dialog": {
+    "close": "Zavrieť"
+  },
+  "sidebar": {
+    "title": "Bočný panel",
+    "description": "Zobrazí mobilný bočný panel.",
+    "toggle": "Prepnúť bočný panel"
+  },
+  "address": {
+    "line1": "Adresa, riadok 1",
+    "line1Placeholder": "Ulica, číslo, byt",
+    "line2": "Adresa, riadok 2",
+    "line2Placeholder": "Poschodie, apartmán, ďalšie informácie (voliteľné)",
+    "country": "Krajina",
+    "city": "Mesto",
+    "cityPlaceholder": "Mesto",
+    "zip": "PSČ"
+  },
+  "country": {
+    "selectPlaceholder": "Vyberte krajinu",
+    "none": "— Žiadna —"
+  },
+  "phone": {
+    "code": "Kód",
+    "placeholder": "napr. 20 7123 4567",
+    "searchCode": "Hľadať krajinu alebo kód…",
+    "noResults": "Žiadna krajina sa nezhoduje."
+  },
+  "captcha": {
+    "newChallenge": "Nová úloha",
+    "refreshAria": "Obnoviť CAPTCHA",
+    "answerPlaceholder": "Zadajte odpoveď",
+    "verified": "Overené",
+    "incorrect": "Nesprávne, skúste znova"
+  },
+  "carousel": {
+    "previous": "Previous slide",
+    "next": "Next slide"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "name": "1. pilot off: assignment reads succeed (legacy-compatible)",
+      "ok": true,
+      "detail": "count=3"
+    },
+    {
+      "name": "2. pilot A reads: every returned assignment has tenantId=A",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "3. assignEmployee remains a documented BadRequest (no mutation surface)",
+      "ok": true,
+      "detail": "forbidden_by_product"
+    },
+    {
+      "name": "4. tenant A cannot assign tenant B candidate (NotFound)",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "5. employee assign mutation surface forbidden by product (covers cross-tenant trivially)",
+      "ok": true,
+      "detail": "see case 3"
+    },
+    {
+      "name": "6. rejected tenant B assign creates no row in tenant A scope",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "7. tenant A can advance tenant A assignment (passes tenant gate)",
+      "ok": true,
+      "detail": "success"
+    },
+    {
+      "name": "8. tenant A cannot advance tenant B assignment (NotFound)",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "9. rejected tenant B advance leaves progress unchanged",
+      "ok": true,
+      "detail": "status=IN_PROGRESS"
+    },
+    {
+      "name": "10. tenant A can toggle flag on tenant A progress",
+      "ok": true,
+      "detail": "success"
+    },
+    {
+      "name": "11. tenant A cannot toggle flag on tenant B progress (NotFound)",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "12. tenant A cannot mutate NULL-tenant legacy assignment (NotFound)",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "13. audit row tenant A carries tenantId=A (audit pilot ON)",
+      "ok": true,
+      "detail": "tenantId=11111111"
+    },
+    {
+      "name": "14. rejected tenant B mutation emits no audit row",
+      "ok": true,
+      "detail": "before=0 after=0"
+    },
+    {
+      "name": "15. workflow CONFIG remains global (same id visible to A and B)",
+      "ok": true,
+      "detail": "A=00000000 B=00000000"
+    },
+    {
+      "name": "16. concurrent ALS frames remain isolated for advanceToStage",
+      "ok": true,
+      "detail": "A.blocked=true B.blocked=true"
+    },
+    {
+      "name": "17. source-level: every candidateWorkflowAssignment.create site spreads tenantData()",
+      "ok": true,
+      "detail": "creates=1 stamped=1"
+    }
+  ]
+}

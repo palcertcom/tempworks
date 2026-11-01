@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Arabic body font — loaded only when the document direction is RTL.
+ * Noto Sans Arabic is a clean sans that pairs well with Inter.
+ * The browser pulls it lazily; LTR users never download it. */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+html[dir="rtl"],
+html[lang="ar"] {
+  font-family: 'Noto Sans Arabic', 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+               'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+               'Helvetica Neue', sans-serif;
+}
+
+/* Tabular figures look more uniform in Arabic numeric columns where
+ * digits and Arabic-Indic numerals can sit next to each other. */
+html[lang="ar"] .tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

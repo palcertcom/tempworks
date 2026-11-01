@@ -1,0 +1,58 @@
+{
+  "slug": "06-storage",
+  "title": "Audit F — Storage",
+  "startedAt": "2026-05-09T14:53:00.973Z",
+  "durationMs": 76,
+  "status": "WARN",
+  "metrics": [
+    {
+      "key": "documents.total",
+      "value": 52
+    },
+    {
+      "key": "documents.with-storageKey",
+      "value": 0
+    },
+    {
+      "key": "documents.with-storageUrl",
+      "value": 51
+    },
+    {
+      "key": "documents.missing-storage",
+      "value": 1
+    },
+    {
+      "key": "documents.legacy-local",
+      "value": 1
+    },
+    {
+      "key": "documents.public-spaces",
+      "value": 50
+    },
+    {
+      "key": "documents.not-tenant-prefixed",
+      "value": 0
+    }
+  ],
+  "findings": [
+    {
+      "severity": "WARN",
+      "rule": "storage.missing-pointer",
+      "message": "1 documents have neither storageKey nor storageUrl. Investigate; rekey-skip on Phase 3."
+    },
+    {
+      "severity": "WARN",
+      "rule": "storage.local-path",
+      "message": "1 documents reference a legacy local /uploads path (sample: /uploads/documents/legacy.pdf)."
+    },
+    {
+      "severity": "WARN",
+      "rule": "storage.public-spaces",
+      "message": "50 documents stored as public-readable Spaces URLs (no signature). Will be rekeyed to tenants/<tenantId>/... in Phase 3."
+    }
+  ],
+  "notes": [
+    "Phase 1 does NOT migrate any object. The audit just sizes the Phase 3 rekey + ACL flip job.",
+    "Per ADR-006, frontend cutover precedes ACL flip."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "f55de1d8-f553-4291-a210-caa0413b14f1",
+  "status": "COMPLETED",
+  "kind": "FULL_SYSTEM",
+  "verifyResult": "VERIFIED",
+  "offsiteStatus": "VERIFIED",
+  "package": "tempworks-dr_2026-10-25T11-57-10Z_0558ab93",
+  "fileName": "tempworks-dr_2026-10-25T11-57-10Z_0558ab93",
+  "engine": "stream",
+  "uploadsCount": 8,
+  "uploadsComplete": true,
+  "globalsCaptured": true,
+  "createdAt": "2026-10-25T11:57:10.063Z",
+  "completedAt": "2026-10-25T11:57:11.696Z",
+  "uiToCompletedSeconds": 4.6
+}

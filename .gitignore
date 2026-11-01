@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+*.log
+.claude/
+backups/
+*.dump
+*.tar.gz
+__pycache__/
+*.pyc
+verify-evidence/

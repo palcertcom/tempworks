@@ -1,0 +1,86 @@
+{
+  "passed": 16,
+  "total": 16,
+  "cases": [
+    {
+      "name": "1. dry-run inserts zero rows",
+      "ok": true,
+      "detail": "mode=dry-run inserted=0 before=1 after=1"
+    },
+    {
+      "name": "2. dry-run reports 0 eligible (Phase 3.9 retired legacy criterion)",
+      "ok": true,
+      "detail": "eligible=0"
+    },
+    {
+      "name": "3. apply refused when PLATFORM_ADMIN_BACKFILL_ENABLED=false",
+      "ok": true,
+      "detail": "mode=dry-run reason=\"PLATFORM_ADMIN_BACKFILL_ENABLED is not true\""
+    },
+    {
+      "name": "4. apply refused when PLATFORM_ADMIN_BACKFILL_APPLY=false",
+      "ok": true,
+      "detail": "mode=dry-run reason=\"null\""
+    },
+    {
+      "name": "5. apply refused outside SAFE_CLONE/SAFE_STAGING",
+      "ok": true,
+      "detail": "mode=dry-run reason=\"classification=UNKNOWN is not SAFE_CLONE/SAFE_STAGING\""
+    },
+    {
+      "name": "6. apply inserts 0 PlatformAdmin rows (Phase 3.9 retired legacy criterion)",
+      "ok": true,
+      "detail": "inserted=0 mode=apply"
+    },
+    {
+      "name": "7. apply does not duplicate or modify existing PlatformAdmin row",
+      "ok": true,
+      "detail": "level=SUPPORT grantedBy=pre-existing"
+    },
+    {
+      "name": "8. apply skips deleted/inactive users",
+      "ok": true,
+      "detail": "inserted-deleted/inactive=0"
+    },
+    {
+      "name": "9. apply does not promote non-system agency user",
+      "ok": true,
+      "detail": "inserted=0"
+    },
+    {
+      "name": "10. multiple system-agency membership handled deterministically or reported",
+      "ok": true,
+      "detail": "multiSystemAgencies=0"
+    },
+    {
+      "name": "11. Agency row remains unchanged after apply (Phase 3.9 — column dropped)",
+      "ok": true,
+      "detail": "sysAgency=00000000-0000-0000-0000-0000000035SA"
+    },
+    {
+      "name": "12. rerun apply is idempotent (second run inserts 0)",
+      "ok": true,
+      "detail": "inserted=0 eligible=0"
+    },
+    {
+      "name": "13. PlatformAuditLog status documented (deferred when table absent)",
+      "ok": true,
+      "detail": "deferred=true"
+    },
+    {
+      "name": "14. PlatformAdmin readiness report wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "15. Phase 3.4 employee unique harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "16. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=9/9"
+    }
+  ]
+}

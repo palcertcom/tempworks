@@ -1,0 +1,9 @@
+{
+  "label": "stream-engine-incremental",
+  "exitCode": 0,
+  "durationS": 46.6,
+  "peakDiskBytes": 125829120,
+  "peakDiskMiB": 120.0,
+  "peakRssBytes": 281554944,
+  "peakRssMiB": 268.5
+}

@@ -1,0 +1,71 @@
+{
+  "passed": 13,
+  "total": 13,
+  "cases": [
+    {
+      "name": "1. dry-run updates zero rows",
+      "ok": true,
+      "detail": "updated=0 applied=false"
+    },
+    {
+      "name": "2. dry-run reports correct candidate count",
+      "ok": true,
+      "detail": "candidate=10"
+    },
+    {
+      "name": "3. apply refused when flag false",
+      "ok": true,
+      "detail": "mode=dry-run reason=ATTENDANCE_AUDIT_BACKFILL_APPLY=false (default; dry-run)"
+    },
+    {
+      "name": "4. apply refused outside SAFE_CLONE/SAFE_STAGING (source gate)",
+      "ok": true,
+      "detail": "flag+SAFE both required"
+    },
+    {
+      "name": "5. apply updates only AttendanceRecord rows with matching ar.tenantId",
+      "ok": true,
+      "detail": "mode=apply updated=10 candidate=10"
+    },
+    {
+      "name": "6. apply does not overwrite already tenant-stamped rows",
+      "ok": true,
+      "detail": "tenantId=11111111"
+    },
+    {
+      "name": "7. apply skips missing AttendanceRecord entityId",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "8. apply skips attendance rows with NULL tenantId",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "9. apply does not touch non-AttendanceRecord audit rows",
+      "ok": true,
+      "detail": "entity=Employee tenantId=null"
+    },
+    {
+      "name": "10. seeded candidate becomes tenant-stamped after apply",
+      "ok": true,
+      "detail": "tenantId=11111111"
+    },
+    {
+      "name": "11. rerun apply is idempotent (zero updates)",
+      "ok": true,
+      "detail": "updated=0"
+    },
+    {
+      "name": "12. backfill module exports runBackfill + uses env+SAFE guards",
+      "ok": true,
+      "detail": "export + guards present"
+    },
+    {
+      "name": "13. scanner registers phase250-attendance-audit-backfill",
+      "ok": true,
+      "detail": "tag found"
+    }
+  ]
+}

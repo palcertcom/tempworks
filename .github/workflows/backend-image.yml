@@ -1,0 +1,38 @@
+# Builds the backend production image EXACTLY as App Platform does (build
+# context backend/, backend/Dockerfile, its pinned base image, no overrides,
+# no secrets), then verifies the final non-root image and runs the full
+# disaster-recovery drill with recovery performed from that image.
+# Nothing is pushed or deployed. Object storage is a local S3 simulator.
+name: backend-image
+
+# Manual only: start it (Actions → backend-image → Run workflow) once the
+# repository can run Actions jobs. Automatic PR triggers were removed because
+# every run was refused before start ("recent account payments have failed or
+# your spending limit needs to be increased") — see the PR.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-image-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build, verify and recover from the unmodified production image (same script as for any Docker host)
+        run: bash backend/scripts/ci/verify-production-image.sh --install-prereqs
+
+      - name: Evidence (logs never contain production credentials — this job has none)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-image-evidence
+          path: verify-evidence/
+          retention-days: 14

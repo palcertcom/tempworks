@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-05-10T11:43:15.189Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "localhost",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "staging"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "legacy": {
+    "pilotActive": false,
+    "reason": "TENANT_PRISMA_PILOT_ENABLED=false",
+    "findAllTotal": 6,
+    "findOneAId": "00000000-0000-0000-0000-0000000fa001",
+    "errorOnMissing": "NotFoundException",
+    "totalsADisbursed": 300,
+    "totalsACount": 2,
+    "txTypeCount": 2,
+    "historyId": "00000000-0000-0000-0000-0000000fa001",
+    "responseShapeOk": true
+  },
+  "pilot": {
+    "pilotActive": true,
+    "reason": "pilot ON, env=SAFE_CLONE",
+    "findAllTotal": 4,
+    "findOneAId": "00000000-0000-0000-0000-0000000fa001",
+    "errorOnMissing": "NotFoundException",
+    "totalsADisbursed": 300,
+    "totalsACount": 2,
+    "txTypeCount": 2,
+    "historyId": "00000000-0000-0000-0000-0000000fa001",
+    "responseShapeOk": true
+  },
+  "counts": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "legacy: pilot OFF reports pilotActive=false",
+      "ok": true,
+      "detail": "TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "pilot: pilot ON + finance allow-list ⇒ pilotActive=true",
+      "ok": true,
+      "detail": "pilot ON, env=SAFE_CLONE"
+    },
+    {
+      "name": "findAll: pilot total <= legacy total (tenant filter applies)",
+      "ok": true,
+      "detail": "legacy=6 pilot=4"
+    },
+    {
+      "name": "findOne: legacy + pilot resolve the tenant A record id",
+      "ok": true,
+      "detail": "legacy=00000000-0000-0000-0000-0000000fa001 pilot=00000000-0000-0000-0000-0000000fa001"
+    },
+    {
+      "name": "error path: NotFoundException for missing id in both modes",
+      "ok": true,
+      "detail": "legacy=NotFoundException pilot=NotFoundException"
+    },
+    {
+      "name": "getTotals: legacy + pilot return same per-entity sum",
+      "ok": true,
+      "detail": "legacy=300/2 pilot=300/2"
+    },
+    {
+      "name": "listTransactionTypes: global catalog identical in both modes",
+      "ok": true,
+      "detail": "legacy=2 pilot=2"
+    },
+    {
+      "name": "getHistory: pilot resolves the same record id (tenant pre-check)",
+      "ok": true,
+      "detail": "legacy=00000000-0000-0000-0000-0000000fa001 pilot=00000000-0000-0000-0000-0000000fa001"
+    },
+    {
+      "name": "response shape preserved (PaginatedResponse<FinancialRecord>)",
+      "ok": true,
+      "detail": "legacy=true pilot=true"
+    }
+  ]
+}

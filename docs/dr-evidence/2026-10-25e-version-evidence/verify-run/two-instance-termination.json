@@ -1,0 +1,95 @@
+{
+  "term": {
+    "failures": 0,
+    "checks": [
+      {
+        "name": "term: catalog row leaves RUNNING → FAILED",
+        "ok": true,
+        "detail": {
+          "status": "FAILED",
+          "afterSeconds": 0
+        }
+      },
+      {
+        "name": "term: reason recorded",
+        "ok": true,
+        "detail": "Interrupted — app instance shut down (redeploy/scale-in) during the backup. No snapshot was committed."
+      },
+      {
+        "name": "term: no snapshot committed for the interrupted run (no MANIFEST with its catalogId)",
+        "ok": true
+      },
+      {
+        "name": "term: lock released — a new backup starts on the surviving instance",
+        "ok": true,
+        "detail": 201
+      },
+      {
+        "name": "term: that backup completes",
+        "ok": true,
+        "detail": "COMPLETED"
+      }
+    ],
+    "detectedAfterSeconds": 0
+  },
+  "kill": {
+    "failures": 0,
+    "checks": [
+      {
+        "name": "kill: catalog row leaves RUNNING → FAILED",
+        "ok": true,
+        "detail": {
+          "status": "FAILED",
+          "afterSeconds": 99
+        }
+      },
+      {
+        "name": "kill: reason recorded",
+        "ok": true,
+        "detail": "Interrupted — the app instance running this backup stopped before completion (redeploy, crash or scale-in). No snapshot was committed."
+      },
+      {
+        "name": "kill: no snapshot committed for the interrupted run (no MANIFEST with its catalogId)",
+        "ok": true
+      },
+      {
+        "name": "kill: retention GC removes the orphaned uncommitted snapshot files",
+        "ok": true,
+        "detail": {
+          "kept": 12,
+          "removed": [],
+          "keptComplete": [
+            "tempworks-dr_2026-10-25T16-12-49Z_cc3f78d7",
+            "tempworks-dr_2026-10-25T16-12-02Z_32f8ae57",
+            "tempworks-dr_2026-10-25T16-11-02Z_a7e10abf",
+            "tempworks-dr_2026-10-25T16-10-02Z_6c814dff",
+            "tempworks-dr_2026-10-25T16-09-02Z_0c60226b",
+            "tempworks-dr_2026-10-25T16-08-40Z_83ac8f1a",
+            "tempworks-dr_2026-10-25T16-08-38Z_770e5c2d",
+            "tempworks-dr_2026-10-25T16-08-16Z_d99c4415",
+            "tempworks-dr_2026-10-25T16-08-01Z_5139c7b1",
+            "tempworks-dr_2026-10-25T16-07-47Z_ac1d4541",
+            "tempworks-dr_2026-10-25T16-07-36Z_2cfcda3e",
+            "tempworks-dr_2026-10-25T16-07-31Z_49b0f261"
+          ],
+          "keptPartial": [],
+          "blobsKept": 85,
+          "blobsDeleted": 0,
+          "orphanSnapshotsDeleted": 1,
+          "abortedUploads": 0
+        }
+      },
+      {
+        "name": "kill: lock released — a new backup starts on the surviving instance",
+        "ok": true,
+        "detail": 201
+      },
+      {
+        "name": "kill: that backup completes",
+        "ok": true,
+        "detail": "COMPLETED"
+      }
+    ],
+    "detectedAfterSeconds": 99
+  }
+}

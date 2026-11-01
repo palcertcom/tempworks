@@ -1,0 +1,56 @@
+{
+  "passed": 10,
+  "total": 10,
+  "cases": [
+    {
+      "name": "1. create legacy: response shape",
+      "ok": true,
+      "detail": "id=691e2437"
+    },
+    {
+      "name": "2. create legacy: tenantId NULL",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "3. create pilot: tenantId = A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "4. update mutates field",
+      "ok": true,
+      "detail": "phone=+99"
+    },
+    {
+      "name": "5. updateStatus mutates status",
+      "ok": true,
+      "detail": "status=ACTIVE"
+    },
+    {
+      "name": "6. remove sets deletedAt",
+      "ok": true,
+      "detail": "deletedAt=true"
+    },
+    {
+      "name": "7. uploadPhoto pilot same-tenant: 1 storage call + photoUrl set",
+      "ok": true,
+      "detail": "uploads=1 url=true"
+    },
+    {
+      "name": "8. grantAgencyAccess returns grant",
+      "ok": true,
+      "detail": "view=true edit=true"
+    },
+    {
+      "name": "9. updateAgencyAccess flips canEdit",
+      "ok": true,
+      "detail": "edit=false"
+    },
+    {
+      "name": "10. revokeAgencyAccess returns OK",
+      "ok": true,
+      "detail": "Access revoked"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "term": {
+    "failures": 0,
+    "checks": [
+      {
+        "name": "term: catalog row leaves RUNNING → FAILED",
+        "ok": true,
+        "detail": {
+          "status": "FAILED",
+          "afterSeconds": 0
+        }
+      },
+      {
+        "name": "term: reason recorded",
+        "ok": true,
+        "detail": "Interrupted — app instance shut down (redeploy/scale-in) during the backup. No snapshot was committed."
+      },
+      {
+        "name": "term: no snapshot committed for the interrupted run (no MANIFEST with its catalogId)",
+        "ok": true
+      },
+      {
+        "name": "term: lock released — a new backup starts on the surviving instance",
+        "ok": true,
+        "detail": 201
+      },
+      {
+        "name": "term: that backup completes",
+        "ok": true,
+        "detail": "COMPLETED"
+      }
+    ],
+    "detectedAfterSeconds": 0
+  },
+  "kill": {
+    "failures": 0,
+    "checks": [
+      {
+        "name": "kill: catalog row leaves RUNNING → FAILED",
+        "ok": true,
+        "detail": {
+          "status": "FAILED",
+          "afterSeconds": 97
+        }
+      },
+      {
+        "name": "kill: reason recorded",
+        "ok": true,
+        "detail": "Interrupted — the app instance running this backup stopped before completion (redeploy, crash or scale-in). No snapshot was committed."
+      },
+      {
+        "name": "kill: no snapshot committed for the interrupted run (no MANIFEST with its catalogId)",
+        "ok": true
+      },
+      {
+        "name": "kill: retention GC removes the orphaned uncommitted snapshot files",
+        "ok": true,
+        "detail": {
+          "kept": 12,
+          "removed": [],
+          "blobsKept": 75,
+          "blobsDeleted": 0,
+          "orphanSnapshotsDeleted": 1,
+          "abortedUploads": 0
+        }
+      },
+      {
+        "name": "kill: lock released — a new backup starts on the surviving instance",
+        "ok": true,
+        "detail": 201
+      },
+      {
+        "name": "kill: that backup completes",
+        "ok": true,
+        "detail": "COMPLETED"
+      }
+    ],
+    "detectedAfterSeconds": 97
+  }
+}

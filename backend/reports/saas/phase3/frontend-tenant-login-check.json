@@ -1,0 +1,91 @@
+{
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "name": "1. LoginPage contains a Company field",
+      "ok": true,
+      "detail": "company input present"
+    },
+    {
+      "name": "2. Company field is required",
+      "ok": true,
+      "detail": "required"
+    },
+    {
+      "name": "3. authApi.login routes to /auth/login-v2 when company provided",
+      "ok": true,
+      "detail": "conditional path"
+    },
+    {
+      "name": "4. Payload contains { company, email, password }",
+      "ok": true,
+      "detail": "shape ok"
+    },
+    {
+      "name": "5. company and email normalized (trim + lowercase)",
+      "ok": true,
+      "detail": "normalized"
+    },
+    {
+      "name": "6. last company stored in localStorage (LAST_COMPANY_KEY)",
+      "ok": true,
+      "detail": "persisted"
+    },
+    {
+      "name": "7. password is NOT stored (api + LoginPage)",
+      "ok": true,
+      "detail": "no password storage"
+    },
+    {
+      "name": "8. generic auth error shown for any 401",
+      "ok": true,
+      "detail": "generic only"
+    },
+    {
+      "name": "9. legacy /auth/login fallback when company is empty",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "10. token/session handling unchanged (setTokens called)",
+      "ok": true,
+      "detail": "unchanged"
+    },
+    {
+      "name": "11. no user-facing error leaks tenant/email existence",
+      "ok": true,
+      "detail": "generic only"
+    },
+    {
+      "name": "12. backend Phase 3.13 contract resolves a fresh tenant/user pair",
+      "ok": true,
+      "detail": "resolved"
+    },
+    {
+      "name": "13. Phase 3.12 controller wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "14. Phase 3.11 grant/revoke wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "15. Phase 3.10 cleanup harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "16. Phase 3.9 drop-agency-is-system wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "17. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=8/8"
+    }
+  ]
+}

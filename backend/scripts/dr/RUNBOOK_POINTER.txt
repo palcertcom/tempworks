@@ -1,0 +1,5 @@
+TempWorks Disaster-Recovery package
+====================================
+Restore with:  backend/scripts/dr/restore.sh <this-package> --target-url <DATABASE_URL> --create-db --roles
+Full procedure: docs/DISASTER_RECOVERY_RUNBOOK.md  (bundled schema: config/schema.prisma, release: config/release.txt)
+Verify only:    backend/scripts/dr/verify.sh <this-package>

@@ -1,0 +1,296 @@
+{
+  "userStatus": {
+    "ACTIVE": "Aktívny",
+    "INACTIVE": "Neaktívny",
+    "SUSPENDED": "Pozastavený",
+    "PENDING": "Čaká",
+    "TERMINATED": "Ukončený"
+  },
+  "agencyStatus": {
+    "ACTIVE": "Aktívna",
+    "INACTIVE": "Neaktívna",
+    "SUSPENDED": "Pozastavená"
+  },
+  "agencyApprovalStatus": {
+    "PENDING_APPROVAL": "Čaká na schválenie",
+    "APPROVED": "Schválené",
+    "REJECTED": "Zamietnuté"
+  },
+  "employeeStatus": {
+    "ACTIVE": "Aktívny",
+    "INACTIVE": "Neaktívny",
+    "PENDING": "Čaká",
+    "ONBOARDING": "Nástup",
+    "TERMINATED": "Ukončený",
+    "ON_LEAVE": "Na dovolenke",
+    "SUSPENDED": "Pozastavený"
+  },
+  "applicantStatus": {
+    "NEW": "Nový",
+    "SCREENING": "Prehliadka",
+    "INTERVIEW": "Pohovor",
+    "OFFER": "Ponuka",
+    "ACCEPTED": "Akceptované",
+    "REJECTED": "Zamietnuté",
+    "WITHDRAWN": "Stiahnuté",
+    "ONBOARDING": "Nástup",
+    "HIRED": "Prijatý"
+  },
+  "applicantTier": {
+    "LEAD": "Záujemca",
+    "CANDIDATE": "Kandidát"
+  },
+  "documentStatus": {
+    "PENDING": "Čaká na kontrolu",
+    "VERIFIED": "Platný",
+    "REJECTED": "Zamietnutý",
+    "EXPIRED": "Expirovaný",
+    "EXPIRING_SOON": "Čoskoro vyprší"
+  },
+  "workflowStageStatus": {
+    "PENDING": "Čaká",
+    "IN_PROGRESS": "Prebieha",
+    "COMPLETED": "Dokončené",
+    "SKIPPED": "Preskočené",
+    "BLOCKED": "Blokované"
+  },
+  "workPermitStatus": {
+    "PENDING": "Čaká",
+    "APPLIED": "Podané",
+    "APPROVED": "Schválené",
+    "REJECTED": "Zamietnuté",
+    "EXPIRED": "Expirované",
+    "CANCELLED": "Zrušené"
+  },
+  "visaStatus": {
+    "PENDING": "Čaká",
+    "APPLIED": "Podané",
+    "APPOINTMENT_SCHEDULED": "Termín naplánovaný",
+    "APPROVED": "Schválené",
+    "REJECTED": "Zamietnuté",
+    "EXPIRED": "Expirované",
+    "CANCELLED": "Zrušené"
+  },
+  "gender": {
+    "MALE": "Muž",
+    "FEMALE": "Žena",
+    "OTHER": "Iné",
+    "PREFER_NOT_TO_SAY": "Nechcem uviesť"
+  },
+  "alertSeverity": {
+    "LOW": "Nízka",
+    "MEDIUM": "Stredná",
+    "HIGH": "Vysoká",
+    "CRITICAL": "Kritická"
+  },
+  "alertStatus": {
+    "OPEN": "Otvorené",
+    "ACKNOWLEDGED": "Potvrdené",
+    "RESOLVED": "Vyriešené",
+    "DISMISSED": "Zamietnuté"
+  },
+  "notificationType": {
+    "INFO": "Informácia",
+    "WARNING": "Upozornenie",
+    "ERROR": "Chyba",
+    "SUCCESS": "Úspech",
+    "COMPLIANCE": "Súlad",
+    "DOCUMENT_EXPIRY": "Expirácia dokumentu",
+    "WORKFLOW": "Pracovný postup",
+    "SYSTEM": "Systém",
+    "FINANCIAL": "Financie",
+    "VEHICLE_MOT_EXPIRING": "MOT expiruje",
+    "VEHICLE_TAX_EXPIRING": "Daň z vozidla expiruje",
+    "VEHICLE_INSURANCE_EXPIRING": "Poistenie expiruje",
+    "VEHICLE_REGISTRATION_EXPIRING": "Registrácia expiruje",
+    "VEHICLE_TACHOGRAPH_EXPIRING": "Tachograf expiruje",
+    "VEHICLE_ATP_EXPIRING": "ATP expiruje",
+    "VEHICLE_PRESSURE_TEST_DUE": "Tlaková skúška",
+    "VEHICLE_SERVICE_DUE": "Servis je potrebný",
+    "VEHICLE_SERVICE_OVERDUE": "Servis je po termíne"
+  },
+  "workflowCategory": {
+    "INITIAL": "Počiatočný",
+    "DOCUMENTATION": "Dokumentácia",
+    "COMPLIANCE": "Súlad",
+    "TRAINING": "Školenie",
+    "DEPLOYMENT": "Nasadenie",
+    "ADMINISTRATIVE": "Administratíva"
+  },
+  "candidateProgressStatus": {
+    "PENDING": "Čaká",
+    "IN_PROGRESS": "Prebieha",
+    "COMPLETED": "Dokončené",
+    "REJECTED": "Zamietnuté"
+  },
+  "approvalDecision": {
+    "APPROVED": "Schválené",
+    "REJECTED": "Zamietnuté",
+    "PENDING": "Čaká"
+  },
+  "attendanceStatus": {
+    "PRESENT": "Prítomný",
+    "ABSENT": "Neprítomný",
+    "LATE": "Meškanie",
+    "ON_LEAVE": "Na dovolenke",
+    "HOLIDAY": "Sviatok",
+    "REMOTE": "Vzdialene"
+  },
+  "fuelType": {
+    "DIESEL": "Diesel",
+    "PETROL": "Benzín",
+    "HYBRID": "Hybrid",
+    "ELECTRIC": "Elektrický",
+    "LPG": "LPG",
+    "CNG": "CNG"
+  },
+  "maintenanceStatus": {
+    "SCHEDULED": "Naplánované",
+    "IN_PROGRESS": "Prebieha",
+    "COMPLETED": "Dokončené",
+    "CANCELLED": "Zrušené",
+    "OVERDUE": "Po termíne"
+  },
+  "contractType": {
+    "Full-time": "Plný úväzok",
+    "Part-time": "Čiastočný úväzok",
+    "Contract": "Zmluva",
+    "Temporary": "Dočasná",
+    "Internship": "Stáž",
+    "Seasonal": "Sezónna"
+  },
+  "language": {
+    "Albanian": "Albanian",
+    "Arabic": "Arabic",
+    "Bosnian": "Bosnian",
+    "Bulgarian": "Bulgarian",
+    "Chinese (Cantonese)": "Chinese (Cantonese)",
+    "Chinese (Mandarin)": "Chinese (Mandarin)",
+    "Croatian": "Croatian",
+    "Czech": "Czech",
+    "Danish": "Danish",
+    "Dutch": "Dutch",
+    "English": "English",
+    "Estonian": "Estonian",
+    "Finnish": "Finnish",
+    "French": "French",
+    "German": "German",
+    "Greek": "Greek",
+    "Hungarian": "Hungarian",
+    "Italian": "Italian",
+    "Latvian": "Latvian",
+    "Lithuanian": "Lithuanian",
+    "Macedonian": "Macedonian",
+    "Maltese": "Maltese",
+    "Norwegian": "Norwegian",
+    "Persian": "Persian",
+    "Polish": "Polish",
+    "Portuguese": "Portuguese",
+    "Romanian": "Romanian",
+    "Russian": "Russian",
+    "Serbian": "Serbian",
+    "Slovak": "Slovak",
+    "Slovenian": "Slovenian",
+    "Spanish": "Spanish",
+    "Swedish": "Swedish",
+    "Turkish": "Turkish",
+    "Ukrainian": "Ukrainian",
+    "Urdu": "Urdu",
+    "Other": "Other"
+  },
+  "proficiency": {
+    "A1 - Beginner": "A1 — Beginner",
+    "A2 - Elementary": "A2 — Elementary",
+    "B1 - Intermediate": "B1 — Intermediate",
+    "B2 - Upper Intermediate": "B2 — Upper Intermediate",
+    "C1 - Advanced": "C1 — Advanced",
+    "C2 - Mastery": "C2 — Mastery",
+    "Native": "Native"
+  },
+  "skillLevel": {
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Advanced": "Advanced",
+    "Expert": "Expert"
+  },
+  "jobCategory": {
+    "Flatbed Driver": "Vodič valníka",
+    "Forklift Operator": "Vodič vysokozdvižného vozíka",
+    "HGV Driver Class 1": "Vodič nákladného vozidla – trieda 1",
+    "HGV Driver Class 2": "Vodič nákladného vozidla – trieda 2",
+    "LGV Driver": "Vodič ľahkého úžitkového vozidla",
+    "Multi-Drop Driver": "Rozvozový vodič",
+    "Tanker Driver": "Vodič cisterny",
+    "Transport Manager": "Manažér dopravy",
+    "Van Driver": "Vodič dodávky",
+    "Warehouse Operative": "Skladový pracovník",
+    "Bus Driver": "Vodič autobusu",
+    "Coach Driver": "Vodič diaľkového autobusu",
+    "Courier Driver": "Kuriér",
+    "Delivery Driver": "Vodič rozvozu",
+    "Taxi Driver": "Taxikár",
+    "Crane Operator": "Žeriavnik",
+    "Logistics Coordinator": "Koordinátor logistiky"
+  },
+  "familyRelation": {
+    "Spouse": "Manžel/ka",
+    "Partner": "Partner/ka",
+    "Parent": "Rodič",
+    "Child": "Dieťa",
+    "Sibling": "Súrodenec",
+    "Friend": "Priateľ/ka",
+    "Colleague": "Kolega/Kolegyňa",
+    "Other": "Iné"
+  },
+  "drivingQualification": {
+    "Tachograph Card": "Karta tachografu",
+    "C95 / CPC Card": "Karta KKV (C95 / CPC)",
+    "ADR Certificate": "Osvedčenie ADR",
+    "Medical Certificate": "Lekárske osvedčenie",
+    "DVLA Check": "Kontrola DVLA",
+    "Transport Manager CPC": "CPC manažéra dopravy"
+  },
+  "educationLevel": {
+    "Primary School": "Základná škola",
+    "Secondary School": "Stredná škola",
+    "High School / A-Levels": "Gymnázium / Maturita",
+    "Vocational Training": "Odborná škola",
+    "Associate Degree": "Vyššie odborné vzdelanie",
+    "Bachelor's Degree": "Bakalársky titul",
+    "Master's Degree": "Magisterský titul",
+    "Doctoral Degree": "Doktorský titul",
+    "Professional Certification": "Odborné osvedčenie",
+    "Other": "Iné"
+  },
+  "vehicleStatus": {
+    "ACTIVE": "Aktívne",
+    "INACTIVE": "Neaktívne",
+    "IN_MAINTENANCE": "V údržbe",
+    "SCRAPPED": "Vyradené"
+  },
+  "vehicleType": {
+    "TRUCK": "Nákladné vozidlo",
+    "CAR": "Auto",
+    "VAN": "Dodávka",
+    "TANKER": "Cisterna",
+    "TRAILER": "Náves",
+    "REFRIGERATED_TRAILER": "Chladiarenský náves",
+    "SPECIALTY": "Špeciálne"
+  },
+  "workshopStatus": {
+    "ACTIVE": "Aktívna",
+    "INACTIVE": "Neaktívna"
+  },
+  "documentCompliance": {
+    "COMPLIANT": "V súlade",
+    "AT_RISK": "Riziko",
+    "NON_COMPLIANT": "Mimo súladu",
+    "PENDING": "Čakajúce"
+  },
+  "entityType": {
+    "APPLICANT": "Uchádzač",
+    "EMPLOYEE": "Zamestnanec",
+    "VEHICLE": "Vozidlo",
+    "AGENCY": "Agentúra"
+  }
+}

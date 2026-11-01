@@ -1,0 +1,1 @@
+{"id":"sha256:b250ad6e568cc0cab4a4c32e274e9ae3f3a59f767a030f4f3432fccf55b2067b","user":"node","entrypoint":"["/usr/bin/tini","--","/usr/local/bin/docker-entrypoint.sh"]","size":1131946066,"created":"2026-10-25T14:44:58.159626918Z","arch":"amd64"}

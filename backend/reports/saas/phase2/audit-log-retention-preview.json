@@ -1,0 +1,56 @@
+{
+  "passed": 10,
+  "total": 10,
+  "cases": [
+    {
+      "name": "1. retention disabled ⇒ enabled=false; no destructive action",
+      "ok": true,
+      "detail": "enabled=false candidate=3"
+    },
+    {
+      "name": "2. preview returns candidate count only (no rows array)",
+      "ok": true,
+      "detail": "keys=enabled,days,cutoffIso,candidateCount,tenantId"
+    },
+    {
+      "name": "3. tenant A preview counts only tenant A rows",
+      "ok": true,
+      "detail": "count=3"
+    },
+    {
+      "name": "4. tenant B preview counts only tenant B rows",
+      "ok": true,
+      "detail": "count=2"
+    },
+    {
+      "name": "5. NULL-tenant rows excluded from tenant preview; included in NULL preview",
+      "ok": true,
+      "detail": "nullCount=1 A=3"
+    },
+    {
+      "name": "6. date threshold respected (large days ⇒ zero candidates)",
+      "ok": true,
+      "detail": "days=10000 count=0"
+    },
+    {
+      "name": "7. no rows are deleted or modified (snapshot before/after equal)",
+      "ok": true,
+      "detail": "before=983 after=983"
+    },
+    {
+      "name": "8. preview is idempotent",
+      "ok": true,
+      "detail": "a=3 b=3"
+    },
+    {
+      "name": "9. retention days env fallback works for invalid values (defaults to 365)",
+      "ok": true,
+      "detail": "days=365"
+    },
+    {
+      "name": "10. retention preview source contains no destructive Prisma calls",
+      "ok": true,
+      "detail": "noDestructive=true hasCount=true"
+    }
+  ]
+}

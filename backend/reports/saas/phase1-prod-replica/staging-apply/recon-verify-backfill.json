@@ -1,0 +1,134 @@
+{
+  "slug": "verify-backfill",
+  "title": "Phase 1 — Tenant Backfill Verifier",
+  "mode": "dry-run",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "startedAt": "2026-05-09T14:54:27.930Z",
+  "durationMs": 55,
+  "metrics": [
+    {
+      "key": "tenants.count",
+      "value": 4
+    },
+    {
+      "key": "platform_admins.count",
+      "value": 2
+    },
+    {
+      "key": "reconciliation_queue.pending",
+      "value": 16
+    }
+  ],
+  "actions": [
+    {
+      "kind": "tenants.count-matches-progress",
+      "subject": {
+        "tenants": 4,
+        "progressDone": 4
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "tenants.have-default-agency",
+      "subject": {
+        "withoutDefault": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "users.with-agency-have-membership",
+      "subject": {
+        "count": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "users.no-agency.handled",
+      "subject": {
+        "count": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "memberships.have-agency-membership",
+      "subject": {
+        "without": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "applicants.tenantId-populated",
+      "subject": {
+        "stillNull": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "employees.tenantId-populated",
+      "subject": {
+        "stillNull": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "vehicles.tenantId-populated",
+      "subject": {
+        "stillNull": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "platform_admins.exists",
+      "subject": {
+        "count": 2
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "tenants.no-duplicate-slug",
+      "subject": {
+        "dupes": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "memberships.no-duplicate-pair",
+      "subject": {
+        "dupes": 0
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "checkpoint.no-partial",
+      "subject": {
+        "n": 0,
+        "samples": null
+      },
+      "proposedDecision": "PASS",
+      "applied": false
+    },
+    {
+      "kind": "reconciliation.queue-pending",
+      "subject": {
+        "pending": 16
+      },
+      "proposedDecision": "SKIPPED",
+      "applied": false
+    }
+  ],
+  "notes": [
+    "Verification PASSED: 12 pass, 0 fail, 1 skipped"
+  ],
+  "status": "OK"
+}

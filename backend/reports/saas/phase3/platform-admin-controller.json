@@ -1,0 +1,86 @@
+{
+  "passed": 16,
+  "total": 16,
+  "cases": [
+    {
+      "name": "1. flag off → all routes throw NotFoundException (HTTP_DISABLED)",
+      "ok": true,
+      "detail": "rejects=3/3"
+    },
+    {
+      "name": "2. SUPER can grant SUPPORT",
+      "ok": true,
+      "detail": "PLATFORM_ADMIN_GRANTED"
+    },
+    {
+      "name": "3. SUPER can grant OPERATOR",
+      "ok": true,
+      "detail": "PLATFORM_ADMIN_GRANTED"
+    },
+    {
+      "name": "4. SUPER can grant SUPER",
+      "ok": true,
+      "detail": "PLATFORM_ADMIN_GRANTED"
+    },
+    {
+      "name": "5. SUPPORT cannot grant (service rejects)",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "6. OPERATOR cannot grant",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "7. non-PlatformAdmin user cannot grant",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "8. SUPER can revoke another PlatformAdmin",
+      "ok": true,
+      "detail": "PLATFORM_ADMIN_REVOKED"
+    },
+    {
+      "name": "9. self-revoke rejected",
+      "ok": true,
+      "detail": "forbidden"
+    },
+    {
+      "name": "10. list returns PlatformAdmin rows",
+      "ok": true,
+      "detail": "count=5"
+    },
+    {
+      "name": "11. grant emits PlatformAuditLog",
+      "ok": true,
+      "detail": "grantRows=3"
+    },
+    {
+      "name": "12. revoke emits PlatformAuditLog",
+      "ok": true,
+      "detail": "revokeRows=1"
+    },
+    {
+      "name": "13. duplicate grant deterministic (IDEMPOTENT vs LEVEL_CHANGED)",
+      "ok": true,
+      "detail": "idem=PLATFORM_ADMIN_GRANT_IDEMPOTENT change=PLATFORM_ADMIN_LEVEL_CHANGED"
+    },
+    {
+      "name": "14. controller delegates only to PlatformAdminService",
+      "ok": true,
+      "detail": "usesService=true usesPrisma=false"
+    },
+    {
+      "name": "15. Phase 3.11 grant/revoke harness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "16. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=12/12"
+    }
+  ]
+}

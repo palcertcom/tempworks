@@ -1,0 +1,100 @@
+{
+  "title": "Dashboard",
+  "welcomeBack": "Willkommen zurück, {{name}}",
+  "user": "Benutzer",
+  "refresh": "Aktualisieren",
+  "loadFailed": "Dashboard-Daten konnten nicht geladen werden.",
+  "retry": "Erneut versuchen",
+  "kpi": {
+    "totalEmployees": "Mitarbeiter gesamt",
+    "activeEmployees": "Aktive Mitarbeiter",
+    "pendingApplications": "Offene Bewerbungen",
+    "expiringDocuments": "Bald ablaufend",
+    "expiredDocuments": "Abgelaufene Dokumente",
+    "expiredAction": "Aktion erforderlich",
+    "noExpired": "Keine abgelaufenen Dokumente",
+    "thisMonth": "diesen Monat",
+    "noChangeThisMonth": "Keine Änderung in diesem Monat",
+    "active": "Aktiv",
+    "ofTotal": "({{percent}}% gesamt)",
+    "needReview": "{{count}} zu prüfen",
+    "allReviewed": "Alles geprüft",
+    "within60Days": "Innerhalb 60 Tagen",
+    "within60DaysAction": "Innerhalb 60 Tagen — Aktion erforderlich"
+  },
+  "applicants": {
+    "title": "Bewerber-Übersicht",
+    "subtitle": "Bewerber nach aktuellem Status",
+    "viewAllApplicants": "Alle Bewerber anzeigen",
+    "viewAllCandidates": "Alle Kandidaten anzeigen",
+    "total": "Gesamt",
+    "newUnreviewed": "Neu / Unbearbeitet",
+    "screening": "Vorauswahl",
+    "interview": "Interview",
+    "offerMade": "Angebot gemacht",
+    "accepted": "Akzeptiert"
+  },
+  "workflow": {
+    "title": "Recruiting-Workflow",
+    "subtitle": "Aktuelle Verteilung der Mitarbeiter im Recruiting-Prozess",
+    "viewWorkflow": "Workflow anzeigen",
+    "noStages": "Keine aktiven Workflow-Stufen konfiguriert.",
+    "employees_one": "{{count}} Mitarbeiter",
+    "employees_other": "{{count}} Mitarbeiter",
+    "documentVerification": "Dokumentenprüfung",
+    "workPermit": "Arbeitserlaubnis",
+    "visa": "Visum",
+    "onboarding": "Onboarding",
+    "avgProcessingDays": "Ø Bearbeitungstage",
+    "approvalRate": "Genehmigungsrate",
+    "daysSuffix": "{{count}}T"
+  },
+  "recentActivity": {
+    "title": "Letzte Aktivität",
+    "subtitle": "Neueste System-Ereignisse",
+    "empty": "Keine aktuellen Aktivitäten.",
+    "viewAll": "Alle Aktivitäten anzeigen",
+    "system": "System",
+    "uploaded": "{{entity}} hochgeladen",
+    "verified": "{{entity}} verifiziert",
+    "rejected": "{{entity}} abgelehnt",
+    "created": "{{entity}} erstellt",
+    "updated": "{{entity}} aktualisiert",
+    "deleted": "{{entity}} gelöscht",
+    "renewed": "{{entity}} erneuert",
+    "converted": "{{entity}} konvertiert",
+    "fallback": "{{entity}} {{action}}"
+  },
+  "recentEmployees": {
+    "title": "Neueste Mitarbeiter",
+    "subtitle": "Neueste Registrierungen",
+    "viewAll": "Alle anzeigen",
+    "empty": "Noch keine Mitarbeiter registriert."
+  },
+  "expiredDocuments": {
+    "title": "Abgelaufene Dokumente",
+    "subtitleCount": "{{count}} abgelaufen ohne Verlängerung",
+    "subtitleLoading": "…",
+    "viewAll": "Alle anzeigen",
+    "emptyZero": "Keine abgelaufenen Dokumente ohne Verlängerung.",
+    "emptyOther": "0 von 0 abgelaufenen Dokumenten angezeigt.",
+    "expiredOn": "Abgelaufen am {{date}} (vor {{days}} Tagen)",
+    "more": "+{{count}} weitere —",
+    "moreLink": "alle anzeigen",
+    "expiredBadge": "Abgelaufen"
+  },
+  "quickActions": {
+    "title": "Schnellaktionen",
+    "subtitle": "Verknüpfungen zu häufigen Aufgaben",
+    "addEmployee": "Mitarbeiter hinzufügen",
+    "uploadDocument": "Dokument hochladen",
+    "viewWorkflow": "Workflow anzeigen",
+    "reports": "Berichte"
+  },
+  "timeAgo": {
+    "justNow": "gerade eben",
+    "minutesAgo": "vor {{count}} Min",
+    "hoursAgo": "vor {{count}} Std",
+    "daysAgo": "vor {{count}} T"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "passed": 15,
+  "total": 15,
+  "cases": [
+    {
+      "name": "1. legacy user (no PlatformAdmin) stamps agencyIsSystem=false (Phase 3.9 supersedes legacy)",
+      "ok": true,
+      "detail": "agencyIsSystem=false"
+    },
+    {
+      "name": "2. PlatformAdmin-only user stamps agencyIsSystem=true",
+      "ok": true,
+      "detail": "agencyIsSystem=true"
+    },
+    {
+      "name": "3. user with both signals stamps true",
+      "ok": true,
+      "detail": "agencyIsSystem=true"
+    },
+    {
+      "name": "4. user with neither signal stamps false",
+      "ok": true,
+      "detail": "agencyIsSystem=false"
+    },
+    {
+      "name": "5. PLATFORM_ADMIN_DUAL_READ_ENABLED flag inert under Phase 3.9",
+      "ok": true,
+      "detail": "uNewOnly=true uLegacy=false"
+    },
+    {
+      "name": "6. inactive user → existing UnauthorizedException preserved",
+      "ok": true,
+      "detail": "rejected"
+    },
+    {
+      "name": "7. JwtStrategy returns the existing field shape",
+      "ok": true,
+      "detail": "keys=agencyId,agencyIsSystem,email,firstName,id,lastName,role,roleId"
+    },
+    {
+      "name": "8. downstream check (isExternalActor) consumes agencyIsSystem unchanged",
+      "ok": true,
+      "detail": "legacy.ext=true newOnly.ext=false neither.ext=true"
+    },
+    {
+      "name": "9. PlatformAdminAccessService called exactly once per validate",
+      "ok": true,
+      "detail": "calls=4 (4 successful validates)"
+    },
+    {
+      "name": "10. PlatformAuditLog write is not attempted (table absent, no error raised)",
+      "ok": true,
+      "detail": "tableExists=false"
+    },
+    {
+      "name": "11. Agency row unchanged after validate (Phase 3.9 — column dropped)",
+      "ok": true,
+      "detail": "sysAgency=00000000-0000-0000-0000-0000000037SA"
+    },
+    {
+      "name": "12. PlatformAdmin rows unchanged after validate",
+      "ok": true,
+      "detail": "level=SUPER grantedBy=phase370-test"
+    },
+    {
+      "name": "13. Phase 3.6 dual-read guard wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "14. Phase 3.5 backfill wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "15. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=11/11"
+    }
+  ]
+}

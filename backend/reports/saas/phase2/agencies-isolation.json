@@ -1,0 +1,61 @@
+{
+  "passed": 11,
+  "total": 11,
+  "cases": [
+    {
+      "name": "1. findAll under tenant A: no tenant B rows (system agencies allowed)",
+      "ok": true,
+      "detail": "count=8"
+    },
+    {
+      "name": "2. findOne(tenantB-id) cross-tenant 404",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "3. search \"Agency B\" under A does not leak B",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "4. getUsers(tenantB-id) blocked at parent gate",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "5. getEmployees(tenantB-id) blocked at parent gate",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "6. getStats(tenantB-id) blocked at parent gate",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "7. listPermissionOverrides(tenantB-id) blocked at parent gate",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "8. system agency visible under both A and B (decision §6)",
+      "ok": true,
+      "detail": "seenA=true seenB=true"
+    },
+    {
+      "name": "9. concurrent ALS frames isolated",
+      "ok": true,
+      "detail": "aNoB=true bNoA=true"
+    },
+    {
+      "name": "10. legacy: returns union across tenants",
+      "ok": true,
+      "detail": "tenants=3 total=15"
+    },
+    {
+      "name": "11. source-level: phase235 tags + mutation/storage on legacyPrisma",
+      "ok": true,
+      "detail": "read=true mut=true storage=true global=true create=true update=true"
+    }
+  ]
+}

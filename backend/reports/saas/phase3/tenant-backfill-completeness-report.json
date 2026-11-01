@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-05-11T08:41:17.239Z",
+  "readOnly": true,
+  "classification": "SAFE_CLONE",
+  "target": "local (localhost)",
+  "tables": {
+    "employee": {
+      "table": "employees",
+      "total": 12,
+      "nullTenant": 2,
+      "nonNullTenant": 10,
+      "byStatus": {
+        "PENDING": {
+          "total": 10,
+          "nullTenant": 2
+        },
+        "ACTIVE": {
+          "total": 2,
+          "nullTenant": 0
+        }
+      },
+      "sampleNullIds": [
+        "03146b8f-4dd9-4073-847b-f9c1e5ed4a6f",
+        "43f2c6d6-cc66-4bb7-a8d3-d2e31a3fd488"
+      ],
+      "blocksConstraints": true
+    },
+    "applicant": {
+      "table": "applicants",
+      "total": 4,
+      "nullTenant": 0,
+      "nonNullTenant": 4,
+      "byStatus": {
+        "NEW": {
+          "total": 2,
+          "nullTenant": 0
+        },
+        "ACCEPTED": {
+          "total": 2,
+          "nullTenant": 0
+        }
+      },
+      "sampleNullIds": [],
+      "blocksConstraints": false
+    }
+  },
+  "blocksPhase32Cleanup": true,
+  "blocksPhase33Constraints": true
+}

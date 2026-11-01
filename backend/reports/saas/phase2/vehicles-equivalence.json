@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-05-10T11:43:47.529Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "localhost",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "staging"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "legacy": {
+    "pilotActive": false,
+    "reason": "TENANT_PRISMA_PILOT_ENABLED=false",
+    "listTotal": 4,
+    "vehicleId": "00000000-0000-0000-0000-0000000vh001",
+    "maintId": "00000000-0000-0000-0000-0000000mr001",
+    "errOnMissing": "NotFoundException",
+    "maintTotal": 2,
+    "dashboardTotal": 4,
+    "txTypeCount": 1,
+    "workshopCount": 0,
+    "shapeOk": true
+  },
+  "pilot": {
+    "pilotActive": true,
+    "reason": "pilot ON, env=SAFE_CLONE",
+    "listTotal": 2,
+    "vehicleId": "00000000-0000-0000-0000-0000000vh001",
+    "maintId": "00000000-0000-0000-0000-0000000mr001",
+    "errOnMissing": "NotFoundException",
+    "maintTotal": 1,
+    "dashboardTotal": 2,
+    "txTypeCount": 1,
+    "workshopCount": 0,
+    "shapeOk": true
+  },
+  "counts": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "legacy: pilot OFF reports pilotActive=false",
+      "ok": true,
+      "detail": "TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "pilot: pilot ON + vehicles allow-list ⇒ pilotActive=true",
+      "ok": true,
+      "detail": "pilot ON, env=SAFE_CLONE"
+    },
+    {
+      "name": "listVehicles: pilot total <= legacy total (tenant filter applies)",
+      "ok": true,
+      "detail": "legacy=4 pilot=2"
+    },
+    {
+      "name": "getVehicle: legacy + pilot resolve the tenant A vehicle id",
+      "ok": true,
+      "detail": "legacy=00000000-0000-0000-0000-0000000vh001 pilot=00000000-0000-0000-0000-0000000vh001"
+    },
+    {
+      "name": "getMaintenanceRecord: legacy + pilot resolve the tenant A record id",
+      "ok": true,
+      "detail": "legacy=00000000-0000-0000-0000-0000000mr001 pilot=00000000-0000-0000-0000-0000000mr001"
+    },
+    {
+      "name": "error path: NotFoundException for missing vehicle id in both modes",
+      "ok": true,
+      "detail": "legacy=NotFoundException pilot=NotFoundException"
+    },
+    {
+      "name": "listMaintenanceRecords: pilot total <= legacy total",
+      "ok": true,
+      "detail": "legacy=2 pilot=1"
+    },
+    {
+      "name": "getDashboardStats.totalVehicles: pilot <= legacy",
+      "ok": true,
+      "detail": "legacy=4 pilot=2"
+    },
+    {
+      "name": "listMaintenanceTypes: global catalog identical in both modes",
+      "ok": true,
+      "detail": "legacy=1 pilot=1"
+    },
+    {
+      "name": "listWorkshops: global catalog identical in both modes",
+      "ok": true,
+      "detail": "legacy=0 pilot=0"
+    },
+    {
+      "name": "response shape preserved",
+      "ok": true,
+      "detail": "legacy=true pilot=true"
+    }
+  ]
+}

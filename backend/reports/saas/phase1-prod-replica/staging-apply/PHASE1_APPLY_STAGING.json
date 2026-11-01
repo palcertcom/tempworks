@@ -1,0 +1,65 @@
+{
+  "mode": "apply",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "nodeEnv": "unset",
+  "allowed": true,
+  "overallOk": true,
+  "stages": [
+    {
+      "name": "preflight",
+      "ok": true,
+      "durationMs": 19120,
+      "exitCode": 3,
+      "detail": "Command failed: /home/user/Tempworksemployeerecruitmentcompliancemanagementsystem/backend/node_modules/.bin/ts-node /home/user/Tempworksemployeerecruitmentcompliancemanagementsystem/backend/scripts/saas/phase1/run-preflight.ts"
+    },
+    {
+      "name": "recon-A-user-identity",
+      "ok": true,
+      "durationMs": 1761,
+      "exitCode": 0
+    },
+    {
+      "name": "recon-B-agency-tenant-projection",
+      "ok": true,
+      "durationMs": 1877,
+      "exitCode": 0
+    },
+    {
+      "name": "recon-C-unique-constraints",
+      "ok": true,
+      "durationMs": 1722,
+      "exitCode": 0
+    },
+    {
+      "name": "recon-D-data-ownership",
+      "ok": true,
+      "durationMs": 1717,
+      "exitCode": 0
+    },
+    {
+      "name": "recon-E-reports-sql",
+      "ok": true,
+      "durationMs": 1666,
+      "exitCode": 0
+    },
+    {
+      "name": "tenant-backfill",
+      "ok": true,
+      "durationMs": 1883,
+      "exitCode": 0
+    },
+    {
+      "name": "seq-snapshot",
+      "ok": true,
+      "durationMs": 1918,
+      "exitCode": 0
+    },
+    {
+      "name": "verify",
+      "ok": true,
+      "durationMs": 1880,
+      "exitCode": 0
+    }
+  ],
+  "finishedAt": "2026-05-09T14:54:28.093Z"
+}

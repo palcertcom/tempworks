@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-05-09T17:18:53.279Z",
+  "aborted": false,
+  "abortReason": "",
+  "counts": {
+    "total": 20,
+    "passed": 20,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "environment classified safe (SAFE_CLONE or SAFE_STAGING)",
+      "ok": true,
+      "detail": "classification=SAFE_CLONE, reason=localhost + fixture pattern (db=saas_phase1_fixture), host=127.0.0.1, db=saas_phase1_fixture, nodeEnv=unset"
+    },
+    {
+      "name": "flag MULTI_TENANT_ENABLED = true",
+      "ok": true,
+      "detail": "expected=true, got=\"true\""
+    },
+    {
+      "name": "flag TENANT_SAFE_REPORTS_ENABLED = true",
+      "ok": true,
+      "detail": "expected=true, got=\"true\""
+    },
+    {
+      "name": "flag TENANT_CONTEXT_REQUIRED_FOR_SAFE_REPORTS = true",
+      "ok": true,
+      "detail": "expected=true, got=\"true\""
+    },
+    {
+      "name": "flag TENANT_CONTEXT_STAGING_ONLY = true",
+      "ok": true,
+      "detail": "expected=true, got=\"true\""
+    },
+    {
+      "name": "flag TENANT_PRISMA_ENFORCEMENT stays false",
+      "ok": true,
+      "detail": "expected=false, got=\"(unset, defaults false)\""
+    },
+    {
+      "name": "flag RLS_ENFORCEMENT stays false",
+      "ok": true,
+      "detail": "expected=false, got=\"(unset, defaults false)\""
+    },
+    {
+      "name": "context smoke (7 in-process cases)",
+      "ok": true,
+      "detail": "context-smoke: 7/7 cases PASS",
+      "durationMs": 3077
+    },
+    {
+      "name": "reports equivalence (legacy ≡ safe)",
+      "ok": true,
+      "detail": "reports-read-equivalence: PASS=17 WARN=0 FAIL=0 SKIPPED=1 (of 17 READY)",
+      "durationMs": 1808
+    },
+    {
+      "name": "reports isolation (N/N + 0 leaks)",
+      "ok": true,
+      "detail": "reports-isolation-test: 17/17 sources isolated.",
+      "durationMs": 1859
+    },
+    {
+      "name": "integration: tenant resolvable",
+      "ok": true,
+      "detail": "tenant=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "integration: flag OFF means tenantSafeReportsEnabled() false",
+      "ok": true,
+      "detail": "tenantSafeReportsEnabled=false"
+    },
+    {
+      "name": "integration: flag ON + missing tenantId → rejected",
+      "ok": true,
+      "detail": "composer rejected empty tenantId"
+    },
+    {
+      "name": "integration: DISABLED source fails closed",
+      "ok": true,
+      "detail": "document_types.status=DISABLED reason=Phase 2.4 — global catalog; reachable via joined sources (documents_with_type, employees_documents_type) using kind=catalog. Direct exposure pending product decision."
+    },
+    {
+      "name": "integration: READY source executes for valid tenant",
+      "ok": true,
+      "detail": "rows=5, columns=1, params[0]=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "integration: output shape compatible with legacy consumer ({columns, rows, total, page, limit})",
+      "ok": true,
+      "detail": "column[0]={\"key\":\"id\",\"label\":\"ID\",\"type\":\"uuid\"}"
+    },
+    {
+      "name": "integration: concurrent ALS frames isolated",
+      "ok": true,
+      "detail": "seen=[\"99999999-9999-9999-9999-999999999999\",\"11111111-1111-1111-1111-111111111111\"]"
+    },
+    {
+      "name": "rollback: flags off → safe path disabled",
+      "ok": true,
+      "detail": "safeReports=false multiTenant=false"
+    },
+    {
+      "name": "rollback: legacy query still reads employees without tenant filter",
+      "ok": true,
+      "detail": "count=29"
+    },
+    {
+      "name": "rollback: row counts unchanged (no mutation during rehearsal)",
+      "ok": true,
+      "detail": "before={\"tenants\":\"4\",\"employees\":\"29\",\"applicants\":\"72\",\"documents\":\"52\",\"agencies\":\"4\"} after={\"tenants\":\"4\",\"employees\":\"29\",\"applicants\":\"72\",\"documents\":\"52\",\"agencies\":\"4\"}"
+    }
+  ]
+}

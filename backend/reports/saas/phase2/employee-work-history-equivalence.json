@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-05-10T02:08:30.349Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "empA": "f2cae0af-4df6-46ea-8689-3c0576681de2",
+  "counts": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "legacy: pilot OFF reports pilotActive=false",
+      "ok": true,
+      "detail": "TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "pilot: pilot ON + tenant ctx reports pilotActive=true (effectively scoped)",
+      "ok": true,
+      "detail": "pilot ON, env=SAFE_CLONE"
+    },
+    {
+      "name": "list ids identical between legacy and pilot for tenant A",
+      "ok": true,
+      "detail": "legacy=3, pilot=2"
+    },
+    {
+      "name": "pilot view excludes NULL-tenant legacy row",
+      "ok": true,
+      "detail": "pilotIds=00000000-0000-0000-0000-0000000ea001,00000000-0000-0000-0000-0000000ea002"
+    },
+    {
+      "name": "legacy view INCLUDES NULL-tenant legacy row (no filter)",
+      "ok": true,
+      "detail": "legacyIds=00000000-0000-0000-0000-0000000ea001,00000000-0000-0000-0000-0000000ea002,00000000-0000-0000-0000-0000000ea999"
+    },
+    {
+      "name": "event-type catalog count equal (global catalog)",
+      "ok": true,
+      "detail": "legacy=3 pilot=3"
+    },
+    {
+      "name": "error path equivalent (NotFoundException for missing employee)",
+      "ok": true,
+      "detail": "legacy=NotFoundException pilot=NotFoundException"
+    },
+    {
+      "name": "create legacy: tenantId is NULL",
+      "ok": true,
+      "detail": "legacy.tenantId=null"
+    },
+    {
+      "name": "create pilot: tenantId is set to active tenant",
+      "ok": true,
+      "detail": "pilot.tenantId=11111111-1111-1111-1111-111111111111 tenantA=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "update reflects new description in BOTH modes",
+      "ok": true,
+      "detail": "legacy=rehearsal-temp-updated pilot=rehearsal-temp-updated"
+    },
+    {
+      "name": "remove sets deletedAt in BOTH modes (soft delete)",
+      "ok": true,
+      "detail": "legacy=set pilot=set"
+    },
+    {
+      "name": "response shape preserved (Array<{id,eventType,attachments,...}>)",
+      "ok": true,
+      "detail": "legacy=true pilot=true"
+    }
+  ]
+}

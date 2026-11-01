@@ -1,0 +1,78 @@
+{
+  "generatedAt": "2026-05-10T09:02:49.138Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "counts": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "createVehicle response shape preserved (id present)",
+      "ok": true,
+      "detail": "legacy.id=946e9692-8e5f-43ff-af2d-25b98213a609 pilot.id=c037d67f-a337-48b2-8c60-ab352977eb4b"
+    },
+    {
+      "name": "createVehicle legacy: tenantId is NULL",
+      "ok": true,
+      "detail": "legacy.tenantId=null"
+    },
+    {
+      "name": "createVehicle pilot: tenantId is set to active tenant",
+      "ok": true,
+      "detail": "pilot.tenantId=11111111-1111-1111-1111-111111111111 tenantA=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "updateVehicle (legacy) mutates make",
+      "ok": true,
+      "detail": "make=LegacyUpdated"
+    },
+    {
+      "name": "updateVehicle (pilot) mutates make",
+      "ok": true,
+      "detail": "make=PilotUpdated"
+    },
+    {
+      "name": "createMaintenanceRecord legacy: tenantId is NULL",
+      "ok": true,
+      "detail": "legacy.tenantId=null"
+    },
+    {
+      "name": "createMaintenanceRecord pilot: tenantId is set to active tenant",
+      "ok": true,
+      "detail": "pilot.tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "updateMaintenanceRecord (legacy) mutates notes",
+      "ok": true,
+      "detail": "notes=legacy-notes"
+    },
+    {
+      "name": "updateMaintenanceRecord (pilot) mutates notes",
+      "ok": true,
+      "detail": "notes=pilot-notes"
+    },
+    {
+      "name": "pilot deleteVehicle: deletedAt is set",
+      "ok": true,
+      "detail": "deletedAt=set"
+    },
+    {
+      "name": "pilot deleteMaintenanceRecord: deletedAt is set",
+      "ok": true,
+      "detail": "deletedAt=set"
+    },
+    {
+      "name": "validation: NotFoundException for missing maintenance record id in both modes",
+      "ok": true,
+      "detail": "legacy=NotFoundException pilot=NotFoundException"
+    }
+  ]
+}

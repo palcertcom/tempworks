@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-05-10T07:22:04.785Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "counts": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "readDocumentBytes: response shape preserved (buffer + mimeType + name)",
+      "ok": true,
+      "detail": "legacy.shape=true pilot.shape=true"
+    },
+    {
+      "name": "readDocumentBytes: exactly 1 storage read in both modes",
+      "ok": true,
+      "detail": "legacy=1 pilot=1"
+    },
+    {
+      "name": "createBulkDownloadArchive: same-tenant 2-id list yields 2 entries in both modes",
+      "ok": true,
+      "detail": "legacy.entries=2 pilot.entries=2"
+    },
+    {
+      "name": "createBulkDownloadArchive: 2 storage reads in both modes for same-tenant 2-id list",
+      "ok": true,
+      "detail": "legacy.downloads=2 pilot.downloads=2"
+    },
+    {
+      "name": "readDocumentBytes: NotFoundException for missing id in both modes",
+      "ok": true,
+      "detail": "legacy=NotFoundException pilot=NotFoundException"
+    },
+    {
+      "name": "createBulkDownloadArchive: empty input yields empty zip + 0 storage reads in both modes",
+      "ok": true,
+      "detail": "legacy={entries:0,downloads:0} pilot={entries:0,downloads:0}"
+    }
+  ]
+}

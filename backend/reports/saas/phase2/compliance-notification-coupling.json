@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. flag off (default): no coupling notifications created",
+      "ok": true,
+      "detail": "before=0 after=0 notify=absent"
+    },
+    {
+      "name": "2. flag on + TENANT_JOB_FANOUT_ENABLED=false: refused; no notifications",
+      "ok": "tenant fan-out gates off (TENANT_AWARE_JOBS_ENABLED / TENANT_JOB_FANOUT_ENABLED)",
+      "detail": "notify={\"refused\":\"tenant fan-out gates off (TENANT_AWARE_JOBS_ENABLED / TENANT_JOB_FANOUT_ENABLED)\"}"
+    },
+    {
+      "name": "3. flag on + TENANT_AWARE_JOBS_ENABLED=false: refused; no notifications",
+      "ok": "tenant fan-out gates off (TENANT_AWARE_JOBS_ENABLED / TENANT_JOB_FANOUT_ENABLED)",
+      "detail": "notify={\"refused\":\"tenant fan-out gates off (TENANT_AWARE_JOBS_ENABLED / TENANT_JOB_FANOUT_ENABLED)\"}"
+    },
+    {
+      "name": "4. compliance pilot inactive: upstream refusal; no notifications",
+      "ok": true,
+      "detail": "msg=refused: TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "5. happy path: notifications created with tenantId=A only",
+      "ok": true,
+      "detail": "total=1 newA=1 notified=1"
+    },
+    {
+      "name": "6. tenant B users do not receive tenant A notifications",
+      "ok": true,
+      "detail": "newB=0"
+    },
+    {
+      "name": "7. NULL-tenant notifications are NOT created",
+      "ok": true,
+      "detail": "newNull=0"
+    },
+    {
+      "name": "8. notification fan-out runs inside per-tenant ALS frame (tenantId stamped)",
+      "ok": true,
+      "detail": "newA=1 newB=0 newNull=0"
+    },
+    {
+      "name": "9. notification fan-out failure captured (no throw)",
+      "ok": true,
+      "detail": "notify={\"error\":\"synthetic fan-out failure\"}"
+    },
+    {
+      "name": "10. raw generateAlerts() body does NOT call notification fan-out",
+      "ok": true,
+      "detail": "bodyLen=1476 callsNotify=false"
+    },
+    {
+      "name": "11. ComplianceCron body still calls only runScheduledComplianceAlertGeneration()",
+      "ok": true,
+      "detail": "OK"
+    },
+    {
+      "name": "12. ComplianceScheduler body does not call notification helpers directly",
+      "ok": true,
+      "detail": "OK"
+    }
+  ]
+}

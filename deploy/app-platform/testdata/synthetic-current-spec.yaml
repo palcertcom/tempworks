@@ -1,0 +1,64 @@
+# SYNTHETIC stand-in for `doctl apps spec get` — structure from the production
+# description, all values fake. EV[...] stands for DigitalOcean-encrypted secrets.
+alerts:
+- rule: DEPLOYMENT_FAILED
+ingress:
+  rules:
+  - component:
+      name: tempworksemployeerecruitmentcomp
+    match:
+      path:
+        prefix: /
+name: tempworksbackend
+region: fra
+services:
+- build_command: npm ci && npx prisma generate && npm run build && echo "=== DIST TREE ===" && find dist -maxdepth 4 -type f | sort
+  environment_slug: node-js
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:fakefakefake:fakeciphertext1]
+  - key: JWT_SECRET
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:fakefakefake:fakeciphertext2]
+  - key: NODE_ENV
+    scope: RUN_AND_BUILD_TIME
+    value: development
+  - key: NODE_TLS_REJECT_UNAUTHORIZED
+    scope: RUN_AND_BUILD_TIME
+    value: "0"
+  - key: PORT
+    scope: RUN_AND_BUILD_TIME
+    value: "3000"
+  - key: UPLOAD_STORAGE_DRIVER
+    scope: RUN_AND_BUILD_TIME
+    value: spaces
+  - key: DO_SPACES_BUCKET
+    scope: RUN_AND_BUILD_TIME
+    value: tempworks-uploads
+  - key: DO_SPACES_ENDPOINT
+    scope: RUN_AND_BUILD_TIME
+    value: https://fra1.digitaloceanspaces.com
+  - key: UPLOAD_DEST
+    scope: RUN_AND_BUILD_TIME
+    value: ./uploads
+  - key: BACKUP_SPACES_ACCESS_KEY
+    scope: RUN_TIME
+    type: SECRET
+    value: EV[1:fakefakefake:fakeciphertext3]
+  - key: BACKUP_SPACES_SECRET_KEY
+    scope: RUN_TIME
+    type: SECRET
+    value: EV[1:fakefakefake:fakeciphertext4]
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: raedrasheed/Tempworksemployeerecruitmentcompliancemanagementsystem
+  http_port: 8080
+  instance_count: 2
+  instance_size_slug: apps-s-1vcpu-1gb
+  name: tempworksemployeerecruitmentcomp
+  run_command: npx prisma migrate deploy && MAIN_FILE=$(find dist -name main.js | head -n 1) && echo "Starting $MAIN_FILE" && node "$MAIN_FILE"
+  source_dir: /backend

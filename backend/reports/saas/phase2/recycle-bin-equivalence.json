@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-05-10T02:10:28.069Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "counts": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "legacy": {
+    "pilotActive": false,
+    "reason": "TENANT_PRISMA_PILOT_ENABLED=false",
+    "countsTotal": 1,
+    "countsApplicant": 0,
+    "countsEmployee": 0,
+    "countsUser": 1,
+    "listTotal": 0,
+    "filteredApplicantTotal": 0,
+    "filteredUserTotal": 0,
+    "errorOnUnknown": "no-error"
+  },
+  "pilot": {
+    "pilotActive": true,
+    "reason": "pilot ON, env=SAFE_CLONE",
+    "countsTotal": 1,
+    "countsApplicant": 0,
+    "countsEmployee": 0,
+    "countsUser": 1,
+    "listTotal": 0,
+    "filteredApplicantTotal": 0,
+    "filteredUserTotal": 0,
+    "errorOnUnknown": "no-error"
+  },
+  "results": [
+    {
+      "name": "legacy: pilot OFF reports pilotActive=false",
+      "ok": true,
+      "detail": "TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "pilot ON: pilotActive=true",
+      "ok": true,
+      "detail": "pilot ON, env=SAFE_CLONE"
+    },
+    {
+      "name": "getEntityCounts: pilot APPLICANT count <= legacy",
+      "ok": true,
+      "detail": "legacy=0 pilot=0"
+    },
+    {
+      "name": "getEntityCounts: pilot EMPLOYEE count <= legacy",
+      "ok": true,
+      "detail": "legacy=0 pilot=0"
+    },
+    {
+      "name": "getEntityCounts: USER count is GLOBAL — equal in both modes",
+      "ok": true,
+      "detail": "legacy=1 pilot=1"
+    },
+    {
+      "name": "getEntityCounts: pilot total <= legacy total",
+      "ok": true,
+      "detail": "legacy=1 pilot=1"
+    },
+    {
+      "name": "findAll(all types): pilot total <= legacy total",
+      "ok": true,
+      "detail": "legacy=0 pilot=0"
+    },
+    {
+      "name": "findAll(entityType=JOB_AD): pilot subset of legacy (tenant-scoped)",
+      "ok": true,
+      "detail": "legacy=0 pilot=0"
+    },
+    {
+      "name": "findAll(entityType=DOCUMENT_TYPE): GLOBAL — equal in both modes",
+      "ok": true,
+      "detail": "legacy=0 pilot=0"
+    },
+    {
+      "name": "error path: unknown entityType raises same error class",
+      "ok": true,
+      "detail": "legacy=no-error pilot=no-error"
+    },
+    {
+      "name": "response shape preserved (PaginatedResponse + counts.total)",
+      "ok": true,
+      "detail": "numeric totals + meta in both modes"
+    }
+  ]
+}

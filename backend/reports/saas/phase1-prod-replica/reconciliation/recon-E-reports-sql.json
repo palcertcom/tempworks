@@ -1,0 +1,190 @@
+{
+  "slug": "E-reports-sql",
+  "title": "Recon E — Reports SQL",
+  "mode": "dry-run",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "startedAt": "2026-05-09T14:53:14.357Z",
+  "durationMs": 25,
+  "metrics": [
+    {
+      "key": "reports.raw-sql-hits",
+      "value": 13
+    },
+    {
+      "key": "reports.source-def-files",
+      "value": 1
+    },
+    {
+      "key": "reports.source-defs.with-tenantColumn",
+      "value": 0
+    }
+  ],
+  "actions": [
+    {
+      "kind": "reports.missing-tenant-column",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "declarationCount": 0
+      },
+      "proposedDecision": "add tenantColumn:<col>; reject at boot if missing",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 33,
+        "snippet": "*  hardcoded here — never interpolated from user input — so Prisma.raw is safe. */",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 653,
+        "snippet": "? [Prisma.sql`${Prisma.raw(`${primaryAlias}.\"deletedAt\"`)} IS NULL`]",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 660,
+        "snippet": "const col    = Prisma.raw(`${f.alias}.\"${f.dbCol}\"`);",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 692,
+        "snippet": "groupedCols.map((c: any) => Prisma.raw(`${fields[c.columnName].alias}.\"${fields[c.columnName].dbCol}\"`)),",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 700,
+        "snippet": ".map((s: any) => Prisma.raw(",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 706,
+        "snippet": ": Prisma.sql`ORDER BY ${Prisma.raw(fallbackOrder)}`;",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 715,
+        "snippet": "SELECT ${Prisma.raw(countExpr)} AS total",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 716,
+        "snippet": "FROM ${Prisma.raw(fromFragment)}",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 719,
+        "snippet": "const countResult: any[] = await this.prisma.$queryRaw(countSql);",
+        "pattern": "$queryRaw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 724,
+        "snippet": "SELECT ${Prisma.raw(selectParts.join(', '))}",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 725,
+        "snippet": "FROM ${Prisma.raw(fromFragment)}",
+        "pattern": "Prisma.raw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 731,
+        "snippet": "const rows: any[] = await this.prisma.$queryRaw(dataSql);",
+        "pattern": "$queryRaw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.raw-sql",
+      "subject": {
+        "file": "src/reports/reports.service.ts",
+        "line": 835,
+        "snippet": "this.prisma.$queryRaw`",
+        "pattern": "$queryRaw"
+      },
+      "proposedDecision": "wrap-with-Prisma.sql + parameterize; declare tenantColumn on parent source",
+      "applied": false
+    },
+    {
+      "kind": "reports.export-isolation",
+      "subject": {
+        "requirement": "Excel/PDF/DOCX exports MUST reuse the same query builder; export entry-points cannot accept raw SQL."
+      },
+      "proposedDecision": "route exports through `runReport` with the same tenantColumn enforcement",
+      "applied": false
+    }
+  ],
+  "notes": [
+    "Static analysis only — no DB queries.",
+    "BLOCKER status here is informational for Phase 2 planning; Phase 1 backfill itself is unaffected.",
+    "apply-mode is a no-op for this recon (no DB writes); current mode = dry-run."
+  ],
+  "status": "BLOCKER"
+}

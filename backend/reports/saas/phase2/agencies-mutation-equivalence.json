@@ -1,0 +1,56 @@
+{
+  "passed": 10,
+  "total": 10,
+  "cases": [
+    {
+      "name": "1. create legacy: response shape preserved",
+      "ok": true,
+      "detail": "id=c5d08200"
+    },
+    {
+      "name": "2. create legacy: tenantId NULL",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "3. create pilot + ALS A: tenantId = A",
+      "ok": true,
+      "detail": "tenantId=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "4. update mutates field",
+      "ok": true,
+      "detail": "phone=+99"
+    },
+    {
+      "name": "6. uploadLogo same-tenant: 1 storage call + logoUrl set",
+      "ok": true,
+      "detail": "uploads=1 url=true"
+    },
+    {
+      "name": "7. setPermissionOverride creates record",
+      "ok": true,
+      "detail": "allow=true"
+    },
+    {
+      "name": "8. removePermissionOverride returns OK",
+      "ok": true,
+      "detail": "Permission override removed"
+    },
+    {
+      "name": "9. setManager updates managerId",
+      "ok": true,
+      "detail": "mgr=true"
+    },
+    {
+      "name": "5. remove sets deletedAt",
+      "ok": true,
+      "detail": "deletedAt=true"
+    },
+    {
+      "name": "10. pilot create with no ALS: tenantId NULL (System Admin fallback)",
+      "ok": true,
+      "detail": "tenantId=null"
+    }
+  ]
+}

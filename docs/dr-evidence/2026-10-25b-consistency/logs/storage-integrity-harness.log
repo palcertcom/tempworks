@@ -1,0 +1,19 @@
+== local driver ==
+  ✓ second write to an existing key is refused (STORAGE.KEY_EXISTS)
+  ✓ original bytes unchanged after the refused overwrite
+  ✓ normal uploads always get a fresh key
+  ✓ delete is QUEUED (purge queue insert recorded)
+  ✓ queued object is still present (a running backup can capture it)
+  ✓ prefix delete queues every object under the prefix (3 of 3 queued)
+  ✓ prefix-queued objects are still present
+  ✓ STORAGE_DEFERRED_DELETE=off deletes immediately
+  ✓ without a database (harness construction) deletes immediately
+[Nest] 10865  - 10/25/2026, 9:58:08 AM    WARN [StorageService] purge queue unavailable, deleting immediately: relation "storage_purge_queue" does not exist
+  ✓ queue failure falls back to an immediate delete
+== S3 path (http://127.0.0.1:5555) ==
+  ✓ S3: second write to an existing key is refused
+  ✓ S3: original object bytes unchanged
+  ✓ S3: delete queued, object still present
+  ✓ S3: immediate delete (no database) removes the object
+
+STORAGE INTEGRITY: PASS=14 FAIL=0

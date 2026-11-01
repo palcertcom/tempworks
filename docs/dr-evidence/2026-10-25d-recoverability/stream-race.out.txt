@@ -1,0 +1,47 @@
+A: overwrite a referenced object in place during the backup
+  ✓ [A] exit 0 (consistent after retry) — 0
+  ✓ [A] needed a retry (overwrite detected) — 2
+  ✓ [A] captured bytes are the NEW content
+B: delete a referenced object for good during the backup
+  ✓ [B] exit 4 (INCOMPLETE) — 4
+  ✓ [B] MANIFEST complete=false
+  ✓ [B] refcheck lists the vanished reference as missing (not dangling) — {"missing":1,"dangling":0}
+  ✓ [B] all retries used — 3
+  ✓ [B] recoverability INCOMPLETE with FILES_CHANGED_DURING_BACKUP
+  ✓ [B] verify: integrity OK, recoverability INCOMPLETE → exit 6 (not verified) — 6
+C: delete + re-create a referenced object during the backup
+  ✓ [C] exit 0 (consistent after retry) — 0
+  ✓ [C] needed a retry — 2
+D: a reference to a file that exists in NO source (pre-existing loss)
+  ✓ [D] exit 6 DEGRADED (consistent, single attempt) — not COMPLETE — {"code":6,"rec":"DEGRADED"}
+  ✓ [D] MANIFEST: recoverability DEGRADED, complete=false, FILES_UNRESOLVED issue
+  ✓ [D] evidence: listings + direct HEAD 404 + earlier snapshots searched — ["live bucket s3://live-uploads: absent from every listing and direct HEAD → 404 at 2026-10-25T14:46:52.131Z","3 earlier snapshot(s): not contained"]
+  ✓ [D] verify: integrity OK but recoverability DEGRADED → exit 6 (not "verified") — {"code":6}
+  ✓ [D] list: shown as DEGRADED / complete=false
+D2: a referenced file deleted from live storage (before the backup) but held by an earlier snapshot
+  ✓ [D2] exit 0 COMPLETE — the file was recovered from an earlier snapshot, not declared lost — {"code":0}
+  ✓ [D2] manifest entry records where it came from; bytes identical — earlier snapshot tempworks-dr_2026-10-25T14-46-50Z_98bd5bf8
+  ✓ [D2] LIVE_STORAGE_MISSING_RECOVERED reported so live storage can be repaired
+D3: legacy /uploads file present only on another instance
+  ✓ [D4] before instance B reported: DEGRADED, evidence names this instance + "no inventory from any other instance" — ["instance instance-A: /tmp/stream-race-instA — absent","no inventory from any other instance yet","5 earlier snapshot(s): not contained"]
+  ✓ [D3] legacy-inventory on instance B records its files — {"instance":"instance-B","root":"/tmp/stream-race-instB","files":1,"uploaded":1,"scannedAt":"2026-10-25T14:46:58.176Z"}
+  ✓ [D3] backup on instance A is COMPLETE: the file came from instance B — {"code":0,"from":"instance instance-B (inventory 2026-10-25T14:46:58.176Z)"}
+E: SIGTERM during the backup (redeploy / scale-in)
+  ✓ [E] exit 143 — 143
+  ✓ [E] no uncommitted snapshot files left behind — []
+  ✓ [E] operation lock released
+  ✓ [E] list does not show an interrupted snapshot
+F: a second backup while one is running
+  ✓ [F] second backup refused with exit 5 (lock held) — 5
+  ✓ [F] first backup still completes — 0
+G: retention keep=1 with blob garbage collection
+  ✓ [G] fresh unreferenced blob survives the GC grace period (protects in-flight backups)
+  ✓ [G] exactly one snapshot kept (the newest complete) — ["tempworks-dr_2026-10-25T14-47-03Z_1cd9ce78"]
+  ✓ [G] unreferenced blobs collected after grace — {"before":22,"after":20,"removed":2}
+R: retention with a DEGRADED snapshot newer than the last COMPLETE one
+  ✓ [R] the last COMPLETE snapshot is kept AND the newer DEGRADED one is kept as a partial — ["tempworks-dr_2026-10-25T14-47-11Z_bcda4374:DEGRADED","tempworks-dr_2026-10-25T14-47-03Z_1cd9ce78:COMPLETE"]
+  ✓ [R] retention reports them separately — {"kept":2,"removed":[],"keptComplete":["tempworks-dr_2026-10-25T14-47-03Z_1cd9ce78"],"keptPartial":["tempworks-dr_2026-10-25T14-47-11Z_bcda4374"],"blobsKept":20,"blobsDeleted":0,"orphanSnapshotsDeleted":0,"abortedUploads":0}
+H: deep verification of the kept snapshot after GC
+  ✓ [H] deep verify exit 0 — []
+
+all checks passed

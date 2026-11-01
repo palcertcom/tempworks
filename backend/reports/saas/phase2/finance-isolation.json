@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-05-10T06:34:31.660Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantB": "22222222-2222-2222-2222-222222222222",
+  "counts": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "pilot ON, tenant A: findAll returns ONLY tenant A rows",
+      "ok": true,
+      "detail": "count=4 noB=true"
+    },
+    {
+      "name": "pilot ON, tenant A: findOne(tenantB-id) raises NotFoundException",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: getHistory(tenantB-id) raises NotFoundException (parent tenant-checked)",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: getTotals on tenant B entity returns 0 records",
+      "ok": true,
+      "detail": "count=0 disbursed=0"
+    },
+    {
+      "name": "concurrent ALS frames isolated (T_A no B-rows; T_B no A-rows)",
+      "ok": true,
+      "detail": "aCount=4 bCount=2 aNoB=true bNoA=true"
+    },
+    {
+      "name": "pilot OFF: legacy reads include both tenant A and tenant B records",
+      "ok": true,
+      "detail": "count=6 hasA=true hasB=true"
+    },
+    {
+      "name": "source: Phase 2.17 mutation annotations and tenantData spread present",
+      "ok": true,
+      "detail": "all mutation guard annotations present"
+    }
+  ]
+}

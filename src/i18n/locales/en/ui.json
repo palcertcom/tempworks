@@ -1,0 +1,54 @@
+{
+  "confirmDialog": {
+    "title": "Are you sure?",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "morePages": "More pages",
+    "ariaLabel": "pagination",
+    "goToPrevious": "Go to previous page",
+    "goToNext": "Go to next page"
+  },
+  "dialog": {
+    "close": "Close"
+  },
+  "sidebar": {
+    "title": "Sidebar",
+    "description": "Displays the mobile sidebar.",
+    "toggle": "Toggle Sidebar"
+  },
+  "address": {
+    "line1": "Address Line 1",
+    "line1Placeholder": "Street address, building, apartment",
+    "line2": "Address Line 2",
+    "line2Placeholder": "Floor, suite, additional info (optional)",
+    "country": "Country",
+    "city": "City",
+    "cityPlaceholder": "City",
+    "zip": "Zip / Postal Code"
+  },
+  "country": {
+    "selectPlaceholder": "Select country",
+    "none": "— None —"
+  },
+  "phone": {
+    "code": "Code",
+    "placeholder": "e.g. 20 7123 4567",
+    "searchCode": "Search country or code…",
+    "noResults": "No country matches."
+  },
+  "captcha": {
+    "newChallenge": "New challenge",
+    "refreshAria": "Refresh CAPTCHA",
+    "answerPlaceholder": "Enter the answer",
+    "verified": "Verified",
+    "incorrect": "Incorrect, try again"
+  },
+  "carousel": {
+    "previous": "Previous slide",
+    "next": "Next slide"
+  }
+}

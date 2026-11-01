@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. pilot active when flag ON + module allowed",
+      "ok": true,
+      "detail": "{\"active\":true,\"reason\":\"pilot ON, env=SAFE_CLONE\"}"
+    },
+    {
+      "name": "2. legacy findAll: union across tenants",
+      "ok": true,
+      "detail": "total=14"
+    },
+    {
+      "name": "3. pilot findAll(A): total reduced",
+      "ok": true,
+      "detail": "legacy=14 pilot=7"
+    },
+    {
+      "name": "4. findOne resolves tenant A id",
+      "ok": true,
+      "detail": "id=aaaaaaa1"
+    },
+    {
+      "name": "5. findOne(missing) raises NotFound",
+      "ok": true,
+      "detail": "NotFound"
+    },
+    {
+      "name": "6. search \"Agency B\" under A: no foreign-tenant rows",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "7. getUsers parent-gated returns array",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "8. getEmployees parent-gated returns array",
+      "ok": true,
+      "detail": "count=8"
+    },
+    {
+      "name": "9. getStats parent-gated returns counts",
+      "ok": true,
+      "detail": "users=1 emp=8"
+    },
+    {
+      "name": "10. listPermissionOverrides parent-gated returns array",
+      "ok": true,
+      "detail": "count=0"
+    },
+    {
+      "name": "11. listPublic stays globally visible (>= legacy total)",
+      "ok": true,
+      "detail": "count=14"
+    },
+    {
+      "name": "12. response shape preserved",
+      "ok": true,
+      "detail": "data,meta"
+    }
+  ]
+}

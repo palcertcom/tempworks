@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. scheduler disabled: status=skipped",
+      "ok": true,
+      "detail": "{\"job\":\"compliance-alert-generation\",\"status\":\"skipped\",\"skipped\":true,\"processed\":0,\"succeeded\":0,\"failed\":0,\"alertsCreated\":0,\"notifySucceeded\":0,\"notifySkipped\":0,\"notifyFailed\":0,\"notifyDeduped\":0,\"cron\":\"0 */6 * * *\",\"timestamp\":\"2026-05-10T21:33:38.613Z\"}"
+    },
+    {
+      "name": "2. fan-out off: status=skipped (refused), processed=0",
+      "ok": true,
+      "detail": "status=skipped refused=TENANT_JOB_FANOUT_ENABLED=false"
+    },
+    {
+      "name": "3. pilot inactive: status=skipped (refused)",
+      "ok": true,
+      "detail": "status=skipped refused=pilot inactive: TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "4. happy path: status=ok, processed === active tenant count (2)",
+      "ok": true,
+      "detail": "{\"job\":\"compliance-alert-generation\",\"status\":\"ok\",\"skipped\":false,\"processed\":2,\"succeeded\":2,\"failed\":0,\"alertsCreated\":2,\"notifySucceeded\":0,\"notifySkipped\":0,\"notifyFailed\":0,\"notifyDeduped\":0,\"cron\":\"0 */6 * * *\",\"timestamp\":\"2026-05-10T21:33:38.880Z\"}"
+    },
+    {
+      "name": "5. one tenant failure: status=partial_failure, failed=1, no throw",
+      "ok": true,
+      "detail": "{\"job\":\"compliance-alert-generation\",\"status\":\"partial_failure\",\"skipped\":false,\"processed\":2,\"succeeded\":1,\"failed\":1,\"alertsCreated\":1,\"notifySucceeded\":0,\"notifySkipped\":0,\"notifyFailed\":0,\"notifyDeduped\":0,\"cron\":\"0 */6 * * *\",\"timestamp\":\"2026-05-10T21:33:38.941Z\"}"
+    },
+    {
+      "name": "6. notify error: status=partial_failure, notifyFailed=1",
+      "ok": true,
+      "detail": "{\"job\":\"compliance-alert-generation\",\"status\":\"partial_failure\",\"skipped\":false,\"processed\":2,\"succeeded\":2,\"failed\":0,\"alertsCreated\":1,\"notifySucceeded\":0,\"notifySkipped\":1,\"notifyFailed\":1,\"notifyDeduped\":0,\"cron\":\"0 */6 * * *\",\"timestamp\":\"2026-05-10T21:33:38.982Z\"}"
+    },
+    {
+      "name": "7. scheduler-level error: status=failed, no throw",
+      "ok": true,
+      "detail": "{\"job\":\"compliance-alert-generation\",\"status\":\"failed\",\"skipped\":false,\"processed\":0,\"succeeded\":0,\"failed\":0,\"alertsCreated\":0,\"notifySucceeded\":0,\"notifySkipped\":0,\"notifyFailed\":0,\"notifyDeduped\":0,\"error\":\"synthetic dispatch failure\",\"cron\":\"0 */6 * * *\",\"timestamp\":\"2026-05-10T21:33:39.005Z\"}"
+    },
+    {
+      "name": "8. health fingerprint emitted EXACTLY ONCE per tick",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "9. health log does NOT include sensitive sample payloads",
+      "ok": true,
+      "detail": "len=285 found=none"
+    },
+    {
+      "name": "10. ComplianceCron.tick calls only runScheduledComplianceAlertGeneration()",
+      "ok": true,
+      "detail": "present=true"
+    },
+    {
+      "name": "11. ComplianceCron.tick does not call dispatch directly",
+      "ok": true,
+      "detail": "present=false"
+    },
+    {
+      "name": "12. ComplianceCron.tick does not call notification helpers",
+      "ok": true,
+      "detail": "present=false"
+    }
+  ]
+}

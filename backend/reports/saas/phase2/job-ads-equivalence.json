@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-05-10T02:09:29.025Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantASlug": "engineer-acme",
+  "tenantAId": "00000000-0000-0000-0000-0000000a0001",
+  "legacy": {
+    "pilotActive": false,
+    "reason": "TENANT_PRISMA_PILOT_ENABLED=false",
+    "findAllTotal": 8,
+    "findPublishedTotal": 7,
+    "findBySlugId": "00000000-0000-0000-0000-0000000a0001",
+    "findOneId": "00000000-0000-0000-0000-0000000a0001",
+    "errorOnMissing": "NotFoundException",
+    "createdId": "bbeb1171-675a-4825-ab42-21f0421ce5c7",
+    "createdTenantId": null,
+    "createdSlug": "rehearsal-job-zvqjqy",
+    "updatedTitle": "rehearsal-job-zvqjqy-updated",
+    "removedDeletedAt": "set",
+    "responseShapeOk": true
+  },
+  "pilot": {
+    "pilotActive": true,
+    "reason": "pilot ON, env=SAFE_CLONE",
+    "findAllTotal": 2,
+    "findPublishedTotal": 1,
+    "findBySlugId": "00000000-0000-0000-0000-0000000a0001",
+    "findOneId": "00000000-0000-0000-0000-0000000a0001",
+    "errorOnMissing": "NotFoundException",
+    "createdId": "bb0fb459-7dae-4ff5-9fdb-f50db320e484",
+    "createdTenantId": "11111111-1111-1111-1111-111111111111",
+    "createdSlug": "rehearsal-job-dkxs79",
+    "updatedTitle": "rehearsal-job-dkxs79-updated",
+    "removedDeletedAt": "set",
+    "responseShapeOk": true
+  },
+  "counts": {
+    "total": 13,
+    "passed": 13,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "legacy: pilot OFF reports pilotActive=false",
+      "ok": true,
+      "detail": "TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "pilot: pilot ON + module allow-list ⇒ pilotActive=true",
+      "ok": true,
+      "detail": "pilot ON, env=SAFE_CLONE"
+    },
+    {
+      "name": "findAll: pilot total < legacy total (cross-tenant rows filtered)",
+      "ok": true,
+      "detail": "legacy=8 pilot=2"
+    },
+    {
+      "name": "findPublished: pilot total <= legacy total",
+      "ok": true,
+      "detail": "legacy=7 pilot=1"
+    },
+    {
+      "name": "findBySlug(tenantA-slug): both modes resolve the same id",
+      "ok": true,
+      "detail": "legacy=00000000-0000-0000-0000-0000000a0001 pilot=00000000-0000-0000-0000-0000000a0001"
+    },
+    {
+      "name": "findOne(tenantA-id): both modes resolve to tenantA id",
+      "ok": true,
+      "detail": "legacy=00000000-0000-0000-0000-0000000a0001 pilot=00000000-0000-0000-0000-0000000a0001"
+    },
+    {
+      "name": "error path: NotFoundException for missing id in both modes",
+      "ok": true,
+      "detail": "legacy=NotFoundException pilot=NotFoundException"
+    },
+    {
+      "name": "create legacy: tenantId is NULL",
+      "ok": true,
+      "detail": "legacy.tenantId=null"
+    },
+    {
+      "name": "create pilot: tenantId is set to active tenant",
+      "ok": true,
+      "detail": "pilot.tenantId=11111111-1111-1111-1111-111111111111 tenantA=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "create slug: legacy + pilot both got a non-empty slug",
+      "ok": true,
+      "detail": "legacy=rehearsal-job-zvqjqy pilot=rehearsal-job-dkxs79"
+    },
+    {
+      "name": "update reflects new title in BOTH modes",
+      "ok": true,
+      "detail": "legacy=rehearsal-job-zvqjqy-updated pilot=rehearsal-job-dkxs79-updated"
+    },
+    {
+      "name": "remove sets deletedAt in BOTH modes (soft delete)",
+      "ok": true,
+      "detail": "legacy=set pilot=set"
+    },
+    {
+      "name": "response shape preserved (PaginatedResponse<JobAd>)",
+      "ok": true,
+      "detail": "legacy=true pilot=true"
+    }
+  ]
+}

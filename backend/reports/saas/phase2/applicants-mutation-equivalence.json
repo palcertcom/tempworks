@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-05-10T12:21:15.962Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "localhost",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "staging"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "counts": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "create response shape preserved",
+      "ok": true,
+      "detail": "legacy.id=bfb92a01-e56f-4ed1-a544-465089b7d0e4 pilot.id=e0401a19-391b-4172-8e72-859aa54fccef"
+    },
+    {
+      "name": "create legacy: tenantId NULL",
+      "ok": true,
+      "detail": "tid=null"
+    },
+    {
+      "name": "create pilot: tenantId=A",
+      "ok": true,
+      "detail": "tid=11111111-1111-1111-1111-111111111111"
+    },
+    {
+      "name": "update (legacy) mutates phone",
+      "ok": true,
+      "detail": "phone=+legacy"
+    },
+    {
+      "name": "update (pilot) mutates phone",
+      "ok": true,
+      "detail": "phone=+pilot"
+    },
+    {
+      "name": "updateStatus (pilot) mutates status",
+      "ok": true,
+      "detail": "status=SCREENING"
+    },
+    {
+      "name": "pilot remove: deletedAt set",
+      "ok": true,
+      "detail": "deletedAt=set"
+    },
+    {
+      "name": "validation: NotFoundException for missing applicant id in both modes",
+      "ok": true,
+      "detail": "legacy=NotFoundException pilot=NotFoundException"
+    },
+    {
+      "name": "bulk filter (pilot): tenant B id silently dropped; tenant A id processed",
+      "ok": true,
+      "detail": "results=1 bIncluded=false"
+    },
+    {
+      "name": "requestDelete (pilot) creates request for tenant A applicant",
+      "ok": true,
+      "detail": "id=6947c599-5ddd-497a-ba39-134d8ba9cd78"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "slug": "D-data-ownership",
+  "title": "Recon D — Data Ownership",
+  "mode": "dry-run",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "startedAt": "2026-05-09T14:53:12.309Z",
+  "durationMs": 47,
+  "metrics": [
+    {
+      "key": "applicants.total",
+      "value": 72
+    },
+    {
+      "key": "applicants.null-owner",
+      "value": 0
+    },
+    {
+      "key": "applicants.orphan-owner",
+      "value": 0
+    },
+    {
+      "key": "employees.total",
+      "value": 29
+    },
+    {
+      "key": "employees.null-owner",
+      "value": 0
+    },
+    {
+      "key": "employees.orphan-owner",
+      "value": 0
+    },
+    {
+      "key": "vehicles.total",
+      "value": 3
+    },
+    {
+      "key": "vehicles.null-owner",
+      "value": 1
+    },
+    {
+      "key": "vehicles.orphan-owner",
+      "value": 0
+    },
+    {
+      "key": "documents.total",
+      "value": 52
+    },
+    {
+      "key": "documents.inferable-via-employees",
+      "value": 52
+    },
+    {
+      "key": "documents.unresolved-parent",
+      "value": 0
+    },
+    {
+      "key": "financial_records.total",
+      "value": 1
+    },
+    {
+      "key": "financial_records.inferable-via-employees",
+      "value": 1
+    },
+    {
+      "key": "financial_records.unresolved-parent",
+      "value": 0
+    },
+    {
+      "key": "job_ads.total",
+      "value": 3
+    },
+    {
+      "key": "workflows.total",
+      "value": 3
+    },
+    {
+      "key": "workshops.total",
+      "value": 1
+    }
+  ],
+  "actions": [
+    {
+      "kind": "ownership.null.vehicles",
+      "subject": {
+        "id": "6228d8e0-1e82-40da-990d-9eea5f759728",
+        "table": "vehicles"
+      },
+      "proposedDecision": "assign-tenant | hard-delete (after review)",
+      "applied": false
+    },
+    {
+      "kind": "ownership.manual-decision-required",
+      "subject": {
+        "table": "job_ads"
+      },
+      "proposedDecision": "product-decision: tenant-scope | system-template-with-clone | catalog",
+      "applied": false
+    },
+    {
+      "kind": "ownership.manual-decision-required",
+      "subject": {
+        "table": "workflows"
+      },
+      "proposedDecision": "product-decision: tenant-scope | system-template-with-clone | catalog",
+      "applied": false
+    },
+    {
+      "kind": "ownership.manual-decision-required",
+      "subject": {
+        "table": "workshops"
+      },
+      "proposedDecision": "product-decision: tenant-scope | system-template-with-clone | catalog",
+      "applied": false
+    }
+  ],
+  "notes": [
+    "For entity-keyed models (Document, FinancialRecord), tenantId is inferred from the parent entity AT BACKFILL — never silently assigned at recon time.",
+    "Rows whose parent is missing entirely (`unresolved-parent`) are quarantined; ops decides delete vs ignore."
+  ],
+  "status": "WARN"
+}

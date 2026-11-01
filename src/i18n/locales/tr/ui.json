@@ -1,0 +1,54 @@
+{
+  "confirmDialog": {
+    "title": "Emin misiniz?",
+    "confirm": "Onayla",
+    "cancel": "İptal"
+  },
+  "pagination": {
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "morePages": "Daha fazla sayfa",
+    "ariaLabel": "sayfalama",
+    "goToPrevious": "Önceki sayfaya git",
+    "goToNext": "Sonraki sayfaya git"
+  },
+  "dialog": {
+    "close": "Kapat"
+  },
+  "sidebar": {
+    "title": "Yan Panel",
+    "description": "Mobil yan paneli görüntüler.",
+    "toggle": "Yan Paneli Aç/Kapat"
+  },
+  "address": {
+    "line1": "Adres Satırı 1",
+    "line1Placeholder": "Sokak, bina, daire",
+    "line2": "Adres Satırı 2",
+    "line2Placeholder": "Kat, suit, ek bilgi (isteğe bağlı)",
+    "country": "Ülke",
+    "city": "Şehir",
+    "cityPlaceholder": "Şehir",
+    "zip": "Posta Kodu"
+  },
+  "country": {
+    "selectPlaceholder": "Ülke seçin",
+    "none": "— Yok —"
+  },
+  "phone": {
+    "code": "Kod",
+    "placeholder": "ör. 20 7123 4567",
+    "searchCode": "Ülke veya kod ara…",
+    "noResults": "Eşleşen ülke yok."
+  },
+  "captcha": {
+    "newChallenge": "Yeni soru",
+    "refreshAria": "CAPTCHA'yı yenile",
+    "answerPlaceholder": "Cevabı girin",
+    "verified": "Doğrulandı",
+    "incorrect": "Yanlış, tekrar deneyin"
+  },
+  "carousel": {
+    "previous": "Previous slide",
+    "next": "Next slide"
+  }
+}

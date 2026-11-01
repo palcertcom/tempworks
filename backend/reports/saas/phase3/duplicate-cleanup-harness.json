@@ -1,0 +1,116 @@
+{
+  "passed": 22,
+  "total": 22,
+  "cases": [
+    {
+      "name": "1. plan runs read-only",
+      "ok": true,
+      "detail": "roJson=true noWrites=true exit=0"
+    },
+    {
+      "name": "2. plan writes JSON and MD",
+      "ok": true,
+      "detail": "md=true"
+    },
+    {
+      "name": "3. Employee.email exact same-tenant dup detected",
+      "ok": true,
+      "detail": "keep=00000000 del=1"
+    },
+    {
+      "name": "4. Employee.employeeNumber exact same-tenant dup detected",
+      "ok": true,
+      "detail": "keep=00000000"
+    },
+    {
+      "name": "5. Applicant.email exact same-tenant dup detected",
+      "ok": true,
+      "detail": "keep=00000000"
+    },
+    {
+      "name": "6. conflicting active dup classified as conflicting_active",
+      "ok": true,
+      "detail": "softDel=0"
+    },
+    {
+      "name": "7. NULL-tenant dup reported separately",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "8. cross-tenant same email reported as observation, not blocker",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "9. plan MD masks emails",
+      "ok": true,
+      "detail": "masked"
+    },
+    {
+      "name": "10. apply refused when PHASE3_DUPLICATE_CLEANUP_ENABLED=false",
+      "ok": true,
+      "detail": "dryRun=true reason=\"PHASE3_DUPLICATE_CLEANUP_ENABLED is not true\" rows=0"
+    },
+    {
+      "name": "11. apply refused when PHASE3_DUPLICATE_CLEANUP_APPLY=false",
+      "ok": true,
+      "detail": "dryRun=true reason=\"PHASE3_DUPLICATE_CLEANUP_APPLY is not true\" rows=0"
+    },
+    {
+      "name": "12. apply refused outside SAFE_CLONE/SAFE_STAGING",
+      "ok": true,
+      "detail": "dryRun=true reason=\"classification=UNKNOWN is not SAFE_CLONE/SAFE_STAGING\""
+    },
+    {
+      "name": "13. apply soft-deletes only exact duplicate lower-priority row",
+      "ok": true,
+      "detail": "softDeleted=3 old.deletedAt=set new.deletedAt=null active=1"
+    },
+    {
+      "name": "14. apply does not mutate conflicting_active group",
+      "ok": true,
+      "detail": "A=null B=null"
+    },
+    {
+      "name": "15. apply does not mutate NULL-tenant rows",
+      "ok": true,
+      "detail": "A=null B=null"
+    },
+    {
+      "name": "16. apply does not mutate cross-tenant observation rows",
+      "ok": true,
+      "detail": "A=null B=null"
+    },
+    {
+      "name": "17. apply is idempotent (second run no-ops)",
+      "ok": true,
+      "detail": "softDeleted=0 alreadyDeleted=3"
+    },
+    {
+      "name": "18. before/after duplicate count decreases for exact groups",
+      "ok": true,
+      "detail": "before=2 after=1"
+    },
+    {
+      "name": "19. no hard-delete (DELETE FROM) source calls exist",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "20. Phase 3.1 readiness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "21. Phase 3.0 readiness wiring intact",
+      "ok": true,
+      "detail": "pkg.json"
+    },
+    {
+      "name": "22. cumulative regression chain outputs present",
+      "ok": true,
+      "detail": "present=6/6"
+    }
+  ]
+}

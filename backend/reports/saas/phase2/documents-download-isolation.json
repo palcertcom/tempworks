@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-05-10T07:22:19.818Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantB": "22222222-2222-2222-2222-222222222222",
+  "counts": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "DOWNLOAD GUARD: pilot ON, tenant A readDocumentBytes(tenantB-id) raises NotFoundException; 0 storage reads",
+      "ok": true,
+      "detail": "err=NotFoundException downloads=0"
+    },
+    {
+      "name": "pilot ON, tenant A readDocumentBytes(tenantA-id) succeeds; 1 storage read",
+      "ok": true,
+      "detail": "bytes=true downloads=1"
+    },
+    {
+      "name": "ARCHIVE GUARD: pilot ON, tenant A archive of cross-tenant-only ids ⇒ empty zip; 0 storage reads",
+      "ok": true,
+      "detail": "entries=0 downloads=0"
+    },
+    {
+      "name": "ARCHIVE GUARD: pilot ON, tenant A archive of mixed ids ⇒ 2 entries (A only); 2 storage reads; no tenant-B file names",
+      "ok": true,
+      "detail": "entries=2 downloads=2 names=Alice_Anderson/PASSPORT/Alice_Passport.pdf|Alice_Anderson/VISA/Alice_Visa.pdf"
+    },
+    {
+      "name": "pilot ON, tenant A: same-tenant archive ⇒ 2 entries; 2 storage reads",
+      "ok": true,
+      "detail": "entries=2 downloads=2"
+    },
+    {
+      "name": "pilot OFF: legacy archive of mixed ids returns 4 entries (gate disengages)",
+      "ok": true,
+      "detail": "entries=4 downloads=4"
+    },
+    {
+      "name": "concurrent ALS frames isolated: T_A archive has 2 A entries; T_B archive has 2 B entries",
+      "ok": true,
+      "detail": "aEntries=2 bEntries=2"
+    },
+    {
+      "name": "source: download sites carry phase222-download-guard and route through pilot client",
+      "ok": true,
+      "detail": "all patterns matched"
+    }
+  ]
+}

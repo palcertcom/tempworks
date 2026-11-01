@@ -1,0 +1,70 @@
+{
+  "mode": "apply",
+  "applied": true,
+  "safeClassification": "SAFE_CLONE",
+  "totals": {
+    "candidateRows": 0,
+    "updatedRows": 0,
+    "skippedAlreadyTenantStamped": 95,
+    "skippedMissingTarget": 82,
+    "skippedTargetWithoutTenant": 9,
+    "skippedWrongEntity": 0,
+    "skippedAmbiguous": 0
+  },
+  "byEntity": {
+    "Document": {
+      "candidateRows": 0,
+      "updatedRows": 0,
+      "skippedAlreadyTenantStamped": 39,
+      "skippedMissingTarget": 1,
+      "skippedTargetWithoutTenant": 7,
+      "beforeNullTenantRows": 8,
+      "afterNullTenantRows": 8
+    },
+    "FinancialRecord": {
+      "candidateRows": 0,
+      "updatedRows": 0,
+      "skippedAlreadyTenantStamped": 48,
+      "skippedMissingTarget": 1,
+      "skippedTargetWithoutTenant": 0,
+      "beforeNullTenantRows": 1,
+      "afterNullTenantRows": 1
+    },
+    "WorkPermit": {
+      "candidateRows": 0,
+      "updatedRows": 0,
+      "skippedAlreadyTenantStamped": 2,
+      "skippedMissingTarget": 39,
+      "skippedTargetWithoutTenant": 0,
+      "beforeNullTenantRows": 39,
+      "afterNullTenantRows": 39
+    },
+    "Visa": {
+      "candidateRows": 0,
+      "updatedRows": 0,
+      "skippedAlreadyTenantStamped": 2,
+      "skippedMissingTarget": 39,
+      "skippedTargetWithoutTenant": 0,
+      "beforeNullTenantRows": 39,
+      "afterNullTenantRows": 39
+    },
+    "ComplianceAlert": {
+      "candidateRows": 0,
+      "updatedRows": 0,
+      "skippedAlreadyTenantStamped": 2,
+      "skippedMissingTarget": 1,
+      "skippedTargetWithoutTenant": 1,
+      "beforeNullTenantRows": 2,
+      "afterNullTenantRows": 2
+    },
+    "Notification": {
+      "candidateRows": 0,
+      "updatedRows": 0,
+      "skippedAlreadyTenantStamped": 2,
+      "skippedMissingTarget": 1,
+      "skippedTargetWithoutTenant": 1,
+      "beforeNullTenantRows": 2,
+      "afterNullTenantRows": 2
+    }
+  }
+}

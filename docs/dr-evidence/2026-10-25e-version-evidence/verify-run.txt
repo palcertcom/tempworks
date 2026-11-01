@@ -1,0 +1,176 @@
+== 1. build (exact Dockerfile, pinned base, no build args)
+TEST-ONLY: build skipped, verifying existing image tempworks-backend:candidate (NOT the exact production build)
+== 2. identity
+commit=b369d872efadc849b59f37ee7015342639caaada
+image_id=sha256:e136b31131056bf18c1165d8767ac67252328ec1f1d3f52a1159555a4c4e10c5
+exact_production_build=no
+== 3. image checks
+== 1. identity
+  ✓ runs as a non-root user (node)
+== 2. tools inside the image
+  ✓ pg_dump/pg_restore/psql/pg_dumpall are all major 18
+  ✓ Prisma CLI available without network (prisma : 7.5.0)
+== 3. database over TLS (private CA, host name pg-ci.internal)
+  ✓ schema applied from the image's Prisma schema (82 tables)
+  ✓ unbaselined: migrate deploy fails (P3005), container exits non-zero (rc=1), server not started
+  ✓ baseline recorded (13 migrations)
+  ✓ migrations verified the DB certificate strictly (DATABASE_CA_CERT)
+  ✓ "No pending migrations" then the server started
+  ✓ listening on $PORT=58080 (HTTP 200 from /api/docs)
+== 4. graceful stop
+  ✓ SIGTERM → exited in 1 s (code 143), schedulers stopped
+== 5. TLS diagnostic (documented command) from the image
+✓ postgres pg-ci.internal:55432 [app policy] app policy (sslmode=require, CA configured): verified
+✓ postgres pg-ci.internal:55432 [chain]      chain trusted (DATABASE_CA_CERT/PGSSLROOTCERT)
+✓ postgres pg-ci.internal:55432 [chain+hostname] verify-full would work
+  ✓ tls-check with the right CA: everything verified (rc=0)
+  ✓ tls-check with a WRONG CA: reports the failure (rc=1)
+  ✓ tls-check output contains no credentials
+== 6. backup → restore cycle from the image (fresh cluster, non-superuser admin)
+  ✓ streaming backup from the image over verified TLS: COMPLETE (rc=0) although pg_dumpall is refused
+  ✓ deep verify from the image (rc=0)
+  ✓ restore from the image into a FRESH cluster as non-superuser dbadmin: RESTORE OK (rc=0)
+  ✓ restored: tw owned by tw_app, data present
+result: 17 passed, 0 failed
+== 4. full DR drill, recovery from the image
+pg_dumpall --globals-only as tempworks_app: refused ✓
+  ✓ platform admin signed in (login-v2, company "tempworks")
+  ✓ tenant alpha: tenant + agency + 2 user(s) created via API
+  ✓ tenant beta: tenant + agency + 1 user(s) created via API
+  ✓ tenant alpha: 2 employee(s), documents and photo uploaded through the API
+  ✓ tenant beta: 1 employee(s), documents and photo uploaded through the API
+  ✓ source tenant isolation: alpha sees its 2 employee(s) and none of the other tenant's
+  ✓ source downloads: all 4 alpha attachment(s) byte-identical
+  ✓ source tenant isolation: beta sees its 1 employee(s) and none of the other tenant's
+  ✓ source downloads: all 2 beta attachment(s) byte-identical
+  ✓ source: cross-tenant attachment download denied (HTTP 404)
+  ✓ signed in through the UI as platform admin
+  ✓ backup page loaded; preflight banner: READY
+  ✓ "Full system" backup requested from the UI
+  ✓ background job finished: COMPLETED in 4.7s, kind=FULL_SYSTEM, off-site=VERIFIED
+  ✓ integrity verified from the UI: VERIFIED
+  ✓ photo replacement inside the window: old object kept (deletion deferred to the purge queue)
+  ✓ app writes inside the window → consistent on the FIRST attempt (8 referenced, 0 inconsistent) — prevented, not just detected
+  ✓ A1 package passes verify.sh
+  ✓ overwrite of a referenced key detected on attempt 1 (pre-snapshot ETag ≠ captured ETag)
+  ✓ retry → consistent on attempt 2; package holds the overwritten bytes together with a snapshot taken after the overwrite
+  ✓ A2 package passes verify.sh
+  ✓ second backup request while one is running → HTTP 503 (advisory lock prevents overlap)
+  ✓ backup under sustained load: COMPLETED (attempts=1), verify=VERIFIED, off-site=VERIFIED
+  ✓ 43 deletion(s) queued; replaced objects still present until purged
+  ✓ purge while a backup holds the lock → skipped, nothing deleted
+  ✓ queued-but-still-referenced object kept (stillReferenced=1)
+  ✓ unreferenced queued objects purged (43); queue now 0
+  ✓ backup accepted by A — 201
+  ✓ concurrent backup on B refused (cross-instance lock) — 503
+  ✓ B sees COMPLETED — COMPLETED
+  ✓ engine = stream (bucket-native) — stream
+  ✓ stored copy verified by the engine — {"verify":"VERIFIED","offsite":"VERIFIED"}
+  ✓ B lists it as present (fileExists, not missing) — {"fileExists":true,"fileMissing":false}
+  ✓ deep verification via B — {"package":"tempworks-dr_2026-10-25T16-08-16Z_d99c4415","integrity":"OK","recoverability":"COMPLETE","verified":true,"deep":true,"problems":[],"checks":["database.dump 336.84 KB sha256 ok","database.dump parsed completely by pg_restore","uploads: 52 file(s), 0 problem(s) (deep re-hash)"],"complete":true,"kind":"full","recoveryIssues":[]} | 
+  ✓ download via B is a valid package (tar extracts, verify.sh passes) — {"http":200,"contentType":"application/x-tar","bytes":656384,"tarOk":true,"verifyExit":0,"dumpSha":"176b60d73d460f3363432bbbae4efc14dbd131cdea5d3332ebf2ca91280417a4","pkg":"tempworks-dr_2026-10-25T16-08-16Z_d99c4415"}
+  ✓ downloaded dump sha256 = catalog checksum
+  ✓ local dirs of both instances wiped — ["/tmp/tw-drill-verify/source/backups","/tmp/tw-drill-verify/source/backups.tmp","/tmp/tw-drill-verify/source/backups-b","/tmp/tw-drill-verify/source/backups-b.tmp"]
+  ✓ still present on A and on B (bucket is authoritative, not local cache)
+  ✓ reconcile via A marks nothing missing — {"total":3,"present":3,"missing":0,"imported":2}
+  ✓ download via A after the wipe: identical dump, verify.sh passes — {"verifyExit":0}
+  ✓ purge on B skipped while another instance purges (purge lock) — {"skippedBecauseBackupRunning":false,"examined":0,"purged":0,"stillReferenced":0,"failed":0,"graceHours":0,"skippedBecauseOtherInstancePurging":true}
+  ✓ purge skipped while a backup holds the lock exclusively — {"skippedBecauseBackupRunning":true,"examined":0,"purged":0,"stillReferenced":0,"failed":0,"graceHours":0}
+  ✓ a backup requested during a purge waits for it, then starts (no false "busy") — {"status":201,"waitedSeconds":2.855}
+  ✓ that backup completes — COMPLETED
+  ✓ external snapshot created — 0
+  ✓ reconcile via B imports it — {"total":6,"present":6,"missing":0,"imported":1}
+  ✓ A lists the imported snapshot as COMPLETED + present — {"status":"COMPLETED","notes":"[imported from backup storage] external-runner"}
+  ✓ at least 3 occurrences fired
+  ✓ every occurrence claimed exactly once (unique)
+  ✓ one backup row per claimed occurrence (no duplicates)
+  ✓ all scheduled runs COMPLETED
+  ✓ the non-owning instance stood down (logged) for each occurrence
+  ✓ term: catalog row leaves RUNNING → FAILED — {"status":"FAILED","afterSeconds":0}
+  ✓ term: reason recorded — Interrupted — app instance shut down (redeploy/scale-in) during the backup. No snapshot was committed.
+  ✓ term: no snapshot committed for the interrupted run (no MANIFEST with its catalogId)
+  ✓ term: lock released — a new backup starts on the surviving instance — 201
+  ✓ term: that backup completes — COMPLETED
+  ✓ kill: catalog row leaves RUNNING → FAILED — {"status":"FAILED","afterSeconds":99}
+  ✓ kill: reason recorded — Interrupted — the app instance running this backup stopped before completion (redeploy, crash or scale-in). No snapshot was committed.
+  ✓ kill: no snapshot committed for the interrupted run (no MANIFEST with its catalogId)
+  ✓ kill: retention GC removes the orphaned uncommitted snapshot files — {"kept":12,"removed":[],"keptComplete":["tempworks-dr_2026-10-25T16-12-49Z_cc3f78d7","tempworks-dr_2026-10-25T16-12-02Z_32f8ae57","tempworks-dr_2026-10-25T16-11-02Z_a7e10abf","tempworks-dr_2026-10-25T16-10-02Z_6c814dff","tempworks-dr_2026-10-25T16-09-02Z_0c60226b","tempworks-dr_2026-10-25T16-08-40Z_83ac8f1a","tempworks-dr_2026-10-25T16-08-38Z_770e5c2d","tempworks-dr_2026-10-25T16-08-16Z_d99c4415","tempworks-dr_2026-10-25T16-08-01Z_5139c7b1","tempworks-dr_2026-10-25T16-07-47Z_ac1d4541","tempworks-dr_2026-10-25T16-07-36Z_2cfcda3e","tempworks-dr_2026-10-25T16-07-31Z_49b0f261"],"keptPartial":[],"blobsKept":85,"blobsDeleted":0,"orphanSnapshotsDeleted":1,"abortedUploads":0}
+  ✓ kill: lock released — a new backup starts on the surviving instance — 201
+  ✓ kill: that backup completes — COMPLETED
+source API unreachable ✓
+source DB unreachable ✓
+source bucket gone ✓
+rec-uploads: 0 objects ✓
+✓ restore refuses to guess the storage target (no silent local fallback)
+  ✓ globals: database/globals.sql sha ok
+  ✓ database: database/database.dump sha ok
+✓ integrity: every component and file matches its checksum
+✓ recoverability COMPLETE: all DB-referenced files and database prerequisites captured
+✓ required roles present: postgres, tempworks_app, tempworks_readonly
+✓ prerequisites met on target: required roles, extensions
+✓ storage URL remap complete — no document references the old storage.
+✓ catalog reconstructed: package registered as COMPLETED + VERIFIED + RESTORE-TESTED.
+✓ all 88 tables present after restore
+✓ database owned by tempworks_app; it can create objects in schema public (future migrations work)
+  ✓ recovery config references no source DB/API/bucket
+  ✓ source API is down
+  ✓ source upload bucket is gone
+  ✓ recovered backend runs from the production image (same image id as the restore) — image=e136b3113105 user=node
+  ✓ recovered backend runs as a non-root user — node
+  ✓ image start path on the recovered DB: migrate deploy → "No pending migrations" → server
+  ✓ restore ran into a FRESH cluster (no source roles) as a NON-superuser admin — {"sourceRolesOnFreshCluster":0,"restoringRole":"dbadmin","restoringRoleSuperuser":false}
+  ✓ recovery upload storage was EMPTY before the restore
+  ✓ every required role recorded by the backup exists on the recovered cluster — tempworks_app,tempworks_readonly
+  ✓ backup was COMPLETE even though pg_dumpall was refused at the source (roles from the catalog) — recoverability=COMPLETE globals=false prereqs=catalog (pg_dumpall refused)
+  ✓ recovered app can run its schema migrations (boot drift-heal applies all statements) — 120/120
+  ✓ outbound email is disabled in the recovered app
+  ✓ platform admin logs in with the ORIGINAL password
+  ✓ tenant users log in (alpha HR, beta HR, alpha read-only)
+  ✓ wrong password is rejected
+  ✓ cross-tenant login is rejected (alpha user → company beta)
+  ✓ Read Only user cannot create employees — HTTP 403
+  ✓ alpha sees all 2 of its recovered employees
+  ✓ alpha sees none of the other tenant's employees
+  ✓ beta sees all 1 of its recovered employees
+  ✓ beta sees none of the other tenant's employees
+  ✓ direct cross-tenant record access is denied — HTTP 403
+  ✓ cross-tenant attachment download is denied — HTTP 404
+  ✓ bulk ZIP download excludes the other tenant's file — HTTP 200, 1 file(s)
+  ✓ attachment "Oleksii Work Contract" downloads byte-identical — HTTP 200
+  ✓ attachment "Oleksii Identity Document" downloads byte-identical — HTTP 200
+  ✓ attachment "Tawanda Work Contract" downloads byte-identical — HTTP 200
+  ✓ attachment "Tawanda Identity Document" downloads byte-identical — HTTP 200
+  ✓ attachment "Ingrid Work Contract" downloads byte-identical — HTTP 200
+  ✓ attachment "Ingrid Identity Document" downloads byte-identical — HTTP 200
+  ✓ every document fileUrl points at the RECOVERY bucket (remapped) — rec=6 src=0
+  ✓ profile photo (alpha) is the one captured at the recovery point
+  ✓ profile photo (beta) is the one captured at the recovery point
+  ✓ records written AFTER the backup are absent (recovery point = backup snapshot) — 0 found
+  ✓ document soft-deleted after the backup is active again (state as of the snapshot)
+  ✓ employee profile documents list loads
+  ✓ create employee succeeds — HTTP 201
+  ✓ employee number continues the sequence (no collision) — E20261000003 → E20261000004
+  ✓ update employee persists
+  ✓ new upload accepted — HTTP 201
+  ✓ new upload stored in the recovery bucket
+  ✓ new upload downloads byte-identical
+  ✓ all public tables owned by the app role
+  ✓ read-only role grants restored — 85 table grants
+  ✓ foreign-key constraint enforced
+  ✓ unique constraint enforced
+  ✓ identity/serial sequences advance — platform_audit_logs_id_seq,saas_phase1_seq_snapshot_id_seq,saas_reconciliation_queue_id_seq,user_number_sequences_id_seq
+  ✓ backup catalog reconstructed: restored package = COMPLETED|VERIFIED|restore-tested — COMPLETED|VERIFIED|true
+  ✓ no orphaned RUNNING rows in the recovered catalog
+  ✓ recovered catalog row describes the package (kind, file count, size, off-site source) — kind=FULL_SYSTEM files=8 size=322800 offsite=VERIFIED
+  ✓ recovered system re-verifies the package it was restored from
+  ✓ all 8 captured files present in recovery storage with identical SHA-256 — missing=0 mismatch=0
+  ✓ UI login (tenant alpha HR) reaches the dashboard
+  ✓ UI employee list shows alpha employees only
+  ✓ UI "Download" link serves an original attachment from recovery storage — http://127.0.0.1:5555/rec-uploads/documents/EMPLOYEE/33d310a2-87cf-4c5a-813e-77eb1e9177f6/National_ID_Card/73d1163c-04eb-4099-8c95-1b82bb650b7b.pdf
+  ✓ file uploaded through the recovered UI is stored + served byte-identical
+  ✓ recovered admin UI shows the restored backup in its catalog
+✓ schema parity: recovered schema-only dump is IDENTICAL to the source (incl. non-Prisma SQL objects)
+[drill 16:15:14] RECOVERY DRILL PASSED
+recovery verification: 57 passed, 0 failed
+ALL STEPS PASSED — evidence in /home/user/Tempworksemployeerecruitmentcompliancemanagementsystem/verify-evidence (no credentials are written there)
+VERIFY_RC=0

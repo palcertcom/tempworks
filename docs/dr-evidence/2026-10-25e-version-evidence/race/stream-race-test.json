@@ -1,0 +1,309 @@
+{
+  "ranAt": "2026-10-25T15:52:39.839Z",
+  "environment": "local PostgreSQL 18 + s3rver S3 SIMULATOR (not real Spaces)",
+  "failures": 0,
+  "results": {
+    "A": {
+      "checks": [
+        {
+          "name": "exit 0 (consistent after retry)",
+          "ok": true,
+          "detail": 0
+        },
+        {
+          "name": "needed a retry (overwrite detected)",
+          "ok": true,
+          "detail": 2
+        },
+        {
+          "name": "captured bytes are the NEW content",
+          "ok": true
+        }
+      ],
+      "package": "tempworks-dr_2026-10-25T15-51-27Z_55c0a4c6"
+    },
+    "B": {
+      "checks": [
+        {
+          "name": "exit 4 (INCOMPLETE)",
+          "ok": true,
+          "detail": 4
+        },
+        {
+          "name": "MANIFEST complete=false",
+          "ok": true
+        },
+        {
+          "name": "refcheck lists the vanished reference as missing (not dangling)",
+          "ok": true,
+          "detail": {
+            "missing": 1,
+            "dangling": 0
+          }
+        },
+        {
+          "name": "all retries used",
+          "ok": true,
+          "detail": 3
+        },
+        {
+          "name": "recoverability INCOMPLETE with FILES_CHANGED_DURING_BACKUP",
+          "ok": true
+        },
+        {
+          "name": "verify: integrity OK, recoverability INCOMPLETE → exit 6 (not verified)",
+          "ok": true,
+          "detail": 6
+        }
+      ],
+      "package": "tempworks-dr_2026-10-25T15-51-36Z_46f7b813"
+    },
+    "C": {
+      "checks": [
+        {
+          "name": "exit 0 (consistent after retry)",
+          "ok": true,
+          "detail": 0
+        },
+        {
+          "name": "needed a retry",
+          "ok": true,
+          "detail": 2
+        }
+      ]
+    },
+    "D": {
+      "checks": [
+        {
+          "name": "exit 6 DEGRADED (consistent, single attempt) — not COMPLETE",
+          "ok": true,
+          "detail": {
+            "code": 6,
+            "rec": "DEGRADED"
+          }
+        },
+        {
+          "name": "MANIFEST: recoverability DEGRADED, complete=false, FILES_UNRESOLVED issue",
+          "ok": true
+        },
+        {
+          "name": "evidence: listings + direct HEAD 404 + earlier snapshots searched",
+          "ok": true,
+          "detail": [
+            "live bucket s3://live-uploads: absent from every listing and direct HEAD → 404 at 2026-10-25T15:51:55.929Z",
+            "3 earlier snapshot(s): not contained"
+          ]
+        },
+        {
+          "name": "verify: integrity OK but recoverability DEGRADED → exit 6 (not \"verified\")",
+          "ok": true,
+          "detail": {
+            "code": 6
+          }
+        },
+        {
+          "name": "list: shown as DEGRADED / complete=false",
+          "ok": true
+        }
+      ]
+    },
+    "D2": {
+      "checks": [
+        {
+          "name": "NOT complete: exit 6 DEGRADED with FILES_VERSION_UNVERIFIED",
+          "ok": true,
+          "detail": {
+            "code": 6
+          }
+        },
+        {
+          "name": "candidate preserved in the backup, marked versionVerified=false, source disclosed",
+          "ok": true,
+          "detail": {
+            "from": "earlier snapshot tempworks-dr_2026-10-25T15-51-53Z_ee3a087b",
+            "verified": false
+          }
+        }
+      ]
+    },
+    "D2p": {
+      "checks": [
+        {
+          "name": "capture records the version evidence from the object metadata",
+          "ok": true,
+          "detail": "app-write-once-unique-key"
+        },
+        {
+          "name": "normal recovery still works: COMPLETE, copy versionVerified=true, identical bytes",
+          "ok": true,
+          "detail": {
+            "code": 0,
+            "verified": true
+          }
+        },
+        {
+          "name": "LIVE_STORAGE_MISSING_RECOVERED reported so live storage can be repaired",
+          "ok": true
+        }
+      ]
+    },
+    "D5": {
+      "checks": [
+        {
+          "name": "V1 captured live (COMPLETE)",
+          "ok": true,
+          "detail": 0
+        },
+        {
+          "name": "NOT COMPLETE merely because V1 is available: exit 6 DEGRADED, FILES_VERSION_UNVERIFIED",
+          "ok": true,
+          "detail": 6
+        },
+        {
+          "name": "V1 preserved as a disclosed candidate (sha, source, reason), versionVerified=false",
+          "ok": true,
+          "detail": {
+            "from": "earlier snapshot tempworks-dr_2026-10-25T15-52-09Z_944f8bb7",
+            "reason": "legacy local file: no evidence the earlier copy is the version the database references (the key may have been rewritten since)"
+          }
+        },
+        {
+          "name": "verify: integrity OK, recoverability DEGRADED (exit 6)",
+          "ok": true,
+          "detail": 6
+        }
+      ]
+    },
+    "D6": {
+      "checks": [
+        {
+          "name": "before instance B reported: unresolved, evidence names this instance + \"no inventory from any other instance\"",
+          "ok": true,
+          "detail": [
+            "instance instance-A: /tmp/stream-race-instA — absent",
+            "no inventory from any other instance yet",
+            "9 earlier snapshot(s): not contained"
+          ]
+        },
+        {
+          "name": "legacy-inventory on instance B records its file",
+          "ok": true,
+          "detail": {
+            "instance": "instance-B",
+            "root": "/tmp/stream-race-instB",
+            "files": 1,
+            "uploaded": 0,
+            "scannedAt": "2026-10-25T15:52:18.821Z"
+          }
+        },
+        {
+          "name": "inventory copy is a CANDIDATE, not proof: DEGRADED, versionVerified=false, source = instance B",
+          "ok": true,
+          "detail": {
+            "code": 6,
+            "from": "instance instance-B (inventory 2026-10-25T15:52:18.821Z)"
+          }
+        }
+      ]
+    },
+    "E": {
+      "checks": [
+        {
+          "name": "exit 143",
+          "ok": true,
+          "detail": 143
+        },
+        {
+          "name": "no uncommitted snapshot files left behind",
+          "ok": true,
+          "detail": []
+        },
+        {
+          "name": "operation lock released",
+          "ok": true
+        },
+        {
+          "name": "list does not show an interrupted snapshot",
+          "ok": true
+        }
+      ]
+    },
+    "F": {
+      "checks": [
+        {
+          "name": "second backup refused with exit 5 (lock held)",
+          "ok": true,
+          "detail": 5
+        },
+        {
+          "name": "first backup still completes",
+          "ok": true,
+          "detail": 0
+        }
+      ]
+    },
+    "G": {
+      "checks": [
+        {
+          "name": "fresh unreferenced blob survives the GC grace period (protects in-flight backups)",
+          "ok": true
+        },
+        {
+          "name": "exactly one snapshot kept (the newest complete)",
+          "ok": true,
+          "detail": [
+            "tempworks-dr_2026-10-25T15-52-25Z_7674d90b"
+          ]
+        },
+        {
+          "name": "unreferenced blobs collected after grace",
+          "ok": true,
+          "detail": {
+            "before": 23,
+            "after": 20,
+            "removed": 3
+          }
+        }
+      ]
+    },
+    "R": {
+      "checks": [
+        {
+          "name": "the last COMPLETE snapshot is kept AND the newer DEGRADED one is kept as a partial",
+          "ok": true,
+          "detail": [
+            "tempworks-dr_2026-10-25T15-52-35Z_a19b1503:DEGRADED",
+            "tempworks-dr_2026-10-25T15-52-25Z_7674d90b:COMPLETE"
+          ]
+        },
+        {
+          "name": "retention reports them separately",
+          "ok": true,
+          "detail": {
+            "kept": 2,
+            "removed": [],
+            "keptComplete": [
+              "tempworks-dr_2026-10-25T15-52-25Z_7674d90b"
+            ],
+            "keptPartial": [
+              "tempworks-dr_2026-10-25T15-52-35Z_a19b1503"
+            ],
+            "blobsKept": 20,
+            "blobsDeleted": 0,
+            "orphanSnapshotsDeleted": 0,
+            "abortedUploads": 0
+          }
+        }
+      ]
+    },
+    "H": {
+      "checks": [
+        {
+          "name": "deep verify exit 0",
+          "ok": true,
+          "detail": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,363 @@
+# Entity Relationship Diagram
+
+```mermaid
+erDiagram
+    Role {
+        String id PK
+        String name
+        String description
+        Boolean isSystem
+        DateTime createdAt
+        DateTime updatedAt
+        DateTime deletedAt
+    }
+
+    Permission {
+        String id PK
+        String name
+        String module
+        String action
+        DateTime createdAt
+    }
+
+    RolePermission {
+        String roleId PK,FK
+        String permissionId PK,FK
+    }
+
+    User {
+        String id PK
+        String email
+        String passwordHash
+        String firstName
+        String lastName
+        String phone
+        String roleId FK
+        UserStatus status
+        String agencyId FK
+        DateTime lastLoginAt
+        DateTime createdAt
+        DateTime updatedAt
+        DateTime deletedAt
+    }
+
+    Agency {
+        String id PK
+        String name
+        String country
+        String contactPerson
+        String email
+        String phone
+        AgencyStatus status
+        String logoUrl
+        String notes
+        Int maxUsersPerAgency
+        DateTime createdAt
+        DateTime updatedAt
+        DateTime deletedAt
+    }
+
+    Employee {
+        String id PK
+        String firstName
+        String lastName
+        String email
+        String phone
+        String nationality
+        EmployeeStatus status
+        DateTime dateOfBirth
+        String licenseNumber
+        String licenseCategory
+        Int yearsExperience
+        String agencyId FK
+        String photoUrl
+        String addressLine1
+        String addressLine2
+        String city
+        String country
+        String postalCode
+        String emergencyContact
+        String emergencyPhone
+        String notes
+        DateTime createdAt
+        DateTime updatedAt
+        DateTime deletedAt
+    }
+
+    WorkflowStage {
+        String id PK
+        String name
+        Int order
+        String description
+        String color
+        WorkflowCategory category
+        Boolean isActive
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    EmployeeWorkflowStage {
+        String id PK
+        String employeeId FK
+        String stageId FK
+        WorkflowStageStatus status
+        DateTime startedAt
+        DateTime completedAt
+        String notes
+        String assignedToId FK
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    JobType {
+        String id PK
+        String name
+        String description
+        Boolean isActive
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    Applicant {
+        String id PK
+        String firstName
+        String lastName
+        String email
+        String phone
+        String nationality
+        DateTime dateOfBirth
+        ApplicantStatus status
+        String jobTypeId FK
+        String residencyStatus
+        Boolean hasNationalInsurance
+        String nationalInsuranceNumber
+        Boolean hasWorkAuthorization
+        String workAuthorizationType
+        DateTime workAuthorizationExpiry
+        DateTime preferredStartDate
+        String availability
+        Boolean willingToRelocate
+        String preferredLocations
+        String salaryExpectation
+        String notes
+        DateTime createdAt
+        DateTime updatedAt
+        DateTime deletedAt
+    }
+
+    Application {
+        String id PK
+        String applicantId FK
+        ApplicationStatus status
+        DateTime submittedAt
+        DateTime reviewedAt
+        String reviewedById FK
+        String jobTypeId FK
+        String notes
+        DateTime createdAt
+        DateTime updatedAt
+        DateTime deletedAt
+    }
+
+    DocumentType {
+        String id PK
+        String name
+        String description
+        String category
+        Boolean required
+        Boolean trackExpiry
+        Int renewalPeriodDays
+        Boolean isActive
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    Document {
+        String id PK
+        String name
+        String documentTypeId FK
+        EntityType entityType
+        String entityId
+        String fileUrl
+        String mimeType
+        Int fileSize
+        DocumentStatus status
+        DateTime issueDate
+        DateTime expiryDate
+        String issuer
+        String documentNumber
+        String notes
+        String uploadedById FK
+        String verifiedById FK
+        DateTime verifiedAt
+        DateTime createdAt
+        DateTime updatedAt
+        DateTime deletedAt
+    }
+
+    WorkPermit {
+        String id PK
+        String employeeId FK
+        String permitType
+        WorkPermitStatus status
+        String permitNumber
+        DateTime applicationDate
+        DateTime approvalDate
+        DateTime expiryDate
+        String issuingAuthority
+        String notes
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    Visa {
+        String id PK
+        EntityType entityType
+        String entityId
+        String visaType
+        VisaStatus status
+        String visaNumber
+        DateTime applicationDate
+        DateTime appointmentDate
+        DateTime approvalDate
+        DateTime expiryDate
+        String embassy
+        String notes
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    ComplianceAlert {
+        String id PK
+        EntityType entityType
+        String entityId
+        String documentId FK
+        String alertType
+        AlertSeverity severity
+        String message
+        AlertStatus status
+        DateTime dueDate
+        DateTime resolvedAt
+        String resolvedById FK
+        String notes
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    Notification {
+        String id PK
+        String userId FK
+        String title
+        String message
+        NotificationType type
+        Boolean isRead
+        DateTime readAt
+        String relatedEntity
+        String relatedEntityId
+        DateTime createdAt
+        DateTime deletedAt
+    }
+
+    AuditLog {
+        String id PK
+        String userId FK
+        String userEmail
+        String action
+        String entity
+        String entityId
+        Json changes
+        String ipAddress
+        String userAgent
+        DateTime createdAt
+        DateTime deletedAt
+    }
+
+    SystemSetting {
+        String id PK
+        String key
+        String value
+        String description
+        String category
+        Boolean isPublic
+        DateTime updatedAt
+        String updatedById FK
+    }
+
+    NotificationRule {
+        String id PK
+        String name
+        String trigger
+        String entityType
+        Int daysBeforeExpiry
+        Boolean isActive
+        DateTime createdAt
+        DateTime updatedAt
+        DateTime deletedAt
+    }
+
+    %% Role & Permission
+    Role ||--o{ RolePermission : "has"
+    Permission ||--o{ RolePermission : "assigned via"
+
+    %% User
+    Role ||--o{ User : "assigned to"
+    Agency ||--o{ User : "belongs to"
+
+    %% Agency & Employee
+    Agency ||--o{ Employee : "manages"
+
+    %% Workflow
+    Employee ||--o{ EmployeeWorkflowStage : "progresses through"
+    WorkflowStage ||--o{ EmployeeWorkflowStage : "defines"
+    User ||--o{ EmployeeWorkflowStage : "assigned to (AssignedStages)"
+
+    %% Recruitment
+    JobType ||--o{ Applicant : "applied for"
+    JobType ||--o{ Application : "linked to"
+    Applicant ||--o{ Application : "submits"
+    User ||--o{ Application : "reviews (ReviewedApplications)"
+
+    %% Documents
+    DocumentType ||--o{ Document : "categorises"
+    User ||--o{ Document : "uploads (UploadedDocuments)"
+    User ||--o{ Document : "verifies (VerifiedDocuments)"
+
+    %% Work Permits
+    Employee ||--o{ WorkPermit : "holds"
+
+    %% Compliance
+    Document ||--o{ ComplianceAlert : "triggers"
+    User ||--o{ ComplianceAlert : "resolves (ResolvedAlerts)"
+
+    %% Notifications & Audit
+    User ||--o{ Notification : "receives"
+    User ||--o{ AuditLog : "generates"
+
+    %% System Settings
+    User ||--o{ SystemSetting : "updates"
+```
+
+## Enumerations
+
+| Enum | Values |
+|------|--------|
+| `UserStatus` | ACTIVE, INACTIVE, SUSPENDED, PENDING |
+| `AgencyStatus` | ACTIVE, INACTIVE, SUSPENDED |
+| `EmployeeStatus` | ACTIVE, INACTIVE, PENDING, ONBOARDING, TERMINATED, ON_LEAVE |
+| `ApplicantStatus` | NEW, SCREENING, INTERVIEW, OFFER, ACCEPTED, REJECTED, WITHDRAWN, ONBOARDING |
+| `ApplicationStatus` | DRAFT, SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED, WITHDRAWN |
+| `DocumentStatus` | PENDING, VERIFIED, REJECTED, EXPIRED, EXPIRING_SOON |
+| `WorkflowStageStatus` | PENDING, IN_PROGRESS, COMPLETED, SKIPPED, BLOCKED |
+| `WorkflowCategory` | INITIAL, DOCUMENTATION, COMPLIANCE, TRAINING, DEPLOYMENT, ADMINISTRATIVE |
+| `WorkPermitStatus` | PENDING, APPLIED, APPROVED, REJECTED, EXPIRED, CANCELLED |
+| `VisaStatus` | PENDING, APPLIED, APPOINTMENT_SCHEDULED, APPROVED, REJECTED, EXPIRED, CANCELLED |
+| `AlertSeverity` | LOW, MEDIUM, HIGH, CRITICAL |
+| `AlertStatus` | OPEN, ACKNOWLEDGED, RESOLVED, DISMISSED |
+| `NotificationType` | INFO, WARNING, ERROR, SUCCESS, COMPLIANCE, DOCUMENT_EXPIRY, WORKFLOW, SYSTEM |
+| `EntityType` | EMPLOYEE, APPLICANT, APPLICATION, AGENCY, USER |
+
+## Notes
+
+- **Polymorphic relations**: `Document`, `Visa`, and `ComplianceAlert` use `entityType` + `entityId` columns to reference multiple entity types (EMPLOYEE, APPLICANT, etc.) without a hard foreign key.
+- All primary keys are UUID strings.
+- Soft deletes are implemented via `deletedAt` on most entities.

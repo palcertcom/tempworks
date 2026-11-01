@@ -1,0 +1,100 @@
+{
+  "title": "Gösterge Paneli",
+  "welcomeBack": "Tekrar hoş geldiniz, {{name}}",
+  "user": "Kullanıcı",
+  "refresh": "Yenile",
+  "loadFailed": "Gösterge paneli verileri yüklenemedi.",
+  "retry": "Tekrar Dene",
+  "kpi": {
+    "totalEmployees": "Toplam Çalışan",
+    "activeEmployees": "Aktif Çalışanlar",
+    "pendingApplications": "Bekleyen Başvurular",
+    "expiringDocuments": "Süresi Yaklaşan",
+    "expiredDocuments": "Süresi Dolmuş Belgeler",
+    "expiredAction": "Eylem gerekli",
+    "noExpired": "Süresi dolmuş belge yok",
+    "thisMonth": "bu ay",
+    "noChangeThisMonth": "Bu ay değişiklik yok",
+    "active": "Aktif",
+    "ofTotal": "(toplamın %{{percent}})",
+    "needReview": "{{count}} inceleme bekliyor",
+    "allReviewed": "Tümü incelendi",
+    "within60Days": "60 gün içinde",
+    "within60DaysAction": "60 gün içinde — işlem gerekli"
+  },
+  "applicants": {
+    "title": "Başvuran Genel Bakış",
+    "subtitle": "Mevcut duruma göre başvuranlar",
+    "viewAllApplicants": "Tüm Başvuranları Görüntüle",
+    "viewAllCandidates": "Tüm Adayları Görüntüle",
+    "total": "Toplam",
+    "newUnreviewed": "Yeni / İncelenmemiş",
+    "screening": "Tarama",
+    "interview": "Mülakat",
+    "offerMade": "Teklif Yapıldı",
+    "accepted": "Kabul Edildi"
+  },
+  "workflow": {
+    "title": "İşe Alım İş Akışı",
+    "subtitle": "İşe alım sürecinde çalışanların aşama dağılımı",
+    "viewWorkflow": "İş Akışını Görüntüle",
+    "noStages": "Aktif iş akışı aşaması yapılandırılmadı.",
+    "employees_one": "{{count}} çalışan",
+    "employees_other": "{{count}} çalışan",
+    "documentVerification": "Belge Doğrulama",
+    "workPermit": "Çalışma İzni",
+    "visa": "Vize",
+    "onboarding": "İşe Başlatma",
+    "avgProcessingDays": "Ort. İşlem Günü",
+    "approvalRate": "Onay Oranı",
+    "daysSuffix": "{{count}}g"
+  },
+  "recentActivity": {
+    "title": "Son Aktivite",
+    "subtitle": "En son sistem olayları",
+    "empty": "Yeni aktivite yok.",
+    "viewAll": "Tüm Aktiviteleri Görüntüle",
+    "system": "Sistem",
+    "uploaded": "{{entity}} yüklendi",
+    "verified": "{{entity}} doğrulandı",
+    "rejected": "{{entity}} reddedildi",
+    "created": "{{entity}} oluşturuldu",
+    "updated": "{{entity}} güncellendi",
+    "deleted": "{{entity}} silindi",
+    "renewed": "{{entity}} yenilendi",
+    "converted": "{{entity}} dönüştürüldü",
+    "fallback": "{{entity}} {{action}}"
+  },
+  "recentEmployees": {
+    "title": "Son Çalışanlar",
+    "subtitle": "En son kayıtlar",
+    "viewAll": "Tümünü Görüntüle",
+    "empty": "Henüz çalışan kaydı yok."
+  },
+  "expiredDocuments": {
+    "title": "Süresi Dolan Belgeler",
+    "subtitleCount": "Yenilemesiz {{count}} süresi dolmuş",
+    "subtitleLoading": "…",
+    "viewAll": "Tümünü Görüntüle",
+    "emptyZero": "Yenilemesiz süresi dolan belge yok.",
+    "emptyOther": "0 / 0 süresi dolan belge gösteriliyor.",
+    "expiredOn": "{{date}} tarihinde sona erdi ({{days}}g önce)",
+    "more": "+{{count}} daha —",
+    "moreLink": "tümünü görüntüle",
+    "expiredBadge": "Süresi Doldu"
+  },
+  "quickActions": {
+    "title": "Hızlı İşlemler",
+    "subtitle": "Sık kullanılan görevler için kısayollar",
+    "addEmployee": "Çalışan Ekle",
+    "uploadDocument": "Belge Yükle",
+    "viewWorkflow": "İş Akışını Görüntüle",
+    "reports": "Raporlar"
+  },
+  "timeAgo": {
+    "justNow": "az önce",
+    "minutesAgo": "{{count}}d önce",
+    "hoursAgo": "{{count}}s önce",
+    "daysAgo": "{{count}}g önce"
+  }
+}

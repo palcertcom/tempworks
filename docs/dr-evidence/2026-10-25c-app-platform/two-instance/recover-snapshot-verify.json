@@ -1,0 +1,1 @@
+{"package":"tempworks-dr_2026-10-25T11-57-10Z_0558ab93","verified":true,"deep":true,"problems":[],"checks":["database.dump 307.20 KB sha256 ok","database.dump parsed completely by pg_restore","uploads: 8 file(s), 0 problem(s) (deep re-hash)"],"complete":true,"kind":"full"}

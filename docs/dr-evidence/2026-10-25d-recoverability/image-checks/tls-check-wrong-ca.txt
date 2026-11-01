@@ -1,0 +1,6 @@
+✗ postgres pg-ci.internal:55432 [app policy] app policy (sslmode=require, CA configured): verified: UNABLE_TO_VERIFY_LEAF_SIGNATURE unable to verify the first certificate
+✗ postgres pg-ci.internal:55432 [chain]      chain verified: UNABLE_TO_VERIFY_LEAF_SIGNATURE unable to verify the first certificate
+✗ postgres pg-ci.internal:55432 [chain+hostname] chain + host name verified: UNABLE_TO_VERIFY_LEAF_SIGNATURE unable to verify the first certificate
+
+NOT ALL VERIFIED — keep the current setting until the failures above are resolved (see docs).
+{"tlsCheck":"failed","results":[{"target":"postgres pg-ci.internal:55432 [app policy]","ok":false,"detail":"app policy (sslmode=require, CA configured): verified: UNABLE_TO_VERIFY_LEAF_SIGNATURE unable to verify the first certificate","connects":false},{"target":"postgres pg-ci.internal:55432 [chain]","ok":false,"detail":"chain verified: UNABLE_TO_VERIFY_LEAF_SIGNATURE unable to verify the first certificate"},{"target":"postgres pg-ci.internal:55432 [chain+hostname]","ok":false,"detail":"chain + host name verified: UNABLE_TO_VERIFY_LEAF_SIGNATURE unable to verify the first certificate"}]}

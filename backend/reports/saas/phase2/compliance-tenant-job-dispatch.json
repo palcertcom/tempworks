@@ -1,0 +1,51 @@
+{
+  "passed": 9,
+  "total": 9,
+  "cases": [
+    {
+      "name": "1. fan-out refused when TENANT_JOB_FANOUT_ENABLED=false",
+      "ok": true,
+      "detail": "TENANT_JOB_FANOUT_ENABLED=false"
+    },
+    {
+      "name": "2. fan-out refused when TENANT_PRISMA_PILOT_ENABLED=false",
+      "ok": true,
+      "detail": "pilot inactive: TENANT_PRISMA_PILOT_ENABLED=false"
+    },
+    {
+      "name": "3. compliance not allow-listed: dispatch is safe (refused or no-new)",
+      "ok": true,
+      "detail": "processed=2 noNew=true"
+    },
+    {
+      "name": "4. fan-out enumerates only ACTIVE tenants",
+      "ok": true,
+      "detail": "processed=2 ids=11111111,22222222"
+    },
+    {
+      "name": "5. each per-tenant scan ran inside its own ALS frame",
+      "ok": true,
+      "detail": "okCount=2/2"
+    },
+    {
+      "name": "6. dispatch creates no NULL-tenant or cross-tenant alerts",
+      "ok": true,
+      "detail": "newNull=false newA=1 newB=1"
+    },
+    {
+      "name": "7. one tenant failure does not abort loop or leak",
+      "ok": true,
+      "detail": "aOk=false bOk=true"
+    },
+    {
+      "name": "8. dispatch never calls raw generateAlerts()",
+      "ok": true,
+      "detail": "forTenant=true raw=false"
+    },
+    {
+      "name": "9. concurrent dispatches remain ALS-isolated",
+      "ok": true,
+      "detail": "r1=2 r2=2"
+    }
+  ]
+}

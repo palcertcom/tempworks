@@ -1,0 +1,71 @@
+{
+  "passed": 13,
+  "total": 13,
+  "cases": [
+    {
+      "name": "1. duplicate report runs read-only (BEGIN READ ONLY + no write SQL)",
+      "ok": true,
+      "detail": "readOnlyTxn=true noWrites=true"
+    },
+    {
+      "name": "2. duplicate report writes JSON and MD",
+      "ok": true,
+      "detail": "json=true md=true"
+    },
+    {
+      "name": "3. Employee.email same-tenant duplicates detected",
+      "ok": true,
+      "detail": "groups=1"
+    },
+    {
+      "name": "4. Applicant.email same-tenant duplicates detected",
+      "ok": true,
+      "detail": "groups=1"
+    },
+    {
+      "name": "5. Employee.employeeNumber same-tenant duplicates detected",
+      "ok": true,
+      "detail": "groups=1"
+    },
+    {
+      "name": "6. NULL-tenant duplicate rows reported separately",
+      "ok": true,
+      "detail": "groups=1"
+    },
+    {
+      "name": "7. Cross-tenant same email reported (not blocking)",
+      "ok": true,
+      "detail": "xt=1 blocking=4"
+    },
+    {
+      "name": "8. script makes no net row changes (counts unchanged after cleanup)",
+      "ok": true,
+      "detail": "before={\"employees\":12,\"applicants\":4,\"users\":6,\"tenants\":2,\"platform_admins\":0} after={\"employees\":12,\"applicants\":4,\"users\":6,\"tenants\":2,\"platform_admins\":0}"
+    },
+    {
+      "name": "9. no Phase 3.0 unique-constraint migration created in this phase",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "10. PlatformAdmin foundation doc exists",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "11. Uniqueness audit doc exists",
+      "ok": true,
+      "detail": "present"
+    },
+    {
+      "name": "12. Phase 2.61/2.62/2.63 harness wiring intact in package.json",
+      "ok": true,
+      "detail": "all scripts present"
+    },
+    {
+      "name": "13. cumulative regression chain outputs present from prior runs",
+      "ok": true,
+      "detail": "present=4/4"
+    }
+  ]
+}

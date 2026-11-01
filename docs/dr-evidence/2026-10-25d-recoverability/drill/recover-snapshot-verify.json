@@ -1,0 +1,1 @@
+{"package":"tempworks-dr_2026-10-25T14-50-52Z_ebedccaa","integrity":"OK","recoverability":"COMPLETE","verified":true,"deep":true,"problems":[],"checks":["database.dump 309.87 KB sha256 ok","database.dump parsed completely by pg_restore","uploads: 8 file(s), 0 problem(s) (deep re-hash)"],"complete":true,"kind":"full","recoveryIssues":[]}

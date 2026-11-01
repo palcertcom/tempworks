@@ -1,0 +1,100 @@
+{
+  "title": "Dashboard",
+  "welcomeBack": "Welcome back, {{name}}",
+  "user": "User",
+  "refresh": "Refresh",
+  "loadFailed": "Failed to load dashboard data.",
+  "retry": "Retry",
+  "kpi": {
+    "totalEmployees": "Total Employees",
+    "activeEmployees": "Active Employees",
+    "pendingApplications": "Pending Applications",
+    "expiringDocuments": "Expiring Soon",
+    "expiredDocuments": "Expired Documents",
+    "expiredAction": "Action needed",
+    "noExpired": "No expired documents",
+    "thisMonth": "this month",
+    "noChangeThisMonth": "No change this month",
+    "active": "Active",
+    "ofTotal": "({{percent}}% of total)",
+    "needReview": "{{count}} need review",
+    "allReviewed": "All reviewed",
+    "within60Days": "Within 60 days",
+    "within60DaysAction": "Within 60 days — action needed"
+  },
+  "applicants": {
+    "title": "Applicants Overview",
+    "subtitle": "Job applicants by current status",
+    "viewAllApplicants": "View All Applicants",
+    "viewAllCandidates": "View All Candidates",
+    "total": "Total",
+    "newUnreviewed": "New / Unreviewed",
+    "screening": "Screening",
+    "interview": "Interview",
+    "offerMade": "Offer Made",
+    "accepted": "Accepted"
+  },
+  "workflow": {
+    "title": "Recruitment Workflow",
+    "subtitle": "Current stage distribution of employees in the recruitment process",
+    "viewWorkflow": "View Workflow",
+    "noStages": "No active workflow stages configured.",
+    "employees_one": "{{count}} employee",
+    "employees_other": "{{count}} employees",
+    "documentVerification": "Document Verification",
+    "workPermit": "Work Permit",
+    "visa": "Visa",
+    "onboarding": "Onboarding",
+    "avgProcessingDays": "Avg. Processing Days",
+    "approvalRate": "Approval Rate",
+    "daysSuffix": "{{count}}d"
+  },
+  "recentActivity": {
+    "title": "Recent Activity",
+    "subtitle": "Latest system events",
+    "empty": "No recent activity.",
+    "viewAll": "View All Activity",
+    "system": "System",
+    "uploaded": "{{entity}} uploaded",
+    "verified": "{{entity}} verified",
+    "rejected": "{{entity}} rejected",
+    "created": "{{entity}} created",
+    "updated": "{{entity}} updated",
+    "deleted": "{{entity}} deleted",
+    "renewed": "{{entity}} renewed",
+    "converted": "{{entity}} converted",
+    "fallback": "{{entity}} {{action}}"
+  },
+  "recentEmployees": {
+    "title": "Recent Employees",
+    "subtitle": "Latest registrations",
+    "viewAll": "View All",
+    "empty": "No employees registered yet."
+  },
+  "expiredDocuments": {
+    "title": "Expired Documents",
+    "subtitleCount": "{{count}} expired with no renewal",
+    "subtitleLoading": "…",
+    "viewAll": "View All",
+    "emptyZero": "No expired documents without renewals.",
+    "emptyOther": "Showing 0 of 0 expired documents.",
+    "expiredOn": "Expired {{date}} ({{days}}d ago)",
+    "more": "+{{count}} more —",
+    "moreLink": "view all",
+    "expiredBadge": "Expired"
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "subtitle": "Shortcuts to common tasks",
+    "addEmployee": "Add Employee",
+    "uploadDocument": "Upload Document",
+    "viewWorkflow": "View Workflow",
+    "reports": "Reports"
+  },
+  "timeAgo": {
+    "justNow": "just now",
+    "minutesAgo": "{{count}}m ago",
+    "hoursAgo": "{{count}}h ago",
+    "daysAgo": "{{count}}d ago"
+  }
+}

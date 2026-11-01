@@ -1,0 +1,69 @@
+{
+  "slug": "07-reports-sql",
+  "title": "Audit G — Reports SQL",
+  "startedAt": "2026-05-09T14:53:03.117Z",
+  "durationMs": 351,
+  "status": "BLOCKER",
+  "metrics": [
+    {
+      "key": "reports.scanned-files",
+      "value": 1
+    },
+    {
+      "key": "reports.source-decl-occurrences",
+      "value": 3
+    },
+    {
+      "key": "reports.raw-sql-occurrences",
+      "value": 13
+    },
+    {
+      "key": "reports.files-with-tenantColumn",
+      "value": 0
+    },
+    {
+      "key": "exports.exceljs.files",
+      "value": 6
+    },
+    {
+      "key": "exports.pdfkit.files",
+      "value": 2
+    },
+    {
+      "key": "exports.docx.files",
+      "value": 1
+    }
+  ],
+  "findings": [
+    {
+      "severity": "BLOCKER",
+      "rule": "reports.raw-sql-without-tenant-column",
+      "message": "Found 13 raw-SQL occurrences but no source declares `tenantColumn`. Phase 3 reports refactor (ADR-007) MUST land before Phase 2 enforcement.",
+      "detail": [
+        {
+          "file": "src/reports/reports.service.ts",
+          "declarationsFound": 3,
+          "rawSqlOccurrences": 13,
+          "hasTenantColumnHint": false
+        }
+      ]
+    },
+    {
+      "severity": "INFO",
+      "rule": "reports.files-listed",
+      "message": "Scanned 1 files.",
+      "detail": [
+        {
+          "file": "src/reports/reports.service.ts",
+          "declarationsFound": 3,
+          "rawSqlOccurrences": 13,
+          "hasTenantColumnHint": false
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "This audit is static (no DB queries). It estimates the Phase 3 reports-engine refactor.",
+    "Phase 1 does NOT touch the reports module."
+  ]
+}

@@ -1,0 +1,190 @@
+
+[drill 08:55:42] init: workspace /tmp/tw-drill + secret store (credentials live OUTSIDE every backup)
+secret store: /tmp/tw-drill/secret-store/secrets.env (mode 600) — values are never printed
+
+[drill 08:55:45] s3-up: LOCAL S3-compatible simulator (s3rver) on :5555 — NOT DigitalOcean Spaces
+buckets: src-uploads (source), rec-uploads (recovery), dr-offsite (independently retained copies)
+
+[drill 08:55:47] release: build the deployable artifact and retain it OFF-SITE (independent of the source server)
+[spaces-sync] offsite put s3://dr-offsite/artifacts/tempworks-release-e9a27b377a5834c5a05f473eff9a20e2a47639f6.tar.gz
+[spaces-sync] offsite verify s3://dr-offsite/artifacts/tempworks-release-e9a27b377a5834c5a05f473eff9a20e2a47639f6.tar.gz: OK
+release artifact: tempworks-release-e9a27b377a5834c5a05f473eff9a20e2a47639f6.tar.gz → s3://dr-offsite/artifacts/ (verified: True)
+
+[drill 08:56:30] source-up: SOURCE stack — PostgreSQL 18 :57432, app role is a NON-superuser DB owner (like a managed DB)
+
+[drill 08:56:32] schema: prisma db push (schema.prisma) → db:migrate:all (hand-written SQL migrations)
+SQL migrations: some failed — see evidence/source-sql-migrations.log (historical scripts; recorded, not hidden)
+✅  Succeeded: 27/28
+❌  Failed: 1
+
+[drill 08:56:35] seed: real seed (roles, permissions, owner tenant/agency, platform admin)
+Created 3 sample employees
+Created 2 sample applicants
+Seed completed successfully!
+[Nest] 7615  - 10/25/2026, 8:56:40 AM     LOG [PrismaService] drift-heal: 117/117 statements applied (idempotent)
+[Nest] 7615  - 10/25/2026, 8:56:40 AM     LOG [StorageService] Storage driver: spaces (bucket=src-uploads, public=http://127.0.0.1:5555/src-uploads)
+[Nest] 7615  - 10/25/2026, 8:56:40 AM     LOG [NestApplication] Nest application successfully started +47ms
+SOURCE up: web http://127.0.0.1:8101  api http://127.0.0.1:3101/api/v1
+
+[drill 08:56:42] source-data: create multi-tenant data THROUGH THE APPLICATION API
+  ✓ platform admin signed in (login-v2, company "tempworks")
+  ✓ tenant alpha: tenant + agency + 2 user(s) created via API
+  ✓ tenant beta: tenant + agency + 1 user(s) created via API
+  ✓ tenant alpha: 2 employee(s), documents and photo uploaded through the API
+  ✓ tenant beta: 1 employee(s), documents and photo uploaded through the API
+  ✓ source tenant isolation: alpha sees its 2 employee(s) and none of the other tenant's
+  ✓ source downloads: all 4 alpha attachment(s) byte-identical
+  ✓ source tenant isolation: beta sees its 1 employee(s) and none of the other tenant's
+  ✓ source downloads: all 2 beta attachment(s) byte-identical
+  ✓ source: cross-tenant attachment download denied (HTTP 404)
+source data recorded → /tmp/tw-drill/evidence/source-data.json  (3 employees, 6 documents, 2 photos)
+
+[drill 08:56:47] ui-backup: trigger a FULL SYSTEM backup from the admin UI (frontend → API → background job → DR tooling)
+  ✓ signed in through the UI as platform admin
+  ✓ backup page loaded; preflight banner: READY
+  ✓ "Full system" backup requested from the UI
+  ✓ background job finished: COMPLETED in 4.2s, kind=FULL_SYSTEM, off-site=VERIFIED
+  ✓ integrity verified from the UI: VERIFIED
+backup recorded → /tmp/tw-drill/evidence/ui-backup.json
+
+[drill 08:56:58] concurrency: app-driven uploads / photo replacements (purge old object) / deletions DURING backups
+A) deterministic race: API writes inside the snapshot→file-capture window
+  · during window: upload=201 photo-replace=200 renew=201 soft-delete=200
+  ✓ photo purge inside the window was DETECTED and the capture retried → consistent on attempt 2
+  ✓ final package: 10 referenced file(s), 0 missing, 0 unreferenced (post-snapshot uploads/old objects)
+  ✓ race A package passes verify.sh
+B) real overlap: API-triggered FULL backup while a write load runs
+  ✓ second backup request while one is running → HTTP 503 (advisory lock prevents overlap)
+  · load during backup: {"uploads":63,"photoReplacements":63,"deletes":31,"errors":0}
+  ✓ backup under load: explicitly INCOMPLETE (never presented as complete) — acceptable outcome
+concurrency results → /tmp/tw-drill/evidence/concurrency.json
+
+[drill 08:57:16] schedule: scheduled FULL backups (cron + TZ), overlap safety, status/staleness reporting
+[Nest] 9681  - 10/25/2026, 8:57:19 AM     LOG [BackupSchedule] Scheduled FULL_SYSTEM backups: cron "* * * * *" (Europe/Bratislava); next run 2026-10-25T09:58:00.000+01:00
+  ✓ schedule ACTIVE: cron "* * * * *" (Europe/Bratislava), kind FULL_SYSTEM, next run 2026-10-25T09:58:00.000+01:00
+  · holding the backup lock for 60s across the next scheduled tick…
+  ✓ tick while another operation held the lock → SKIPPED_BUSY (no overlap), audited (1 entry)
+  ✓ next scheduled run: COMPLETED FULL_SYSTEM, integrity VERIFIED, off-site VERIFIED (notes "[SCHEDULED]")
+  ✓ staleness: not stale (newest verified backup 0.0 min old, limit 26 h)
+
+[drill 08:59:06] disaster: STOP the source app and DESTROY its server-local state + storage
+source API unreachable ✓
+source DB unreachable ✓
+source bucket gone ✓
+
+[drill 08:59:06] recover: rebuild TempWorks on a CLEAN stack using only off-site copies + secret store + prerequisites
+
+[drill 08:59:06] 1/7 fetch release artifact + backup package from OFF-SITE storage
+[spaces-sync] offsite get s3://dr-offsite/artifacts/tempworks-release-e9a27b377a5834c5a05f473eff9a20e2a47639f6.tar.gz -> /tmp/tw-drill/recovery/incoming/tempworks-release-e9a27b377a5834c5a05f473eff9a20e2a47639f6.tar.gz
+[spaces-sync] offsite get s3://dr-offsite/artifacts/tempworks-release-e9a27b377a5834c5a05f473eff9a20e2a47639f6.tar.gz.sha256 -> /tmp/tw-drill/recovery/incoming/tempworks-release-e9a27b377a5834c5a05f473eff9a20e2a47639f6.tar.gz.sha256
+[spaces-sync] offsite get s3://dr-offsite/dr/tempworks-dr_2026-10-25T08-56-54Z_d4a27306.tar.gz -> /tmp/tw-drill/recovery/incoming/tempworks-dr_2026-10-25T08-56-54Z_d4a27306.tar.gz
+[spaces-sync] offsite get s3://dr-offsite/dr/tempworks-dr_2026-10-25T08-56-54Z_d4a27306.tar.gz.sha256 -> /tmp/tw-drill/recovery/incoming/tempworks-dr_2026-10-25T08-56-54Z_d4a27306.tar.gz.sha256
+tempworks-release-e9a27b377a5834c5a05f473eff9a20e2a47639f6.tar.gz: OK
+tempworks-dr_2026-10-25T08-56-54Z_d4a27306.tar.gz: OK
+
+[drill 08:59:07] 2/7 unpack the release into a SEPARATE app directory (not the source working tree)
+
+[drill 08:59:23] 3/7 fresh PostgreSQL 18 instance (no roles, no data)
+roles named tempworks* on fresh cluster: 0
+
+[drill 08:59:24] 4/7 restore database + roles + uploaded files (empty bucket rec-uploads) with the ARTIFACT's toolkit
+✓ restore refuses to guess the storage target (no silent local fallback)
+NOTICE:  database "guard_check" does not exist, skipping
+  ✓ globals: database/globals.sql sha ok
+  ✓ database: database/database.dump sha ok
+✓ package completeness: all DB-referenced files captured
+     skipped provider-managed role statement: CREATE ROLE postgres;
+     skipped provider-managed role statement: ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
+✓ globals applied (provider-managed roles skipped explicitly)
+remapping storage URLs: http://127.0.0.1:5555/src-uploads/… → http://127.0.0.1:5555/rec-uploads/…
+     NOTICE:  storage URL remap: 8 row(s) updated
+✓ storage URL remap complete — no document references the old storage.
+reconstructing backup catalog (package tempworks-dr_2026-10-25T08-56-54Z_d4a27306, catalogId 18459d2b-3d77-4d9c-9cf1-e5e6e5572538)…
+✓ catalog reconstructed: package registered as COMPLETED + VERIFIED + RESTORE-TESTED.
+✓ all 84 tables present after restore
+✓ database owned by tempworks_app; it can create objects in schema public (future migrations work)
+RESTORE OK — database + uploads restored and verified on target.
+
+[drill 08:59:27] 5/7 recover credentials from the secret store (role passwords are never in backups)
+
+[drill 08:59:27] 6/7 recovery configuration (own ports, own bucket, side effects disabled) + start services
+[Nest] 11040  - 10/25/2026, 8:59:29 AM   ERROR [EmailService] RESEND_API_KEY not found in environment! ConfigService returned: "" | process.env: "". Emails will NOT be sent. Restart the backend after fixing .env
+[Nest] 11040  - 10/25/2026, 8:59:29 AM     LOG [PrismaService] drift-heal: 117/117 statements applied (idempotent)
+[Nest] 11040  - 10/25/2026, 8:59:29 AM     LOG [StorageService] Storage driver: spaces (bucket=rec-uploads, public=http://127.0.0.1:5555/rec-uploads)
+[Nest] 11040  - 10/25/2026, 8:59:30 AM     LOG [NestApplication] Nest application successfully started +15ms
+
+[drill 08:59:31] 7/7 recovery complete
+RECOVERY up: web http://127.0.0.1:8201  api http://127.0.0.1:3201/api/v1
+
+[drill 08:59:31] verify: end-to-end checks against the RECOVERED application (UI + API + DB + storage)
+0) independence from the lost source
+  ✓ recovery config references no source DB/API/bucket
+  ✓ source API is down
+  ✓ source upload bucket is gone
+  ✓ recovered backend runs from the unpacked release artifact, not the source tree — cwd=/tmp/tw-drill/recovery/app/backend gitSha=e9a27b377a58
+  ✓ recovered app can run its schema migrations (boot drift-heal applies all statements) — 117/117
+  ✓ outbound email is disabled in the recovered app
+1) login + permissions (original credentials restored with the data)
+  ✓ platform admin logs in with the ORIGINAL password
+  ✓ tenant users log in (alpha HR, beta HR, alpha read-only)
+  ✓ wrong password is rejected
+  ✓ cross-tenant login is rejected (alpha user → company beta)
+  ✓ Read Only user cannot create employees — HTTP 403
+2) tenant isolation
+  ✓ alpha sees all 2 of its recovered employees
+  ✓ alpha sees none of the other tenant's employees
+  ✓ beta sees all 1 of its recovered employees
+  ✓ beta sees none of the other tenant's employees
+  ✓ direct cross-tenant record access is denied — HTTP 403
+  ✓ cross-tenant attachment download is denied — HTTP 404
+  ✓ bulk ZIP download excludes the other tenant's file — HTTP 200, 1 file(s)
+3) existing attachments, storage references, recovery point
+  ✓ attachment "Oleksii Work Contract" downloads byte-identical — HTTP 200
+  ✓ attachment "Oleksii Identity Document" downloads byte-identical — HTTP 200
+  ✓ attachment "Tawanda Work Contract" downloads byte-identical — HTTP 200
+  ✓ attachment "Tawanda Identity Document" downloads byte-identical — HTTP 200
+  ✓ attachment "Ingrid Work Contract" downloads byte-identical — HTTP 200
+  ✓ attachment "Ingrid Identity Document" downloads byte-identical — HTTP 200
+  ✓ every document fileUrl points at the RECOVERY bucket (remapped) — rec=6 src=0
+  ✓ profile photo (alpha) is the one captured at the recovery point
+  ✓ profile photo (beta) is the one captured at the recovery point
+  ✓ records written AFTER the backup are absent (recovery point = backup snapshot) — 0 found
+  ✓ document soft-deleted after the backup is active again (state as of the snapshot)
+4) business workflows on the recovered system
+  ✓ employee profile documents list loads
+  ✓ create employee succeeds — HTTP 201
+  ✓ employee number continues the sequence (no collision) — E20261000003 → E20261000004
+  ✓ update employee persists
+  ✓ new upload accepted — HTTP 201
+  ✓ new upload stored in the recovery bucket
+  ✓ new upload downloads byte-identical
+5) database ownership, grants, constraints, sequences
+  ✓ all public tables owned by the app role
+  ✓ read-only role grants restored — 83 table grants
+ERROR:  insert or update on table "documents" violates foreign key constraint "documents_documentTypeId_fkey"
+DETAIL:  Key (documentTypeId)=(no-such-type) is not present in table "document_types".
+  ✓ foreign-key constraint enforced
+ERROR:  duplicate key value violates unique constraint "users_email_key"
+DETAIL:  Key (email)=(admin@tempworks.com) already exists.
+  ✓ unique constraint enforced
+  ✓ identity/serial sequences advance — platform_audit_logs_id_seq,saas_phase1_seq_snapshot_id_seq,saas_reconciliation_queue_id_seq,user_number_sequences_id_seq
+  ✓ backup catalog reconstructed: restored package = COMPLETED|VERIFIED|restore-tested — COMPLETED|VERIFIED|true
+  ✓ no orphaned RUNNING rows in the recovered catalog
+  ✓ recovered catalog row describes the package (kind, file count, size, off-site source) — kind=FULL_SYSTEM files=8 size=96490 offsite=VERIFIED
+  ✓ recovered system re-verifies the package it was restored from
+6) file inventory + checksum parity with the backup package
+  ✓ all 8 captured files present in recovery storage with identical SHA-256 — missing=0 mismatch=0
+7) recovered UI (browser)
+  ✓ UI login (tenant alpha HR) reaches the dashboard
+  ✓ UI employee list shows alpha employees only
+  ✓ UI "Download" link serves an original attachment from recovery storage — http://127.0.0.1:5555/rec-uploads/documents/EMPLOYEE/d8e3bf67-ed0c-4583-ab7f-aa907e214aa5/National_ID_Card/ce220b21-7533-48fa-af00-7aeda0d3bb87.pdf
+  ✓ file uploaded through the recovered UI is stored + served byte-identical
+  ✓ recovered admin UI shows the restored backup in its catalog
+
+RECOVERY VERIFICATION: 51/51 checks passed
+
+[drill 08:59:43] schema parity: source schema (captured pre-disaster) vs recovered schema
+✓ schema parity: recovered schema-only dump is IDENTICAL to the source (incl. non-Prisma SQL objects)
+
+[drill 08:59:43] RECOVERY DRILL PASSED
+FULL DRILL EXIT: 0  wall=241s

@@ -1,0 +1,5 @@
+[Nest] 11040  - 10/25/2026, 8:59:29 AM   ERROR [EmailService] RESEND_API_KEY not found in environment! ConfigService returned: "" | process.env: "". Emails will NOT be sent. Restart the backend after fixing .env
+[Nest] 11040  - 10/25/2026, 8:59:29 AM     LOG [PrismaService] drift-heal: 117/117 statements applied (idempotent)
+[Nest] 11040  - 10/25/2026, 8:59:29 AM     LOG [StorageService] Storage driver: spaces (bucket=rec-uploads, public=http://127.0.0.1:5555/rec-uploads)
+[Nest] 11040  - 10/25/2026, 8:59:30 AM    WARN [BackupSchedule] Scheduled backups are DISABLED (BACKUP_SCHEDULE_CRON is not set).
+[Nest] 11040  - 10/25/2026, 8:59:30 AM     LOG [NestApplication] Nest application successfully started +15ms

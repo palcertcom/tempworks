@@ -1,0 +1,97 @@
+{
+  "tenants": {
+    "list": {
+      "title": "[!Ténänts!]",
+      "subtitle": "[!Plätførm-wídé ténänt ädmínísträtíøn!]",
+      "addTenant": "[!Ädd Ténänt!]",
+      "searchPlaceholder": "[!Séärch by nämé, slüg, ør dømäín…!]",
+      "allStatuses": "[!Äll stätüsés!]",
+      "includeDeleted": "[!Ínclüdé délétéd!]",
+      "loading": "[!Løädíng…!]",
+      "empty": "[!Nø ténänts føünd.!]",
+      "view": "[!Víéw!]",
+      "edit": "[!Édít!]",
+      "archive": "[!Ärchívé!]",
+      "activate": "[!Äctíväté!]",
+      "restore": "[!Réstøré!]",
+      "delete": "[!Délété!]",
+      "cols": {
+        "name": "[!Nämé!]",
+        "slug": "[!Slüg!]",
+        "domain": "[!Dømäín!]",
+        "status": "[!Stätüs!]",
+        "created": "[!Créätéd!]",
+        "actions": "[!Äctíøns!]"
+      }
+    },
+    "form": {
+      "titleCreate": "[!Néw Ténänt!]",
+      "titleEdit": "[!Édít Ténänt!]",
+      "subtitle": "[!Ténänt prøfílé änd øpérätíønäl séttíngs!]",
+      "save": "[!Sävé!]",
+      "saving": "[!Sävíng…!]",
+      "cancel": "[!Cäncél!]",
+      "slugHelp": "[!Løwércäsé, ÜRL-säfé. Üséd ín ténänt-äwäré løgín.!]",
+      "slugImmutable": "[!Slüg chängés réqüíré ä SÜPÉR Plätførm Ädmín.!]",
+      "sections": {
+        "general": "[!Généräl!]",
+        "branding": "[!Brändíng!]",
+        "contact": "[!Cøntäct & Nøtés!]"
+      }
+    },
+    "fields": {
+      "name": "[!Nämé!]",
+      "slug": "[!Slüg!]",
+      "customDomain": "[!Cüstøm Dømäín!]",
+      "status": "[!Stätüs!]",
+      "region": "[!Régíøn!]",
+      "logoUrl": "[!Løgø ÜRL!]",
+      "primaryColor": "[!Prímäry Cølør!]",
+      "timezone": "[!Tímézøné!]",
+      "locale": "[!Løcälé!]",
+      "contactEmail": "[!Cøntäct Émäíl!]",
+      "contactPhone": "[!Cøntäct Phøné!]",
+      "address": "[!Äddréss!]",
+      "notes": "[!Nøtés!]",
+      "planId": "[!Plän!]",
+      "onboardingStatus": "[!Ønbøärdíng!]",
+      "createdAt": "[!Créätéd ät!]",
+      "updatedAt": "[!Üpdätéd ät!]"
+    },
+    "statuses": {
+      "active": "[!Äctívé!]",
+      "suspended": "[!Süspéndéd!]",
+      "inactive": "[!Ínäctívé!]"
+    },
+    "tabs": {
+      "general": "[!Généräl!]",
+      "branding": "[!Brändíng!]",
+      "access": "[!Äccéss!]",
+      "stats": "[!Stätístícs!]",
+      "flags": "[!Féätüré Flägs!]"
+    },
+    "stats": {
+      "agencies": "[!Ägéncíés!]",
+      "users": "[!Üsérs!]",
+      "employees": "[!Émpløyéés!]",
+      "applicants": "[!Äpplícänts!]",
+      "documents": "[!Døcüménts!]",
+      "memberships": "[!Mémbérshíps!]",
+      "unavailable": "[!Stätístícs ünäväíläblé.!]"
+    },
+    "flags": {
+      "empty": "[!Nø féätüré flägs cønfígüréd.!]"
+    },
+    "deleted": "[!Délétéd!]",
+    "confirmArchiveTitle": "[!Ärchívé ténänt?!]",
+    "confirmArchiveDesc": "[!Thé ténänt wíll bé süspéndéd änd ünäväíläblé tø íts üsérs.!]",
+    "confirmDeleteTitle": "[!Délété ténänt?!]",
+    "confirmDeleteDesc": "[!Søft-délétés thé ténänt. Ít cän bé réstøréd by ä SÜPÉR ädmín.!]",
+    "toastCreated": "[!Ténänt créätéd!]",
+    "toastUpdated": "[!Ténänt üpdätéd!]",
+    "toastArchived": "[!Ténänt ärchívéd!]",
+    "toastActivated": "[!Ténänt äctívätéd!]",
+    "toastRestored": "[!Ténänt réstøréd!]",
+    "toastDeleted": "[!Ténänt délétéd!]"
+  }
+}

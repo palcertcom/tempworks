@@ -1,0 +1,9 @@
+{
+  "label": "staging-engine",
+  "exitCode": 0,
+  "durationS": 173.8,
+  "peakDiskBytes": 1976770091,
+  "peakDiskMiB": 1885.2,
+  "peakRssBytes": 2083827712,
+  "peakRssMiB": 1987.3
+}

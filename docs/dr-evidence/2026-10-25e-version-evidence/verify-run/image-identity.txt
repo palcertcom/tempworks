@@ -1,0 +1,8 @@
+commit=b369d872efadc849b59f37ee7015342639caaada
+dockerfile_sha256=b3c1509154f3a2c224545149c0e2f5cc5b0395edbc02307ae0d8f387b77f8baa
+base_image=node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d
+image_id=sha256:e136b31131056bf18c1165d8767ac67252328ec1f1d3f52a1159555a4c4e10c5
+image_user=node
+image_size_bytes=1132004540
+built_at=2026-10-25T16:02:46Z
+exact_production_build=no

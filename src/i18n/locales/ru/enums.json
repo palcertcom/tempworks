@@ -1,0 +1,296 @@
+{
+  "userStatus": {
+    "ACTIVE": "Активен",
+    "INACTIVE": "Неактивен",
+    "SUSPENDED": "Приостановлен",
+    "PENDING": "Ожидание",
+    "TERMINATED": "Завершён"
+  },
+  "agencyStatus": {
+    "ACTIVE": "Активно",
+    "INACTIVE": "Неактивно",
+    "SUSPENDED": "Приостановлено"
+  },
+  "agencyApprovalStatus": {
+    "PENDING_APPROVAL": "Ожидает одобрения",
+    "APPROVED": "Одобрено",
+    "REJECTED": "Отклонено"
+  },
+  "employeeStatus": {
+    "ACTIVE": "Активен",
+    "INACTIVE": "Неактивен",
+    "PENDING": "Ожидание",
+    "ONBOARDING": "Адаптация",
+    "TERMINATED": "Завершён",
+    "ON_LEAVE": "В отпуске",
+    "SUSPENDED": "Приостановлен"
+  },
+  "applicantStatus": {
+    "NEW": "Новый",
+    "SCREENING": "Отбор",
+    "INTERVIEW": "Собеседование",
+    "OFFER": "Предложение",
+    "ACCEPTED": "Принято",
+    "REJECTED": "Отклонено",
+    "WITHDRAWN": "Отозвано",
+    "ONBOARDING": "Адаптация",
+    "HIRED": "Принят"
+  },
+  "applicantTier": {
+    "LEAD": "Лид",
+    "CANDIDATE": "Кандидат"
+  },
+  "documentStatus": {
+    "PENDING": "Ожидает проверки",
+    "VERIFIED": "Действительный",
+    "REJECTED": "Отклонён",
+    "EXPIRED": "Истёк",
+    "EXPIRING_SOON": "Скоро истечёт"
+  },
+  "workflowStageStatus": {
+    "PENDING": "Ожидание",
+    "IN_PROGRESS": "В процессе",
+    "COMPLETED": "Завершено",
+    "SKIPPED": "Пропущено",
+    "BLOCKED": "Заблокировано"
+  },
+  "workPermitStatus": {
+    "PENDING": "Ожидание",
+    "APPLIED": "Подано",
+    "APPROVED": "Одобрено",
+    "REJECTED": "Отклонено",
+    "EXPIRED": "Истёк",
+    "CANCELLED": "Отменено"
+  },
+  "visaStatus": {
+    "PENDING": "Ожидание",
+    "APPLIED": "Подано",
+    "APPOINTMENT_SCHEDULED": "Назначена встреча",
+    "APPROVED": "Одобрено",
+    "REJECTED": "Отклонено",
+    "EXPIRED": "Истёк",
+    "CANCELLED": "Отменено"
+  },
+  "gender": {
+    "MALE": "Мужской",
+    "FEMALE": "Женский",
+    "OTHER": "Другое",
+    "PREFER_NOT_TO_SAY": "Предпочитаю не указывать"
+  },
+  "alertSeverity": {
+    "LOW": "Низкий",
+    "MEDIUM": "Средний",
+    "HIGH": "Высокий",
+    "CRITICAL": "Критический"
+  },
+  "alertStatus": {
+    "OPEN": "Открыто",
+    "ACKNOWLEDGED": "Подтверждено",
+    "RESOLVED": "Решено",
+    "DISMISSED": "Отклонено"
+  },
+  "notificationType": {
+    "INFO": "Информация",
+    "WARNING": "Предупреждение",
+    "ERROR": "Ошибка",
+    "SUCCESS": "Успех",
+    "COMPLIANCE": "Соответствие",
+    "DOCUMENT_EXPIRY": "Истечение документа",
+    "WORKFLOW": "Рабочий процесс",
+    "SYSTEM": "Система",
+    "FINANCIAL": "Финансы",
+    "VEHICLE_MOT_EXPIRING": "MOT истекает",
+    "VEHICLE_TAX_EXPIRING": "Транспортный налог истекает",
+    "VEHICLE_INSURANCE_EXPIRING": "Страховка истекает",
+    "VEHICLE_REGISTRATION_EXPIRING": "Регистрация истекает",
+    "VEHICLE_TACHOGRAPH_EXPIRING": "Тахограф истекает",
+    "VEHICLE_ATP_EXPIRING": "ATP истекает",
+    "VEHICLE_PRESSURE_TEST_DUE": "Требуется проверка давления",
+    "VEHICLE_SERVICE_DUE": "Требуется обслуживание",
+    "VEHICLE_SERVICE_OVERDUE": "Обслуживание просрочено"
+  },
+  "workflowCategory": {
+    "INITIAL": "Начальный",
+    "DOCUMENTATION": "Документация",
+    "COMPLIANCE": "Соответствие",
+    "TRAINING": "Обучение",
+    "DEPLOYMENT": "Назначение",
+    "ADMINISTRATIVE": "Административный"
+  },
+  "candidateProgressStatus": {
+    "PENDING": "Ожидание",
+    "IN_PROGRESS": "В процессе",
+    "COMPLETED": "Завершено",
+    "REJECTED": "Отклонено"
+  },
+  "approvalDecision": {
+    "APPROVED": "Одобрено",
+    "REJECTED": "Отклонено",
+    "PENDING": "Ожидание"
+  },
+  "attendanceStatus": {
+    "PRESENT": "Присутствует",
+    "ABSENT": "Отсутствует",
+    "LATE": "Опоздание",
+    "ON_LEAVE": "В отпуске",
+    "HOLIDAY": "Праздник",
+    "REMOTE": "Удалённо"
+  },
+  "fuelType": {
+    "DIESEL": "Дизель",
+    "PETROL": "Бензин",
+    "HYBRID": "Гибрид",
+    "ELECTRIC": "Электро",
+    "LPG": "LPG",
+    "CNG": "CNG"
+  },
+  "maintenanceStatus": {
+    "SCHEDULED": "Запланировано",
+    "IN_PROGRESS": "В процессе",
+    "COMPLETED": "Завершено",
+    "CANCELLED": "Отменено",
+    "OVERDUE": "Просрочено"
+  },
+  "contractType": {
+    "Full-time": "Полная занятость",
+    "Part-time": "Частичная занятость",
+    "Contract": "Контракт",
+    "Temporary": "Временная",
+    "Internship": "Стажировка",
+    "Seasonal": "Сезонная"
+  },
+  "language": {
+    "Albanian": "Albanian",
+    "Arabic": "Arabic",
+    "Bosnian": "Bosnian",
+    "Bulgarian": "Bulgarian",
+    "Chinese (Cantonese)": "Chinese (Cantonese)",
+    "Chinese (Mandarin)": "Chinese (Mandarin)",
+    "Croatian": "Croatian",
+    "Czech": "Czech",
+    "Danish": "Danish",
+    "Dutch": "Dutch",
+    "English": "English",
+    "Estonian": "Estonian",
+    "Finnish": "Finnish",
+    "French": "French",
+    "German": "German",
+    "Greek": "Greek",
+    "Hungarian": "Hungarian",
+    "Italian": "Italian",
+    "Latvian": "Latvian",
+    "Lithuanian": "Lithuanian",
+    "Macedonian": "Macedonian",
+    "Maltese": "Maltese",
+    "Norwegian": "Norwegian",
+    "Persian": "Persian",
+    "Polish": "Polish",
+    "Portuguese": "Portuguese",
+    "Romanian": "Romanian",
+    "Russian": "Russian",
+    "Serbian": "Serbian",
+    "Slovak": "Slovak",
+    "Slovenian": "Slovenian",
+    "Spanish": "Spanish",
+    "Swedish": "Swedish",
+    "Turkish": "Turkish",
+    "Ukrainian": "Ukrainian",
+    "Urdu": "Urdu",
+    "Other": "Other"
+  },
+  "proficiency": {
+    "A1 - Beginner": "A1 — Beginner",
+    "A2 - Elementary": "A2 — Elementary",
+    "B1 - Intermediate": "B1 — Intermediate",
+    "B2 - Upper Intermediate": "B2 — Upper Intermediate",
+    "C1 - Advanced": "C1 — Advanced",
+    "C2 - Mastery": "C2 — Mastery",
+    "Native": "Native"
+  },
+  "skillLevel": {
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Advanced": "Advanced",
+    "Expert": "Expert"
+  },
+  "jobCategory": {
+    "Flatbed Driver": "Водитель бортового грузовика",
+    "Forklift Operator": "Оператор погрузчика",
+    "HGV Driver Class 1": "Водитель грузового автомобиля 1-го класса",
+    "HGV Driver Class 2": "Водитель грузового автомобиля 2-го класса",
+    "LGV Driver": "Водитель лёгкого грузовика",
+    "Multi-Drop Driver": "Водитель развозной доставки",
+    "Tanker Driver": "Водитель автоцистерны",
+    "Transport Manager": "Руководитель транспортного отдела",
+    "Van Driver": "Водитель фургона",
+    "Warehouse Operative": "Работник склада",
+    "Bus Driver": "Водитель автобуса",
+    "Coach Driver": "Водитель туристического автобуса",
+    "Courier Driver": "Курьер",
+    "Delivery Driver": "Водитель-доставщик",
+    "Taxi Driver": "Водитель такси",
+    "Crane Operator": "Крановщик",
+    "Logistics Coordinator": "Координатор логистики"
+  },
+  "familyRelation": {
+    "Spouse": "Супруг(а)",
+    "Partner": "Партнёр",
+    "Parent": "Родитель",
+    "Child": "Ребёнок",
+    "Sibling": "Брат/сестра",
+    "Friend": "Друг/подруга",
+    "Colleague": "Коллега",
+    "Other": "Другое"
+  },
+  "drivingQualification": {
+    "Tachograph Card": "Карта тахографа",
+    "C95 / CPC Card": "Карта C95 / CPC",
+    "ADR Certificate": "Свидетельство ADR",
+    "Medical Certificate": "Медицинская справка",
+    "DVLA Check": "Проверка DVLA",
+    "Transport Manager CPC": "CPC менеджера по транспорту"
+  },
+  "educationLevel": {
+    "Primary School": "Начальная школа",
+    "Secondary School": "Средняя школа",
+    "High School / A-Levels": "Старшая школа / A-уровни",
+    "Vocational Training": "Профессионально-техническое образование",
+    "Associate Degree": "Степень младшего специалиста",
+    "Bachelor's Degree": "Степень бакалавра",
+    "Master's Degree": "Степень магистра",
+    "Doctoral Degree": "Докторская степень",
+    "Professional Certification": "Профессиональный сертификат",
+    "Other": "Другое"
+  },
+  "vehicleStatus": {
+    "ACTIVE": "Активно",
+    "INACTIVE": "Неактивно",
+    "IN_MAINTENANCE": "На обслуживании",
+    "SCRAPPED": "Списано"
+  },
+  "vehicleType": {
+    "TRUCK": "Грузовик",
+    "CAR": "Автомобиль",
+    "VAN": "Фургон",
+    "TANKER": "Автоцистерна",
+    "TRAILER": "Прицеп",
+    "REFRIGERATED_TRAILER": "Рефрижератор",
+    "SPECIALTY": "Спецтехника"
+  },
+  "workshopStatus": {
+    "ACTIVE": "Активна",
+    "INACTIVE": "Неактивна"
+  },
+  "documentCompliance": {
+    "COMPLIANT": "Соответствует",
+    "AT_RISK": "Под угрозой",
+    "NON_COMPLIANT": "Не соответствует",
+    "PENDING": "Ожидает"
+  },
+  "entityType": {
+    "APPLICANT": "Кандидат",
+    "EMPLOYEE": "Сотрудник",
+    "VEHICLE": "ТС",
+    "AGENCY": "Агентство"
+  }
+}

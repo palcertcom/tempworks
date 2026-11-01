@@ -1,0 +1,80 @@
+{
+  "slug": "B-agency-tenant-projection",
+  "title": "Recon B — Agency → Tenant Projection",
+  "mode": "dry-run",
+  "database": "postgres://postgres@127.0.0.1/saas_phase1_fixture?sslmode=disable",
+  "startedAt": "2026-05-09T14:53:08.181Z",
+  "durationMs": 30,
+  "metrics": [
+    {
+      "key": "agencies.total",
+      "value": 5
+    },
+    {
+      "key": "agencies.customer",
+      "value": 4
+    },
+    {
+      "key": "agencies.system",
+      "value": 1
+    },
+    {
+      "key": "projection.tenants",
+      "value": 4
+    },
+    {
+      "key": "agencies.already-tenant-mapped",
+      "value": 0
+    }
+  ],
+  "actions": [
+    {
+      "kind": "projection.summary",
+      "subject": {
+        "sample": [
+          {
+            "agencyId": "11111111-1111-1111-1111-111111111111",
+            "name": "Acme HR",
+            "tenantId": "11111111-1111-1111-1111-111111111111",
+            "proposedSlug": "acme-hr",
+            "slugConflicts": [],
+            "defaultAgencyId": "<assigned-at-backfill>"
+          },
+          {
+            "agencyId": "22222222-2222-2222-2222-222222222222",
+            "name": "Globex Co.",
+            "tenantId": "22222222-2222-2222-2222-222222222222",
+            "proposedSlug": "globex-co",
+            "slugConflicts": [],
+            "defaultAgencyId": "<assigned-at-backfill>"
+          },
+          {
+            "agencyId": "33333333-3333-3333-3333-333333333333",
+            "name": "Initech",
+            "tenantId": "33333333-3333-3333-3333-333333333333",
+            "proposedSlug": "initech",
+            "slugConflicts": [],
+            "defaultAgencyId": "<assigned-at-backfill>"
+          },
+          {
+            "agencyId": "44444444-4444-4444-4444-444444444444",
+            "name": "Empty Co",
+            "tenantId": "44444444-4444-4444-4444-444444444444",
+            "proposedSlug": "empty-co",
+            "slugConflicts": [],
+            "defaultAgencyId": "<assigned-at-backfill>"
+          }
+        ],
+        "totalTenants": 4
+      },
+      "proposedDecision": "apply-as-is",
+      "applied": false
+    }
+  ],
+  "notes": [
+    "Tenant.id reuses Agency.id (ADR-003).",
+    "Default Agency UUID is freshly generated at backfill time and recorded in agency_split_progress.",
+    "Reserved-slug list size: 29. Update by editing this file + Phase 0 reserved-slugs constant."
+  ],
+  "status": "OK"
+}

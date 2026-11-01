@@ -1,0 +1,106 @@
+{
+  "passed": 20,
+  "total": 20,
+  "cases": [
+    {
+      "name": "1. dry-run updates zero rows",
+      "ok": true,
+      "detail": "updated=0"
+    },
+    {
+      "name": "2. dry-run reports candidates per entity",
+      "ok": true,
+      "detail": "candidate=8 entities=6"
+    },
+    {
+      "name": "3. apply refused when flag false",
+      "ok": true,
+      "detail": "CROSS_MODULE_AUDIT_BACKFILL_APPLY=false (default; dry-run)"
+    },
+    {
+      "name": "4. apply refused outside SAFE_CLONE/SAFE_STAGING (source gate)",
+      "ok": true,
+      "detail": "flag+SAFE both required"
+    },
+    {
+      "name": "5. apply updates eligible Document audit rows only",
+      "ok": true,
+      "detail": "updated=2"
+    },
+    {
+      "name": "6. apply updates eligible FinancialRecord audit rows only",
+      "ok": true,
+      "detail": "updated=2"
+    },
+    {
+      "name": "7. apply updates eligible ComplianceAlert audit rows only",
+      "ok": true,
+      "detail": "updated=1"
+    },
+    {
+      "name": "8. apply updates eligible Notification audit rows only",
+      "ok": true,
+      "detail": "updated=1"
+    },
+    {
+      "name": "9. WorkPermit handled per schema (direct tenantId join)",
+      "ok": true,
+      "detail": "updated=1"
+    },
+    {
+      "name": "10. Visa handled per schema (direct tenantId join)",
+      "ok": true,
+      "detail": "updated=1"
+    },
+    {
+      "name": "11. already tenant-stamped audit rows are not overwritten",
+      "ok": true,
+      "detail": "preserved"
+    },
+    {
+      "name": "12. missing target rows are skipped",
+      "ok": true,
+      "detail": "NULL preserved"
+    },
+    {
+      "name": "13. target rows with NULL tenantId are skipped",
+      "ok": true,
+      "detail": "NULL preserved"
+    },
+    {
+      "name": "14. wrong-entity / non-target audit rows not touched (User sentinel still NULL)",
+      "ok": true,
+      "detail": "tenantId=null"
+    },
+    {
+      "name": "15. non-allow-listed entity rows are not touched (User entity stays NULL)",
+      "ok": true,
+      "detail": "sentinel preserved"
+    },
+    {
+      "name": "16. seeded candidates become tenant-stamped after apply",
+      "ok": true,
+      "detail": "all stamped"
+    },
+    {
+      "name": "17. rerun apply is idempotent (zero updates for seeded subset)",
+      "ok": true,
+      "detail": "updated=0"
+    },
+    {
+      "name": "18. per-entity updated counts cover all 6 target entities",
+      "ok": true,
+      "detail": "all >=1"
+    },
+    {
+      "name": "19. scanner registers phase251-cross-module-audit-backfill",
+      "ok": true,
+      "detail": "tag found"
+    },
+    {
+      "name": "20. backfill module exports runBackfill + uses env+SAFE guards",
+      "ok": true,
+      "detail": "export + guards present"
+    }
+  ]
+}

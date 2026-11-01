@@ -1,0 +1,118 @@
+{
+  "generatedAt": "2026-05-10T21:33:06.020Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "empA": "eeeeeeea-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "legacySnapshot": {
+    "dashSummary": {
+      "totalAlerts": 7,
+      "openAlerts": 5,
+      "criticalAlerts": 2,
+      "resolvedAlerts": 2
+    },
+    "dashAlertIds": [
+      "00000000-0000-0000-0000-00000000c001",
+      "00000000-0000-0000-0000-00000000c002",
+      "00000000-0000-0000-0000-00000000c101",
+      "00000000-0000-0000-0000-00000000c102",
+      "00000000-0000-0000-0000-00000000c999"
+    ],
+    "dashRecentCount": 5,
+    "alertsTotal": 7,
+    "alertsOpenTotal": 5,
+    "expiringDocsCount": 4,
+    "empDocsCount": 5,
+    "empAlertsCount": 3
+  },
+  "pilotSnapshot": {
+    "dashSummary": {
+      "totalAlerts": 3,
+      "openAlerts": 2,
+      "criticalAlerts": 1,
+      "resolvedAlerts": 1
+    },
+    "dashAlertIds": [
+      "00000000-0000-0000-0000-00000000c001",
+      "00000000-0000-0000-0000-00000000c002"
+    ],
+    "dashRecentCount": 2,
+    "alertsTotal": 3,
+    "alertsOpenTotal": 2,
+    "expiringDocsCount": 2,
+    "empDocsCount": 2,
+    "empAlertsCount": 2
+  },
+  "counts": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "allow-list: unset env ⇒ all modules allowed",
+      "ok": true,
+      "detail": "isModuleAllowed returns true for both"
+    },
+    {
+      "name": "allow-list: =\"compliance\" allows compliance, denies others",
+      "ok": true,
+      "detail": "compliance=true, ewh=false"
+    },
+    {
+      "name": "allow-list: comma-separated allows both modules",
+      "ok": true,
+      "detail": "both true"
+    },
+    {
+      "name": "allow-list: =nothing ⇒ scope inactive even with flag on",
+      "ok": true,
+      "detail": "module \"compliance\" not in TENANT_PRISMA_PILOT_MODULES"
+    },
+    {
+      "name": "getDashboard: legacy totalAlerts ≥ pilot totalAlerts (pilot filtered)",
+      "ok": true,
+      "detail": "legacy=7 pilot=3"
+    },
+    {
+      "name": "getDashboard: pilot summary excludes NULL-tenant + tenant B",
+      "ok": true,
+      "detail": "pilot.totalAlerts=3 (expected 3 for tenant A)"
+    },
+    {
+      "name": "getAlerts: pilot total < legacy total (other tenants filtered)",
+      "ok": true,
+      "detail": "legacy=7 pilot=3"
+    },
+    {
+      "name": "getAlerts(status=OPEN): both modes count only OPEN status",
+      "ok": true,
+      "detail": "legacy open=5/7 pilot open=2/3"
+    },
+    {
+      "name": "getEmployeeCompliance: response shape preserved",
+      "ok": true,
+      "detail": "legacy.docs=5 pilot.docs=2"
+    },
+    {
+      "name": "getEmployeeCompliance: pilot openAlerts only counts tenant A",
+      "ok": true,
+      "detail": "legacy=3 pilot=2"
+    },
+    {
+      "name": "getExpiringDocuments: pilot result subset of legacy result",
+      "ok": true,
+      "detail": "legacy=4 pilot=2"
+    },
+    {
+      "name": "response shape preserved (summary/docs/alertsByStatus/recentAlerts keys present)",
+      "ok": true,
+      "detail": "summary keys numeric in both"
+    }
+  ]
+}

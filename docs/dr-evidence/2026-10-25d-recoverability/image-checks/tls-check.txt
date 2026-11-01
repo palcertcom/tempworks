@@ -1,0 +1,6 @@
+✓ postgres pg-ci.internal:55432 [app policy] app policy (sslmode=require, CA configured): verified
+✓ postgres pg-ci.internal:55432 [chain]      chain trusted (DATABASE_CA_CERT/PGSSLROOTCERT)
+✓ postgres pg-ci.internal:55432 [chain+hostname] verify-full would work
+
+ALL VERIFIED — NODE_TLS_REJECT_UNAUTHORIZED=0 is not needed for these endpoints.
+{"tlsCheck":"ok","results":[{"target":"postgres pg-ci.internal:55432 [app policy]","ok":true,"detail":"app policy (sslmode=require, CA configured): verified","connects":true},{"target":"postgres pg-ci.internal:55432 [chain]","ok":true,"detail":"chain trusted (DATABASE_CA_CERT/PGSSLROOTCERT)"},{"target":"postgres pg-ci.internal:55432 [chain+hostname]","ok":true,"detail":"verify-full would work"}]}

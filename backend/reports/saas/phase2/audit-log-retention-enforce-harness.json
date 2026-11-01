@@ -1,0 +1,91 @@
+{
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "name": "1. dry-run updates zero rows",
+      "ok": true,
+      "detail": "mode=dry-run updated=0"
+    },
+    {
+      "name": "2. dry-run reports correct candidate count for tenant A (>=2 seeded)",
+      "ok": true,
+      "detail": "candidate=5"
+    },
+    {
+      "name": "3. apply refused when AUDIT_LOG_RETENTION_ENABLED=false",
+      "ok": true,
+      "detail": "AUDIT_LOG_RETENTION_ENABLED=false"
+    },
+    {
+      "name": "4. apply refused when AUDIT_LOG_RETENTION_APPLY=false",
+      "ok": true,
+      "detail": "AUDIT_LOG_RETENTION_APPLY=false"
+    },
+    {
+      "name": "5. apply refused outside SAFE_CLONE/SAFE_STAGING (source gate)",
+      "ok": true,
+      "detail": "all 3 gates wired"
+    },
+    {
+      "name": "6. apply soft-deletes only rows older than cutoff (>=2 expected)",
+      "ok": true,
+      "detail": "mode=apply updated=5"
+    },
+    {
+      "name": "6b. tenant A old rows now soft-deleted",
+      "ok": true,
+      "detail": "old1=true old2=true"
+    },
+    {
+      "name": "7. apply does not touch newer rows",
+      "ok": true,
+      "detail": "newA.deletedAt=null"
+    },
+    {
+      "name": "8. apply does not touch already soft-deleted rows",
+      "ok": true,
+      "detail": "alreadyDel.deletedAt=Sun May 25 2025 21:32:27 GMT+0000 (Coordinated Universal Time)"
+    },
+    {
+      "name": "9. tenant A retention does not touch tenant B rows",
+      "ok": true,
+      "detail": "B.deletedAt=null"
+    },
+    {
+      "name": "10. tenant B retention does not touch tenant A rows",
+      "ok": true,
+      "detail": "B.deletedAt=true A.new.deletedAt=null updated=3"
+    },
+    {
+      "name": "11. null-tenant scope affects only NULL-tenant rows",
+      "ok": true,
+      "detail": "nullDeleted=true updated=2"
+    },
+    {
+      "name": "12. all scope soft-deletes every eligible old row regardless of tenantId",
+      "ok": true,
+      "detail": "A=true B=true NULL=true new=null updated=4"
+    },
+    {
+      "name": "13. rerun apply is idempotent (zero updates after all-scope)",
+      "ok": true,
+      "detail": "updated=0 candidate=0"
+    },
+    {
+      "name": "14. no hard-delete calls exist in source",
+      "ok": true,
+      "detail": "soft-delete only"
+    },
+    {
+      "name": "15. enforce module exports runRetentionEnforce + uses gates",
+      "ok": true,
+      "detail": "export + gates present"
+    },
+    {
+      "name": "16. scanner registers phase253-audit-log-retention-enforce",
+      "ok": true,
+      "detail": "tag found"
+    }
+  ]
+}

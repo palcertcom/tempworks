@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-05-10T07:21:19.178Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantB": "22222222-2222-2222-2222-222222222222",
+  "counts": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "pilot ON, tenant A: findAll returns ONLY tenant A documents",
+      "ok": true,
+      "detail": "count=2 noB=true"
+    },
+    {
+      "name": "pilot ON, tenant A: findOne(tenantB-id) raises NotFoundException",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: findByEntity on tenant B employee returns 0 documents",
+      "ok": true,
+      "detail": "total=0"
+    },
+    {
+      "name": "pilot ON, tenant A: getExpiringDocuments excludes tenant B documents",
+      "ok": true,
+      "detail": "count=2 ids=00000000-0000-0000-0000-0000000dc002,00000000-0000-0000-0000-0000000dc001…"
+    },
+    {
+      "name": "pilot ON, tenant A: readDocumentBytes(tenantB-id) raises NotFoundException (no storage fetch)",
+      "ok": true,
+      "detail": "err=NotFoundException msg=Document 00000000-0000-0000-0000-0000000dc101 not found"
+    },
+    {
+      "name": "pilot ON: checkDocTypePermission (global catalog) returns boolean",
+      "ok": true,
+      "detail": "value=true"
+    },
+    {
+      "name": "concurrent ALS frames isolated (T_A no B-rows; T_B no A-rows)",
+      "ok": true,
+      "detail": "aCount=2 bCount=2 aNoB=true bNoA=true"
+    },
+    {
+      "name": "pilot OFF: legacy reads include both tenant A and tenant B documents",
+      "ok": true,
+      "detail": "count=7 hasA=true hasB=true"
+    },
+    {
+      "name": "source: every mutation/download method routes through legacyPrisma",
+      "ok": true,
+      "detail": "all guard annotations present"
+    }
+  ]
+}

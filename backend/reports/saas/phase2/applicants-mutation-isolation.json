@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-05-10T21:34:48.507Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "tenantA": "11111111-1111-1111-1111-111111111111",
+  "tenantB": "22222222-2222-2222-2222-222222222222",
+  "counts": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "pilot ON, tenant A: update(tenantB-id) rejected; phone unchanged",
+      "ok": true,
+      "detail": "before=\"+49B\" after=\"+49B\""
+    },
+    {
+      "name": "pilot ON, tenant A: updateStatus(tenantB-id) rejected; status unchanged",
+      "ok": true,
+      "detail": "before=NEW after=NEW"
+    },
+    {
+      "name": "pilot ON, tenant A: remove(tenantB-id) rejected; deletedAt unchanged",
+      "ok": true,
+      "detail": "deletedAt=null"
+    },
+    {
+      "name": "pilot ON, tenant A: setCurrentStage(tenantB-id) raises 404",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: approveApplicant(tenantB-id) raises 404",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: reassignAgency(tenantB-id) raises 404 (parent gate)",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: reassignAgency(tenantA-id, tenantB-agency) raises 404 (agency gate)",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "pilot ON, tenant A: requestDelete(tenantB-id) raises 404",
+      "ok": true,
+      "detail": "NotFoundException"
+    },
+    {
+      "name": "BULK FILTER: pilot ON, tenant A bulk(STATUS_CHANGE on [A,B]) → only A processed; B unchanged",
+      "ok": true,
+      "detail": "processedCount=1 bIncluded=false bStatusBefore=NEW bStatusAfter=NEW"
+    },
+    {
+      "name": "pilot OFF: legacy update on tenant B applicant still succeeds",
+      "ok": true,
+      "detail": "mutated"
+    },
+    {
+      "name": "source: every Phase 2.29 mutation pattern present",
+      "ok": true,
+      "detail": "all patterns matched"
+    }
+  ]
+}

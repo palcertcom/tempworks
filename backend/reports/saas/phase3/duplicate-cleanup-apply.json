@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-05-11T08:41:14.157Z",
+  "classification": "SAFE_CLONE",
+  "enabled": true,
+  "apply": true,
+  "refusedReason": null,
+  "dryRun": false,
+  "exactGroupsConsidered": 3,
+  "rowsSoftDeleted": 0,
+  "rowsAlreadyDeleted": 3,
+  "refusedConflictingActive": 1,
+  "refusedNullTenant": 1,
+  "refusedCrossTenant": 1,
+  "beforeActiveCount": {
+    "employees": 18,
+    "applicants": 5
+  },
+  "afterActiveCount": {
+    "employees": 18,
+    "applicants": 5
+  }
+}

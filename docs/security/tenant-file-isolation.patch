@@ -1,0 +1,137 @@
+From c04c98ac84a257fd66ffa50a5d07107e17f4c88f Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Sun, 25 Oct 2026 08:49:58 +0000
+Subject: [PATCH] fix(documents): enforce tenant isolation on file bytes and
+ bulk ZIP
+
+Found by the disaster-recovery drill's tenant-isolation checks (and shown to
+be PRE-EXISTING, not caused by restore: the document's tenantId was intact
+in both the backup and the recovered database).
+
+GET /documents/:id/file and POST /documents/bulk-download relied on
+scope().tenantWhere(), which is `{}` in the default (legacy, non-pilot)
+Prisma mode. Any authenticated user with documents:read could therefore
+stream another tenant's attachment by id, and the bulk ZIP included other
+tenants' files. The metadata endpoint (findOne) already gated on the owning
+entity's tenant; the byte paths now use the same rule via a shared
+isSameTenantAsCaller() helper (SUPER bypass unchanged; foreign ids answer
+404 / are dropped from the ZIP before any storage read).
+
+Drill: cross-tenant file access is now asserted on the source before the
+backup and on the recovered application (single file + bulk ZIP); the
+verify phase always runs schema parity and fails on any check.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01WtPBCrb8yTQgD6roYqdmPp
+---
+ backend/src/documents/documents.controller.ts |  4 +-
+ backend/src/documents/documents.service.ts    | 41 +++++++++++++++----
+ 2 files changed, 34 insertions(+), 11 deletions(-)
+
+diff --git a/backend/src/documents/documents.controller.ts b/backend/src/documents/documents.controller.ts
+index 1e566b5..1f784cf 100644
+--- a/backend/src/documents/documents.controller.ts
++++ b/backend/src/documents/documents.controller.ts
+@@ -115,9 +115,9 @@ export class DocumentsController {
+   @RequirePermission('documents:create')
+   @HttpCode(HttpStatus.OK)
+   @ApiOperation({ summary: 'Download multiple documents as a structured ZIP archive' })
+-  async bulkDownload(@Body() dto: { ids: string[] }, @Res() res: Response) {
++  async bulkDownload(@Body() dto: { ids: string[] }, @Res() res: Response, @CurrentUser() user: any) {
+     if (!dto.ids?.length) { res.status(400).json({ message: 'No document IDs provided' }); return; }
+-    const buffer = await this.documentsService.createBulkDownloadArchive(dto.ids);
++    const buffer = await this.documentsService.createBulkDownloadArchive(dto.ids, user);
+     res.setHeader('Content-Type', 'application/zip');
+     res.setHeader('Content-Disposition', `attachment; filename="documents_${Date.now()}.zip"`);
+     res.setHeader('Content-Length', buffer.length);
+diff --git a/backend/src/documents/documents.service.ts b/backend/src/documents/documents.service.ts
+index 087aaa6..016e69d 100644
+--- a/backend/src/documents/documents.service.ts
++++ b/backend/src/documents/documents.service.ts
+@@ -179,6 +179,22 @@ export class DocumentsService {
+     throw new NotFoundException({ code: 'DOCUMENT.NOT_FOUND', message: `Document ${id} not found`, params: { id } });
+   }
+ 
++  /**
++   * Tenant gate for a document, decided by its OWNING ENTITY (same rule as
++   * findOne). Enforced regardless of the pilot/legacy Prisma mode: in the
++   * default legacy mode scope().tenantWhere() is `{}`, so without this the
++   * byte-streaming and bulk-ZIP paths served other tenants' files by id.
++   * SUPER (agencyIsSystem) bypasses. Returns false when the caller is in a
++   * different tenant than the document's entity.
++   */
++  private async isSameTenantAsCaller(entityType: string, entityId: string, caller?: any): Promise<boolean> {
++    if (!caller || caller?.agencyIsSystem === true) return true;
++    const callerTenantId = (caller?.tenantId ?? '').toString().trim() || null;
++    if (!callerTenantId) return true;
++    const entityTenantId = await this.resolveEntityTenantId(entityType, entityId);
++    return !entityTenantId || entityTenantId === callerTenantId;
++  }
++
+   private async resolveEntityTenantId(entityType: string, entityId: string): Promise<string | null> {
+     switch (entityType) {
+       case 'EMPLOYEE': {
+@@ -511,12 +527,8 @@ export class DocumentsService {
+     await this.assertReadableByCaller(doc.entityType as string, id, caller);
+ 
+     // Tenant gate via entity (SUPER bypasses).
+-    if (caller?.agencyIsSystem !== true) {
+-      const entityTenantId = await this.resolveEntityTenantId(doc.entityType as string, doc.entityId);
+-      const callerTenantId = (caller?.tenantId ?? '').toString().trim() || null;
+-      if (entityTenantId && callerTenantId && entityTenantId !== callerTenantId) {
+-        throw new NotFoundException({ code: 'DOCUMENT.NOT_FOUND', message: `Document ${id} not found`, params: { id } });
+-      }
++    if (!(await this.isSameTenantAsCaller(doc.entityType as string, doc.entityId, caller))) {
++      throw new NotFoundException({ code: 'DOCUMENT.NOT_FOUND', message: `Document ${id} not found`, params: { id } });
+     }
+ 
+     // Resolve the owning entity (employee/applicant) so the View page can
+@@ -546,12 +558,17 @@ export class DocumentsService {
+     // a foreign file's bytes.
+     const doc = await this.prisma.document.findFirst({ // @tenant-reviewed: phase222-download-guard (metadata gates storage read; cross-tenant ids never reach fetchDocumentBuffer)
+       where: { id, deletedAt: null, ...t },
+-      select: { id: true, name: true, fileUrl: true, mimeType: true, entityType: true },
++      select: { id: true, name: true, fileUrl: true, mimeType: true, entityType: true, entityId: true },
+     });
+     if (!doc) throw new NotFoundException({ code: 'DOCUMENT.NOT_FOUND', message: `Document ${id} not found`, params: { id } });
+     // Same permission scope as findOne: attendance-only callers may
+     // stream ATTENDANCE-linked files only.
+     await this.assertReadableByCaller(doc.entityType as string, id, caller);
++    // Same tenant gate as findOne — the byte stream must never be weaker
++    // than the metadata endpoint.
++    if (!(await this.isSameTenantAsCaller(doc.entityType as string, doc.entityId, caller))) {
++      throw new NotFoundException({ code: 'DOCUMENT.NOT_FOUND', message: `Document ${id} not found`, params: { id } });
++    }
+     if (!doc.fileUrl) throw new NotFoundException({ code: 'DOCUMENT.FILE_MISSING', message: 'Document has no file', params: { id } });
+     const buffer = await this.fetchDocumentBuffer(doc.fileUrl);
+     return { buffer, mimeType: doc.mimeType ?? 'application/octet-stream', name: doc.name ?? 'document' };
+@@ -1444,7 +1461,7 @@ export class DocumentsService {
+ 
+   // ── Bulk download as ZIP ───────────────────────────────────────────────────
+ 
+-  async createBulkDownloadArchive(ids: string[]): Promise<Buffer> {
++  async createBulkDownloadArchive(ids: string[], caller?: any): Promise<Buffer> {
+     // Phase 2.22 — DOWNLOAD GUARD. Pre-filter the requested id list
+     // by the active tenant BEFORE issuing any storage reads. In legacy
+     // mode the spread is `{}` and the lookup matches by id alone (same
+@@ -1452,10 +1469,16 @@ export class DocumentsService {
+     // dropped; the storage loop below only sees URLs the active
+     // tenant owns.
+     const t = this.scope().tenantWhere();
+-    const docs = await this.prisma.document.findMany({ // @tenant-reviewed: phase222-download-guard (tenant pre-filter on id list; foreign ids never reach fetchDocumentBuffer)
++    const found = await this.prisma.document.findMany({ // @tenant-reviewed: phase222-download-guard (tenant pre-filter on id list; foreign ids never reach fetchDocumentBuffer)
+       where: { id: { in: ids }, deletedAt: null, ...t },
+       include: { documentType: { select: { name: true } } },
+     });
++    // Entity-tenant gate (enforced in legacy mode too): foreign-tenant ids are
++    // dropped before any storage read.
++    const docs: typeof found = [];
++    for (const d of found) {
++      if (await this.isSameTenantAsCaller(d.entityType as string, d.entityId, caller)) docs.push(d);
++    }
+     const entityIds = [...new Set(docs.map(d => d.entityId))];
+     const nameMap: Record<string, string> = {};
+     await Promise.all(entityIds.map(async (eid) => {
+-- 
+2.43.0
+

@@ -1,0 +1,30 @@
+{
+  "A": {
+    "exitCode": 0,
+    "consistencyAttempts": 2,
+    "uploadsComplete": true,
+    "referenced": 10,
+    "missing": 0,
+    "unreferencedObjects": 0,
+    "apiStatuses": {
+      "upload": 201,
+      "photoReplace": 200,
+      "renew": 201,
+      "softDelete": 200
+    },
+    "verifyExit": 0
+  },
+  "B": {
+    "overlapRequestStatus": 503,
+    "status": "INCOMPLETE",
+    "consistencyAttempts": 3,
+    "uploadsComplete": false,
+    "offsiteStatus": "SKIPPED_INCOMPLETE",
+    "load": {
+      "uploads": 63,
+      "photoReplacements": 63,
+      "deletes": 31,
+      "errors": 0
+    }
+  }
+}

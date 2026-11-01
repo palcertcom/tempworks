@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "name": "1. tenant A getWorkflowCandidates returns only tenant A",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "2. tenant A excludes tenant B candidates",
+      "ok": true,
+      "detail": "B excluded"
+    },
+    {
+      "name": "3. tenant A excludes NULL-tenant assignments",
+      "ok": true,
+      "detail": "NULL excluded"
+    },
+    {
+      "name": "4. tenant B getWorkflowCandidates returns only tenant B",
+      "ok": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "5. tenant A getWorkflowStats counts only tenant A",
+      "ok": true,
+      "detail": "active=2 completed=1"
+    },
+    {
+      "name": "6. tenant B getWorkflowStats counts only tenant B",
+      "ok": true,
+      "detail": "active=2 completed=0"
+    },
+    {
+      "name": "7. tenant A board view counts only tenant A subjects in columns",
+      "ok": true,
+      "detail": "totalCount=1"
+    },
+    {
+      "name": "8. concurrent ALS frames stay isolated for getWorkflowCandidates",
+      "ok": true,
+      "detail": "A=1 B=1"
+    },
+    {
+      "name": "9. allow-list \"nothing\" ⇒ legacy union (B + NULL visible)",
+      "ok": true,
+      "detail": "B=true NULL=true"
+    },
+    {
+      "name": "10. workflow CONFIG (getWorkflow) remains global — tenant A sees the global workflow id",
+      "ok": true,
+      "detail": "id=00000000"
+    },
+    {
+      "name": "11. mutation paths still flow through pilot.prisma (createWorkflow present)",
+      "ok": true,
+      "detail": "createWorkflow present"
+    },
+    {
+      "name": "12. audit emission routes through TenantAuditLogService (Phase 2.62)",
+      "ok": true,
+      "detail": "helper=true noRawCreate=true"
+    }
+  ]
+}

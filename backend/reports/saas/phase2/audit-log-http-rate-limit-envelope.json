@@ -1,0 +1,91 @@
+{
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "name": "1. limiter disabled ⇒ no Retry-After header added",
+      "ok": true,
+      "detail": "headers=none"
+    },
+    {
+      "name": "2. enabled RPM=1 ⇒ second list request returns 429",
+      "ok": true,
+      "detail": "status=429"
+    },
+    {
+      "name": "3. 429 body has error=\"rate_limited\"",
+      "ok": true,
+      "detail": "error=rate_limited"
+    },
+    {
+      "name": "4. 429 body has retryAfterSeconds positive integer",
+      "ok": true,
+      "detail": "retryAfterSeconds=60"
+    },
+    {
+      "name": "5. 429 body has limit",
+      "ok": true,
+      "detail": "limit=1"
+    },
+    {
+      "name": "6. 429 body has remaining=0",
+      "ok": true,
+      "detail": "remaining=0"
+    },
+    {
+      "name": "7. 429 body has windowSeconds",
+      "ok": true,
+      "detail": "windowSeconds=60"
+    },
+    {
+      "name": "8. Retry-After header equals retryAfterSeconds",
+      "ok": true,
+      "detail": "header=60 envelope=60"
+    },
+    {
+      "name": "9. stats route returns same structured 429 envelope",
+      "ok": true,
+      "detail": "status=429 error=rate_limited"
+    },
+    {
+      "name": "10. retention-preview returns same structured 429 envelope",
+      "ok": true,
+      "detail": "status=429 error=rate_limited"
+    },
+    {
+      "name": "11. export.csv returns structured 429 envelope, not CSV",
+      "ok": true,
+      "detail": "bodyLen=0 contentType=undefined"
+    },
+    {
+      "name": "12. byId route returns same structured 429 envelope",
+      "ok": true,
+      "detail": "status=429 error=rate_limited"
+    },
+    {
+      "name": "13. successful export.csv still returns text/csv and export headers",
+      "ok": true,
+      "detail": "Content-Type=text/csv; charset=utf-8"
+    },
+    {
+      "name": "14. tenant A 429 envelope does not affect tenant B",
+      "ok": true,
+      "detail": "A=429 B.passes=true"
+    },
+    {
+      "name": "15. global FULL_ACCESS rate-limit envelope uses global/user key",
+      "ok": true,
+      "detail": "status=429 key=global"
+    },
+    {
+      "name": "16. missing ALS in pilot returns Forbidden, not rate-limit envelope",
+      "ok": true,
+      "detail": "message=Audit-log read requires an active tenant context"
+    },
+    {
+      "name": "17. every TenantAuditController GET handler passes res to enforceRateLimit",
+      "ok": true,
+      "detail": "routes=5 wired=5"
+    }
+  ]
+}

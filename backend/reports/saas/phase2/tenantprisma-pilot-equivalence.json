@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-05-10T02:08:00.682Z",
+  "environment": {
+    "classification": "SAFE_CLONE",
+    "reason": "localhost + fixture pattern (db=saas_phase1_fixture)",
+    "host": "127.0.0.1",
+    "dbName": "saas_phase1_fixture",
+    "nodeEnv": "unset"
+  },
+  "counts": {
+    "total": 13,
+    "passed": 13,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "baseline: pilot OFF reports pilotActive=false",
+      "ok": true,
+      "detail": "pilotActive=false"
+    },
+    {
+      "name": "pilot ON reports pilotActive=true (env safe)",
+      "ok": true,
+      "detail": "pilotActive=true"
+    },
+    {
+      "name": "findAll(System Admin) equivalent (id sets)",
+      "ok": true,
+      "detail": "legacy=5 pilot=5"
+    },
+    {
+      "name": "findAll(Agency Manager) equivalent (id sets)",
+      "ok": true,
+      "detail": "legacy=0 pilot=0"
+    },
+    {
+      "name": "findAll(Agency User) equivalent (id sets)",
+      "ok": true,
+      "detail": "legacy=4 pilot=4"
+    },
+    {
+      "name": "findAll preserves ordering (alphabetical by name)",
+      "ok": true,
+      "detail": "legacy[0..2]=Compliance Officer,HR Manager,Read Only"
+    },
+    {
+      "name": "findOne(id) returns same role",
+      "ok": true,
+      "detail": "legacy=00000000-0000-0000-0000-000000000004 pilot=00000000-0000-0000-0000-000000000004"
+    },
+    {
+      "name": "getPermissions count equal",
+      "ok": true,
+      "detail": "legacy=5 pilot=5"
+    },
+    {
+      "name": "getPermissions first 10 ids equal",
+      "ok": true,
+      "detail": "legacy[0]=4e704553-3504-4866-82f8-233503658a98 pilot[0]=4e704553-3504-4866-82f8-233503658a98"
+    },
+    {
+      "name": "getPermissionsMatrix role count equal",
+      "ok": true,
+      "detail": "legacy=5 pilot=5"
+    },
+    {
+      "name": "getPermissionsMatrix grant count equal",
+      "ok": true,
+      "detail": "legacy=0 pilot=0"
+    },
+    {
+      "name": "error on missing id: same error class",
+      "ok": true,
+      "detail": "legacy=NotFoundException:Role not found pilot=NotFoundException:Role not found"
+    },
+    {
+      "name": "response shape preserved (Array, top-level keys)",
+      "ok": true,
+      "detail": "findAll arrays + matrix object match"
+    }
+  ]
+}

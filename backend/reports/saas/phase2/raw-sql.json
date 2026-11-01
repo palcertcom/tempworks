@@ -1,0 +1,310 @@
+{
+  "generatedAt": "2026-05-11T12:06:16.530Z",
+  "counts": {
+    "total": 26,
+    "BLOCKER": 11,
+    "HIGH": 9,
+    "MEDIUM": 6,
+    "blocksPhase2": 20,
+    "reviewedWithoutReason": 0
+  },
+  "byModule": {
+    "backup": 2,
+    "common": 1,
+    "email": 1,
+    "recycle-bin": 5,
+    "reports": 11,
+    "saas": 1,
+    "applicants": 3,
+    "employees": 1,
+    "pipeline": 1
+  },
+  "findings": [
+    {
+      "file": "src/backup/backup.service.ts",
+      "line": 325,
+      "pattern": "$executeRawUnsafe",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "backup",
+      "snippet": "await this.prisma.$executeRawUnsafe(",
+      "fix": "Convert to $executeRaw with tagged-template params; route through TenantPrismaService.withTenant.",
+      "reviewed": false
+    },
+    {
+      "file": "src/backup/backup.service.ts",
+      "line": 556,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "backup",
+      "snippet": "`Backup database name \"${meta.databaseName}\" differs from current \"${conn.database}\".`,",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/common/storage/storage.service.ts",
+      "line": 171,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "common",
+      "snippet": "this.logger.warn(`Spaces delete failed for ${key}: ${err?.message ?? err}`);",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/email/email.service.ts",
+      "line": 19,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "email",
+      "snippet": "this.logger.log(`Email service ready (Resend API). Key: ${this.apiKey.substring(0, 8)}... FROM: ${this.from}`);",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/recycle-bin/hard-delete.service.ts",
+      "line": 210,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "recycle-bin",
+      "snippet": "`Cannot hard-delete agency: ${activeEmployees} active employee(s) and ${activeUsers} active user(s) still reference it. Reassign or delete them first.`,",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/recycle-bin/hard-delete.service.ts",
+      "line": 249,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "recycle-bin",
+      "snippet": "`Cannot hard-delete document type: ${activeDocs} active document(s) reference it. Soft-delete or reassign them first.`,",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/recycle-bin/hard-delete.service.ts",
+      "line": 313,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "recycle-bin",
+      "snippet": "`Cannot hard-delete role: ${assignedUsers} active user(s) are assigned this role. Reassign them first.`,",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/recycle-bin/hard-delete.service.ts",
+      "line": 55,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "recycle-bin",
+      "snippet": "throw new ForbiddenException(`Hard delete is not permitted for entity type: ${entityType}`);",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/recycle-bin/hard-delete.service.ts",
+      "line": 79,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "recycle-bin",
+      "snippet": "throw new BadRequestException(`No hard-delete handler for entity type: ${entityType}`);",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 779,
+      "pattern": "string-concat-SQL",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": "`${j.joinType} JOIN \"${j.table}\" AS ${j.alias} ON ${j.on}`,",
+      "fix": "Replace template-string SQL with parameterised tagged-template OR move into SOURCE_DEFS.",
+      "reviewed": false
+    },
+    {
+      "file": "src/saas/prisma/tenant-prisma.service.ts",
+      "line": 62,
+      "pattern": "$executeRawUnsafe",
+      "severity": "BLOCKER",
+      "blocksPhase2": true,
+      "module": "saas",
+      "snippet": "await tx.$executeRawUnsafe(setLocalTenantSql(tenantId));",
+      "fix": "Convert to $executeRaw with tagged-template params; route through TenantPrismaService.withTenant.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 785,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": "? [Prisma.sql`${Prisma.raw(`${primaryAlias}.\"deletedAt\"`)} IS NULL`]",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 792,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": "const col    = Prisma.raw(`${f.alias}.\"${f.dbCol}\"`);",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 824,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": "groupedCols.map((c: any) => Prisma.raw(`${fields[c.columnName].alias}.\"${fields[c.columnName].dbCol}\"`)),",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 832,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": ".map((s: any) => Prisma.raw(",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 838,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": ": Prisma.sql`ORDER BY ${Prisma.raw(fallbackOrder)}`;",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 847,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": "SELECT ${Prisma.raw(countExpr)} AS total",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 848,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": "FROM ${Prisma.raw(fromFragment)}",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 856,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": "SELECT ${Prisma.raw(selectParts.join(', '))}",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 857,
+      "pattern": "Prisma.raw",
+      "severity": "HIGH",
+      "blocksPhase2": true,
+      "module": "reports",
+      "snippet": "FROM ${Prisma.raw(fromFragment)}",
+      "fix": "Move into the SOURCE_DEFS registry under backend/src/saas/reports; the boot validator will require tenantColumn.",
+      "reviewed": false
+    },
+    {
+      "file": "src/applicants/applicants.service.ts",
+      "line": 1336,
+      "pattern": "$queryRaw",
+      "severity": "MEDIUM",
+      "blocksPhase2": false,
+      "module": "applicants",
+      "snippet": "const result: { current: number }[] = await this.legacyPrisma.$queryRaw`",
+      "fix": "Wrap call site in TenantPrismaService.withTenant; verify the SQL has a tenant filter.",
+      "reviewed": false
+    },
+    {
+      "file": "src/applicants/applicants.service.ts",
+      "line": 1363,
+      "pattern": "$queryRaw",
+      "severity": "MEDIUM",
+      "blocksPhase2": false,
+      "module": "applicants",
+      "snippet": "const result: { current: number }[] = await this.legacyPrisma.$queryRaw`",
+      "fix": "Wrap call site in TenantPrismaService.withTenant; verify the SQL has a tenant filter.",
+      "reviewed": false
+    },
+    {
+      "file": "src/applicants/applicants.service.ts",
+      "line": 1390,
+      "pattern": "$queryRaw",
+      "severity": "MEDIUM",
+      "blocksPhase2": false,
+      "module": "applicants",
+      "snippet": "const result: { current: number }[] = await this.legacyPrisma.$queryRaw`",
+      "fix": "Wrap call site in TenantPrismaService.withTenant; verify the SQL has a tenant filter.",
+      "reviewed": false
+    },
+    {
+      "file": "src/employees/employees.service.ts",
+      "line": 318,
+      "pattern": "$queryRaw",
+      "severity": "MEDIUM",
+      "blocksPhase2": false,
+      "module": "employees",
+      "snippet": "const result: any[] = await this.legacyPrisma.$queryRaw`",
+      "fix": "Wrap call site in TenantPrismaService.withTenant; verify the SQL has a tenant filter.",
+      "reviewed": false
+    },
+    {
+      "file": "src/pipeline/pipeline.service.ts",
+      "line": 433,
+      "pattern": "$executeRaw",
+      "severity": "MEDIUM",
+      "blocksPhase2": false,
+      "module": "pipeline",
+      "snippet": "await this.prisma.$executeRaw`",
+      "fix": "Wrap the call site in TenantPrismaService.withTenant so RLS sees a tenant_id GUC.",
+      "reviewed": false
+    },
+    {
+      "file": "src/reports/reports.service.ts",
+      "line": 967,
+      "pattern": "$queryRaw",
+      "severity": "MEDIUM",
+      "blocksPhase2": false,
+      "module": "reports",
+      "snippet": "this.prisma.$queryRaw`",
+      "fix": "Wrap call site in TenantPrismaService.withTenant; verify the SQL has a tenant filter.",
+      "reviewed": false
+    }
+  ]
+}

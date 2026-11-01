@@ -1,0 +1,15 @@
+{
+  "id": "18459d2b-3d77-4d9c-9cf1-e5e6e5572538",
+  "status": "COMPLETED",
+  "kind": "FULL_SYSTEM",
+  "verifyResult": "VERIFIED",
+  "offsiteStatus": "VERIFIED",
+  "package": "tempworks-dr_2026-10-25T08-56-54Z_d4a27306",
+  "fileName": "tempworks-dr_2026-10-25T08-56-54Z_d4a27306.tar.gz",
+  "uploadsCount": 8,
+  "uploadsComplete": true,
+  "globalsCaptured": true,
+  "createdAt": "2026-10-25T08:56:54.104Z",
+  "completedAt": "2026-10-25T08:56:56.518Z",
+  "uiToCompletedSeconds": 4.2
+}
