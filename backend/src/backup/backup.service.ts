@@ -576,14 +576,52 @@ export class BackupService implements OnModuleInit, OnModuleDestroy {
     return null;
   }
 
+  /** Recent direct exports are audit records, never downloadable server artifacts. */
+  async directHistory() {
+    const starts = await this.prisma.auditLog.findMany({
+      where: { entity: 'DirectBackupExport', action: 'BACKUP_EXPORT_STARTED', deletedAt: null },
+      orderBy: { createdAt: 'desc' }, take: 50,
+    });
+    const ends = starts.length ? await this.prisma.auditLog.findMany({
+      where: { entity: 'DirectBackupExport', entityId: { in: starts.map(s => s.entityId) },
+        action: 'BACKUP_EXPORT_FINISHED', deletedAt: null },
+      orderBy: { createdAt: 'desc' },
+    }) : [];
+    return starts.map(start => {
+      const end = ends.find(e => e.entityId === start.entityId);
+      const meta = (start.changes || {}) as any;
+      const result = (end?.changes || {}) as any;
+      return { id: start.entityId, createdAt: start.createdAt, finishedAt: end?.createdAt,
+        userName: meta.userName, userEmail: start.userEmail, kind: meta.kind,
+        fileName: meta.fileName, bytes: result.bytes || 0,
+        state: result.state || (Date.now() - start.createdAt.getTime() > 65 * 60 * 1000 ? 'UNKNOWN' : 'STARTED') };
+    });
+  }
+
   /** One authenticated request owns creation and download; no local archive. */
   async directZip(kind: string, userId?: string, userEmail?: string) {
     if (!['DATABASE', 'FILES'].includes(kind)) throw new BadRequestException('Expected DATABASE or FILES');
     const tools = kind === 'DATABASE' ? resolvePgTools(await this.serverMajor()) : null;
     const lock = await this.acquireLock();
+    const exportId = uuidv4();
+    const fileName = `tempworks-${kind.toLowerCase()}-${exportId}.zip`;
+    let bytes = 0;
+    let reported = false;
+    const report = async (state: 'STREAMED' | 'FAILED' | 'CANCELLED') => {
+      if (reported) return;
+      reported = true;
+      await this.auditLog.log({ userId, userEmail, action: 'BACKUP_EXPORT_FINISHED',
+        entity: 'DirectBackupExport', entityId: exportId,
+        changes: { kind, fileName, state, bytes } });
+    };
     try {
-      await this.auditLog.log({ userId, userEmail, action: 'BACKUP_DOWNLOADED', entity: 'SystemBackup', entityId: uuidv4(),
-        changes: { kind, format: 'zip', delivery: 'direct', state: 'STARTED' } });
+      const user = userId ? await this.prisma.user.findUnique({ where: { id: userId },
+        select: { firstName: true, lastName: true } }) : null;
+      // Fail before starting an export if its durable audit record cannot be saved.
+      await this.prisma.auditLog.create({ data: { userId, userEmail,
+        action: 'BACKUP_EXPORT_STARTED', entity: 'DirectBackupExport', entityId: exportId,
+        changes: { kind, fileName, format: 'zip', delivery: 'direct', state: 'STARTED',
+          userName: user ? `${user.firstName} ${user.lastName}`.trim() : (userEmail || userId || '') } } });
       const child = spawn(process.execPath, [this.script('direct-export.mjs'), kind], {
         env: { ...process.env, ...(tools ? { PG_BIN_PATH: tools.bindir } : {}) },
         detached: process.platform !== 'win32', stdio: ['ignore', 'pipe', 'pipe'],
@@ -612,6 +650,7 @@ export class BackupService implements OnModuleInit, OnModuleDestroy {
       };
       this.directExports.add(cancel);
       lock.on('error', () => { cancel(); stream.destroy(new Error('Export lock lost')); });
+      child.stdout.on('data', chunk => { bytes += chunk.length; });
       child.stdout.pipe(stream, { end: false });
       child.stderr.resume();
       const finish = (ok: boolean) => {
@@ -621,15 +660,16 @@ export class BackupService implements OnModuleInit, OnModuleDestroy {
         this.directExports.delete(cancel);
         void this.releaseLock(lock);
         if (ok) stream.end();
-        else stream.destroy(new Error('ZIP export failed; discard incomplete download'));
+        else { void report('FAILED'); stream.destroy(new Error('ZIP export failed; discard incomplete download')); }
       };
       child.on('error', () => finish(false));
       child.on('close', code => finish(code === 0));
       const timer = setTimeout(() => { cancel(); stream.destroy(new Error('Export timed out')); }, 60 * 60 * 1000);
       timer.unref();
       child.on('close', () => clearTimeout(timer));
-      return { stream, cancel, fileName: `tempworks-${kind.toLowerCase()}-${Date.now()}.zip` };
+      return { stream, cancel, fileName, report };
     } catch (error) {
+      await report('FAILED');
       await this.releaseLock(lock);
       throw error;
     }

@@ -1,3 +1,4 @@
+import { trackDownload } from './download-progress.mjs';
 // Central API client for TempWorks backend
 
 export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
@@ -2288,7 +2289,8 @@ export const vehiclesApi = {
 
 export const backupApi = {
   /** Create and stream a ZIP in the same request; never fetch a container-local artifact. */
-  directDownload: async (kind: 'DATABASE' | 'FILES', signal: AbortSignal): Promise<void> => {
+  directDownload: async (kind: 'DATABASE' | 'FILES', signal: AbortSignal, onProgress: (progress: { phase: string; bytes: number }) => void = () => {}): Promise<void> => {
+    onProgress({ phase: 'choosing', bytes: 0 });
     const fileName = `tempworks-${kind.toLowerCase()}-${new Date().toISOString().replace(/[:.]/g, '-')}.zip`;
     let writable: any;
     // Called from the click handler before any network await, preserving user activation.
@@ -2299,6 +2301,7 @@ export const backupApi = {
       writable = await handle.createWritable();
     }
     try {
+      onProgress({ phase: 'preparing', bytes: 0 });
       const token = getAccessToken();
       const res = await fetch(`${API_URL}/backup/direct-download`, {
         method: 'POST', signal,
@@ -2310,12 +2313,15 @@ export const backupApi = {
         throw new Error(typeof error.message === 'string' ? error.message : `Download failed (${res.status})`);
       }
       if (!res.body || !res.headers.get('content-type')?.includes('application/zip')) throw new Error('Invalid ZIP response');
+      let received = 0;
+      const tracked = trackDownload(res.body, (bytes: number) => { received = bytes; onProgress({ phase: 'receiving', bytes }); });
       if (writable) {
-        await res.body.pipeTo(writable, { signal });
+        await tracked.pipeTo(writable, { signal });
         writable = undefined;
       } else {
         // Portable fallback: only offer the file after the complete response arrives.
-        const blob = await res.blob();
+        const blob = await new Response(tracked).blob();
+        onProgress({ phase: 'saving', bytes: received });
         const url = URL.createObjectURL(blob);
         const anchor = document.createElement('a');
         anchor.href = url; anchor.download = fileName;
@@ -2327,6 +2333,8 @@ export const backupApi = {
       throw error;
     }
   },
+
+  directHistory: () => apiFetch<any[]>('/backup/direct-history'),
 
   /** List all backups (paginated) */
   list: (params: { page?: number; limit?: number; search?: string; status?: string; kind?: string } = {}) => {

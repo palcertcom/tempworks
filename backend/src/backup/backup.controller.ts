@@ -47,19 +47,23 @@ export class BackupController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Stream database SQL or uploaded files as ZIP to the browser' })
   async directDownload(@Body() body: { kind?: string }, @Request() req: any, @Res() res: Response) {
-    const { stream, cancel, fileName } = await this.backupService.directZip(body?.kind || '', req.user?.id, req.user?.email);
+    const { stream, cancel, fileName, report } = await this.backupService.directZip(body?.kind || '', req.user?.id, req.user?.email);
     res.set({
       'Content-Type': 'application/zip',
       'Content-Disposition': `attachment; filename="${fileName}"`,
       'Cache-Control': 'no-store',
       'X-Content-Type-Options': 'nosniff',
     });
-    res.on('close', () => { if (!res.writableFinished) cancel(); });
-    stream.on('error', () => { cancel(); res.destroy(); });
-    if (res.destroyed) { cancel(); return; }
+    res.on('finish', () => { void report('STREAMED'); });
+    res.on('close', () => { if (!res.writableFinished) { void report('CANCELLED'); cancel(); } });
+    stream.on('error', () => { void report('FAILED'); cancel(); res.destroy(); });
+    if (res.destroyed) { void report('CANCELLED'); cancel(); return; }
     if (stream.destroyed) { res.destroy(); return; }
     stream.pipe(res);
   }
+
+  @Get('direct-history')
+  directHistory() { return this.backupService.directHistory(); }
 
   // ── List backups ──────────────────────────────────────────────────────────
 

@@ -128,6 +128,23 @@ export function DatabaseBackup() {
   const [createKind,    setCreateKind]    = useState<'DATABASE' | 'FILES'>('DATABASE');
   const [creating,      setCreating]      = useState(false);
 
+  const [downloadProgress, setDownloadProgress] = useState({ phase: 'choosing', bytes: 0 });
+  const [downloadSeconds, setDownloadSeconds] = useState(0);
+  const [directHistory, setDirectHistory] = useState<any[]>([]);
+  const [historyError, setHistoryError] = useState(false);
+  const fetchDirectHistory = useCallback(async () => {
+    try { setDirectHistory(await backupApi.directHistory()); setHistoryError(false); }
+    catch { setHistoryError(true); }
+  }, []);
+  useEffect(() => { fetchDirectHistory(); }, [fetchDirectHistory]);
+  useEffect(() => {
+    if (!creating) return;
+    const started = Date.now();
+    setDownloadSeconds(0);
+    const timer = setInterval(() => setDownloadSeconds(Math.floor((Date.now() - started) / 1000)), 1000);
+    return () => clearInterval(timer);
+  }, [creating]);
+
   const downloadAbort = useRef<AbortController | null>(null);
   useEffect(() => () => downloadAbort.current?.abort(), []);
 
@@ -201,8 +218,9 @@ export function DatabaseBackup() {
     const abort = new AbortController();
     downloadAbort.current = abort;
     setCreating(true);
+    setDownloadProgress({ phase: 'choosing', bytes: 0 });
     try {
-      await backupApi.directDownload(createKind, abort.signal);
+      await backupApi.directDownload(createKind, abort.signal, setDownloadProgress);
       toast.success(t('settings.directZip.saved', { defaultValue: 'ZIP download finished. Keep the file on your device.' }));
       setShowCreate(false);
     } catch (err: any) {
@@ -211,6 +229,7 @@ export function DatabaseBackup() {
       downloadAbort.current = null;
       setCreating(false);
       fetchStatus();
+      fetchDirectHistory();
     }
   };
 
@@ -380,11 +399,37 @@ export function DatabaseBackup() {
       </div>
 
       <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-900">
-        {t('settings.directZip.info', { defaultValue: 'Download database.sql inside a ZIP, or uploaded files in a separate ZIP. The archive is streamed to your device and is not saved on the server. Keep this page open until the download finishes. These downloads do not appear in the server backup history below.' })}
+        {t('settings.directZip.info', { defaultValue: 'Download database.sql inside a ZIP, or uploaded files in a separate ZIP. The archive is streamed to your device and is not saved on the server. Keep this page open until the download finishes. Download operations are recorded in the direct-download history below; archives remain on your device.' })}
         <p className="mt-2">{t('settings.directZip.scope', { defaultValue: 'Files ZIP includes current Spaces objects and uploads on the serving instance. It cannot recover missing files or files held only by another instance. Database SQL contains schema and data, without cluster roles or access grants. ZIP downloads cannot be restored through the legacy restore buttons below.' })}</p>
       </div>
 
       {/* Scheduled-backup status — states plainly whether scheduling is ACTIVE. */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div><CardTitle>{t('settings.directZip.historyTitle', { defaultValue: 'Direct ZIP download history' })}</CardTitle>
+          <CardDescription>{t('settings.directZip.historyNote', { defaultValue: 'Latest 50 operations. Sent means the server finished sending; local file saving is not verified. No archive is stored here.' })}</CardDescription></div>
+          <Button variant="outline" onClick={fetchDirectHistory}><RefreshCw className="w-4 h-4" /><span className="sr-only">{t('settings.directZip.refresh', { defaultValue: 'Refresh history' })}</span></Button>
+        </CardHeader>
+        <CardContent>
+          {historyError ? <p role="alert">{t('settings.directZip.historyError', { defaultValue: 'Could not load download history. Try refreshing.' })}</p> :
+          <div className="overflow-x-auto"><Table>
+            <TableHeader><TableRow>
+              {['when', 'who', 'type', 'result', 'size'].map(key => <TableHead key={key}>{t(`settings.directZip.${key}`, { defaultValue: ({ when: 'Started', who: 'Created by', type: 'Backup type', result: 'Result', size: 'ZIP bytes generated' } as any)[key] })}</TableHead>)}
+            </TableRow></TableHeader>
+            <TableBody>
+              {directHistory.length === 0 && <TableRow><TableCell colSpan={5}>{t('settings.directZip.emptyHistory', { defaultValue: 'No direct downloads recorded yet.' })}</TableCell></TableRow>}
+              {directHistory.map(row => <TableRow key={row.id}>
+                <TableCell>{fmt(row.createdAt)}</TableCell>
+                <TableCell><div>{row.userName || row.userEmail || '—'}</div><div className="text-xs text-muted-foreground">{row.userEmail}</div></TableCell>
+                <TableCell>{t(`settings.directZip.${row.kind === 'FILES' ? 'files' : 'database'}`)}<div className="text-xs text-muted-foreground break-all">{row.fileName}</div></TableCell>
+                <TableCell>{t(`settings.directZip.state${row.state}`, { defaultValue: ({ STARTED: 'Started — awaiting result', STREAMED: 'Sent by server', FAILED: 'Failed', CANCELLED: 'Connection closed / cancelled', UNKNOWN: 'Result unknown (interrupted)' } as any)[row.state] || row.state })}{row.finishedAt && <div className="text-xs text-muted-foreground">{fmt(row.finishedAt)}</div>}</TableCell>
+                <TableCell>{(row.bytes / 1048576).toFixed(2)} MiB</TableCell>
+              </TableRow>)}
+            </TableBody>
+          </Table></div>}
+        </CardContent>
+      </Card>
+
       {schedule && (
         <div className={`p-3 rounded-lg border text-sm ${schedule.active ? (schedule.stale ? 'bg-red-50 border-red-200 text-red-800' : 'bg-slate-50 border-slate-200 text-slate-700') : 'bg-amber-50 border-amber-200 text-amber-800'}`}>
           <div className="flex items-center gap-2 font-medium">
@@ -676,6 +721,14 @@ export function DatabaseBackup() {
               <SelectItem value="FILES">{t('settings.directZip.files', { defaultValue: 'Uploaded files — one ZIP' })}</SelectItem>
             </SelectContent>
           </Select>
+          {creating && <div className="space-y-2 py-3" aria-busy="true">
+            <p className="text-sm" role="status">{t(`settings.directZip.phase${downloadProgress.phase}`, { defaultValue: ({ choosing: 'Choose where to save the ZIP…', preparing: 'Preparing backup — waiting for data…', receiving: 'Receiving and saving ZIP…', saving: 'Preparing local download…' } as any)[downloadProgress.phase] })}</p>
+            <div role="progressbar" aria-label={t('settings.directZip.downloading', { defaultValue: 'Downloading…' })} aria-valuetext={`${(downloadProgress.bytes / 1048576).toFixed(2)} MiB`} className="h-2 w-full overflow-hidden rounded-full bg-blue-100">
+              <div className="h-full w-full rounded-full bg-blue-500 animate-pulse motion-reduce:animate-none" />
+            </div>
+            <p className="text-sm tabular-nums">{t('settings.directZip.progressDetail', { defaultValue: '{{size}} MiB received · {{seconds}} seconds elapsed', size: (downloadProgress.bytes / 1048576).toFixed(2), seconds: downloadSeconds })}</p>
+            <p className="text-xs text-muted-foreground">{t('settings.directZip.noPercent', { defaultValue: 'The final ZIP size is not known yet, so a percentage is unavailable. Keep this page open.' })}</p>
+          </div>}
           <DialogFooter>
             <Button variant="outline" onClick={() => creating ? downloadAbort.current?.abort() : setShowCreate(false)}>
               {t('settings.databaseBackup.cancel')}

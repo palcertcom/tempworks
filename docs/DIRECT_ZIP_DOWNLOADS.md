@@ -19,10 +19,12 @@ then attempts to download it from another instance.
 
 ## Scope and restore
 
-These are fresh exports, not a conversion of an earlier dated backup. They do
-not create misleading downloadable history rows for files that only exist on
-the user's computer. Existing history, scheduled backups and restore paths
-remain legacy DR functionality.
+These are fresh exports, not a conversion of an earlier dated backup. A separate direct-download history shows the latest 50 operations, with the
+initiating user's name/email, kind, timestamps, generated ZIP byte count and
+server result. It is backed by existing audit_logs (no schema migration).
+It does not offer download/restore buttons for archives held on a user's device.
+Existing stored-backup history, scheduled backups and restore paths remain
+legacy DR functionality.
 
 Database SQL excludes cluster roles, object ownership and access grants for
 portability. Restore into a separate empty compatible PostgreSQL database using
@@ -75,3 +77,29 @@ use its original package format, not these download ZIPs.
 References:
 * https://www.postgresql.org/docs/18/app-pgdump.html
 * https://docs.python.org/3/library/zipfile.html
+
+## Download progress and audit history
+
+The modal shows an indeterminate activity bar, received MiB and elapsed seconds,
+including the preparation period. ZIP length is unknown until export finishes;
+no invented percentage is shown. Progress counts response bytes and preserves
+backpressure, cancellation and error propagation.
+
+The server records BACKUP_EXPORT_STARTED before starting its producer, including
+a snapshot of the authenticated user's name and email. It appends a correlated
+BACKUP_EXPORT_FINISHED with STREAMED, FAILED or CANCELLED. STREAMED means the
+HTTP response finished sending, not proof that the browser saved the file.
+Unfinished starts older than 65 minutes are shown as UNKNOWN, since process
+termination can prevent a final audit write. Final audit write failures are
+logged by the existing audit service; they do not manufacture success.
+Old downloads made before this change are not backfilled into the new history.
+Audit history follows the existing audit-log retention policy.
+
+Validation: frontend/backend builds passed; 13 tests passed (6 export tests and
+7 progress/controller/history tests with mocked persistence and HTTP streams).
+No real DigitalOcean download or production database was used for these tests.
+After a backend build, run:
+
+```sh
+node --test backend/scripts/dr/tests/direct-export.test.mjs backend/scripts/dr/tests/download-ui-audit.test.mjs
+```
