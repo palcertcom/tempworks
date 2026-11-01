@@ -43,6 +43,24 @@ export class BackupController {
     return this.backupService.createBackup(dto, req.user?.id, req.user?.email);
   }
 
+  @Post('direct-download')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Stream database SQL or uploaded files as ZIP to the browser' })
+  async directDownload(@Body() body: { kind?: string }, @Request() req: any, @Res() res: Response) {
+    const { stream, cancel, fileName } = await this.backupService.directZip(body?.kind || '', req.user?.id, req.user?.email);
+    res.set({
+      'Content-Type': 'application/zip',
+      'Content-Disposition': `attachment; filename="${fileName}"`,
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+    });
+    res.on('close', () => { if (!res.writableFinished) cancel(); });
+    stream.on('error', () => { cancel(); res.destroy(); });
+    if (res.destroyed) { cancel(); return; }
+    if (stream.destroyed) { res.destroy(); return; }
+    stream.pipe(res);
+  }
+
   // ── List backups ──────────────────────────────────────────────────────────
 
   @Get()

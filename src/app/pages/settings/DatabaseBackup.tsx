@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import {
@@ -125,14 +125,15 @@ export function DatabaseBackup() {
 
   // Create backup modal
   const [showCreate,    setShowCreate]    = useState(false);
-  const [createNotes,   setCreateNotes]   = useState('');
-  const [createKind,    setCreateKind]    = useState<'DATABASE' | 'FULL_SYSTEM'>('DATABASE');
+  const [createKind,    setCreateKind]    = useState<'DATABASE' | 'FILES'>('DATABASE');
   const [creating,      setCreating]      = useState(false);
+
+  const downloadAbort = useRef<AbortController | null>(null);
+  useEffect(() => () => downloadAbort.current?.abort(), []);
 
   // Verify / reconcile / preflight
   const [verifyingId,   setVerifyingId]   = useState<string | null>(null);
   const [reconciling,   setReconciling]   = useState(false);
-  const [preflight,     setPreflight]     = useState<any | null>(null);
   const [schedule,      setSchedule]      = useState<any | null>(null);
 
   // Delete modal
@@ -175,7 +176,6 @@ export function DatabaseBackup() {
   }, []);
 
   const fetchPreflight = useCallback(async () => {
-    try { setPreflight(await backupApi.preflight()); } catch { /* ignore */ }
     try { setSchedule(await backupApi.schedule()); } catch { /* ignore */ }
   }, []);
 
@@ -198,18 +198,19 @@ export function DatabaseBackup() {
   // ── Create backup ─────────────────────────────────────────────────────────
 
   const handleCreate = async () => {
+    const abort = new AbortController();
+    downloadAbort.current = abort;
     setCreating(true);
     try {
-      await backupApi.create({ notes: createNotes || undefined, kind: createKind });
-      toast.success(t('pages:settings.backup.createStarted', { defaultValue: 'Backup started — it runs in the background.' }));
+      await backupApi.directDownload(createKind, abort.signal);
+      toast.success(t('settings.directZip.saved', { defaultValue: 'ZIP download finished. Keep the file on your device.' }));
       setShowCreate(false);
-      setCreateNotes('');
-      fetchBackups();
-      fetchStatus();
     } catch (err: any) {
-      toast.error(apiError(err, tc('toast.saveFailed')));
+      if (err?.name !== 'AbortError') toast.error(apiError(err, tc('toast.exportFailed')));
     } finally {
+      downloadAbort.current = null;
       setCreating(false);
+      fetchStatus();
     }
   };
 
@@ -369,38 +370,19 @@ export function DatabaseBackup() {
               ? <><RefreshCw className="w-4 h-4 me-2 animate-spin" />{t('settings.databaseBackup.reconciling', { defaultValue: 'Reconciling…' })}</>
               : <><HardDrive className="w-4 h-4 me-2" />{t('settings.databaseBackup.reconcile', { defaultValue: 'Reconcile' })}</>}
           </Button>
-          <Button onClick={() => setShowCreate(true)} disabled={locked}>
+          <Button onClick={() => setShowCreate(true)} disabled={locked || creating}>
             {locked
               ? <><RefreshCw className="w-4 h-4 me-2 animate-spin" />{t('settings.databaseBackup.operationInProgress')}</>
-              : <><Plus className="w-4 h-4 me-2" />{t('settings.databaseBackup.createBackup')}</>
+              : <><Plus className="w-4 h-4 me-2" />{t('settings.directZip.download', { defaultValue: 'Download backup ZIP' })}</>
             }
           </Button>
         </div>
       </div>
 
-      {/* Preflight banner — surfaces toolchain/connectivity/capacity problems
-          (e.g. the pg_dump vs server version mismatch) BEFORE a backup fails. */}
-      {preflight && !preflight.ok && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-          <div className="flex items-start gap-3">
-            <XCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-            <div className="text-sm text-red-800">
-              <p className="font-semibold">{t('settings.databaseBackup.preflightFailed', { defaultValue: 'Backup environment not ready' })}</p>
-              <ul className="mt-1 list-disc list-inside space-y-0.5">
-                {(preflight.checks ?? []).filter((c: any) => c.state !== 'pass').map((c: any, i: number) => (
-                  <li key={i}><span className="font-medium">{c.name}:</span> {c.detail}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
-      {preflight && preflight.ok && (
-        <div className="flex items-center gap-2 text-xs text-green-700">
-          <CheckCircle2 className="w-4 h-4" />
-          {t('settings.databaseBackup.preflightOk', { defaultValue: 'Backup environment ready (PostgreSQL {{major}} toolchain, connectivity, permissions, capacity all OK)', major: preflight.serverMajor ?? '?' })}
-        </div>
-      )}
+      <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-900">
+        {t('settings.directZip.info', { defaultValue: 'Download database.sql inside a ZIP, or uploaded files in a separate ZIP. The archive is streamed to your device and is not saved on the server. Keep this page open until the download finishes. These downloads do not appear in the server backup history below.' })}
+        <p className="mt-2">{t('settings.directZip.scope', { defaultValue: 'Files ZIP includes current Spaces objects and uploads on the serving instance. It cannot recover missing files or files held only by another instance. Database SQL contains schema and data, without cluster roles or access grants. ZIP downloads cannot be restored through the legacy restore buttons below.' })}</p>
+      </div>
 
       {/* Scheduled-backup status — states plainly whether scheduling is ACTIVE. */}
       {schedule && (
@@ -427,7 +409,7 @@ export function DatabaseBackup() {
           <div className="text-sm text-amber-800">
             <p className="font-semibold">{t('settings.databaseBackup.safetyTitle')}</p>
             <ul className="mt-1 list-disc list-inside space-y-1">
-              <li>{t('settings.databaseBackup.safetyBulletStorage', { defaultValue: 'Backups are written to BACKUP_DIR (must be a persistent volume) and copied to off-site storage when BACKUP_SPACES_* is configured. A backup that exists only on this server is not disaster recovery.' })}</li>
+              <li>{t('settings.directZip.legacy', { defaultValue: 'The history and restore controls below apply only to older server-stored backups.' })}</li>
               <li>{t('settings.databaseBackup.safetyBullet2')}</li>
               <li>{t('settings.databaseBackup.safetyBullet3')}</li>
               <li>{t('settings.databaseBackup.safetyBullet4Pre')} <code className="bg-amber-100 px-1 rounded">pg_dump</code> {t('settings.databaseBackup.safetyBullet4Mid')} <code className="bg-amber-100 px-1 rounded">pg_restore</code> {t('settings.databaseBackup.safetyBullet4Post')} <code className="bg-amber-100 px-1 rounded">PG_BIN_PATH</code> {t('settings.databaseBackup.safetyBullet4Env')}</li>
@@ -681,64 +663,26 @@ export function DatabaseBackup() {
       )}
 
       {/* ── Create Backup Modal ──────────────────────────────────────────────── */}
-      <Dialog open={showCreate} onOpenChange={o => { if (!o) setShowCreate(false); }}>
+      <Dialog open={showCreate} onOpenChange={o => { if (!creating) setShowCreate(o); }}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Database className="w-5 h-5 text-blue-600" />
-              {t('settings.databaseBackup.createDialogTitle')}
-            </DialogTitle>
-            <DialogDescription>
-              <span dangerouslySetInnerHTML={{ __html: t('settings.databaseBackup.createDialogDescription') }} />
-            </DialogDescription>
+            <DialogTitle>{t('settings.directZip.download', { defaultValue: 'Download backup ZIP' })}</DialogTitle>
+            <DialogDescription>{t('settings.directZip.description', { defaultValue: 'Choose a backup to save on your device. No archive is retained on the server.' })}</DialogDescription>
           </DialogHeader>
-          <div className="space-y-4 py-2">
-            <div className="space-y-1.5">
-              <Label>{t('settings.databaseBackup.backupTypeLabel', { defaultValue: 'Backup type' })}</Label>
-              <Select value={createKind} onValueChange={v => setCreateKind(v as 'DATABASE' | 'FULL_SYSTEM')}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="DATABASE">{t('settings.databaseBackup.kindDatabase', { defaultValue: 'Database only' })}</SelectItem>
-                  <SelectItem value="FULL_SYSTEM">{t('settings.databaseBackup.kindFull', { defaultValue: 'Full system (database + uploaded files)' })}</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-1.5">
-              <Label>{t('settings.databaseBackup.notesOptional')}</Label>
-              <Input
-                placeholder={t('settings.databaseBackup.notesPlaceholder')}
-                value={createNotes}
-                onChange={e => setCreateNotes(e.target.value)}
-              />
-            </div>
-            {createKind === 'DATABASE' ? (
-              <div className="p-3 bg-blue-50 border border-blue-200 rounded text-xs text-blue-800 space-y-1">
-                <p className="font-medium">{t('settings.databaseBackup.whatsIncludedDb', { defaultValue: 'Database backup includes:' })}</p>
-                <ul className="list-disc list-inside space-y-0.5">
-                  <li>{t('settings.databaseBackup.inclDb1', { defaultValue: 'Full schema + all data, owners, grants and RLS policies' })}</li>
-                  <li>{t('settings.databaseBackup.inclDb2', { defaultValue: 'Cluster globals (roles, memberships) via pg_dumpall' })}</li>
-                  <li>{t('settings.databaseBackup.inclDb3', { defaultValue: 'Sequences, constraints, indexes and large objects' })}</li>
-                  <li>{t('settings.databaseBackup.inclDb4', { defaultValue: 'Checksums + manifest (verifiable). Does NOT include uploaded files.' })}</li>
-                </ul>
-              </div>
-            ) : (
-              <div className="p-3 bg-indigo-50 border border-indigo-200 rounded text-xs text-indigo-800 space-y-1">
-                <p className="font-medium">{t('settings.databaseBackup.whatsIncludedFull', { defaultValue: 'Full system backup includes everything in a database backup, plus:' })}</p>
-                <ul className="list-disc list-inside space-y-0.5">
-                  <li>{t('settings.databaseBackup.inclFull1', { defaultValue: 'All uploaded files (documents, photos, attachments) with checksums' })}</li>
-                  <li>{t('settings.databaseBackup.inclFull2', { defaultValue: 'Config templates + release identifiers for a clean-server rebuild' })}</li>
-                  <li>{t('settings.databaseBackup.inclFull3', { defaultValue: 'A portable DR package restorable on a clean replacement server' })}</li>
-                </ul>
-              </div>
-            )}
-          </div>
+          <Select disabled={creating} value={createKind} onValueChange={v => setCreateKind(v as 'DATABASE' | 'FILES')}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="DATABASE">{t('settings.directZip.database', { defaultValue: 'Database — database.sql inside ZIP' })}</SelectItem>
+              <SelectItem value="FILES">{t('settings.directZip.files', { defaultValue: 'Uploaded files — one ZIP' })}</SelectItem>
+            </SelectContent>
+          </Select>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowCreate(false)} disabled={creating}>{t('settings.databaseBackup.cancel')}</Button>
-            <Button onClick={handleCreate} disabled={creating}>
-              {creating
-                ? <><RefreshCw className="w-4 h-4 me-2 animate-spin" />{t('settings.databaseBackup.creating')}</>
-                : <><Database className="w-4 h-4 me-2" />{t('settings.databaseBackup.createBackup')}</>
-              }
+            <Button variant="outline" onClick={() => creating ? downloadAbort.current?.abort() : setShowCreate(false)}>
+              {t('settings.databaseBackup.cancel')}
+            </Button>
+            <Button onClick={handleCreate} disabled={creating || locked}>
+              {creating ? <RefreshCw className="w-4 h-4 me-2 animate-spin" /> : <Download className="w-4 h-4 me-2" />}
+              {creating ? t('settings.directZip.downloading', { defaultValue: 'Downloading…' }) : t('settings.directZip.download', { defaultValue: 'Download backup ZIP' })}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -18,7 +18,7 @@ import {
 import { resolvePgTools, resolvePgToolsForRestore, PgToolError } from './pg-tools';
 import { Client } from 'pg';
 import { spawn, ChildProcess } from 'child_process';
-import { Readable } from 'stream';
+import { Readable, PassThrough } from 'stream';
 import * as path from 'path';
 import * as fs from 'fs';
 import { v4 as uuidv4 } from 'uuid';
@@ -99,6 +99,7 @@ export class BackupService implements OnModuleInit, OnModuleDestroy {
   private readonly drDir: string;
   /** The backup child process this instance is running (for shutdown handling). */
   private active: { id: string; child: ChildProcess; lock: Client | null } | null = null;
+  private readonly directExports = new Set<() => void>();
   private remoteCache: { at: number; map: Map<string, any> } | null = null;
 
   constructor(
@@ -222,6 +223,7 @@ export class BackupService implements OnModuleInit, OnModuleDestroy {
    * pool, which may already be closing), then release the lock.
    */
   async onModuleDestroy(): Promise<void> {
+    for (const cancel of this.directExports) cancel();
     const a = this.active;
     if (!a) return;
     this.logger.warn(`Instance shutting down — interrupting running backup ${a.id}.`);
@@ -572,6 +574,65 @@ export class BackupService implements OnModuleInit, OnModuleDestroy {
       if (st.isFile()) return record.filePath;        // legacy single-file dump
     }
     return null;
+  }
+
+  /** One authenticated request owns creation and download; no local archive. */
+  async directZip(kind: string, userId?: string, userEmail?: string) {
+    if (!['DATABASE', 'FILES'].includes(kind)) throw new BadRequestException('Expected DATABASE or FILES');
+    const tools = kind === 'DATABASE' ? resolvePgTools(await this.serverMajor()) : null;
+    const lock = await this.acquireLock();
+    try {
+      await this.auditLog.log({ userId, userEmail, action: 'BACKUP_DOWNLOADED', entity: 'SystemBackup', entityId: uuidv4(),
+        changes: { kind, format: 'zip', delivery: 'direct', state: 'STARTED' } });
+      const child = spawn(process.execPath, [this.script('direct-export.mjs'), kind], {
+        env: { ...process.env, ...(tools ? { PG_BIN_PATH: tools.bindir } : {}) },
+        detached: process.platform !== 'win32', stdio: ['ignore', 'pipe', 'pipe'],
+      });
+      // Do not end the HTTP stream until the producer (including pg_dump) exits
+      // successfully. Otherwise a truncated ZIP could look like a successful download.
+      const stream = new PassThrough();
+      stream.on('error', () => {});
+      let settled = false;
+      let killTimer: NodeJS.Timeout | undefined;
+      const cancel = () => {
+        if (settled) return;
+        try {
+          if (process.platform !== 'win32' && child.pid) process.kill(-child.pid, 'SIGTERM');
+          else child.kill('SIGTERM');
+          if (!killTimer) {
+            killTimer = setTimeout(() => {
+              try {
+                if (process.platform !== 'win32' && child.pid) process.kill(-child.pid, 'SIGKILL');
+                else child.kill('SIGKILL');
+              } catch { /* already exited */ }
+            }, 3000);
+            killTimer.unref();
+          }
+        } catch { /* already exited */ }
+      };
+      this.directExports.add(cancel);
+      lock.on('error', () => { cancel(); stream.destroy(new Error('Export lock lost')); });
+      child.stdout.pipe(stream, { end: false });
+      child.stderr.resume();
+      const finish = (ok: boolean) => {
+        if (settled) return;
+        settled = true;
+        if (killTimer) clearTimeout(killTimer);
+        this.directExports.delete(cancel);
+        void this.releaseLock(lock);
+        if (ok) stream.end();
+        else stream.destroy(new Error('ZIP export failed; discard incomplete download'));
+      };
+      child.on('error', () => finish(false));
+      child.on('close', code => finish(code === 0));
+      const timer = setTimeout(() => { cancel(); stream.destroy(new Error('Export timed out')); }, 60 * 60 * 1000);
+      timer.unref();
+      child.on('close', () => clearTimeout(timer));
+      return { stream, cancel, fileName: `tempworks-${kind.toLowerCase()}-${Date.now()}.zip` };
+    } catch (error) {
+      await this.releaseLock(lock);
+      throw error;
+    }
   }
 
   async getDownloadStream(id: string, userId?: string, userEmail?: string) {

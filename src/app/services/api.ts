@@ -2287,6 +2287,47 @@ export const vehiclesApi = {
 // ── Backup & Restore API ───────────────────────────────────────────────────────
 
 export const backupApi = {
+  /** Create and stream a ZIP in the same request; never fetch a container-local artifact. */
+  directDownload: async (kind: 'DATABASE' | 'FILES', signal: AbortSignal): Promise<void> => {
+    const fileName = `tempworks-${kind.toLowerCase()}-${new Date().toISOString().replace(/[:.]/g, '-')}.zip`;
+    let writable: any;
+    // Called from the click handler before any network await, preserving user activation.
+    // Chromium writes directly to the selected local file instead of buffering a large ZIP.
+    if (typeof (window as any).showSaveFilePicker === 'function') {
+      const handle = await (window as any).showSaveFilePicker({ suggestedName: fileName,
+        types: [{ description: 'ZIP archive', accept: { 'application/zip': ['.zip'] } }] });
+      writable = await handle.createWritable();
+    }
+    try {
+      const token = getAccessToken();
+      const res = await fetch(`${API_URL}/backup/direct-download`, {
+        method: 'POST', signal,
+        headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+        body: JSON.stringify({ kind }),
+      });
+      if (!res.ok) {
+        const error = await res.json().catch(() => ({}));
+        throw new Error(typeof error.message === 'string' ? error.message : `Download failed (${res.status})`);
+      }
+      if (!res.body || !res.headers.get('content-type')?.includes('application/zip')) throw new Error('Invalid ZIP response');
+      if (writable) {
+        await res.body.pipeTo(writable, { signal });
+        writable = undefined;
+      } else {
+        // Portable fallback: only offer the file after the complete response arrives.
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url; anchor.download = fileName;
+        document.body.appendChild(anchor); anchor.click(); anchor.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60_000);
+      }
+    } catch (error) {
+      if (writable) await writable.abort().catch(() => {});
+      throw error;
+    }
+  },
+
   /** List all backups (paginated) */
   list: (params: { page?: number; limit?: number; search?: string; status?: string; kind?: string } = {}) => {
     const qs = new URLSearchParams();
