@@ -5076,7 +5076,7 @@
       "saved": "ZIP download finished. Keep the file on your device.",
       "download": "Download backup ZIP",
       "info": "Download database.sql inside a ZIP, or uploaded files in a separate ZIP. The archive is streamed to your device and is not saved on the server. Keep this page open until the download finishes. Download operations are recorded below; archives remain on your device.",
-      "scope": "Files ZIP includes current Spaces objects and uploads on the serving instance. It cannot recover missing files or files held only by another instance. Database SQL contains schema and data, without cluster roles or access grants. ZIP downloads cannot be restored through the legacy restore buttons below.",
+      "scope": "Files ZIP includes current Spaces objects and uploads on the serving instance. It cannot recover missing files or files held only by another instance. Database SQL contains schema and data, without cluster roles or access grants. Keep the downloaded archives in a safe place.",
       "legacy": "The history and restore controls below apply only to older server-stored backups.",
       "description": "Choose a backup to save on your device. No archive is retained on the server.",
       "database": "Database — database.sql inside ZIP",
@@ -5102,7 +5102,9 @@
       "phasereceiving": "Receiving and saving ZIP…",
       "phasesaving": "Preparing local download…",
       "progressDetail": "{{size}} MiB received · {{seconds}} seconds elapsed",
-      "noPercent": "The final ZIP size is not known yet, so a percentage is unavailable. Keep this page open."
+      "noPercent": "The final ZIP size is not known yet, so a percentage is unavailable. Keep this page open.",
+      "pageTitle": "Backup downloads",
+      "pageSubtitle": "Download database and uploaded files as ZIP archives, and review download activity."
     }
   },
   "profile": {
